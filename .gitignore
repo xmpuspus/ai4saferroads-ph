@@ -26,3 +26,6 @@ build/overlay/*_rwi.csv
 build/overlay/*.tif
 *.tif
 build/web/data/*.pmtiles
+
+# local assistant config
+.claude/
