@@ -14,7 +14,7 @@ The honest pivot survives that, because total crashes are not deaths. A fender-b
 ultrawork rework ai4saferroads-ph around the question "is speed even the problem?" for Philippine traffic, don't stop until every phase is verified done.
 
 PROJECT
-- Path: ~/Desktop/ai4saferroads-ph  (NOT a git repo; deploy is `vercel --prod` from build/web on Xavier's PERSONAL Vercel account `xmpuspus` only)
+- Path: ~/Desktop/ai4saferroads-ph  (git repo on `main`, initialised 2026-07-04, 2 commits, LOCAL ONLY unless Xavier has since pushed a GitHub remote. Commit as the personal `xmpuspus` identity only. Large data is gitignored, see .gitignore. Deploy is `vercel --prod` from build/web on Xavier's PERSONAL Vercel account `xmpuspus`.)
 - Live: https://ai4saferroads-ph.vercel.app
 - What it is now: an open map scoring every drivable street in 51 PH cities against the Safe System survivable speed. Speed Safety Score (SSS) = gap between OSM posted limit and survivable speed, weighted by exposure (POI proximity + WorldPop residential density). 357,423 streets scored, 7,586 flagged. Findings A/B/C/D in docs/findings.md.
 - The critique to answer: PH cities are congested, so real operating speeds sit far below posted limits most of the day. A skeptic says "the limit is 60, we crawl at 30, and still crash, so speed is not the problem." The current tool has no operating-speed layer, which its own June audit named the #1 gap (product-audit-intel-gaps.md: no operating-speed / 85th-percentile layer, the axis iRAP and USLIMITS2 are built on).
