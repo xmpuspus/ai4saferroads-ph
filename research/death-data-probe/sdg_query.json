@@ -1,0 +1,7 @@
+{
+  "query": [
+    {"code": "Sex", "selection": {"filter": "item", "values": ["Both Sexes"]}},
+    {"code": "Year", "selection": {"filter": "item", "values": ["2021","2022","2023"]}}
+  ],
+  "response": {"format": "csv"}
+}

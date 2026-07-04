@@ -1,0 +1,68 @@
+{
+  "key": "ormoc",
+  "label": "Ormoc",
+  "center": [
+    124.6094,
+    11.009
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 1884,
+  "segments_posted_real_osm": 99,
+  "segments_posted_imputed": 1785,
+  "segments_gap_positive": 166,
+  "segments_flagged_sss_gt0": 166,
+  "segments_flagged_real_posted": 31,
+  "sss_max": 40.9,
+  "sss_mean_flagged": 15.9,
+  "vru_pois": 116,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 40.9,
+      "name": "Ormoc Diversion Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 21.1,
+      "name": "Ormoc-Baybay Road",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 14.5,
+      "name": "Ormoc \u2013 Albuera Road",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 14.0,
+      "name": "Merida-Ormoc Road",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 13.1,
+      "name": "Kananga-Ormoc Road",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

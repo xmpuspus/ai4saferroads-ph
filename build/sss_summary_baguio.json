@@ -1,0 +1,77 @@
+{
+  "key": "baguio",
+  "label": "Baguio",
+  "center": [
+    120.598,
+    16.418
+  ],
+  "zoom": 12.8,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 7521,
+  "segments_posted_real_osm": 3961,
+  "segments_posted_imputed": 3560,
+  "segments_gap_positive": 173,
+  "segments_flagged_sss_gt0": 173,
+  "segments_flagged_real_posted": 23,
+  "sss_max": 31.4,
+  "sss_mean_flagged": 16.7,
+  "vru_pois": 655,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 25.0,
+      "name": "M. Roxas Street",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (3 VRU site<=50m)"
+    },
+    {
+      "sss": 25.0,
+      "name": "Pico-Lamtang Road",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 15.8,
+      "name": "Monticello Road",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 15.2,
+      "name": "Balacbac Feeder Road",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 15.0,
+      "name": "Ben Palispis Highway",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 12.5,
+      "name": "Conifer Drive",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

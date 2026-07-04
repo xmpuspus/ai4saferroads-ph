@@ -1,0 +1,59 @@
+{
+  "key": "kidapawan",
+  "label": "Kidapawan",
+  "center": [
+    125.0905,
+    7.0096
+  ],
+  "zoom": 12.7,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 1726,
+  "segments_posted_real_osm": 97,
+  "segments_posted_imputed": 1629,
+  "segments_gap_positive": 152,
+  "segments_flagged_sss_gt0": 152,
+  "segments_flagged_real_posted": 18,
+  "sss_max": 41.6,
+  "sss_mean_flagged": 15.1,
+  "vru_pois": 57,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 41.6,
+      "name": "Kidapawan-M'lang Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 37.6,
+      "name": "Concepcion Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 22.9,
+      "name": "Roxas Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 15.9,
+      "name": "Jose P. Laurel Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

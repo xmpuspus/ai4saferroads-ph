@@ -1,0 +1,41 @@
+{
+  "key": "gensan",
+  "label": "General Santos",
+  "center": [
+    125.1722,
+    6.1122
+  ],
+  "zoom": 12.4,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 9013,
+  "segments_posted_real_osm": 116,
+  "segments_posted_imputed": 8897,
+  "segments_gap_positive": 217,
+  "segments_flagged_sss_gt0": 217,
+  "segments_flagged_real_posted": 4,
+  "sss_max": 50.0,
+  "sss_mean_flagged": 15.1,
+  "vru_pois": 144,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 45.0,
+      "name": "Digos-Makar Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 28.1,
+      "name": "San Juanico Drive",
+      "class": "residential",
+      "posted_osm": 50,
+      "safe": 30,
+      "fatal_reduction_pct": 87.0,
+      "why": "local road, frontage/pedestrian mixing"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

@@ -1,0 +1,8 @@
+{
+  "query": [
+    {"code": "Cause of Death", "selection": {"filter": "item", "values": ["0","96","97"]}},
+    {"code": "Age Group", "selection": {"filter": "item", "values": ["0"]}},
+    {"code": "Sex", "selection": {"filter": "item", "values": ["0"]}}
+  ],
+  "response": {"format": "csv"}
+}

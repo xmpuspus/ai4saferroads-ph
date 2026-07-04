@@ -1,0 +1,86 @@
+{
+  "key": "iligan",
+  "label": "Iligan City",
+  "center": [
+    124.2543,
+    8.2455
+  ],
+  "zoom": 12.5,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 2265,
+  "segments_posted_real_osm": 176,
+  "segments_posted_imputed": 2089,
+  "segments_gap_positive": 143,
+  "segments_flagged_sss_gt0": 143,
+  "segments_flagged_real_posted": 29,
+  "sss_max": 59.9,
+  "sss_mean_flagged": 21.2,
+  "vru_pois": 176,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 59.9,
+      "name": "Circumferential Road 3",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 55.5,
+      "name": "Secondary Diversion Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 54.4,
+      "name": "Pugaan-Mandulog Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 38.9,
+      "name": "Iligan-Bukidnon Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 38.1,
+      "name": "Mandulog-Lanipao Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 18.4,
+      "name": "Hinaplanon-Mandulog Road",
+      "class": "tertiary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 16.2,
+      "name": "Circumferential Road 3 Extension",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

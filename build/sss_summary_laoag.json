@@ -1,0 +1,104 @@
+{
+  "key": "laoag",
+  "label": "Laoag",
+  "center": [
+    120.5935,
+    18.1973
+  ],
+  "zoom": 12.7,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 1835,
+  "segments_posted_real_osm": 200,
+  "segments_posted_imputed": 1635,
+  "segments_gap_positive": 187,
+  "segments_flagged_sss_gt0": 187,
+  "segments_flagged_real_posted": 38,
+  "sss_max": 50.0,
+  "sss_mean_flagged": 13.8,
+  "vru_pois": 98,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 20.8,
+      "name": "Josefa Llanes Escoda National Highway",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 19.7,
+      "name": "J. P. Rizal Avenue",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 16.1,
+      "name": "Airport Avenue",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 15.3,
+      "name": "Laoag - Balaccad Road",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 14.3,
+      "name": "Airport Access Road",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 13.9,
+      "name": "Laoag-Sarrat-Piddig-Solsona Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 13.4,
+      "name": "Rizal Street",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 13.4,
+      "name": "Rodolfo G. Fari\u00f1as Bypass Road",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 13.4,
+      "name": "Manila North Road",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

@@ -1,0 +1,22 @@
+{
+  "key": "butuan",
+  "label": "Butuan",
+  "center": [
+    125.5432,
+    8.9477
+  ],
+  "zoom": 12.5,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 3976,
+  "segments_posted_real_osm": 0,
+  "segments_posted_imputed": 3976,
+  "segments_gap_positive": 258,
+  "segments_flagged_sss_gt0": 258,
+  "segments_flagged_real_posted": 0,
+  "sss_max": 75.0,
+  "sss_mean_flagged": 17.7,
+  "vru_pois": 213,
+  "headline_priority_roads_real_posted": [],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

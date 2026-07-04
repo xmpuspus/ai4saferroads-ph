@@ -1,0 +1,95 @@
+{
+  "key": "digos",
+  "label": "Digos",
+  "center": [
+    125.3555,
+    6.7441
+  ],
+  "zoom": 12.7,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 3138,
+  "segments_posted_real_osm": 55,
+  "segments_posted_imputed": 3083,
+  "segments_gap_positive": 190,
+  "segments_flagged_sss_gt0": 190,
+  "segments_flagged_real_posted": 38,
+  "sss_max": 58.6,
+  "sss_mean_flagged": 16.6,
+  "vru_pois": 118,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 50.0,
+      "name": "Eco Park Road",
+      "class": "unclassified",
+      "posted_osm": 80,
+      "safe": 30,
+      "fatal_reduction_pct": 98.0,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 48.8,
+      "name": "Bato-Matutungan-Binaton Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 39.2,
+      "name": "Governor Douglas R.A. Cagas Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 25.0,
+      "name": "San Nicolas Road",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 25.0,
+      "name": "MacArthur Highway",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 14.5,
+      "name": "Davao-Cotabato Highway",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 14.3,
+      "name": "Lorenzo Catalan Sr. Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 12.8,
+      "name": "Owangon Road",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

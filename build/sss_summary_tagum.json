@@ -1,0 +1,113 @@
+{
+  "key": "tagum",
+  "label": "Tagum",
+  "center": [
+    125.8095,
+    7.4471
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 5382,
+  "segments_posted_real_osm": 277,
+  "segments_posted_imputed": 5105,
+  "segments_gap_positive": 307,
+  "segments_flagged_sss_gt0": 307,
+  "segments_flagged_real_posted": 68,
+  "sss_max": 64.3,
+  "sss_mean_flagged": 18.9,
+  "vru_pois": 128,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 64.3,
+      "name": "Tagum City Bypass Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 48.6,
+      "name": "Mawab-Maco Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 44.7,
+      "name": "Tagum-New Corella Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 39.3,
+      "name": "Apokon-Madaum Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 37.5,
+      "name": "Canocotan-Bincungan Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 37.5,
+      "name": "Dumlan Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 37.5,
+      "name": "Tagum-Santo Tomas Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 37.5,
+      "name": "Magangit Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 37.5,
+      "name": "Taglawig Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 37.5,
+      "name": "New Asturias Road",
+      "class": "tertiary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

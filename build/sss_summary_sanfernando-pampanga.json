@@ -1,0 +1,113 @@
+{
+  "key": "sanfernando-pampanga",
+  "label": "San Fernando (Pampanga)",
+  "center": [
+    120.6938,
+    15.0283
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 10209,
+  "segments_posted_real_osm": 708,
+  "segments_posted_imputed": 9501,
+  "segments_gap_positive": 384,
+  "segments_flagged_sss_gt0": 384,
+  "segments_flagged_real_posted": 134,
+  "sss_max": 66.6,
+  "sss_mean_flagged": 17.7,
+  "vru_pois": 342,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 66.6,
+      "name": "Pampanga Circumferential Road",
+      "class": "unclassified",
+      "posted_osm": 60,
+      "safe": 30,
+      "fatal_reduction_pct": 93.8,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 53.5,
+      "name": "Do\u00f1a Consolacion Street",
+      "class": "residential",
+      "posted_osm": 60,
+      "safe": 30,
+      "fatal_reduction_pct": 93.8,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 48.1,
+      "name": "Guagua-Minalin Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 43.0,
+      "name": "Santo Domingo Boulevard",
+      "class": "unclassified",
+      "posted_osm": 60,
+      "safe": 30,
+      "fatal_reduction_pct": 93.8,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 39.2,
+      "name": "Do\u00f1a Consolacion Extension",
+      "class": "residential",
+      "posted_osm": 60,
+      "safe": 30,
+      "fatal_reduction_pct": 93.8,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 25.0,
+      "name": "General Hizon Avenue",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 20.2,
+      "name": "Camia Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 18.7,
+      "name": "H. S. Boulevard",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 18.4,
+      "name": "Santa Maria Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 18.2,
+      "name": "Jose Abad Santos Avenue",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

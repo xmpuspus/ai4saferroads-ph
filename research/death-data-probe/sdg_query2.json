@@ -1,0 +1,7 @@
+{
+  "query": [
+    {"code": "Sex", "selection": {"filter": "item", "values": ["0"]}},
+    {"code": "Year", "selection": {"filter": "item", "values": ["21","22","23"]}}
+  ],
+  "response": {"format": "csv"}
+}

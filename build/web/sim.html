@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Why the limit is the story: stopping distance at 60 vs 30 km/h</title>
+<style>
+  @font-face{font-family:"IBM Plex Sans Condensed";src:url(fonts/IBMPlexSansCondensed-700.woff2) format("woff2");font-weight:700;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-400.woff2) format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+  :root{--bg:#0E1116;--ink:#E6EAF0;--muted:#8B95A5;--line:#2A323D;
+    --glass:rgba(18,22,30,.84);--danger:#E0574A;--safe:#54A89B;--amber:#FB9F3A;--accent:#E0574A;
+    --font-display:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+    --font-body:"IBM Plex Sans",system-ui,sans-serif;--font-data:"IBM Plex Mono",ui-monospace,monospace}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);overflow:hidden;
+    font-family:var(--font-body)}
+  #c{position:absolute;inset:0;display:block}
+  .glass{background:var(--glass);border:1px solid var(--line);border-radius:13px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,0,0,.5)}
+  .top{position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;
+    align-items:flex-start;gap:12px;z-index:2;pointer-events:none}
+  .title{padding:14px 18px;max-width:560px;pointer-events:auto}
+  h1{font-family:var(--font-display);font-weight:700;font-size:21px;margin:0 0 4px}
+  .title p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.45}
+  .title b{color:#fff}
+  .ctl{padding:10px 14px;display:flex;gap:10px;align-items:center;pointer-events:auto}
+  .ctl a{color:#eaf0f6;text-decoration:none;font-size:12.5px}
+  .ctl button{background:var(--accent);color:#160a08;border:0;border-radius:8px;padding:7px 12px;
+    font-weight:700;font-size:12.5px;cursor:pointer}
+  .foot{position:absolute;bottom:14px;left:16px;right:16px;z-index:2;font-size:10.5px;
+    color:var(--muted);padding:8px 12px;pointer-events:auto}
+  .foot a{color:#5B8DB8}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="top">
+  <div class="title glass">
+    <h1 id="h1">Same driver. Same 22 m. The limit decides.</h1>
+    <p id="sub">On a busy road, a child steps onto the crossing 22 metres ahead. Same
+      reaction time, same brakes. The only difference is the speed the limit allows.</p>
+  </div>
+  <div class="ctl glass"><button id="replay">Replay</button><a href="index.html">&larr; Map</a></div>
+</div>
+<div class="foot glass">
+  Reaction 1.4 s, braking 7 m/s². Fatality risk by impact speed from Tefft 2011 (AAA Foundation).
+  Fatal risk scales with the 4th power of speed (Nilsson). <a href="index.html">Back to the map</a>
+</div>
+<script type="module">
+const TR=1.4, DECEL=7, GAP=22;                 // s, m/s^2, metres to the crossing at step-out
+const SPAN=32, PAD_L=0.06, PAD_R=0.04;         // metres shown; fractional side padding
+const RISK=[[0,0],[24,2],[37,10],[51,25],[68,50],[80,75],[93,90],[120,97]];
+function fatalRisk(k){for(let i=1;i<RISK.length;i++){if(k<=RISK[i][0]){const[a,b]=RISK[i-1],[c,d]=RISK[i];
+  return b+(d-b)*(k-a)/(c-a||1);}}return 97;}
+const SHOT=location.hash==='#shot';
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+let CORR={name:'a busy main road',v_posted:60,v_safe:30};
+try{CORR=await fetch('data/corridor.json').then(r=>r.json());}catch(e){}
+document.getElementById('sub').innerHTML=
+ `On <b>${esc(CORR.name)}</b>, Metro Manila, a child steps onto the crossing 22 m ahead. Same reaction `
+ +`time, same brakes. The only difference is the speed the limit allows. It is set to <b>${CORR.v_posted}</b>, but only <b>${CORR.v_safe}</b> is survivable.`;
+
+const cv=document.getElementById('c'), ctx=cv.getContext('2d');
+let W,H,DPR;
+function resize(){DPR=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+  cv.width=W*DPR;cv.height=H*DPR;cv.style.width=W+'px';cv.style.height=H+'px';ctx.setTransform(DPR,0,0,DPR,0,0);}
+addEventListener('resize',resize);resize();
+
+function mkScene(v,label,theme){return{v0:v/3.6,v:v/3.6,kmh:v,x:0,t:0,state:'react',
+  impact:null,stopX:null,label,theme};}
+let scenes=[];
+function reset(){scenes=[mkScene(CORR.v_posted,'Limit now '+CORR.v_posted+' km/h','danger'),
+                        mkScene(CORR.v_safe,'Safe '+CORR.v_safe+' km/h','safe')];}
+reset();
+
+function step(s,dt){
+  if(s.state==='react'){s.x+=s.v*dt;s.t+=dt;
+    if(s.x>=GAP){s.impact=s.v;s.x=GAP;s.state='done';}
+    else if(s.t>=TR)s.state='brake';}
+  else if(s.state==='brake'){s.v=Math.max(0,s.v-DECEL*dt);s.x+=s.v*dt;
+    if(s.x>=GAP){s.impact=s.v;s.x=GAP;s.state='done';}
+    else if(s.v<=0.01){s.impact=0;s.stopX=s.x;s.state='done';}}
+}
+function stageShot(){for(const s of scenes){let g=0;while(s.state!=='done'&&g++<5000)step(s,0.01);}}
+
+const colors={danger:{a:'#E0574A',line:'#E0574A'},safe:{a:'#54A89B',line:'#54A89B'}};
+function mx(m){const l=W*PAD_L,r=W*(1-PAD_R);return l+(m/SPAN)*(r-l);}
+function drawCar(x,y,col,w){ctx.save();ctx.translate(x,y);
+  ctx.fillStyle=col;roundRect(-w,-13,w*2,16,4);ctx.fill();
+  ctx.fillStyle=col;roundRect(-w*0.55,-22,w*1.0,11,3);ctx.fill();
+  ctx.fillStyle='#0c0c0c';ctx.beginPath();ctx.arc(-w*0.55,4,5,0,7);ctx.arc(w*0.55,4,5,0,7);ctx.fill();
+  ctx.fillStyle='#fff7d6';ctx.beginPath();ctx.arc(w-1,-5,2.6,0,7);ctx.fill();ctx.restore();}
+function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function ped(x,y,down){ctx.save();ctx.translate(x,y);if(down)ctx.rotate(-Math.PI/2.2);
+  ctx.fillStyle='#ffd166';roundRect(-3.5,-20,7,16,3);ctx.fill();
+  ctx.beginPath();ctx.arc(0,-24,5,0,7);ctx.fillStyle='#f4c89a';ctx.fill();ctx.restore();}
+
+function drawScene(s,top,h){
+  const road=top+h*0.62, cx=mx(GAP);
+  // label
+  ctx.font='700 15px "IBM Plex Sans Condensed",sans-serif';ctx.fillStyle=colors[s.theme].line;
+  ctx.textAlign='left';ctx.fillText(s.label,mx(0)-6,top+18);
+  // road
+  ctx.fillStyle='#1b212b';ctx.fillRect(W*PAD_L-6,road,W*(1-PAD_L-PAD_R)+12,26);
+  ctx.strokeStyle='rgba(255,255,255,.10)';ctx.lineWidth=1;
+  ctx.setLineDash([10,9]);ctx.beginPath();ctx.moveTo(W*PAD_L,road+13);ctx.lineTo(W*(1-PAD_R),road+13);ctx.stroke();ctx.setLineDash([]);
+  // distance ticks every 5 m
+  ctx.font='10px "IBM Plex Sans",sans-serif';ctx.fillStyle='#5f7081';ctx.textAlign='center';
+  for(let m=0;m<=30;m+=5){const x=mx(m);ctx.fillRect(x,road+27,1,5);ctx.fillText(m+' m',x,road+45);}
+  // crossing zebra
+  for(let i=0;i<6;i++){ctx.fillStyle=i%2?'#cfd6dd':'#11161d';ctx.fillRect(cx-14+i*5,road-2,4,30);}
+  // travelled bar: reaction (amber) + braking (theme), shows what is just reaction time
+  const reactM=Math.min(s.x,s.v0*TR), brakeM=Math.max(0,s.x-reactM);
+  ctx.fillStyle='rgba(255,176,46,.45)';ctx.fillRect(mx(0),road-9,mx(reactM)-mx(0),6);
+  ctx.fillStyle=s.theme==='danger'?'rgba(224,87,74,.5)':'rgba(84,168,155,.5)';
+  ctx.fillRect(mx(reactM),road-9,mx(reactM+brakeM)-mx(reactM),6);
+  // bar labels (non-colour cue for what the distance is made of)
+  if(reactM>0.5){ctx.font='9px "IBM Plex Sans",sans-serif';ctx.fillStyle='#caa15a';ctx.textAlign='center';
+    ctx.fillText('reaction',(mx(0)+mx(reactM))/2,road-12);}
+  // pedestrian at crossing
+  ped(cx,road,s.state==='done'&&s.impact>0);
+  // car
+  drawCar(mx(s.x),road-3,colors[s.theme].a,15);
+  // text result badge (carries the outcome without relying on colour)
+  if(s.state==='done'){ctx.font='800 12px "IBM Plex Sans",sans-serif';ctx.textAlign='center';
+    ctx.fillStyle=s.impact>0?'#E0574A':'#54A89B';
+    ctx.fillText(s.impact>0?'STRUCK':'STOPPED',mx(s.x),road-34);}
+  // outcome
+  if(s.state==='done'){
+    ctx.textAlign='left';ctx.font='700 14px "IBM Plex Sans",sans-serif';
+    if(s.impact>0){const k=s.impact*3.6,risk=fatalRisk(k);
+      ctx.fillStyle='#E0574A';
+      ctx.fillText(`Hits at ${k.toFixed(0)} km/h. ${risk.toFixed(0)}% chance the pedestrian dies`,mx(0)-6,road-22);
+      ctx.font='11px "IBM Plex Sans",sans-serif';ctx.fillStyle='#ECC4BE';
+      ctx.fillText(`reaction alone uses ${(s.v0*TR).toFixed(0)} m, so the car reaches the crossing before it can brake`,mx(0)-6,road+62);
+    }else{const short=GAP-s.stopX;
+      ctx.fillStyle='#54A89B';
+      ctx.fillText(`Stops ${short.toFixed(0)} m before the crossing. The pedestrian is safe`,mx(0)-6,road-22);
+      ctx.font='11px "IBM Plex Sans",sans-serif';ctx.fillStyle='#A9D9CF';
+      ctx.fillText(`reaction ${(s.v0*TR).toFixed(0)} m + braking ${(s.stopX-s.v0*TR).toFixed(0)} m = ${s.stopX.toFixed(0)} m, well short of ${GAP} m`,mx(0)-6,road+62);
+      ctx.strokeStyle='#54A89B';ctx.setLineDash([3,3]);ctx.beginPath();
+      ctx.moveTo(mx(s.stopX),road-14);ctx.lineTo(mx(s.stopX),road+30);ctx.stroke();ctx.setLineDash([]);}
+  }
+}
+
+let last=0, hold=0;
+function frame(ts){const dt=Math.min(0.03,(ts-last)/1000||0.016);last=ts;
+  if(!SHOT&&!REDUCE){const allDone=scenes.every(s=>s.state==='done');
+    if(allDone){hold+=dt;if(hold>3.0){hold=0;reset();}}else for(const s of scenes)step(s,dt);}
+  ctx.clearRect(0,0,W,H);
+  const topPad=H*0.20, sh=(H*0.66)/2;
+  drawScene(scenes[0],topPad,sh);
+  drawScene(scenes[1],topPad+sh+H*0.02,sh);
+  requestAnimationFrame(frame);}
+if(SHOT||REDUCE)stageShot();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "key": "roxas",
+  "label": "Roxas City",
+  "center": [
+    122.7501,
+    11.5895
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 2625,
+  "segments_posted_real_osm": 56,
+  "segments_posted_imputed": 2569,
+  "segments_gap_positive": 179,
+  "segments_flagged_sss_gt0": 179,
+  "segments_flagged_real_posted": 7,
+  "sss_max": 60.9,
+  "sss_mean_flagged": 15.2,
+  "vru_pois": 103,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 55.7,
+      "name": "Culasi Hill Road",
+      "class": "residential",
+      "posted_osm": 60,
+      "safe": 30,
+      "fatal_reduction_pct": 93.8,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 14.3,
+      "name": "Roxas City Circumferential Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

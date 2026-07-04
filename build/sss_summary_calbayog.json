@@ -1,0 +1,32 @@
+{
+  "key": "calbayog",
+  "label": "Calbayog",
+  "center": [
+    124.5947,
+    12.067
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 696,
+  "segments_posted_real_osm": 30,
+  "segments_posted_imputed": 666,
+  "segments_gap_positive": 70,
+  "segments_flagged_sss_gt0": 70,
+  "segments_flagged_real_posted": 13,
+  "sss_max": 55.2,
+  "sss_mean_flagged": 19.5,
+  "vru_pois": 58,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 55.2,
+      "name": "Maharlika Highway",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

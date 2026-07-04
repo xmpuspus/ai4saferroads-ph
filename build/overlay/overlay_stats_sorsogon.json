@@ -1,0 +1,35 @@
+{
+  "key": "sorsogon",
+  "cells": 17,
+  "step_deg": 0.015,
+  "spearman_rho": -0.311,
+  "spearman_p": 0.412,
+  "spearman_rho_sss_wealth": -0.35,
+  "spearman_p_sss_wealth": 0.411,
+  "spearman_rho_gap_density": 0.059,
+  "spearman_p_gap_density": 0.882,
+  "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+  "morans_i": 0.235,
+  "morans_p": 0.355,
+  "rwi_points_in_bbox": 13,
+  "direction": "neither",
+  "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+  "mismatch_var": "gap_kmh",
+  "biv": [
+    [
+      "#e8e8e8",
+      "#ace4e4",
+      "#5ac8c8"
+    ],
+    [
+      "#dfb0d6",
+      "#a5add3",
+      "#5698b9"
+    ],
+    [
+      "#be64ac",
+      "#8c62aa",
+      "#3b4994"
+    ]
+  ]
+}

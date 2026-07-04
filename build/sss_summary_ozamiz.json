@@ -1,0 +1,113 @@
+{
+  "key": "ozamiz",
+  "label": "Ozamiz",
+  "center": [
+    123.846,
+    8.147
+  ],
+  "zoom": 12.7,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 1209,
+  "segments_posted_real_osm": 164,
+  "segments_posted_imputed": 1045,
+  "segments_gap_positive": 153,
+  "segments_flagged_sss_gt0": 153,
+  "segments_flagged_real_posted": 49,
+  "sss_max": 37.5,
+  "sss_mean_flagged": 15.9,
+  "vru_pois": 73,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 37.5,
+      "name": "Ozamiz City Coastal Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 25.0,
+      "name": "Capistrano Street",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 25.0,
+      "name": "Laurel Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 25.0,
+      "name": "Kaami\u00f1o Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 23.1,
+      "name": "Animas Street",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 22.9,
+      "name": "Abanil Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 21.1,
+      "name": "Governor Angel N. Medina Sr. Avenue",
+      "class": "tertiary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 20.3,
+      "name": "Cotta Road",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 20.1,
+      "name": "Port Road",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 19.3,
+      "name": "Ozamiz-Pagadian Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

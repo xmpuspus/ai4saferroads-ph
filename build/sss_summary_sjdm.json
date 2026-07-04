@@ -1,0 +1,113 @@
+{
+  "key": "sjdm",
+  "label": "San Jose del Monte",
+  "center": [
+    121.0474,
+    14.8102
+  ],
+  "zoom": 12.5,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 13027,
+  "segments_posted_real_osm": 335,
+  "segments_posted_imputed": 12692,
+  "segments_gap_positive": 323,
+  "segments_flagged_sss_gt0": 323,
+  "segments_flagged_real_posted": 58,
+  "sss_max": 75.0,
+  "sss_mean_flagged": 19.1,
+  "vru_pois": 489,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 75.0,
+      "name": "Quirino Highway",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 30,
+      "fatal_reduction_pct": 93.8,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 75.0,
+      "name": "Igay Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 46.0,
+      "name": "Santa Maria - Tungkong Mangga Road",
+      "class": "primary",
+      "posted_osm": 50,
+      "safe": 30,
+      "fatal_reduction_pct": 87.0,
+      "why": "pedestrian activity (2 VRU site<=50m)"
+    },
+    {
+      "sss": 25.0,
+      "name": "Langit Road",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 25.0,
+      "name": "Camarin Road",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 25.0,
+      "name": "J. P. Rizal Street",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (3 VRU site<=50m)"
+    },
+    {
+      "sss": 25.0,
+      "name": "San Ignacio Street",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (5 VRU site<=50m)"
+    },
+    {
+      "sss": 25.0,
+      "name": "Carriedo Street",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (2 VRU site<=50m)"
+    },
+    {
+      "sss": 19.5,
+      "name": "Congressional Road",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 19.2,
+      "name": "Del Monte-Norzagaray Road",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

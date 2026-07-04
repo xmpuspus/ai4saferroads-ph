@@ -1,0 +1,59 @@
+{
+  "key": "pagadian",
+  "label": "Pagadian",
+  "center": [
+    123.4366,
+    7.825
+  ],
+  "zoom": 12.7,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 1678,
+  "segments_posted_real_osm": 67,
+  "segments_posted_imputed": 1611,
+  "segments_gap_positive": 90,
+  "segments_flagged_sss_gt0": 90,
+  "segments_flagged_real_posted": 16,
+  "sss_max": 25.0,
+  "sss_mean_flagged": 16.4,
+  "vru_pois": 101,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 22.8,
+      "name": "J. P. Rizal Avenue",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 16.4,
+      "name": "Pagadian Airport Road",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 15.0,
+      "name": "Regional Government Center Road",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 12.8,
+      "name": "Tukuran-Pagadian Highway",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

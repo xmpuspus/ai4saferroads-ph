@@ -1,0 +1,104 @@
+{
+  "key": "lipa",
+  "label": "Lipa City",
+  "center": [
+    121.1385,
+    13.9421
+  ],
+  "zoom": 12.5,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 9898,
+  "segments_posted_real_osm": 724,
+  "segments_posted_imputed": 9174,
+  "segments_gap_positive": 393,
+  "segments_flagged_sss_gt0": 393,
+  "segments_flagged_real_posted": 20,
+  "sss_max": 75.0,
+  "sss_mean_flagged": 17.3,
+  "vru_pois": 259,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 25.0,
+      "name": "B. Morada Street",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (2 VRU site<=50m)"
+    },
+    {
+      "sss": 23.6,
+      "name": "C. M. Recto Avenue",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (2 VRU site<=50m)"
+    },
+    {
+      "sss": 22.2,
+      "name": "M. K. Lina Street",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 21.4,
+      "name": "P. Torres Street",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 20.4,
+      "name": "General Luna Street",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 19.9,
+      "name": "V. Templo Avenue",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 16.3,
+      "name": "Manila-Batangas Bypass Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 14.4,
+      "name": "Sentrina Drive",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 13.4,
+      "name": "Governor Feliciano Leviste Provincial Highway",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

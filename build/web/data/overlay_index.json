@@ -1,0 +1,1507 @@
+[
+  {
+    "key": "manila",
+    "cells": 138,
+    "step_deg": 0.015,
+    "spearman_rho": -0.11,
+    "spearman_p": 0.289,
+    "spearman_rho_sss_wealth": -0.079,
+    "spearman_p_sss_wealth": 0.424,
+    "spearman_rho_gap_density": -0.11,
+    "spearman_p_gap_density": 0.276,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.085,
+    "morans_p": 0.035,
+    "rwi_points_in_bbox": 62,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "cebu",
+    "cells": 57,
+    "step_deg": 0.015,
+    "spearman_rho": 0.21,
+    "spearman_p": 0.246,
+    "spearman_rho_sss_wealth": 0.266,
+    "spearman_p_sss_wealth": 0.123,
+    "spearman_rho_gap_density": 0.432,
+    "spearman_p_gap_density": 0.018,
+    "crowd_finding": "the worst speed-limit mismatch sits in the more crowded areas",
+    "morans_i": 0.109,
+    "morans_p": 0.055,
+    "rwi_points_in_bbox": 34,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "davao",
+    "cells": 35,
+    "step_deg": 0.015,
+    "spearman_rho": 0.059,
+    "spearman_p": 0.887,
+    "spearman_rho_sss_wealth": 0.111,
+    "spearman_p_sss_wealth": 0.658,
+    "spearman_rho_gap_density": 0.158,
+    "spearman_p_gap_density": 0.631,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.254,
+    "morans_p": 0.06,
+    "rwi_points_in_bbox": 19,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "zamboanga",
+    "cells": 15,
+    "step_deg": 0.015,
+    "spearman_rho": -0.257,
+    "spearman_p": 0.333,
+    "spearman_rho_sss_wealth": -0.239,
+    "spearman_p_sss_wealth": 0.466,
+    "spearman_rho_gap_density": -0.836,
+    "spearman_p_gap_density": 0.067,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.111,
+    "morans_p": 0.335,
+    "rwi_points_in_bbox": 16,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "cdo",
+    "cells": 28,
+    "step_deg": 0.015,
+    "spearman_rho": 0.022,
+    "spearman_p": 0.965,
+    "spearman_rho_sss_wealth": 0.028,
+    "spearman_p_sss_wealth": 0.929,
+    "spearman_rho_gap_density": 0.053,
+    "spearman_p_gap_density": 0.93,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.111,
+    "morans_p": 0.4,
+    "rwi_points_in_bbox": 22,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "gensan",
+    "cells": 20,
+    "step_deg": 0.015,
+    "spearman_rho": -0.06,
+    "spearman_p": 0.95,
+    "spearman_rho_sss_wealth": -0.06,
+    "spearman_p_sss_wealth": 0.95,
+    "spearman_rho_gap_density": 0.054,
+    "spearman_p_gap_density": 0.7,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.098,
+    "morans_p": 0.25,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "iloilo",
+    "cells": 25,
+    "step_deg": 0.015,
+    "spearman_rho": -0.15,
+    "spearman_p": 0.6,
+    "spearman_rho_sss_wealth": -0.126,
+    "spearman_p_sss_wealth": 0.8,
+    "spearman_rho_gap_density": -0.222,
+    "spearman_p_gap_density": 0.44,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.03,
+    "morans_p": 0.92,
+    "rwi_points_in_bbox": 21,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "bacolod",
+    "cells": 29,
+    "step_deg": 0.015,
+    "spearman_rho": -0.612,
+    "spearman_p": 0.035,
+    "spearman_rho_sss_wealth": -0.595,
+    "spearman_p_sss_wealth": 0.035,
+    "spearman_rho_gap_density": 0.105,
+    "spearman_p_gap_density": 0.518,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.325,
+    "morans_p": 0.035,
+    "rwi_points_in_bbox": 19,
+    "direction": "poorer",
+    "finding": "the worst speed-limit mismatch falls in the city's lower-wealth areas",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "baguio",
+    "cells": 38,
+    "step_deg": 0.015,
+    "spearman_rho": 0.078,
+    "spearman_p": 0.659,
+    "spearman_rho_sss_wealth": 0.075,
+    "spearman_p_sss_wealth": 0.685,
+    "spearman_rho_gap_density": 0.049,
+    "spearman_p_gap_density": 0.791,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.052,
+    "morans_p": 0.63,
+    "rwi_points_in_bbox": 16,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "batangas",
+    "cells": 20,
+    "step_deg": 0.015,
+    "spearman_rho": 0.165,
+    "spearman_p": 0.6,
+    "spearman_rho_sss_wealth": 0.211,
+    "spearman_p_sss_wealth": 0.55,
+    "spearman_rho_gap_density": 0.406,
+    "spearman_p_gap_density": 0.2,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.002,
+    "morans_p": 1.0,
+    "rwi_points_in_bbox": 21,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "tacloban",
+    "cells": 12,
+    "step_deg": 0.015,
+    "spearman_rho": 0.406,
+    "spearman_p": 0.167,
+    "spearman_rho_sss_wealth": 0.406,
+    "spearman_p_sss_wealth": 0.167,
+    "spearman_rho_gap_density": 0.392,
+    "spearman_p_gap_density": 0.167,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.115,
+    "morans_p": 0.75,
+    "rwi_points_in_bbox": 26,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "angeles",
+    "cells": 41,
+    "step_deg": 0.015,
+    "spearman_rho": -0.125,
+    "spearman_p": 0.418,
+    "spearman_rho_sss_wealth": -0.105,
+    "spearman_p_sss_wealth": 0.514,
+    "spearman_rho_gap_density": -0.386,
+    "spearman_p_gap_density": 0.025,
+    "crowd_finding": "the worst speed-limit mismatch sits in the less crowded areas",
+    "morans_i": 0.086,
+    "morans_p": 0.19,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "legazpi",
+    "cells": 20,
+    "step_deg": 0.015,
+    "spearman_rho": -0.435,
+    "spearman_p": 0.2,
+    "spearman_rho_sss_wealth": -0.412,
+    "spearman_p_sss_wealth": 0.2,
+    "spearman_rho_gap_density": -0.14,
+    "spearman_p_gap_density": 0.65,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.137,
+    "morans_p": 0.15,
+    "rwi_points_in_bbox": 22,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "dagupan",
+    "cells": 19,
+    "step_deg": 0.015,
+    "spearman_rho": -0.182,
+    "spearman_p": 0.421,
+    "spearman_rho_sss_wealth": -0.147,
+    "spearman_p_sss_wealth": 0.474,
+    "spearman_rho_gap_density": -0.005,
+    "spearman_p_gap_density": 1.0,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.046,
+    "morans_p": 0.84,
+    "rwi_points_in_bbox": 18,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "antipolo",
+    "cells": 17,
+    "step_deg": 0.015,
+    "spearman_rho": -0.11,
+    "spearman_p": 0.706,
+    "spearman_rho_sss_wealth": -0.147,
+    "spearman_p_sss_wealth": 0.707,
+    "spearman_rho_gap_density": 0.441,
+    "spearman_p_gap_density": 0.059,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.14,
+    "morans_p": 0.475,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "olongapo",
+    "cells": 20,
+    "step_deg": 0.015,
+    "spearman_rho": 0.03,
+    "spearman_p": 0.9,
+    "spearman_rho_sss_wealth": 0.174,
+    "spearman_p_sss_wealth": 0.55,
+    "spearman_rho_gap_density": 0.116,
+    "spearman_p_gap_density": 0.7,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.217,
+    "morans_p": 0.15,
+    "rwi_points_in_bbox": 17,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "lucena",
+    "cells": 14,
+    "step_deg": 0.015,
+    "spearman_rho": 0.037,
+    "spearman_p": 0.928,
+    "spearman_rho_sss_wealth": 0.073,
+    "spearman_p_sss_wealth": 0.713,
+    "spearman_rho_gap_density": 0.169,
+    "spearman_p_gap_density": 0.569,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.077,
+    "morans_p": 0.715,
+    "rwi_points_in_bbox": 23,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "santiago",
+    "cells": 22,
+    "step_deg": 0.015,
+    "spearman_rho": 0.23,
+    "spearman_p": 0.226,
+    "spearman_rho_sss_wealth": 0.242,
+    "spearman_p_sss_wealth": 0.226,
+    "spearman_rho_gap_density": 0.317,
+    "spearman_p_gap_density": 0.091,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.045,
+    "morans_p": 0.73,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "iligan",
+    "cells": 25,
+    "step_deg": 0.015,
+    "spearman_rho": -0.202,
+    "spearman_p": 0.56,
+    "spearman_rho_sss_wealth": -0.168,
+    "spearman_p_sss_wealth": 0.6,
+    "spearman_rho_gap_density": -0.265,
+    "spearman_p_gap_density": 0.32,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.197,
+    "morans_p": 0.36,
+    "rwi_points_in_bbox": 17,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "tarlac",
+    "cells": 32,
+    "step_deg": 0.015,
+    "spearman_rho": -0.09,
+    "spearman_p": 0.658,
+    "spearman_rho_sss_wealth": -0.11,
+    "spearman_p_sss_wealth": 0.47,
+    "spearman_rho_gap_density": -0.126,
+    "spearman_p_gap_density": 0.469,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.136,
+    "morans_p": 0.125,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "sanfernando-pampanga",
+    "cells": 39,
+    "step_deg": 0.015,
+    "spearman_rho": -0.422,
+    "spearman_p": 0.026,
+    "spearman_rho_sss_wealth": -0.431,
+    "spearman_p_sss_wealth": 0.026,
+    "spearman_rho_gap_density": 0.052,
+    "spearman_p_gap_density": 0.664,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.04,
+    "morans_p": 0.74,
+    "rwi_points_in_bbox": 24,
+    "direction": "poorer",
+    "finding": "the worst speed-limit mismatch falls in the city's lower-wealth areas",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "malolos",
+    "cells": 25,
+    "step_deg": 0.015,
+    "spearman_rho": -0.546,
+    "spearman_p": 0.24,
+    "spearman_rho_sss_wealth": -0.579,
+    "spearman_p_sss_wealth": 0.24,
+    "spearman_rho_gap_density": 0.473,
+    "spearman_p_gap_density": 0.08,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.411,
+    "morans_p": 0.08,
+    "rwi_points_in_bbox": 25,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "sjdm",
+    "cells": 40,
+    "step_deg": 0.015,
+    "spearman_rho": 0.168,
+    "spearman_p": 0.275,
+    "spearman_rho_sss_wealth": 0.208,
+    "spearman_p_sss_wealth": 0.125,
+    "spearman_rho_gap_density": -0.035,
+    "spearman_p_gap_density": 0.825,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.409,
+    "morans_p": 0.025,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "lipa",
+    "cells": 27,
+    "step_deg": 0.015,
+    "spearman_rho": 0.232,
+    "spearman_p": 0.223,
+    "spearman_rho_sss_wealth": 0.237,
+    "spearman_p_sss_wealth": 0.223,
+    "spearman_rho_gap_density": 0.56,
+    "spearman_p_gap_density": 0.038,
+    "crowd_finding": "the worst speed-limit mismatch sits in the more crowded areas",
+    "morans_i": -0.038,
+    "morans_p": 0.96,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "calamba",
+    "cells": 29,
+    "step_deg": 0.015,
+    "spearman_rho": -0.298,
+    "spearman_p": 0.207,
+    "spearman_rho_sss_wealth": -0.306,
+    "spearman_p_sss_wealth": 0.139,
+    "spearman_rho_gap_density": -0.566,
+    "spearman_p_gap_density": 0.035,
+    "crowd_finding": "the worst speed-limit mismatch sits in the less crowded areas",
+    "morans_i": 0.167,
+    "morans_p": 0.21,
+    "rwi_points_in_bbox": 19,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "dasmarinas",
+    "cells": 52,
+    "step_deg": 0.015,
+    "spearman_rho": -0.184,
+    "spearman_p": 0.174,
+    "spearman_rho_sss_wealth": -0.18,
+    "spearman_p_sss_wealth": 0.174,
+    "spearman_rho_gap_density": -0.214,
+    "spearman_p_gap_density": 0.213,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.032,
+    "morans_p": 0.675,
+    "rwi_points_in_bbox": 24,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "urdaneta",
+    "cells": 17,
+    "step_deg": 0.015,
+    "spearman_rho": 0.088,
+    "spearman_p": 0.823,
+    "spearman_rho_sss_wealth": 0.088,
+    "spearman_p_sss_wealth": 0.823,
+    "spearman_rho_gap_density": 0.007,
+    "spearman_p_gap_density": 1.0,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.023,
+    "morans_p": 0.77,
+    "rwi_points_in_bbox": 16,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "laoag",
+    "cells": 22,
+    "step_deg": 0.015,
+    "spearman_rho": -0.352,
+    "spearman_p": 0.182,
+    "spearman_rho_sss_wealth": -0.381,
+    "spearman_p_sss_wealth": 0.136,
+    "spearman_rho_gap_density": -0.077,
+    "spearman_p_gap_density": 0.864,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.153,
+    "morans_p": 0.32,
+    "rwi_points_in_bbox": 20,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "tuguegarao",
+    "cells": 23,
+    "step_deg": 0.015,
+    "spearman_rho": -0.06,
+    "spearman_p": 0.653,
+    "spearman_rho_sss_wealth": -0.06,
+    "spearman_p_sss_wealth": 0.653,
+    "spearman_rho_gap_density": 0.526,
+    "spearman_p_gap_density": 0.131,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.002,
+    "morans_p": 1.0,
+    "rwi_points_in_bbox": 19,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "sorsogon",
+    "cells": 17,
+    "step_deg": 0.015,
+    "spearman_rho": -0.311,
+    "spearman_p": 0.412,
+    "spearman_rho_sss_wealth": -0.35,
+    "spearman_p_sss_wealth": 0.411,
+    "spearman_rho_gap_density": 0.059,
+    "spearman_p_gap_density": 0.882,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.235,
+    "morans_p": 0.355,
+    "rwi_points_in_bbox": 13,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "dumaguete",
+    "cells": 19,
+    "step_deg": 0.015,
+    "spearman_rho": -0.133,
+    "spearman_p": 0.632,
+    "spearman_rho_sss_wealth": -0.144,
+    "spearman_p_sss_wealth": 0.58,
+    "spearman_rho_gap_density": -0.058,
+    "spearman_p_gap_density": 0.842,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.028,
+    "morans_p": 0.79,
+    "rwi_points_in_bbox": 10,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "tagbilaran",
+    "cells": 17,
+    "step_deg": 0.015,
+    "spearman_rho": -0.113,
+    "spearman_p": 0.647,
+    "spearman_rho_sss_wealth": -0.113,
+    "spearman_p_sss_wealth": 0.647,
+    "spearman_rho_gap_density": -0.213,
+    "spearman_p_gap_density": 0.588,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.054,
+    "morans_p": 0.705,
+    "rwi_points_in_bbox": 13,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "ormoc",
+    "cells": 18,
+    "step_deg": 0.015,
+    "spearman_rho": -0.35,
+    "spearman_p": 0.166,
+    "spearman_rho_sss_wealth": -0.41,
+    "spearman_p_sss_wealth": 0.111,
+    "spearman_rho_gap_density": -0.453,
+    "spearman_p_gap_density": 0.056,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.113,
+    "morans_p": 0.615,
+    "rwi_points_in_bbox": 17,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "calbayog",
+    "cells": 12,
+    "step_deg": 0.015,
+    "spearman_rho": 0.559,
+    "spearman_p": 0.084,
+    "spearman_rho_sss_wealth": 0.629,
+    "spearman_p_sss_wealth": 0.084,
+    "spearman_rho_gap_density": 0.364,
+    "spearman_p_gap_density": 0.25,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.129,
+    "morans_p": 0.575,
+    "rwi_points_in_bbox": 16,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "cotabato",
+    "cells": 23,
+    "step_deg": 0.015,
+    "spearman_rho": -0.235,
+    "spearman_p": 0.348,
+    "spearman_rho_sss_wealth": -0.235,
+    "spearman_p_sss_wealth": 0.348,
+    "spearman_rho_gap_density": -0.156,
+    "spearman_p_gap_density": 0.391,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.095,
+    "morans_p": 0.4,
+    "rwi_points_in_bbox": 25,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "koronadal",
+    "cells": 26,
+    "step_deg": 0.015,
+    "spearman_rho": 0.103,
+    "spearman_p": 0.73,
+    "spearman_rho_sss_wealth": 0.115,
+    "spearman_p_sss_wealth": 0.654,
+    "spearman_rho_gap_density": 0.052,
+    "spearman_p_gap_density": 0.808,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.225,
+    "morans_p": 0.075,
+    "rwi_points_in_bbox": 25,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "kidapawan",
+    "cells": 15,
+    "step_deg": 0.015,
+    "spearman_rho": 0.161,
+    "spearman_p": 0.599,
+    "spearman_rho_sss_wealth": 0.168,
+    "spearman_p_sss_wealth": 0.599,
+    "spearman_rho_gap_density": -0.004,
+    "spearman_p_gap_density": 1.0,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.06,
+    "morans_p": 0.865,
+    "rwi_points_in_bbox": 16,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "tagum",
+    "cells": 44,
+    "step_deg": 0.015,
+    "spearman_rho": -0.611,
+    "spearman_p": 0.023,
+    "spearman_rho_sss_wealth": -0.565,
+    "spearman_p_sss_wealth": 0.023,
+    "spearman_rho_gap_density": -0.643,
+    "spearman_p_gap_density": 0.023,
+    "crowd_finding": "the worst speed-limit mismatch sits in the less crowded areas",
+    "morans_i": 0.541,
+    "morans_p": 0.025,
+    "rwi_points_in_bbox": 25,
+    "direction": "poorer",
+    "finding": "the worst speed-limit mismatch falls in the city's lower-wealth areas",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "digos",
+    "cells": 13,
+    "step_deg": 0.015,
+    "spearman_rho": -0.302,
+    "spearman_p": 0.384,
+    "spearman_rho_sss_wealth": -0.005,
+    "spearman_p_sss_wealth": 1.0,
+    "spearman_rho_gap_density": -0.522,
+    "spearman_p_gap_density": 0.385,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.361,
+    "morans_p": 0.155,
+    "rwi_points_in_bbox": 15,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "pagadian",
+    "cells": 13,
+    "step_deg": 0.015,
+    "spearman_rho": 0.357,
+    "spearman_p": 0.461,
+    "spearman_rho_sss_wealth": 0.423,
+    "spearman_p_sss_wealth": 0.384,
+    "spearman_rho_gap_density": -0.181,
+    "spearman_p_gap_density": 0.539,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.297,
+    "morans_p": 0.155,
+    "rwi_points_in_bbox": 14,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "dipolog",
+    "cells": 12,
+    "step_deg": 0.015,
+    "spearman_rho": 0.14,
+    "spearman_p": 0.585,
+    "spearman_rho_sss_wealth": 0.189,
+    "spearman_p_sss_wealth": 0.583,
+    "spearman_rho_gap_density": -0.392,
+    "spearman_p_gap_density": 0.501,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.133,
+    "morans_p": 0.67,
+    "rwi_points_in_bbox": 14,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "ozamiz",
+    "cells": 14,
+    "step_deg": 0.015,
+    "spearman_rho": 0.09,
+    "spearman_p": 0.857,
+    "spearman_rho_sss_wealth": 0.152,
+    "spearman_p_sss_wealth": 0.786,
+    "spearman_rho_gap_density": 0.336,
+    "spearman_p_gap_density": 0.357,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": -0.252,
+    "morans_p": 0.075,
+    "rwi_points_in_bbox": 15,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  },
+  {
+    "key": "mati",
+    "cells": 13,
+    "step_deg": 0.015,
+    "spearman_rho": -0.352,
+    "spearman_p": 0.385,
+    "spearman_rho_sss_wealth": -0.341,
+    "spearman_p_sss_wealth": 0.385,
+    "spearman_rho_gap_density": 0.159,
+    "spearman_p_gap_density": 0.539,
+    "crowd_finding": "the size of the mismatch does not track how crowded a place is, crowding decides which roads get flagged rather than how large the gap is",
+    "morans_i": 0.282,
+    "morans_p": 0.31,
+    "rwi_points_in_bbox": 12,
+    "direction": "neither",
+    "finding": "speed-limit mismatch shows no clear wealth pattern, it is spread across rich and poor areas alike",
+    "mismatch_var": "gap_kmh",
+    "biv": [
+      [
+        "#e8e8e8",
+        "#ace4e4",
+        "#5ac8c8"
+      ],
+      [
+        "#dfb0d6",
+        "#a5add3",
+        "#5698b9"
+      ],
+      [
+        "#be64ac",
+        "#8c62aa",
+        "#3b4994"
+      ]
+    ]
+  }
+]

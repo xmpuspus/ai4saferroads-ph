@@ -1,0 +1,3944 @@
+[
+  {
+    "key": "manila",
+    "label": "Metro Manila",
+    "center": [
+      121.02,
+      14.59
+    ],
+    "zoom": 11.6,
+    "data_date": "2026-06-25",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 87123,
+    "segments_posted_real_osm": 14163,
+    "segments_posted_imputed": 72960,
+    "segments_gap_positive": 7570,
+    "segments_flagged_sss_gt0": 7570,
+    "segments_flagged_real_posted": 4664,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 29.6,
+    "vru_pois": 5669,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 75.0,
+        "name": "Taft Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "Osme\u00f1a Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "Carlos P. Garcia Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "EDSA",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "Quezon Boulevard",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "A. H. Lacson Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "Legarda Street",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "Tayuman Street",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "C. M. Recto Avenue",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "Mel Lopez Boulevard",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "cebu",
+    "label": "Cebu City",
+    "center": [
+      123.89,
+      10.32
+    ],
+    "zoom": 12.2,
+    "data_date": "2026-06-25",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 22402,
+    "segments_posted_real_osm": 2027,
+    "segments_posted_imputed": 20375,
+    "segments_gap_positive": 1230,
+    "segments_flagged_sss_gt0": 1230,
+    "segments_flagged_real_posted": 581,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 26.6,
+    "vru_pois": 858,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 75.0,
+        "name": "Natalio Bacalso Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 68.3,
+        "name": "Mambaling Underpass",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 64.7,
+        "name": "Tiangge Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 64.6,
+        "name": "Manuel L. Quezon National Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (3 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Osme\u00f1a Boulevard",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "General Maxilom Avenue Extension",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Archbishop Reyes Avenue",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Governor M. Cuenco Avenue",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "N. Escario Street",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "General Maxilom Avenue",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "davao",
+    "label": "Davao City",
+    "center": [
+      125.6081,
+      7.0648
+    ],
+    "zoom": 12.4,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 10873,
+    "segments_posted_real_osm": 2658,
+    "segments_posted_imputed": 8215,
+    "segments_gap_positive": 411,
+    "segments_flagged_sss_gt0": 411,
+    "segments_flagged_real_posted": 364,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 18.8,
+    "vru_pois": 466,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 75.0,
+        "name": "Davao City Coastal Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 74.0,
+        "name": "Buhangin-Cabantian Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Luisa Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Saturn Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Eagle Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Oriole Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Dove Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Peacock Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Diamond Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Cesario Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "zamboanga",
+    "label": "Zamboanga City",
+    "center": [
+      122.0765,
+      6.9047
+    ],
+    "zoom": 12.4,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 5804,
+    "segments_posted_real_osm": 110,
+    "segments_posted_imputed": 5694,
+    "segments_gap_positive": 171,
+    "segments_flagged_sss_gt0": 171,
+    "segments_flagged_real_posted": 15,
+    "sss_max": 46.8,
+    "sss_mean_flagged": 17.7,
+    "vru_pois": 159,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 18.9,
+        "name": "Zamboanga City Bypass Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "cdo",
+    "label": "Cagayan de Oro",
+    "center": [
+      124.6422,
+      8.4756
+    ],
+    "zoom": 12.4,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 8555,
+    "segments_posted_real_osm": 441,
+    "segments_posted_imputed": 8114,
+    "segments_gap_positive": 396,
+    "segments_flagged_sss_gt0": 396,
+    "segments_flagged_real_posted": 72,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 20.5,
+    "vru_pois": 307,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 75.0,
+        "name": "C. M. Recto Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Don Apolinar Velez Street",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 48.4,
+        "name": "Masterson Avenue",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 42.0,
+        "name": "East Coastal Road",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 37.3,
+        "name": "West Coastal Road",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Gaston Circle",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Justo Gaerlan Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Burgos Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Rio de Oro Boulevard",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 24.4,
+        "name": "J. V. Seri\u00f1a Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "gensan",
+    "label": "General Santos",
+    "center": [
+      125.1722,
+      6.1122
+    ],
+    "zoom": 12.4,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 9013,
+    "segments_posted_real_osm": 116,
+    "segments_posted_imputed": 8897,
+    "segments_gap_positive": 217,
+    "segments_flagged_sss_gt0": 217,
+    "segments_flagged_real_posted": 4,
+    "sss_max": 50.0,
+    "sss_mean_flagged": 15.1,
+    "vru_pois": 144,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 45.0,
+        "name": "Digos-Makar Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 28.1,
+        "name": "San Juanico Drive",
+        "class": "residential",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "iloilo",
+    "label": "Iloilo City",
+    "center": [
+      122.5733,
+      10.6933
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 6433,
+    "segments_posted_real_osm": 758,
+    "segments_posted_imputed": 5675,
+    "segments_gap_positive": 368,
+    "segments_flagged_sss_gt0": 368,
+    "segments_flagged_real_posted": 135,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 23.3,
+    "vru_pois": 398,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 50.0,
+        "name": "Iloilo South Coastal Road",
+        "class": "tertiary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Luna Street",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Bonifacio Drive",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Ledesma Street",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Fort San Pedro Drive",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Ruperto Montinola Street",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "Plaza Rizal Street",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 50.0,
+        "name": "MacArthur Drive",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 47.0,
+        "name": "Washington Street",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 46.6,
+        "name": "Avance\u00f1a Street",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "bacolod",
+    "label": "Bacolod",
+    "center": [
+      122.9514,
+      10.6763
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 8167,
+    "segments_posted_real_osm": 475,
+    "segments_posted_imputed": 7692,
+    "segments_gap_positive": 232,
+    "segments_flagged_sss_gt0": 232,
+    "segments_flagged_real_posted": 98,
+    "sss_max": 71.7,
+    "sss_mean_flagged": 20.4,
+    "vru_pois": 258,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 71.7,
+        "name": "Bacolod Silay Airport Access Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 63.1,
+        "name": "Lacson Street",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 56.1,
+        "name": "Paseo Mabini",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 53.7,
+        "name": "Carlos Hilado Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Gatuslao Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Gonzaga Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Araneta Avenue",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Jose Rizal Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "San Juan Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 23.0,
+        "name": "North Capitol Road",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "baguio",
+    "label": "Baguio",
+    "center": [
+      120.598,
+      16.418
+    ],
+    "zoom": 12.8,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 7521,
+    "segments_posted_real_osm": 3961,
+    "segments_posted_imputed": 3560,
+    "segments_gap_positive": 173,
+    "segments_flagged_sss_gt0": 173,
+    "segments_flagged_real_posted": 23,
+    "sss_max": 31.4,
+    "sss_mean_flagged": 16.7,
+    "vru_pois": 655,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 25.0,
+        "name": "M. Roxas Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (3 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Pico-Lamtang Road",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 15.8,
+        "name": "Monticello Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 15.2,
+        "name": "Balacbac Feeder Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 15.0,
+        "name": "Ben Palispis Highway",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 12.5,
+        "name": "Conifer Drive",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "batangas",
+    "label": "Batangas City",
+    "center": [
+      121.0591,
+      13.7553
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 6272,
+    "segments_posted_real_osm": 514,
+    "segments_posted_imputed": 5758,
+    "segments_gap_positive": 357,
+    "segments_flagged_sss_gt0": 357,
+    "segments_flagged_real_posted": 31,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 19.4,
+    "vru_pois": 383,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 25.0,
+        "name": "National Highway 436",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (3 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Rizal Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "P. Burgos Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 22.0,
+        "name": "Kapitan Ponso Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 21.5,
+        "name": "National Highway 439",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.1,
+        "name": "Batangas-Tabangao-Lobo Road",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "butuan",
+    "label": "Butuan",
+    "center": [
+      125.5432,
+      8.9477
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3976,
+    "segments_posted_real_osm": 0,
+    "segments_posted_imputed": 3976,
+    "segments_gap_positive": 258,
+    "segments_flagged_sss_gt0": 258,
+    "segments_flagged_real_posted": 0,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 17.7,
+    "vru_pois": 213,
+    "headline_priority_roads_real_posted": [],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "tacloban",
+    "label": "Tacloban",
+    "center": [
+      125.0083,
+      11.2432
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3823,
+    "segments_posted_real_osm": 59,
+    "segments_posted_imputed": 3764,
+    "segments_gap_positive": 275,
+    "segments_flagged_sss_gt0": 275,
+    "segments_flagged_real_posted": 17,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 24.7,
+    "vru_pois": 311,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 53.7,
+        "name": "Maharlika Highway",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 40.4,
+        "name": "Naga-Naga Rotonda",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "puerto-princesa",
+    "label": "Puerto Princesa",
+    "center": [
+      118.735,
+      9.753
+    ],
+    "zoom": 12.4,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3593,
+    "segments_posted_real_osm": 1,
+    "segments_posted_imputed": 3592,
+    "segments_gap_positive": 220,
+    "segments_flagged_sss_gt0": 220,
+    "segments_flagged_real_posted": 0,
+    "sss_max": 42.7,
+    "sss_mean_flagged": 15.2,
+    "vru_pois": 100,
+    "headline_priority_roads_real_posted": [],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "angeles",
+    "label": "Angeles City",
+    "center": [
+      120.587,
+      15.15
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 14211,
+    "segments_posted_real_osm": 974,
+    "segments_posted_imputed": 13237,
+    "segments_gap_positive": 799,
+    "segments_flagged_sss_gt0": 799,
+    "segments_flagged_real_posted": 202,
+    "sss_max": 74.2,
+    "sss_mean_flagged": 16.0,
+    "vru_pois": 431,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 74.2,
+        "name": "Friendship Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 53.4,
+        "name": "A. Bonifacio Avenue",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 52.6,
+        "name": "Gil Puyat Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 46.2,
+        "name": "Dau Access Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 46.1,
+        "name": "Manuel A. Roxas Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 45.0,
+        "name": "Claro M. Recto Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.4,
+        "name": "Dau Avenue",
+        "class": "residential",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Rizal Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Jake Gonzales Boulevard",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Santo Rosario Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "naga",
+    "label": "Naga City",
+    "center": [
+      123.185,
+      13.624
+    ],
+    "zoom": 12.8,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3212,
+    "segments_posted_real_osm": 7,
+    "segments_posted_imputed": 3205,
+    "segments_gap_positive": 147,
+    "segments_flagged_sss_gt0": 147,
+    "segments_flagged_real_posted": 1,
+    "sss_max": 63.0,
+    "sss_mean_flagged": 23.8,
+    "vru_pois": 164,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 25.0,
+        "name": "P. Burgos Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "legazpi",
+    "label": "Legazpi City",
+    "center": [
+      123.7346,
+      13.1389
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3412,
+    "segments_posted_real_osm": 200,
+    "segments_posted_imputed": 3212,
+    "segments_gap_positive": 145,
+    "segments_flagged_sss_gt0": 145,
+    "segments_flagged_real_posted": 17,
+    "sss_max": 37.4,
+    "sss_mean_flagged": 15.4,
+    "vru_pois": 144,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 37.4,
+        "name": "Captain Fermin Aquende Drive",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.3,
+        "name": "Maharlika Highway",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 18.9,
+        "name": "Legazpi City - Punta De Jesus Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 15.9,
+        "name": "Legazpi City - Manito Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 12.9,
+        "name": "Comun-Inarado-Pe\u00f1afrancia Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "dagupan",
+    "label": "Dagupan",
+    "center": [
+      120.3338,
+      16.043
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 2534,
+    "segments_posted_real_osm": 169,
+    "segments_posted_imputed": 2365,
+    "segments_gap_positive": 142,
+    "segments_flagged_sss_gt0": 142,
+    "segments_flagged_real_posted": 30,
+    "sss_max": 61.6,
+    "sss_mean_flagged": 18.5,
+    "vru_pois": 165,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 54.8,
+        "name": "MacArthur Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 46.1,
+        "name": "Dagupan-Mangaldan-Calasiao Circumferential Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 45.2,
+        "name": "Carmen-Bayambang-Manat Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 41.1,
+        "name": "Malasiqui-Calasiao Road",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 39.7,
+        "name": "Rizal Street",
+        "class": "secondary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Don Marcelo I. Balolong Sr. Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 20.9,
+        "name": "Perez Boulevard",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.7,
+        "name": "A. B. Fernandez Avenue",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.4,
+        "name": "San Fabian-Bonuan-Dagupan Diversion Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 16.1,
+        "name": "Calasiao-Dagupan Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "antipolo",
+    "label": "Antipolo",
+    "center": [
+      121.1759,
+      14.5872
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 14955,
+    "segments_posted_real_osm": 324,
+    "segments_posted_imputed": 14631,
+    "segments_gap_positive": 937,
+    "segments_flagged_sss_gt0": 937,
+    "segments_flagged_real_posted": 53,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 24.9,
+    "vru_pois": 418,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 64.5,
+        "name": "Ortigas Avenue Extension",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Rizal Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (3 VRU site<=50m)"
+      },
+      {
+        "sss": 23.0,
+        "name": "TOCS Avenue",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 22.6,
+        "name": "Narra Avenue",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 19.4,
+        "name": "Mission Hills Boulevard",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 18.2,
+        "name": "E. Rodriguez Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 17.2,
+        "name": "Panorama Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 16.4,
+        "name": "Beach Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 16.3,
+        "name": "Narra Drive",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "olongapo",
+    "label": "Olongapo",
+    "center": [
+      120.2778,
+      14.825
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3803,
+    "segments_posted_real_osm": 124,
+    "segments_posted_imputed": 3679,
+    "segments_gap_positive": 390,
+    "segments_flagged_sss_gt0": 390,
+    "segments_flagged_real_posted": 48,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 17.4,
+    "vru_pois": 169,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 75.0,
+        "name": "Zambales Highway",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 22.2,
+        "name": "San Isidro Road",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.4,
+        "name": "Jose Abad Santos Avenue",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 14.8,
+        "name": "Argonaut Highway",
+        "class": "tertiary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "lucena",
+    "label": "Lucena City",
+    "center": [
+      121.6135,
+      13.9269
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 4079,
+    "segments_posted_real_osm": 231,
+    "segments_posted_imputed": 3848,
+    "segments_gap_positive": 253,
+    "segments_flagged_sss_gt0": 253,
+    "segments_flagged_real_posted": 8,
+    "sss_max": 65.9,
+    "sss_mean_flagged": 17.1,
+    "vru_pois": 145,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 32.8,
+        "name": "Cotta Road",
+        "class": "residential",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Old Manila South Road",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 22.6,
+        "name": "P. Gomez Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 22.4,
+        "name": "Quezon Avenue",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 18.6,
+        "name": "Pedro Nieva Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 12.5,
+        "name": "Quezon Eco-Tourism Road Extension",
+        "class": "tertiary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "santiago",
+    "label": "Santiago City",
+    "center": [
+      121.5479,
+      16.6916
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1786,
+    "segments_posted_real_osm": 194,
+    "segments_posted_imputed": 1592,
+    "segments_gap_positive": 134,
+    "segments_flagged_sss_gt0": 134,
+    "segments_flagged_real_posted": 20,
+    "sss_max": 25.0,
+    "sss_mean_flagged": 14.3,
+    "vru_pois": 72,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 25.0,
+        "name": "Maharlika Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 25.0,
+        "name": "Santiago-Tuguegarao Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 22.8,
+        "name": "Saguday - Santiago City Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "iligan",
+    "label": "Iligan City",
+    "center": [
+      124.2543,
+      8.2455
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 2265,
+    "segments_posted_real_osm": 176,
+    "segments_posted_imputed": 2089,
+    "segments_gap_positive": 143,
+    "segments_flagged_sss_gt0": 143,
+    "segments_flagged_real_posted": 29,
+    "sss_max": 59.9,
+    "sss_mean_flagged": 21.2,
+    "vru_pois": 176,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 59.9,
+        "name": "Circumferential Road 3",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 55.5,
+        "name": "Secondary Diversion Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 54.4,
+        "name": "Pugaan-Mandulog Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 38.9,
+        "name": "Iligan-Bukidnon Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 38.1,
+        "name": "Mandulog-Lanipao Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 18.4,
+        "name": "Hinaplanon-Mandulog Road",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 16.2,
+        "name": "Circumferential Road 3 Extension",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "cabanatuan",
+    "label": "Cabanatuan",
+    "center": [
+      120.9758,
+      15.4846
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3886,
+    "segments_posted_real_osm": 35,
+    "segments_posted_imputed": 3851,
+    "segments_gap_positive": 229,
+    "segments_flagged_sss_gt0": 229,
+    "segments_flagged_real_posted": 2,
+    "sss_max": 47.5,
+    "sss_mean_flagged": 14.8,
+    "vru_pois": 170,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 38.3,
+        "name": "Emilio Vergara Highway",
+        "class": "unclassified",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "tarlac",
+    "label": "Tarlac City",
+    "center": [
+      120.5893,
+      15.4861
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 6751,
+    "segments_posted_real_osm": 242,
+    "segments_posted_imputed": 6509,
+    "segments_gap_positive": 223,
+    "segments_flagged_sss_gt0": 223,
+    "segments_flagged_real_posted": 47,
+    "sss_max": 83.2,
+    "sss_mean_flagged": 15.5,
+    "vru_pois": 175,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 83.2,
+        "name": "Tarlac - Victoria Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 30,
+        "fatal_reduction_pct": 98.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 38.5,
+        "name": "Tarlac Diversion Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 22.9,
+        "name": "MacArthur Highway",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 19.1,
+        "name": "Romulo Boulevard",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 18.2,
+        "name": "Luisita Access Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 17.6,
+        "name": "Romulo Highway",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 14.0,
+        "name": "Tarlac City-San Jose Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "sanfernando-pampanga",
+    "label": "San Fernando (Pampanga)",
+    "center": [
+      120.6938,
+      15.0283
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 10209,
+    "segments_posted_real_osm": 708,
+    "segments_posted_imputed": 9501,
+    "segments_gap_positive": 384,
+    "segments_flagged_sss_gt0": 384,
+    "segments_flagged_real_posted": 134,
+    "sss_max": 66.6,
+    "sss_mean_flagged": 17.7,
+    "vru_pois": 342,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 66.6,
+        "name": "Pampanga Circumferential Road",
+        "class": "unclassified",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 53.5,
+        "name": "Do\u00f1a Consolacion Street",
+        "class": "residential",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 48.1,
+        "name": "Guagua-Minalin Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 43.0,
+        "name": "Santo Domingo Boulevard",
+        "class": "unclassified",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 39.2,
+        "name": "Do\u00f1a Consolacion Extension",
+        "class": "residential",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "General Hizon Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.2,
+        "name": "Camia Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 18.7,
+        "name": "H. S. Boulevard",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 18.4,
+        "name": "Santa Maria Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 18.2,
+        "name": "Jose Abad Santos Avenue",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "malolos",
+    "label": "Malolos",
+    "center": [
+      120.8114,
+      14.8438
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 7025,
+    "segments_posted_real_osm": 212,
+    "segments_posted_imputed": 6813,
+    "segments_gap_positive": 222,
+    "segments_flagged_sss_gt0": 222,
+    "segments_flagged_real_posted": 24,
+    "sss_max": 68.5,
+    "sss_mean_flagged": 16.8,
+    "vru_pois": 277,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 68.5,
+        "name": "F. Estrella Street",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "MacArthur Highway",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 21.2,
+        "name": "Paseo del Congreso",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.3,
+        "name": "Malolos-Bulakan Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 16.8,
+        "name": "Governor Padilla Street",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 16.5,
+        "name": "Mabini Street",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 15.6,
+        "name": "Camino Street",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "sjdm",
+    "label": "San Jose del Monte",
+    "center": [
+      121.0474,
+      14.8102
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 13027,
+    "segments_posted_real_osm": 335,
+    "segments_posted_imputed": 12692,
+    "segments_gap_positive": 323,
+    "segments_flagged_sss_gt0": 323,
+    "segments_flagged_real_posted": 58,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 19.1,
+    "vru_pois": 489,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 75.0,
+        "name": "Quirino Highway",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 75.0,
+        "name": "Igay Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 46.0,
+        "name": "Santa Maria - Tungkong Mangga Road",
+        "class": "primary",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Langit Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Camarin Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "J. P. Rizal Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (3 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "San Ignacio Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (5 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Carriedo Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 19.5,
+        "name": "Congressional Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.2,
+        "name": "Del Monte-Norzagaray Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "lipa",
+    "label": "Lipa City",
+    "center": [
+      121.1385,
+      13.9421
+    ],
+    "zoom": 12.5,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 9898,
+    "segments_posted_real_osm": 724,
+    "segments_posted_imputed": 9174,
+    "segments_gap_positive": 393,
+    "segments_flagged_sss_gt0": 393,
+    "segments_flagged_real_posted": 20,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 17.3,
+    "vru_pois": 259,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 25.0,
+        "name": "B. Morada Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 23.6,
+        "name": "C. M. Recto Avenue",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 22.2,
+        "name": "M. K. Lina Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 21.4,
+        "name": "P. Torres Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.4,
+        "name": "General Luna Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.9,
+        "name": "V. Templo Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 16.3,
+        "name": "Manila-Batangas Bypass Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 14.4,
+        "name": "Sentrina Drive",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 13.4,
+        "name": "Governor Feliciano Leviste Provincial Highway",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "calamba",
+    "label": "Calamba",
+    "center": [
+      121.1551,
+      14.2066
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 9499,
+    "segments_posted_real_osm": 698,
+    "segments_posted_imputed": 8801,
+    "segments_gap_positive": 572,
+    "segments_flagged_sss_gt0": 572,
+    "segments_flagged_real_posted": 229,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 17.8,
+    "vru_pois": 284,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 53.6,
+        "name": "Milagrosa-Bucal Bypass Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 47.7,
+        "name": "Makiling Drive",
+        "class": "unclassified",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 38.0,
+        "name": "Pulo Road",
+        "class": "unclassified",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.9,
+        "name": "River Drive",
+        "class": "unclassified",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.5,
+        "name": "Main Avenue",
+        "class": "unclassified",
+        "posted_osm": 50,
+        "safe": 30,
+        "fatal_reduction_pct": 87.0,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "J. P. Rizal Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.8,
+        "name": "Tagaytay Ridge Drive",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 16.2,
+        "name": "Nino Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 16.0,
+        "name": "San Juan River Drive",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 15.8,
+        "name": "Mountain Drive",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "dasmarinas",
+    "label": "Dasmarinas",
+    "center": [
+      120.9371,
+      14.3271
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 21063,
+    "segments_posted_real_osm": 4432,
+    "segments_posted_imputed": 16631,
+    "segments_gap_positive": 1481,
+    "segments_flagged_sss_gt0": 1481,
+    "segments_flagged_real_posted": 45,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 28.2,
+    "vru_pois": 580,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 54.6,
+        "name": "Governor's Drive",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Arnaldo Highway",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 24.7,
+        "name": "FCIE Main Drive",
+        "class": "unclassified",
+        "posted_osm": 45,
+        "safe": 30,
+        "fatal_reduction_pct": 80.2,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 15.8,
+        "name": "Amuntay Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 14.1,
+        "name": "Greenbreeze Avenue",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 12.8,
+        "name": "Champions Loop",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "urdaneta",
+    "label": "Urdaneta",
+    "center": [
+      120.5669,
+      15.976
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1943,
+    "segments_posted_real_osm": 105,
+    "segments_posted_imputed": 1838,
+    "segments_gap_positive": 233,
+    "segments_flagged_sss_gt0": 233,
+    "segments_flagged_real_posted": 1,
+    "sss_max": 55.9,
+    "sss_mean_flagged": 15.6,
+    "vru_pois": 108,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 37.7,
+        "name": "Villasis\u2013Urdaneta Bypass Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "laoag",
+    "label": "Laoag",
+    "center": [
+      120.5935,
+      18.1973
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1835,
+    "segments_posted_real_osm": 200,
+    "segments_posted_imputed": 1635,
+    "segments_gap_positive": 187,
+    "segments_flagged_sss_gt0": 187,
+    "segments_flagged_real_posted": 38,
+    "sss_max": 50.0,
+    "sss_mean_flagged": 13.8,
+    "vru_pois": 98,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 20.8,
+        "name": "Josefa Llanes Escoda National Highway",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.7,
+        "name": "J. P. Rizal Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 16.1,
+        "name": "Airport Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 15.3,
+        "name": "Laoag - Balaccad Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 14.3,
+        "name": "Airport Access Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 13.9,
+        "name": "Laoag-Sarrat-Piddig-Solsona Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 13.4,
+        "name": "Rizal Street",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 13.4,
+        "name": "Rodolfo G. Fari\u00f1as Bypass Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 13.4,
+        "name": "Manila North Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "vigan",
+    "label": "Vigan",
+    "center": [
+      120.3873,
+      17.5755
+    ],
+    "zoom": 12.9,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1632,
+    "segments_posted_real_osm": 186,
+    "segments_posted_imputed": 1446,
+    "segments_gap_positive": 89,
+    "segments_flagged_sss_gt0": 89,
+    "segments_flagged_real_posted": 24,
+    "sss_max": 31.9,
+    "sss_mean_flagged": 14.4,
+    "vru_pois": 110,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 22.7,
+        "name": "Avenida Quezon",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.8,
+        "name": "Vigan City Diversion Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 18.1,
+        "name": "Calle Burgos",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 15.5,
+        "name": "Vigan-Caoayan Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "tuguegarao",
+    "label": "Tuguegarao",
+    "center": [
+      121.73,
+      17.6119
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 2244,
+    "segments_posted_real_osm": 192,
+    "segments_posted_imputed": 2052,
+    "segments_gap_positive": 108,
+    "segments_flagged_sss_gt0": 108,
+    "segments_flagged_real_posted": 5,
+    "sss_max": 23.1,
+    "sss_mean_flagged": 14.2,
+    "vru_pois": 111,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 23.1,
+        "name": "Rizal Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.4,
+        "name": "Mabini Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.5,
+        "name": "College Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.5,
+        "name": "Caritan Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 18.1,
+        "name": "Don Domingo Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "sorsogon",
+    "label": "Sorsogon City",
+    "center": [
+      124.0053,
+      12.9708
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 999,
+    "segments_posted_real_osm": 134,
+    "segments_posted_imputed": 865,
+    "segments_gap_positive": 74,
+    "segments_flagged_sss_gt0": 74,
+    "segments_flagged_real_posted": 27,
+    "sss_max": 72.6,
+    "sss_mean_flagged": 16.2,
+    "vru_pois": 64,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 72.6,
+        "name": "Sorsogon-Bacon-Manito Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (3 VRU site<=50m)"
+      },
+      {
+        "sss": 24.2,
+        "name": "Magsaysay Avenue",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      },
+      {
+        "sss": 24.1,
+        "name": "Maharlika Highway",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.9,
+        "name": "Rizal Street",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 14.8,
+        "name": "Street Road",
+        "class": "service",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "roxas",
+    "label": "Roxas City",
+    "center": [
+      122.7501,
+      11.5895
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 2625,
+    "segments_posted_real_osm": 56,
+    "segments_posted_imputed": 2569,
+    "segments_gap_positive": 179,
+    "segments_flagged_sss_gt0": 179,
+    "segments_flagged_real_posted": 7,
+    "sss_max": 60.9,
+    "sss_mean_flagged": 15.2,
+    "vru_pois": 103,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 55.7,
+        "name": "Culasi Hill Road",
+        "class": "residential",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 14.3,
+        "name": "Roxas City Circumferential Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "dumaguete",
+    "label": "Dumaguete",
+    "center": [
+      123.308,
+      9.3055
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3397,
+    "segments_posted_real_osm": 183,
+    "segments_posted_imputed": 3214,
+    "segments_gap_positive": 98,
+    "segments_flagged_sss_gt0": 98,
+    "segments_flagged_real_posted": 21,
+    "sss_max": 22.7,
+    "sss_mean_flagged": 14.7,
+    "vru_pois": 116,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 20.7,
+        "name": "L. Rovira West Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.5,
+        "name": "Lamberto Macias Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 15.8,
+        "name": "Katada Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 14.4,
+        "name": "Airport Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "tagbilaran",
+    "label": "Tagbilaran",
+    "center": [
+      123.8788,
+      9.6272
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 2168,
+    "segments_posted_real_osm": 121,
+    "segments_posted_imputed": 2047,
+    "segments_gap_positive": 179,
+    "segments_flagged_sss_gt0": 179,
+    "segments_flagged_real_posted": 28,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 19.9,
+    "vru_pois": 208,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 58.4,
+        "name": "Venancio P. Inting Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 53.6,
+        "name": "Tagbilaran East Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 30,
+        "fatal_reduction_pct": 93.8,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "ormoc",
+    "label": "Ormoc",
+    "center": [
+      124.6094,
+      11.009
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1884,
+    "segments_posted_real_osm": 99,
+    "segments_posted_imputed": 1785,
+    "segments_gap_positive": 166,
+    "segments_flagged_sss_gt0": 166,
+    "segments_flagged_real_posted": 31,
+    "sss_max": 40.9,
+    "sss_mean_flagged": 15.9,
+    "vru_pois": 116,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 40.9,
+        "name": "Ormoc Diversion Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 21.1,
+        "name": "Ormoc-Baybay Road",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 14.5,
+        "name": "Ormoc \u2013 Albuera Road",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 14.0,
+        "name": "Merida-Ormoc Road",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 13.1,
+        "name": "Kananga-Ormoc Road",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "calbayog",
+    "label": "Calbayog",
+    "center": [
+      124.5947,
+      12.067
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 696,
+    "segments_posted_real_osm": 30,
+    "segments_posted_imputed": 666,
+    "segments_gap_positive": 70,
+    "segments_flagged_sss_gt0": 70,
+    "segments_flagged_real_posted": 13,
+    "sss_max": 55.2,
+    "sss_mean_flagged": 19.5,
+    "vru_pois": 58,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 55.2,
+        "name": "Maharlika Highway",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "cotabato",
+    "label": "Cotabato City",
+    "center": [
+      124.2467,
+      7.2238
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1599,
+    "segments_posted_real_osm": 106,
+    "segments_posted_imputed": 1493,
+    "segments_gap_positive": 113,
+    "segments_flagged_sss_gt0": 113,
+    "segments_flagged_real_posted": 31,
+    "sss_max": 50.0,
+    "sss_mean_flagged": 17.2,
+    "vru_pois": 111,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 38.3,
+        "name": "Narciso Ramos Highway",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 38.2,
+        "name": "Cotabato Coastal Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 25.0,
+        "name": "Quezon Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Do\u00f1a Theresa Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Notre Dame Avenue",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Don Cesar Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Don Tomas Vilo Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 25.0,
+        "name": "S. K. Pendatun Extension",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Notre Dame Extension",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 21.8,
+        "name": "S. K. Pendatun Avenue",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "koronadal",
+    "label": "Koronadal",
+    "center": [
+      124.8435,
+      6.5004
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3274,
+    "segments_posted_real_osm": 476,
+    "segments_posted_imputed": 2798,
+    "segments_gap_positive": 223,
+    "segments_flagged_sss_gt0": 223,
+    "segments_flagged_real_posted": 99,
+    "sss_max": 37.5,
+    "sss_mean_flagged": 14.4,
+    "vru_pois": 86,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 37.5,
+        "name": "San Felipe-Tinongcop-Paraiso Diversion Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "Paraiso-Tinongcop-San Felipe Diversion Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "Namnama-Avance\u00f1a Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 20.1,
+        "name": "Graciano Lopez Jaena Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 18.2,
+        "name": "Apolinario M. Mabini Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 17.8,
+        "name": "Masagana I Road",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 17.8,
+        "name": "Sergio S. Osme\u00f1a Sr. Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.8,
+        "name": "Quintin B. Paredes Sr. Street",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.7,
+        "name": "Jose B. Abad Santos Street",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.6,
+        "name": "Jose P. Rizal Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (2 VRU site<=50m)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "kidapawan",
+    "label": "Kidapawan",
+    "center": [
+      125.0905,
+      7.0096
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1726,
+    "segments_posted_real_osm": 97,
+    "segments_posted_imputed": 1629,
+    "segments_gap_positive": 152,
+    "segments_flagged_sss_gt0": 152,
+    "segments_flagged_real_posted": 18,
+    "sss_max": 41.6,
+    "sss_mean_flagged": 15.1,
+    "vru_pois": 57,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 41.6,
+        "name": "Kidapawan-M'lang Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.6,
+        "name": "Concepcion Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 22.9,
+        "name": "Roxas Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 15.9,
+        "name": "Jose P. Laurel Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "tagum",
+    "label": "Tagum",
+    "center": [
+      125.8095,
+      7.4471
+    ],
+    "zoom": 12.6,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 5382,
+    "segments_posted_real_osm": 277,
+    "segments_posted_imputed": 5105,
+    "segments_gap_positive": 307,
+    "segments_flagged_sss_gt0": 307,
+    "segments_flagged_real_posted": 68,
+    "sss_max": 64.3,
+    "sss_mean_flagged": 18.9,
+    "vru_pois": 128,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 64.3,
+        "name": "Tagum City Bypass Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 48.6,
+        "name": "Mawab-Maco Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 44.7,
+        "name": "Tagum-New Corella Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 39.3,
+        "name": "Apokon-Madaum Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "Canocotan-Bincungan Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "Dumlan Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "Tagum-Santo Tomas Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "Magangit Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "Taglawig Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 37.5,
+        "name": "New Asturias Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "digos",
+    "label": "Digos",
+    "center": [
+      125.3555,
+      6.7441
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 3138,
+    "segments_posted_real_osm": 55,
+    "segments_posted_imputed": 3083,
+    "segments_gap_positive": 190,
+    "segments_flagged_sss_gt0": 190,
+    "segments_flagged_real_posted": 38,
+    "sss_max": 58.6,
+    "sss_mean_flagged": 16.6,
+    "vru_pois": 118,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 50.0,
+        "name": "Eco Park Road",
+        "class": "unclassified",
+        "posted_osm": 80,
+        "safe": 30,
+        "fatal_reduction_pct": 98.0,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 48.8,
+        "name": "Bato-Matutungan-Binaton Road",
+        "class": "tertiary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 39.2,
+        "name": "Governor Douglas R.A. Cagas Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 25.0,
+        "name": "San Nicolas Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "MacArthur Highway",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 14.5,
+        "name": "Davao-Cotabato Highway",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      },
+      {
+        "sss": 14.3,
+        "name": "Lorenzo Catalan Sr. Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 12.8,
+        "name": "Owangon Road",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "pagadian",
+    "label": "Pagadian",
+    "center": [
+      123.4366,
+      7.825
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1678,
+    "segments_posted_real_osm": 67,
+    "segments_posted_imputed": 1611,
+    "segments_gap_positive": 90,
+    "segments_flagged_sss_gt0": 90,
+    "segments_flagged_real_posted": 16,
+    "sss_max": 25.0,
+    "sss_mean_flagged": 16.4,
+    "vru_pois": 101,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 22.8,
+        "name": "J. P. Rizal Avenue",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 16.4,
+        "name": "Pagadian Airport Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 15.0,
+        "name": "Regional Government Center Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 12.8,
+        "name": "Tukuran-Pagadian Highway",
+        "class": "trunk",
+        "posted_osm": 80,
+        "safe": 70,
+        "fatal_reduction_pct": 41.4,
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "dipolog",
+    "label": "Dipolog",
+    "center": [
+      123.3449,
+      8.5864
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1283,
+    "segments_posted_real_osm": 101,
+    "segments_posted_imputed": 1182,
+    "segments_gap_positive": 95,
+    "segments_flagged_sss_gt0": 95,
+    "segments_flagged_real_posted": 33,
+    "sss_max": 20.6,
+    "sss_mean_flagged": 15.0,
+    "vru_pois": 74,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 20.6,
+        "name": "Matias Velasco Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 20.2,
+        "name": "Felicisimo Herrera Street",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.5,
+        "name": "General John J. Pershing Highway",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 19.1,
+        "name": "Doctor Santiago Calo Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 18.3,
+        "name": "Rizal Avenue",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 17.9,
+        "name": "Magsaysay Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.9,
+        "name": "Governor Alberto Ubay Road",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 17.2,
+        "name": "Father Nicasio Y. Patangan Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 16.5,
+        "name": "Dipolog-Oroquieta Road",
+        "class": "primary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 16.0,
+        "name": "Matias Ranillo Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "ozamiz",
+    "label": "Ozamiz",
+    "center": [
+      123.846,
+      8.147
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1209,
+    "segments_posted_real_osm": 164,
+    "segments_posted_imputed": 1045,
+    "segments_gap_positive": 153,
+    "segments_flagged_sss_gt0": 153,
+    "segments_flagged_real_posted": 49,
+    "sss_max": 37.5,
+    "sss_mean_flagged": 15.9,
+    "vru_pois": 73,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 37.5,
+        "name": "Ozamiz City Coastal Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 25.0,
+        "name": "Capistrano Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Laurel Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 25.0,
+        "name": "Kaami\u00f1o Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 23.1,
+        "name": "Animas Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 22.9,
+        "name": "Abanil Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 21.1,
+        "name": "Governor Angel N. Medina Sr. Avenue",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.3,
+        "name": "Cotta Road",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 20.1,
+        "name": "Port Road",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.3,
+        "name": "Ozamiz-Pagadian Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "surigao",
+    "label": "Surigao City",
+    "center": [
+      125.4936,
+      9.7905
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1082,
+    "segments_posted_real_osm": 18,
+    "segments_posted_imputed": 1064,
+    "segments_gap_positive": 97,
+    "segments_flagged_sss_gt0": 97,
+    "segments_flagged_real_posted": 0,
+    "sss_max": 75.0,
+    "sss_mean_flagged": 17.4,
+    "vru_pois": 51,
+    "headline_priority_roads_real_posted": [],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "marawi",
+    "label": "Marawi",
+    "center": [
+      124.2854,
+      8.0047
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1123,
+    "segments_posted_real_osm": 39,
+    "segments_posted_imputed": 1084,
+    "segments_gap_positive": 99,
+    "segments_flagged_sss_gt0": 99,
+    "segments_flagged_real_posted": 19,
+    "sss_max": 56.6,
+    "sss_mean_flagged": 18.7,
+    "vru_pois": 85,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 53.8,
+        "name": "Governor Mamintal M. Adiong Sr. Road",
+        "class": "primary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 35.1,
+        "name": "3rd Street",
+        "class": "living_street",
+        "posted_osm": 40,
+        "safe": 20,
+        "fatal_reduction_pct": 93.8,
+        "why": "living street (shared space)"
+      },
+      {
+        "sss": 28.8,
+        "name": "1st Street",
+        "class": "living_street",
+        "posted_osm": 40,
+        "safe": 20,
+        "fatal_reduction_pct": 93.8,
+        "why": "living street (shared space)"
+      },
+      {
+        "sss": 25.0,
+        "name": "Gomisa Avenue",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 19.1,
+        "name": "Ahmad Domocao A. Alonto Sr. Avenue",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  },
+  {
+    "key": "mati",
+    "label": "Mati",
+    "center": [
+      126.2167,
+      6.9522
+    ],
+    "zoom": 12.7,
+    "data_date": "2026-06-26",
+    "data_source": "OpenStreetMap via Overpass",
+    "segments_total": 1336,
+    "segments_posted_real_osm": 197,
+    "segments_posted_imputed": 1139,
+    "segments_gap_positive": 126,
+    "segments_flagged_sss_gt0": 126,
+    "segments_flagged_real_posted": 49,
+    "sss_max": 50.5,
+    "sss_mean_flagged": 14.3,
+    "vru_pois": 42,
+    "headline_priority_roads_real_posted": [
+      {
+        "sss": 50.5,
+        "name": "Mapantad-Tagbobolo-Taguibo Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 39.0,
+        "name": "Badas-Culian Road",
+        "class": "secondary",
+        "posted_osm": 80,
+        "safe": 50,
+        "fatal_reduction_pct": 84.7,
+        "why": "undivided arterial, side-impact intersections"
+      },
+      {
+        "sss": 18.0,
+        "name": "President Diosdado P. Macapagal Highway",
+        "class": "primary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 15.8,
+        "name": "Don Enrique Lopez Street",
+        "class": "tertiary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)"
+      },
+      {
+        "sss": 15.4,
+        "name": "Upper Limatoc Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 13.1,
+        "name": "Do\u00f1a Rosa Street",
+        "class": "unclassified",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing"
+      },
+      {
+        "sss": 12.9,
+        "name": "Dahican-Lawigan Road",
+        "class": "secondary",
+        "posted_osm": 60,
+        "safe": 50,
+        "fatal_reduction_pct": 51.8,
+        "why": "undivided arterial, side-impact intersections"
+      }
+    ],
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  }
+]

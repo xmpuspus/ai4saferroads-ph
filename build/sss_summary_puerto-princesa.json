@@ -1,0 +1,22 @@
+{
+  "key": "puerto-princesa",
+  "label": "Puerto Princesa",
+  "center": [
+    118.735,
+    9.753
+  ],
+  "zoom": 12.4,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 3593,
+  "segments_posted_real_osm": 1,
+  "segments_posted_imputed": 3592,
+  "segments_gap_positive": 220,
+  "segments_flagged_sss_gt0": 220,
+  "segments_flagged_real_posted": 0,
+  "sss_max": 42.7,
+  "sss_mean_flagged": 15.2,
+  "vru_pois": 100,
+  "headline_priority_roads_real_posted": [],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

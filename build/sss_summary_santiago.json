@@ -1,0 +1,50 @@
+{
+  "key": "santiago",
+  "label": "Santiago City",
+  "center": [
+    121.5479,
+    16.6916
+  ],
+  "zoom": 12.7,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 1786,
+  "segments_posted_real_osm": 194,
+  "segments_posted_imputed": 1592,
+  "segments_gap_positive": 134,
+  "segments_flagged_sss_gt0": 134,
+  "segments_flagged_real_posted": 20,
+  "sss_max": 25.0,
+  "sss_mean_flagged": 14.3,
+  "vru_pois": 72,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 25.0,
+      "name": "Maharlika Highway",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 25.0,
+      "name": "Santiago-Tuguegarao Road",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 22.8,
+      "name": "Saguday - Santiago City Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

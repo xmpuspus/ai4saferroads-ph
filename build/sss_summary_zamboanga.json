@@ -1,0 +1,32 @@
+{
+  "key": "zamboanga",
+  "label": "Zamboanga City",
+  "center": [
+    122.0765,
+    6.9047
+  ],
+  "zoom": 12.4,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 5804,
+  "segments_posted_real_osm": 110,
+  "segments_posted_imputed": 5694,
+  "segments_gap_positive": 171,
+  "segments_flagged_sss_gt0": 171,
+  "segments_flagged_real_posted": 15,
+  "sss_max": 46.8,
+  "sss_mean_flagged": 17.7,
+  "vru_pois": 159,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 18.9,
+      "name": "Zamboanga City Bypass Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

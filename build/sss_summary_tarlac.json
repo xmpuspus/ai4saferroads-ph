@@ -1,0 +1,86 @@
+{
+  "key": "tarlac",
+  "label": "Tarlac City",
+  "center": [
+    120.5893,
+    15.4861
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 6751,
+  "segments_posted_real_osm": 242,
+  "segments_posted_imputed": 6509,
+  "segments_gap_positive": 223,
+  "segments_flagged_sss_gt0": 223,
+  "segments_flagged_real_posted": 47,
+  "sss_max": 83.2,
+  "sss_mean_flagged": 15.5,
+  "vru_pois": 175,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 83.2,
+      "name": "Tarlac - Victoria Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 30,
+      "fatal_reduction_pct": 98.0,
+      "why": "pedestrian activity (2 VRU site<=50m)"
+    },
+    {
+      "sss": 38.5,
+      "name": "Tarlac Diversion Road",
+      "class": "secondary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 22.9,
+      "name": "MacArthur Highway",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 19.1,
+      "name": "Romulo Boulevard",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 18.2,
+      "name": "Luisita Access Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    },
+    {
+      "sss": 17.6,
+      "name": "Romulo Highway",
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 70,
+      "fatal_reduction_pct": 41.4,
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    },
+    {
+      "sss": 14.0,
+      "name": "Tarlac City-San Jose Road",
+      "class": "secondary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

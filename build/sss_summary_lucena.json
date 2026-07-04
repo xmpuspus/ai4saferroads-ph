@@ -1,0 +1,77 @@
+{
+  "key": "lucena",
+  "label": "Lucena City",
+  "center": [
+    121.6135,
+    13.9269
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 4079,
+  "segments_posted_real_osm": 231,
+  "segments_posted_imputed": 3848,
+  "segments_gap_positive": 253,
+  "segments_flagged_sss_gt0": 253,
+  "segments_flagged_real_posted": 8,
+  "sss_max": 65.9,
+  "sss_mean_flagged": 17.1,
+  "vru_pois": 145,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 32.8,
+      "name": "Cotta Road",
+      "class": "residential",
+      "posted_osm": 50,
+      "safe": 30,
+      "fatal_reduction_pct": 87.0,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 25.0,
+      "name": "Old Manila South Road",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 22.6,
+      "name": "P. Gomez Street",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 22.4,
+      "name": "Quezon Avenue",
+      "class": "primary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)"
+    },
+    {
+      "sss": 18.6,
+      "name": "Pedro Nieva Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing"
+    },
+    {
+      "sss": 12.5,
+      "name": "Quezon Eco-Tourism Road Extension",
+      "class": "tertiary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

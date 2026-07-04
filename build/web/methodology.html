@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Current vs Proposed Speed Limits: Methodology</title>
+<style>
+  @font-face{font-family:"IBM Plex Sans Condensed";src:url(fonts/IBMPlexSansCondensed-700.woff2) format("woff2");font-weight:700;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-400.woff2) format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-600.woff2) format("woff2");font-weight:600;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+  :root{--bg:#0E1116;--ink:#E6EAF0;--muted:#8B95A5;--line:#2A323D;--card:#161B24;--accent:#E0574A;
+    --font-display:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+    --font-body:"IBM Plex Sans",system-ui,sans-serif;--font-data:"IBM Plex Mono",ui-monospace,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--font-body);line-height:1.55}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 22px 80px}
+  a{color:#5B8DB8}
+  h1{font-family:var(--font-display);font-weight:700;font-size:28px;letter-spacing:.004em;margin:0 0 6px}
+  h2{font-family:var(--font-display);font-weight:700;font-size:20px;margin:34px 0 10px;border-bottom:1px solid rgba(224,87,74,.32);padding-bottom:6px}
+  td:nth-child(2){font-family:var(--font-data);font-variant-numeric:tabular-nums slashed-zero}
+  .lead{color:var(--muted);font-size:15px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:var(--card);color:#fff}
+  code{background:#11161d;border:1px solid var(--line);border-radius:5px;padding:1px 6px;
+    font-size:13px}
+  .formula{background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:12px 14px;font-size:14px;margin:10px 0}
+  .disc{background:#1a1410;border:1px solid #4a3a22;border-radius:8px;padding:12px 14px;
+    font-size:13px;color:#d8c4a4;margin:24px 0}
+  .src{font-size:13px;color:var(--muted)}
+  .back{display:inline-block;margin-bottom:18px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">&larr; back to the map</a>
+<h1>Current vs Proposed Speed Limits: methodology</h1>
+<p class="lead">A transparent, open-data way to map, for every street, the current posted speed
+limit, the proposed safe limit, and why the two differ. It finds segments where the limit is
+higher than the speed a person can survive a crash at, given how the road is used. The Speed
+Safety Score below is the index that ranks them; it is about whether the limit itself is
+appropriate, not whether drivers exceed it.</p>
+
+<h2>1. Safe System recommended speed (V<sub>safe</sub>)</h2>
+<p>Each road segment is assigned a survivable speed from its function and surroundings,
+following the Safe System "survivable speeds" used by road-safety authorities.</p>
+<table>
+<tr><th>Context</th><th>V<sub>safe</sub></th><th>Why</th></tr>
+<tr><td>Pedestrians/cyclists mix with motor traffic (vulnerable-user site within 50 m, or a local road with frontage, or no sidewalk)</td><td>30 km/h</td><td>Survivable pedestrian impact speed</td></tr>
+<tr><td>Undivided arterial with side-impact intersections</td><td>50 km/h</td><td>Survivable side impact</td></tr>
+<tr><td>Divided carriageway / trunk highway (head-on only)</td><td>70 km/h</td><td>Survivable head-on, no side impact. A one-way street alone is not treated as divided.</td></tr>
+<tr><td>Motorway, grade-separated, no conflict</td><td>100 km/h</td><td>No pedestrian or cross conflict</td></tr>
+<tr><td>Living street / shared space</td><td>20 km/h</td><td>Shared pedestrian space</td></tr>
+</table>
+<p class="src">Thresholds: Tingvall &amp; Haworth (1999); ITF/OECD, <em>Speed and Crash Risk</em>
+(2018); WHO Speed Management Manual. Grade-separated roads (motorway, trunk) are never
+downgraded by nearby ground-level sites: an elevated expressway is not a pedestrian street.</p>
+
+<h2>2. Posted limit (V<sub>posted</sub>)</h2>
+<p>Taken from the OpenStreetMap <code>maxspeed</code> tag. Where it is absent, a
+functional-class default is imputed and flagged as imputed. Official GPS-probe data (posted
+limits and operating speeds) replaces this step directly when available.</p>
+
+<h2>3. The score</h2>
+<div class="formula">
+gap = V<sub>posted</sub> &minus; V<sub>safe</sub><br>
+excess fatal-risk factor R = (V<sub>posted</sub> / V<sub>safe</sub>)<sup>4</sup>
+&nbsp;<span class="src">(Nilsson power model: fatal crashes scale with the 4th power of speed)</span><br>
+exposure E &isin; [0,1], a probabilistic OR of vulnerable-user sites within 150 m and WorldPop 2020 residential density<br>
+<b>Speed Safety Score = 100 &times; min(gap, 40)/40 &times; (0.5 + 0.5&middot;E)</b>
+</div>
+<p>Exposure blends how many pedestrian sites (schools, markets, transit) sit within 150 m with
+how many people live around the road (WorldPop 2020 constrained, about 90 m). Either signal can
+raise the weight; because population density is continuous, the score spans the full range rather
+than landing on a handful of steps. Exposure can at most double a gap's score; it never creates
+risk where the gap is zero.
+The recommended limit is V<sub>safe</sub>, and the modeled fatal-risk reduction from adopting
+it is <code>1 &minus; (V<sub>safe</sub> / V<sub>posted</sub>)<sup>4</sup></code>, for example
+60 to 30 km/h is about a 94% modeled reduction.</p>
+
+<h2>4. Data</h2>
+<p>Road network, functional class, posted limits, sidewalk tags, and vulnerable-user sites
+(schools, markets, hospitals, places of worship, transit stops) come from OpenStreetMap via
+the Overpass API. The full urban network of each city is pulled (tiled to avoid query limits),
+every street is scored, and the result is served as vector tiles (PMTiles) so the browser can
+draw the whole network smoothly. The same pipeline runs on any city; 51 Philippine cities are
+shown, from Metro Manila to regional centres across Luzon, the Visayas, and Mindanao.</p>
+
+<h2>5. Wealth overlay (correlation, not causation)</h2>
+<p>To ask whether the worst speed-limit mismatches fall on poorer or wealthier areas, the
+per-segment mismatches are aggregated to a roughly 1.6 km grid (the length-weighted mean
+posted-over-safe gap over segments that have a real posted limit; the gap is used, not the
+exposure-weighted score, so population entering the exposure weight cannot colour the wealth
+result), and each cell is matched to Meta's Relative Wealth Index: a model of relative wealth at
+about 2.4 km from the Data for Good program. The association is the Spearman rank correlation;
+spatial clustering is measured with Moran's I; both carry a permutation p-value. The map draws a
+bivariate choropleth (mismatch tercile by wealth tercile). This is a correlation, not a cause: a
+relationship, or its absence, does not explain why, and spatial autocorrelation means nearby
+cells are not independent. The finding shown is whatever the data gives, not a chosen story.</p>
+
+<h2>5b. Crowding overlay (WorldPop)</h2>
+<p>The same grid supports a second reading: the mismatch against residential crowding, from
+WorldPop 2020. The flagged roads do sit in denser places (a median 14,620 people/km&sup2; around
+them against 9,326 for roads that already fit), but the size of the gap does not track density
+(Spearman about +0.01 across cells): crowding decides which roads flag, not how large the
+mismatch is. Taken to the national level the three pull apart. Metro Manila has the most flagged
+roads and the densest flagged network, yet the country's lowest road-death rate (3.6 per 100,000
+against a national 10.9, PSA 2022); the deadliest regions are rural. The map screens dense city
+arterials; the deaths, recorded by region of residence, sit elsewhere.</p>
+
+<h2>6. Does it agree with real crashes?</h2>
+<p>The model applies a published physical law; it does not prove one. But its output can be
+tested against real crashes. We joined 12,526 geolocated Metro Manila crashes (2018-2020, MMDA
+traffic alerts) to the scored network: the roads flagged here are 7% of the network length but
+carry 42% of the reported crashes, and at a 550 m grid, normalised for road length, crash
+density rises with the Speed Safety Score (Spearman +0.35, p = 0.002). The flags land where
+crashes concentrate. This is an association on a convenience sample that over-reports arterials,
+with no traffic-volume control and mostly vehicle-to-vehicle crashes, so it is consistent with
+the model, not proof a limit causes a crash. A regional cross-check behaves differently and is
+expected to: PSA road-death rates are recorded by region of residence, not crash site, so Metro
+Manila has the most flagged roads yet the country's lowest death rate. The map screens at the
+segment level and validates there. Full numbers and caveats: see the project's validation notes.</p>
+
+<h2>7. Limitations</h2>
+<ul>
+<li>OpenStreetMap posted-limit coverage varies by city (dense in Metro Manila, thin in
+smaller cities, and absent enough in a few that they carry no flagged roads at all). Imputed
+limits are flagged and excluded from the headline counts.</li>
+<li>The V<sub>safe</sub> classifier is a transparent heuristic from open tags, not an
+engineering survey. Street-level imagery and official data would refine it.</li>
+<li>Intersection density and divided-carriageway detection are not yet computed, so
+arterials default to the side-impact survivable speed (50 km/h) unless OpenStreetMap marks
+them as a divided carriageway. Official data would sharpen this.</li>
+<li>Exposure blends point-of-interest proximity with WorldPop residential density; it counts
+residents and nearby sites, not measured daytime foot traffic or traffic volume.</li>
+<li>This is a screening layer to prioritize segments for review, not a final determination.</li>
+</ul>
+
+<div class="disc">
+Indicators are derived from open data (OpenStreetMap) and published road-safety research.
+A flag means a segment warrants review, not that any limit is wrong; posted limits may have
+local context this screening does not capture. Not affiliated with ADB, WHO, or iRAP.
+</div>
+
+<h2>Related work</h2>
+<p class="src">iRAP Star Rating (operating-speed-based road risk; ViDA platform); World Bank
+GRSF, <em>Guide for Safe Speeds</em> (2024, guidance); FHWA USLIMITS2 (expert system for
+setting limits). This project adds an open, network-scale layer comparing posted limits to
+Safe System speeds from OpenStreetMap.</p>
+
+<h2>Sources</h2>
+<p class="src">
+Tingvall &amp; Haworth (1999), Vision Zero ·
+ITF/OECD, <em>Speed and Crash Risk</em> (2018) ·
+WHO Speed Management Manual ·
+Nilsson (1981) power model; Elvik updates ·
+Rosén &amp; Sander (2009), pedestrian fatality risk vs impact speed ·
+Tefft (2011), AAA Foundation ·
+WHO Global Status Report on Road Safety 2023 (Philippines) ·
+Meta Relative Wealth Index, Data for Good (CC-BY) ·
+MMDA traffic-alert crashes 2018-2020 (open mirror) ·
+PSA OpenSTAT road-traffic death rate by region (SDG 3.6.1) ·
+OpenStreetMap contributors (ODbL).
+</p>
+</div>
+</body>
+</html>

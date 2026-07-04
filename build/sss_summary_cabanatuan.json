@@ -1,0 +1,32 @@
+{
+  "key": "cabanatuan",
+  "label": "Cabanatuan",
+  "center": [
+    120.9758,
+    15.4846
+  ],
+  "zoom": 12.6,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 3886,
+  "segments_posted_real_osm": 35,
+  "segments_posted_imputed": 3851,
+  "segments_gap_positive": 229,
+  "segments_flagged_sss_gt0": 229,
+  "segments_flagged_real_posted": 2,
+  "sss_max": 47.5,
+  "sss_mean_flagged": 14.8,
+  "vru_pois": 170,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 38.3,
+      "name": "Emilio Vergara Highway",
+      "class": "unclassified",
+      "posted_osm": 60,
+      "safe": 30,
+      "fatal_reduction_pct": 93.8,
+      "why": "local road, frontage/pedestrian mixing"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}

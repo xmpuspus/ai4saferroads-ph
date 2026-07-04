@@ -1,0 +1,28 @@
+# dependencies / build junk
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+
+# deploy state
+build/web/.vercel/
+.vercel/
+
+# scratch + investigation dirs (regenerable, large)
+tmp/
+
+# dev screenshots (245M); keep only the one the README embeds
+screenshots/*
+!screenshots/sim_v2.png
+
+# raw recordings + video (the shipped hero is docs/demo.gif)
+recordings/
+*.webm
+*.mp4
+
+# large generated / downloaded data (regenerate via `make data`, compute_overlay.py, enrich_worldpop.py)
+build/_fullnet/
+build/overlay/*_rwi.csv
+build/overlay/*.tif
+*.tif
+build/web/data/*.pmtiles

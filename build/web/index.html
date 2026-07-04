@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Current vs Proposed Speed Limits: 51 Philippine cities, from open data</title>
+<meta name="description" content="An open map of every street's current posted speed limit, the proposed safe limit, and why: where a city posts a limit higher than the speed a person survives, across 51 Philippine cities." />
+<meta property="og:title" content="Current vs Proposed Speed Limits" />
+<meta property="og:description" content="The current speed limit, the proposed safe limit, and why, for every street in 51 Philippine cities. Open data." />
+<meta property="og:image" content="og-card.png" />
+<meta property="og:type" content="website" />
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"
+  integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+  integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/pmtiles@3.0.7/dist/pmtiles.js"></script>
+<script src="https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js"></script>
+<style>
+  @font-face{font-family:"IBM Plex Sans Condensed";src:url(fonts/IBMPlexSansCondensed-600.woff2) format("woff2");font-weight:600;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans Condensed";src:url(fonts/IBMPlexSansCondensed-700.woff2) format("woff2");font-weight:700;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-400.woff2) format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-500.woff2) format("woff2");font-weight:500;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-600.woff2) format("woff2");font-weight:600;font-display:swap}
+  @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-700.woff2) format("woff2");font-weight:700;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+  :root{--bg:#0E1116;--panel:#161B24;--ink:#E6EAF0;--muted:#8B95A5;--line:#2A323D;
+    --glass:rgba(18,22,30,.86);--accent:#E0574A;--safe:#54A89B;--focus:#5B8DB8;
+    --font-display:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+    --font-body:"IBM Plex Sans",system-ui,sans-serif;
+    --font-data:"IBM Plex Mono",ui-monospace,monospace;}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+    font-family:var(--font-body)}
+  #map{position:absolute;inset:0}
+  .glass{background:var(--glass);border:1px solid var(--line);border-radius:14px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 10px 40px rgba(0,0,0,.45)}
+  .panel{position:absolute;top:54px;left:18px;width:330px;max-height:calc(100% - 72px);
+    overflow:auto;padding:18px 20px;z-index:3}
+  /* collapsible on desktop too: collapse to a compact title + city header so the map is the star */
+  .panel.collapsed{max-height:none;overflow:visible}
+  .panel.collapsed .sub,.panel.collapsed #panelbody{display:none}
+  .topkey{position:absolute;top:0;left:0;right:0;z-index:6;background:rgba(11,15,22,.93);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    padding:8px 16px;font-size:12.5px;color:var(--ink);text-align:center;line-height:1.45}
+  .topkey b{color:#fff}
+  .topkey .tk-ramp{display:inline-block;width:60px;height:8px;border-radius:4px;vertical-align:middle;margin:0 5px;
+    background:linear-gradient(90deg,#3B0F70,#8C2981,#B73779,#E65D5E,#FB9F3A)}
+  .topkey small{color:var(--muted);font-size:10.5px}
+  details.more{margin:13px 0 2px}
+  details.more:not([open]) > :not(summary){display:none}
+  details.more>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);font-weight:600;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04)}
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary:hover{border-color:var(--focus);background:rgba(255,255,255,.06)}
+  details.more[open]>summary{margin-bottom:10px}
+  details.more>summary .licon{color:var(--focus);flex:0 0 auto}
+  details.more>summary .lgrp-sub{font-weight:500;font-size:10.5px;color:var(--muted)}
+  details.more>summary .chev{margin-left:auto;color:var(--muted);font-size:11px;transition:transform .15s ease}
+  details.more[open]>summary .chev{transform:rotate(180deg)}
+  .llbl{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:600;margin:13px 2px 6px}
+  #layers .seg{width:100%}
+  #layers .seg button{flex:1}
+  .topkey .tk-ramp.score{background:linear-gradient(90deg,#3B0F70,#8C2981,#B73779,#E65D5E,#FB9F3A)}
+  .topkey .tk-ramp.speed{background:linear-gradient(90deg,#54A89B,#9DA871,#C99F52,#E0574A,#FB9F3A)}
+  .bigbtn{display:block;width:100%;margin:12px 0 0;padding:12px;border-radius:11px;border:0;
+    background:var(--accent);color:#0E1116;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
+  #buildstep{margin-top:10px;padding:13px 14px;border:1px solid var(--safe);border-radius:12px;background:rgba(84,168,155,.12)}
+  #buildstep .bs-ix{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
+  #buildstep .bs-t{font-size:15px;font-weight:700;color:#fff;margin:3px 0 4px}
+  #buildstep .bs-d{font-size:12.5px;color:var(--ink);line-height:1.45}#buildstep .bs-d i{color:var(--muted)}
+  #buildstep .bs-nav{display:flex;gap:7px;margin-top:12px;align-items:center}
+  #buildstep .bs-nav button{flex:1;background:#0E1116;color:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 4px;font-weight:700;cursor:pointer;font-family:inherit;font-size:12px}
+  #buildstep .bs-nav #bexit{flex:0 0 auto;color:var(--muted);border-color:transparent}
+  #buildstep .bs-nav span{flex:1}
+  .roadmode{display:flex;align-items:center;gap:9px;margin:12px 0 0;font-size:12px;color:var(--muted)}
+  .roadmode .seg{flex:1}.roadmode .seg button{flex:1}
+  h1{font-family:var(--font-display);font-weight:700;font-size:25px;letter-spacing:.004em;margin:0 0 4px;line-height:1.03;padding-right:34px}
+  h1 .em{color:var(--accent)}
+  .sub{font-size:12.5px;color:var(--muted);margin:0 0 13px;line-height:1.45}
+  .row2{display:flex;gap:8px;margin-bottom:11px}
+  select,input[type=search]{background:#0E1116;color:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:13px}
+  select{flex:1;min-width:0}
+  input[type=search]{width:100%}
+  .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{background:transparent;color:var(--muted);border:0;padding:8px 11px;font-size:12px;cursor:pointer;font-weight:600}
+  .seg button[aria-pressed=true]{background:var(--accent);color:#160a08}
+  .stat{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .stat .big{font-family:var(--font-data);font-weight:600;font-size:19px;color:var(--ink);font-variant-numeric:tabular-nums slashed-zero}
+  .stat b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .sub2{font-size:11px;color:var(--muted);margin:3px 0 0}
+  .sec{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:15px 0 7px}
+  .road{display:block;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--ink);font-size:12px;padding:7px 4px;line-height:1.35;cursor:pointer;font-family:inherit}
+  .road:hover,.road:focus-visible{background:rgba(255,255,255,.06)}
+  .road .nm{color:var(--ink);font-weight:600}.road .meta{color:var(--muted);font-family:var(--font-data);font-size:11px;font-variant-numeric:tabular-nums slashed-zero}
+  .road .rtag{font-family:var(--font-body);font-weight:500;color:var(--muted);vertical-align:middle}
+  .chip{display:inline-block;font-family:var(--font-data);font-size:11px;font-weight:600;border-radius:5px;padding:1px 7px;margin-right:7px;font-variant-numeric:tabular-nums slashed-zero}
+  /* PH regulatory speed-limit sign (white roundel, red ring): the Waze/Google vocabulary the audience already reads */
+  .sign{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#F4F3EE;border:4px solid #D11F2D;color:#0c0c0c;font-family:var(--font-display);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;flex:0 0 auto;vertical-align:middle}
+  .sign.sm{width:23px;height:23px;border-width:2.5px;font-size:10px}
+  .sign.over{box-shadow:0 0 0 2px rgba(224,87,74,.28),0 0 12px 1px rgba(224,87,74,.5)}
+  .sign.strike::before{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2.2px;background:var(--accent);transform:rotate(-20deg);border-radius:2px}
+  .signrow{display:inline-flex;align-items:center;gap:5px}
+  .signrow .ar{color:var(--muted);font-weight:700}
+  .signcap{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
+  .oversafe{font-size:11px;color:var(--accent);font-weight:600;margin-top:5px}
+  /* deep link out to Google Street View so people can see the actual road; a distinct blue = "this leaves the map" */
+  .svlink{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:rgba(91,141,184,.12);color:#86AED2;font-size:11.5px;font-weight:600;text-decoration:none;font-family:var(--font-body)}
+  .svlink:hover,.svlink:focus-visible{background:rgba(91,141,184,.2);border-color:var(--focus)}
+  .svlink .ar2{font-size:13px;line-height:1}
+  .ba{margin:10px 0 2px;padding:12px 13px;border:1px solid var(--accent);border-radius:11px;background:rgba(224,87,74,.08)}
+  .ba .t{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+  .ba .v{font-family:var(--font-data);font-size:17px;margin:3px 0;font-variant-numeric:tabular-nums slashed-zero}.ba .v s{color:var(--accent)}.ba .v b{color:var(--safe)}
+  .ba .r{font-size:12px;color:#E8CFC9}
+  .toggle{width:100%;margin:11px 0 0;padding:11px;border-radius:11px;border:1px solid var(--accent);background:transparent;color:#E8CFC9;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+  .toggle[aria-pressed=true]{background:var(--accent);color:#160a08}
+  #stepper{margin-top:11px;padding:13px 14px;border:1px solid var(--accent);border-radius:12px;background:rgba(224,87,74,.10)}
+  #stepper .ix{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
+  #stepper .nm{font-family:var(--font-display);font-weight:700;font-size:18px;margin:2px 0 5px}
+  #stepper .ba2{font-size:13px;line-height:1.5;font-family:var(--font-data);font-variant-numeric:tabular-nums slashed-zero}#stepper .ba2 s{color:var(--accent)}#stepper .ba2 b{color:var(--safe)}
+  #stepper .why{font-size:12px;color:#E8CFC9;margin-top:6px;line-height:1.4}
+  #stepper .nav{display:flex;justify-content:space-between;gap:6px;margin-top:11px}
+  #stepper .nav button{flex:1;background:#0E1116;color:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 4px;font-weight:700;cursor:pointer;font-family:inherit;font-size:12px}
+  #stepper .nav button#cexit{flex:0 0 auto;color:var(--muted);border-color:transparent}
+  #wealthbox{margin-top:11px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(60,80,120,.12)}
+  #wealthbox .find{font-size:12.5px;line-height:1.5}#wealthbox .find b{color:#fff}
+  #wealthbox .stats{font-size:11px;color:var(--muted);margin-top:6px}
+  .biv{display:grid;grid-template-columns:repeat(3,16px);gap:2px;margin:8px 0 4px}
+  .biv i{width:16px;height:16px;display:block}
+  .bivlbl{font-size:10px;color:var(--muted);display:flex;justify-content:space-between}
+  .ramp{height:11px;border-radius:6px;margin:6px 0 3px;background:linear-gradient(90deg,#3B0F70,#8C2981,#B73779,#E65D5E,#FB9F3A)}
+  .ramp.speed{background:linear-gradient(90deg,#54A89B,#9DA871,#C99F52,#E0574A,#FB9F3A)}
+  .rl{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
+  .legend{margin-top:6px;font-size:11px;color:var(--muted);line-height:1.4}
+  .legend i{display:inline-block;width:14px;height:0;border-top:3px solid;vertical-align:middle;margin-right:4px}
+  /* "show all" link under the worst-roads list (collapsed to 5 by default to keep the panel calm) */
+  .showall{display:block;width:100%;text-align:left;background:transparent;border:0;color:var(--focus);font-size:11px;font-weight:600;cursor:pointer;padding:8px 4px 2px;font-family:inherit}
+  .showall:hover{color:var(--ink)}
+  /* the detailed map legend, tucked behind a quiet toggle (the top banner already carries the main read) */
+  details.infodet{margin:14px 0 2px}
+  details.infodet:not([open]) > :not(summary){display:none}
+  details.infodet>summary{cursor:pointer;list-style:none;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;padding:4px 0}
+  details.infodet>summary::-webkit-details-marker{display:none}
+  details.infodet>summary::before{content:'+ ';color:var(--accent);font-weight:700}
+  details.infodet[open]>summary::before{content:'\2212 '}
+  details.infodet>summary:hover{color:var(--ink)}
+  .vrukey{font-size:10.5px;color:var(--muted);margin:5px 0 2px;display:flex;flex-wrap:wrap;gap:2px 9px;align-items:center}
+  .vrukey i{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:2px;vertical-align:middle}
+  .crashnote{font-size:10.5px;color:var(--muted);margin:6px 2px 0;line-height:1.4}
+  .toggle:disabled{opacity:.4;cursor:not-allowed}
+  .foot{font-size:10px;color:var(--muted);margin-top:12px;line-height:1.45}.foot a{color:var(--focus)}
+  /* secondary actions: one quiet row of two ghost buttons under the primary Build CTA, so the panel reads as one primary + supporting, not a pile of equal coral bars */
+  .actions2{display:flex;gap:8px;margin-top:9px}
+  .actions2 .act{flex:1;min-width:0;background:#0E1116;border:1px solid var(--line);border-radius:11px;color:var(--ink);font-weight:600;font-size:12.5px;line-height:1.2;padding:9px 8px;cursor:pointer;text-decoration:none;font-family:inherit;text-align:center}
+  .actions2 .act small{display:block;font-weight:500;color:var(--muted);font-size:10px;margin-top:2px}
+  .actions2 .act:hover{border-color:var(--focus);background:rgba(255,255,255,.05)}
+  .actions2 .act[aria-pressed=true]{border-color:var(--accent);background:rgba(224,87,74,.14);color:#fff}
+  .actions2 .act:disabled{opacity:.4;cursor:not-allowed}
+  .stamp{position:absolute;bottom:16px;right:14px;z-index:3;font-size:10.5px;color:var(--muted);padding:7px 11px}
+  .overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;z-index:4;background:rgba(7,10,15,.55);backdrop-filter:blur(2px)}
+  .overlay.on{display:flex}
+  .card{padding:18px 22px;text-align:center;max-width:340px}
+  .spin{width:26px;height:26px;border:3px solid rgba(255,255,255,.2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 10px;animation:sp 0.8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .card button{margin-top:10px;background:var(--accent);color:#0E1116;border:0;border-radius:9px;padding:8px 14px;font-weight:700;cursor:pointer}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+  .sronly{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+  /* mobile-only floating CTA: on phones the panel is collapsed and the build-up story is hidden,
+     so this surfaces it. Shown by JS only when (mobile && panel collapsed). */
+  #seehow{display:none;position:fixed;left:50%;bottom:30px;transform:translateX(-50%);z-index:6;
+    background:var(--accent);color:#0a1422;font-weight:800;border:0;border-radius:24px;
+    padding:13px 22px;font-size:14.5px;font-family:inherit;cursor:pointer;
+    box-shadow:0 8px 22px rgba(0,0,0,.5)}
+  /* swipe-compare divider: a vertical line (a meridian, so it stays vertical in Web Mercator) with a drag handle and side labels */
+  #swipe{display:none;position:absolute;top:42px;bottom:14px;left:50%;width:2px;background:rgba(255,255,255,.85);
+    z-index:5;box-shadow:0 0 10px rgba(0,0,0,.7);pointer-events:none}
+  #swipe .sw-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;
+    background:#fff;color:#0E1116;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;
+    cursor:ew-resize;box-shadow:0 2px 10px rgba(0,0,0,.55);pointer-events:auto;touch-action:none}
+  #swipe .sw-lbl{position:absolute;top:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    white-space:nowrap;padding:4px 8px;border-radius:7px;background:rgba(13,17,24,.82);backdrop-filter:blur(6px)}
+  #swipe .sw-l{right:9px;color:#FB9F3A}
+  #swipe .sw-r{left:9px;color:#9DD0F0}
+  #cmpexit{display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:6;
+    background:var(--panel);color:var(--ink);font-weight:700;border:1px solid var(--line);border-radius:22px;
+    padding:10px 20px;font-size:13px;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.5)}
+  @keyframes ctapulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.05)}}
+  @media (prefers-reduced-motion:reduce){#seehow.show{animation:none}}
+  .ptoggle{position:absolute;top:13px;right:13px;width:32px;height:32px;border-radius:9px;
+    border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;font-size:13px;
+    line-height:1;cursor:pointer;display:block;z-index:5}
+  @media (max-width:560px){
+    .ptoggle{display:block}
+    .topkey{font-size:11px;padding:6px 10px;text-align:left}
+    .panel{width:calc(100% - 18px);top:58px;left:9px;max-height:calc(100% - 68px);padding:14px 15px 16px;
+      -webkit-overflow-scrolling:touch}
+    h1{font-size:21px;padding-right:34px}
+    details.more>summary .lgrp-sub{display:none}
+    .panel.collapsed{max-height:none;overflow:visible}
+    .panel.collapsed .sub,.panel.collapsed #panelbody{display:none}
+    .stamp{display:none}
+    #seehow.show{display:block;animation:ctapulse 2.4s ease-in-out infinite}
+    /* guided-build on a phone: drop the panel to a compact bottom card showing only the
+       step, so the map (where the dots and the red->green flip happen) stays visible above. */
+    .panel.building{top:auto;bottom:10px;max-height:46vh}
+    .panel.building>h1,.panel.building>.sub,.panel.building>.row2,.panel.building>.ptoggle{display:none}
+    .panel.building #panelbody>:not(#buildstep){display:none}
+    .panel.building #buildstep{margin-top:0}
+  }
+  /* motion: small breathing loops on the primary action, live overlays, and the danger glow,
+     plus a radar ping when you fly to a road. All off under prefers-reduced-motion. */
+  @keyframes breatheCta{0%,100%{box-shadow:0 0 0 0 rgba(224,87,74,0)}50%{box-shadow:0 0 22px 1px rgba(224,87,74,.5)}}
+  #buildbtn[aria-pressed="false"]{animation:breatheCta 3s ease-in-out infinite}
+  @keyframes breatheGlow{0%,100%{box-shadow:0 0 0 0 rgba(224,87,74,0)}50%{box-shadow:0 0 13px 0 rgba(224,87,74,.42)}}
+  .toggle[aria-pressed="true"]{animation:breatheGlow 3.4s ease-in-out infinite}
+  .bigbtn,.toggle,.actions2 .act,.seg button,.road,.svlink,#panelToggle{transition:box-shadow .25s ease,background .2s ease,border-color .2s ease}
+  @keyframes panelIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  .panel{animation:panelIn .5s ease-out both}
+  @media (prefers-reduced-motion:reduce){
+    #buildbtn[aria-pressed="false"],.toggle[aria-pressed="true"],.panel{animation:none}
+  }
+  /* road popup: default MapLibre popup is white and inherits the page's light text, so it
+     renders light-on-white and is unreadable over satellite. Theme it to the dark glass HUD. */
+  .maplibregl-popup{font-family:inherit}
+  .maplibregl-popup-content{background:rgba(13,17,24,.94);color:var(--ink);border:1px solid var(--line);
+    border-radius:11px;padding:11px 13px;font-size:12.5px;line-height:1.55;max-width:248px;
+    box-shadow:0 12px 34px rgba(0,0,0,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .maplibregl-popup-content b{color:#fff;font-weight:700}
+  .maplibregl-popup-anchor-top .maplibregl-popup-tip,
+  .maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+  .maplibregl-popup-anchor-top-right .maplibregl-popup-tip{border-bottom-color:rgba(13,17,24,.94)}
+  .maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+  .maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+  .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip{border-top-color:rgba(13,17,24,.94)}
+  .maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:rgba(13,17,24,.94)}
+  .maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:rgba(13,17,24,.94)}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="topkey" id="topkey">Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour,
+  <span class="tk-ramp score" aria-hidden="true"></span><small>the more the speed limit needs to come down.</small></div>
+<div class="panel glass" role="region" aria-label="Current vs proposed speed limits, controls and findings">
+  <button id="panelToggle" class="ptoggle" aria-label="Collapse panel" aria-expanded="true">&#9652;</button>
+  <h1>Current vs Proposed <span class="em">Speed Limits</span></h1>
+  <p class="sub">The speed limit now, the safe limit, and why they differ. Tap any road to see it. Every street, from open data.</p>
+  <div class="row2">
+    <select id="city" aria-label="City"></select>
+  </div>
+  <div id="panelbody">
+  <div class="row2"><input type="search" id="find" placeholder="Find a road…" aria-label="Find a road" /></div>
+  <div id="stats"></div>
+  <div id="badetail" hidden></div>
+  <div class="sec">Worst roads</div>
+  <div id="roads"></div>
+  <button id="buildbtn" class="bigbtn" aria-pressed="false">&#9654; Show me how it works, step by step</button>
+  <div id="buildstep" hidden></div>
+  <div class="actions2">
+    <button id="crit" class="act" aria-pressed="false">The worst roads<small>one at a time</small></button>
+    <a class="act simbtn" href="sim.html">Why the limit matters<small>60 vs 30 km/h</small></a>
+  </div>
+  <div id="stepper" hidden></div>
+  <details class="more" id="layers">
+    <summary><svg class="licon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Layers <span class="lgrp-sub">base map &middot; road colour &middot; overlays</span><span class="chev">&#9662;</span></summary>
+    <div class="llbl" style="margin-top:2px">Base map</div>
+    <div class="seg" id="base" role="group" aria-label="Basemap">
+      <button data-v="sat" aria-pressed="false">Satellite</button>
+      <button data-v="dark" aria-pressed="true">Dark</button>
+    </div>
+    <div class="llbl">Road colour</div>
+    <div class="roadmode" id="roadmode">
+      <div class="seg" role="group" aria-label="Road colour">
+        <button data-m="score" aria-pressed="true">Risk</button>
+        <button data-m="current" aria-pressed="false">Now</button>
+        <button data-m="proposed" aria-pressed="false">Safe</button>
+      </div></div>
+    <div class="llbl">Overlays</div>
+    <button id="vrubtn" class="toggle" aria-pressed="false">What makes them dangerous</button>
+    <div class="vrukey" id="vrukey" style="display:none"><i style="background:#E0B354"></i>school <i style="background:#D98C5F"></i>market <i style="background:#CE8296"></i>hospital <i style="background:#8E86C4"></i>worship <i style="background:#5B8DB8"></i>transit</div>
+    <button id="crashbtn" class="toggle" aria-pressed="false">Where crashes really happened (Manila)</button>
+    <div class="crashnote" id="crashnote" hidden></div>
+    <button id="cmpbtn" class="toggle" aria-pressed="false">Swipe to compare our map with real crashes (Manila)</button>
+    <button id="wealthbtn" class="toggle" aria-pressed="false">Is the danger about wealth?</button>
+    <div id="wealthbox" hidden></div>
+    <button id="crowdbtn" class="toggle" aria-pressed="false">Is the danger about crowding?</button>
+    <div id="crowdbox" hidden></div>
+  </details>
+  <details class="infodet">
+    <summary>How to read the map</summary>
+    <div class="ramp" id="legramp" aria-hidden="true"></div>
+    <div class="rl" id="legrl"><span>already safe</span><span>over the safe speed</span><span>most over</span></div>
+    <div class="legend">
+      <div id="leglead"><i style="border-color:#ff3b3b"></i>Bright glow. The <b>speed limit is higher than the safe speed</b>. The deeper the colour, the bigger the gap between the limit now and the safe one.</div>
+      <div><i style="border-top-style:dashed;border-color:#7587a0"></i>Faint dashed. The limit is a <b>guess</b> from the road type, so it is left out of the counts.</div>
+      <div><i style="border-color:#46566b"></i>Thin grey. Every other street, where the limit already fits.</div>
+    </div>
+  </details>
+  <p class="foot"><a href="#" id="resetbtn">&#8634; Reset view</a> &middot; <a href="methodology.html">Method and sources</a> ·
+    <a id="dl" href="#" download>Download this city's data</a><br>
+    Safe speeds from Tingvall &amp; Haworth 1999 / ITF-OECD 2018 / WHO · Nilsson (fatal &prop; speed<sup>4</sup>).<br>
+    A highlighted road is a road to check. It does not mean the limit is definitely wrong. Not affiliated with ADB / WHO / iRAP.</p>
+  <div id="srtable" class="sronly" aria-live="polite"></div>
+  <table id="srranked" class="sronly"></table>
+  </div>
+</div>
+<div class="stamp glass" id="stamp">open data</div>
+<div class="overlay" id="overlay"><div class="card glass" id="ovcard"></div></div>
+<button id="seehow" type="button">&#9654; See how it works</button>
+<div id="swipe" aria-hidden="true">
+  <div class="sw-lbl sw-l">roads over the safe speed</div>
+  <div class="sw-lbl sw-r">real crashes</div>
+  <div class="sw-handle">&#8596;</div>
+</div>
+<button id="cmpexit" type="button">Done comparing</button>
+<script>
+const REDUCE=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FLYMS=REDUCE?0:800;
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+// translate the raw OSM "why" string to plain language (shared by the popup, before/after card, and critical card)
+function whyPlainStr(why){const w=(why||'').toLowerCase();
+  if(w.includes('pedestrian activity')||w.includes('vru'))return 'A school, market, or stop sits right here, so people cross on foot.';
+  if(w.includes('frontage')||w.includes('local road'))return 'A local street people walk along.';
+  if(w.includes('undivided')||w.includes('side-impact'))return 'A wide road with cross-traffic and no divider.';
+  if(w.includes('divided carriageway'))return 'A fast divided road.';
+  if(w.includes('trunk'))return 'A major through-road.';
+  if(w.includes('living street'))return 'A shared street where people walk.';
+  return esc(why||'');}
+// short scannable tag for the worst-roads list: the actual reason a road is flagged (varies per road), not the constant risk % (which is the same for every 60->30 road)
+function whyTag(why){const w=(why||'').toLowerCase();
+  if(w.includes('pedestrian')||w.includes('vru')){const m=w.match(/(\d+)\s*vru/);const n=m?+m[1]:0;return 'people cross on foot'+(n>1?` &middot; ${n} sites`:'');}
+  if(w.includes('undivided')||w.includes('side-impact'))return 'wide road, no divider';
+  if(w.includes('frontage')||w.includes('local road'))return 'homes and shops alongside';
+  if(w.includes('trunk'))return 'fast through-road';
+  if(w.includes('living street'))return 'shared street';
+  if(w.includes('divided carriageway'))return 'fast divided road';
+  return 'over the safe speed';}
+// posted vs proposed limit as paired PH speed-limit signs; the posted one is struck + red-glowing (it is over the safe speed)
+function signPair(posted,safe,big){const c=big?'':' sm';
+  return `<span class="signrow"><span class="sign over strike${c}">${posted}</span><span class="ar">&rarr;</span><span class="sign${c}">${safe}</span></span>`;}
+// Google Street View deep link at a point (Google takes lat,lng and snaps to the nearest pano)
+function svUrl(lat,lng){return `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;}
+// [lng,lat] midpoint of a flagged segment, matched by name + score
+function roadMid(nm,sss){if(!SEG)return null;const f=SEG.features.find(x=>x.properties.name===nm&&x.properties.sss==sss);
+  if(!f)return null;const c=f.geometry.coordinates;return c[Math.floor(c.length/2)];}
+// "see this road" link from a [lng,lat] coord; empty string when we have no coordinate
+function svLink(c,label){if(!c)return '';
+  return `<a class="svlink" href="${svUrl(c[1],c[0])}" target="_blank" rel="noopener" title="Opens Google Street View in a new tab">${label||'See this road'} <span class="ar2" aria-hidden="true">&#8599;</span></a>`;}
+maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
+const ESRI={type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,maxzoom:17,attribution:'Esri, Maxar, Earthstar Geographics'};
+const r2=devicePixelRatio>1.5?'@2x':'';
+const CARTO={type:'raster',tiles:['a','b','c'].map(s=>`https://${s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}${r2}.png`),tileSize:256,attribution:'© OpenStreetMap contributors © CARTO'};
+
+const map=new maplibregl.Map({container:'map',
+  style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources:{esri:ESRI,carto:CARTO},
+    layers:[{id:'bg',type:'background',paint:{'background-color':'#0E1116'}},
+      {id:'esri',type:'raster',source:'esri',layout:{visibility:'none'},paint:{'raster-opacity':0.78,'raster-saturation':-0.25,'raster-brightness-max':0.9}},
+      {id:'carto',type:'raster',source:'carto',paint:{'raster-opacity':1}}]},
+  center:[121.02,14.59],zoom:11.6,attributionControl:true});
+map.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');
+window.__map=map;
+
+// collapsible panel: on phones it defaults to a compact header so the map is visible
+(function(){const p=document.querySelector('.panel'),b=document.getElementById('panelToggle'),sh=document.getElementById('seehow');
+  const isM=()=>matchMedia('(max-width:560px)').matches;
+  function upSeehow(){sh.classList.toggle('show',isM()&&p.classList.contains('collapsed')&&!p.classList.contains('building'));}
+  function set(c){p.classList.toggle('collapsed',c);b.textContent=c?'▾':'▴';
+    b.setAttribute('aria-expanded',String(!c));b.setAttribute('aria-label',c?'Expand panel':'Collapse panel');upSeehow();}
+  b.onclick=()=>set(!p.classList.contains('collapsed'));
+  // tap the floating CTA: open the panel and start the Build-the-picture walkthrough
+  sh.onclick=()=>{set(false);const bb=document.getElementById('buildbtn');if(bb.getAttribute('aria-pressed')!=='true')bb.click();upSeehow();};
+  window.addEventListener('resize',upSeehow);
+  window.__upSeehow=upSeehow;window.__setPanel=set;window.__isMobile=isM;
+  if(isM())set(true); else upSeehow();
+})();
+
+const SSS_COLOR=['interpolate',['linear'],['get','sss'],0,'#3B0F70',25,'#8C2981',50,'#B73779',75,'#E65D5E',100,'#FB9F3A'];
+// colour a road by an actual speed (km/h): teal = slow/safe, coral = fast. Used for Now / Safe views.
+const SPEED_COLOR=f=>['interpolate',['linear'],['get',f],20,'#54A89B',35,'#9DA871',50,'#C99F52',65,'#E0574A',100,'#FB9F3A'];
+const SSS_WIDTH=['interpolate',['linear'],['zoom'],11,['interpolate',['linear'],['get','sss'],0,0.5,75,2.2],
+  14,['interpolate',['linear'],['get','sss'],0,1,75,5],16,['interpolate',['linear'],['get','sss'],0,1.6,75,7]];
+const BASE_W=['interpolate',['linear'],['zoom'],11,0.25,14,0.7,16,1.1];
+const EMPTY={type:'FeatureCollection',features:[]};
+// net-real fades to faint at city zoom (the heatmap carries the overview) and rises to full as you zoom in to read individual roads
+const REAL_OP=['interpolate',['linear'],['zoom'],11,0.05,12.5,0.3,13.8,0.95];
+// kepler.gl-style H3 hexbin aggregation: bin flagged segments into hexagons, colour each by relative danger density. Crisp discrete cells on the dark base, not a blurry heatmap.
+const HEX_RES=8;
+function segMidpoints(fc){const pts=[];   // [lng,lat] midpoint of each flagged (sss>0) segment
+  for(const f of (fc&&fc.features)||[]){const g=f.geometry;if(!g)continue;const sc=f.properties&&f.properties.sss;if(!(sc>0))continue;
+    const cs=g.type==='LineString'?g.coordinates:g.type==='MultiLineString'?g.coordinates.flat(1):null;if(!cs||!cs.length)continue;
+    pts.push(cs[Math.floor(cs.length/2)]);}
+  return pts;}
+function pointCoords(fc){const pts=[];for(const f of (fc&&fc.features)||[]){const g=f.geometry;if(g&&g.type==='Point')pts.push(g.coordinates);}return pts;}
+function cellCounts(pts){const m=new Map();if(typeof h3==='undefined')return m;   // H3 cell -> point count
+  for(const c of pts){let cell;try{cell=h3.latLngToCell(c[1],c[0],HEX_RES);}catch(e){continue;}m.set(cell,(m.get(cell)||0)+1);}return m;}
+function hexbinsFromCounts(m){if(!m.size||typeof h3==='undefined')return EMPTY;
+  let maxN=1;for(const v of m.values())if(v>maxN)maxN=v;const feats=[];
+  for(const [cell,n] of m){let b,ctr;try{b=h3.cellToBoundary(cell);ctr=h3.cellToLatLng(cell);}catch(e){continue;}
+    const ring=b.map(p=>[p[1],p[0]]);ring.push(ring[0]);   // h3 returns [lat,lng]; GeoJSON wants [lng,lat], ring closed
+    feats.push({type:'Feature',geometry:{type:'Polygon',coordinates:[ring]},properties:{t:Math.sqrt(n/maxN),lng:ctr[1]}});}   // t = sqrt density vs hottest cell; lng = cell centroid (the swipe divider cuts on this)
+  return {type:'FeatureCollection',features:feats};}
+function heatPointsFrom(fc){return hexbinsFromCounts(cellCounts(segMidpoints(fc)));}   // danger hexbins from flagged-segment midpoints
+// Spearman rank correlation (rank both, Pearson of ranks); used to score how well the danger and crash hexbins agree
+function spearman(xs,ys){const n=xs.length;if(n<3)return null;
+  const rank=a=>{const idx=a.map((v,i)=>[v,i]).sort((p,q)=>p[0]-q[0]);const r=new Array(a.length);let i=0;
+    while(i<idx.length){let j=i;while(j+1<idx.length&&idx[j+1][0]===idx[i][0])j++;const avg=(i+j)/2+1;for(let k=i;k<=j;k++)r[idx[k][1]]=avg;i=j+1;}return r;};
+  const rx=rank(xs),ry=rank(ys);const mx=rx.reduce((a,b)=>a+b,0)/n,my=ry.reduce((a,b)=>a+b,0)/n;
+  let num=0,dx=0,dy=0;for(let i=0;i<n;i++){const a=rx[i]-mx,b=ry[i]-my;num+=a*b;dx+=a*a;dy+=b*b;}
+  return dx&&dy?num/Math.sqrt(dx*dy):null;}
+const col=s=>s>=75?'#FB9F3A':s>=55?'#E65D5E':s>=30?'#B73779':'#6B1D6E';
+let CITIES=[],OVI=[],CUR=null,SEG=null,reqToken=0,roadsAll=false,CROWD=null;
+const ov=document.getElementById('overlay'),ovc=document.getElementById('ovcard');
+const cityF=k=>['==',['get','city'],k];
+function showLoading(l){ovc.innerHTML=`<div class="spin"></div><div>Loading ${esc(l)}…</div>`;ov.classList.add('on');}
+function hideOverlay(){ov.classList.remove('on');}
+function showError(key,msg){ov.classList.add('on');
+  ovc.innerHTML=`<div style="font-size:15px;margin-bottom:6px">Could not load the map data</div><div style="font-size:12px;color:#9bb0c2">${esc(msg)}</div><button id="retry">Try again</button>`;
+  document.getElementById('retry').onclick=()=>loadCity(key);}
+
+function renderPanel(c){
+  document.getElementById('find').value='';   // clear the search box so it never disagrees with the freshly-loaded list
+  const real=c.segments_flagged_real_posted;roadsAll=false;   // collapse the worst-roads list back to the top 5 on each city
+  const pct=Math.round(100*real/Math.max(c.segments_posted_real_osm,1));
+  // city-wide before/after: mean modeled fatal-risk reduction if every flagged road adopts its safe limit
+  const frs=(SEG&&SEG.features?SEG.features:[]).map(f=>f.properties.fatal_reduction_pct).filter(x=>x>0);
+  const meanFR=frs.length?Math.round(frs.reduce((a,b)=>a+b,0)/frs.length):0;
+  const adopt=meanFR?`<div class="stat"><span>If every road drops to its safe limit</span><span class="big" style="color:var(--safe)">&minus;${meanFR}%</span></div>
+    <p class="sub2">the average drop in the chance a crash there kills someone (Nilsson). Switch the Road colour to Safe to see it.</p>`:'';
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><span>Set over the safe speed</span><span class="big" style="color:var(--accent)">${real.toLocaleString()} &middot; ${pct}%</span></div>
+    <p class="sub2">of ${c.segments_posted_real_osm.toLocaleString()} streets that have a speed limit (${c.segments_total.toLocaleString()} checked in all). ${c.vru_pois.toLocaleString()} schools, markets and stops sit right beside them.</p>${adopt}`;
+  renderRoads(c.headline_priority_roads_real_posted,'');
+  document.getElementById('srtable').textContent=`In ${c.label}, ${real} of ${c.segments_posted_real_osm} roads that have a speed limit are set over the safe speed.`;
+  // sr-only ranked table of the worst highlighted roads (static, not announced on every update)
+  const hp=c.headline_priority_roads_real_posted||[];
+  document.getElementById('srranked').innerHTML=hp.length?`<caption>Worst roads in ${esc(c.label)}, ordered by how far the limit is over the safe speed</caption>`+
+    `<thead><tr><th>Rank</th><th>Road</th><th>Limit now</th><th>Safe</th><th>Score</th></tr></thead><tbody>`+
+    hp.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.name)}</td><td>${r.posted_osm}</td><td>${r.safe}</td><td>${r.sss.toFixed(0)}</td></tr>`).join('')+`</tbody>`:'';
+  document.getElementById('dl').href=`data/sss_flagged_${c.key}.geojson`;
+  document.getElementById('stamp').textContent=`OpenStreetMap as of ${esc(c.data_date||'2026')}`;
+}
+function renderRoads(rows,q){
+  const f=q?rows.filter(r=>r.name.toLowerCase().includes(q.toLowerCase())):rows;
+  const lim=q?8:(roadsAll?8:5);   // 5 by default to keep the panel calm; "show all" reveals the rest
+  const list=f.slice(0,lim).map(r=>`
+    <button class="road" data-nm="${esc(r.name)}" data-sss="${r.sss}">
+      <span class="chip" style="background:${col(r.sss)};color:${r.sss>=75?'#160a08':'#fff'}">${r.sss.toFixed(0)}</span>
+      <span class="nm">${esc(r.name)}</span><br>
+      <span class="meta">${signPair(r.posted_osm,r.safe,false)} <span class="rtag">${whyTag(r.why)}</span></span>
+    </button>`).join('');
+  const more=(!q&&f.length>5)?`<button class="showall" id="roadsmore">${roadsAll?'Show fewer':'Show all '+Math.min(f.length,8)+' &darr;'}</button>`:'';
+  document.getElementById('roads').innerHTML=(list+more)||`<div class="meta" style="font-size:12px;color:var(--muted)">${q?'No match.':'No roads here are set above the safe speed, or OpenStreetMap has no speed limits for this city yet.'}</div>`;
+}
+function showBeforeAfter(r){const el=document.getElementById('badetail');el.hidden=false;
+  el.innerHTML=`<div class="ba"><div class="t">What the speed limit should be on ${esc(r.name)}</div>
+    <div class="v">${signPair(r.posted_osm,r.safe,true)}</div><div class="signcap">limit now &rarr; safe limit</div>
+    <div class="r">Dropping it to the safe limit cuts the chance of a deadly crash by about <b>${r.fatal_reduction_pct.toFixed(0)}%</b> (Nilsson). ${whyPlainStr(r.why)}</div>
+    ${svLink(roadMid(r.name,r.sss),'See this road on Street View')}</div>`;}
+// a radar ping drawn as a map layer (projection-correct): a white ring ripples out with a bright
+// core, so the eye lands on the road the camera flew to
+let pingRAF=0;
+function pingAt(c){if(REDUCE||!c||!map.getSource('ping'))return;
+  map.getSource('ping').setData({type:'Feature',geometry:{type:'Point',coordinates:c},properties:{}});
+  if(pingRAF)cancelAnimationFrame(pingRAF);
+  let t0=0;const DUR=1500;
+  function anim(now){if(!t0)t0=now;const t=Math.min(1,(now-t0)/DUR);
+    map.setPaintProperty('ping-ring','circle-radius',7+42*t);
+    map.setPaintProperty('ping-ring','circle-stroke-opacity',0.9*(1-t));
+    map.setPaintProperty('ping-core','circle-radius',6*(1-0.4*t));
+    map.setPaintProperty('ping-core','circle-opacity',0.95*(1-t));
+    if(t<1){pingRAF=requestAnimationFrame(anim);}else{if(map.getSource('ping'))map.getSource('ping').setData(EMPTY);pingRAF=0;}}
+  pingRAF=requestAnimationFrame(anim);}
+function flyToRoad(nm,sss){const c=roadMid(nm,sss);if(c){map.flyTo({center:c,zoom:16,duration:FLYMS});pingAt(c);}}
+
+function fetchJSON(u){return fetch(u).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status+' on '+u);return r.json();});}
+async function loadCity(key){
+  const c=CITIES.find(x=>x.key===key);if(!c)return;const my=++reqToken;
+  showLoading(c.label);document.getElementById('badetail').hidden=true;
+  try{
+    const flag=await fetchJSON(`data/sss_flagged_${key}.geojson`);
+    let wealth=EMPTY;if(OVI.some(o=>o.key===key)){try{wealth=await fetchJSON(`data/overlay_${key}.geojson`);}catch(e){}}
+    let vru=EMPTY;try{vru=await fetchJSON(`data/pois_${key}.geojson`);}catch(e){}
+    if(my!==reqToken)return;
+    SEG=flag;CUR=c;map.getSource('flag').setData(flag);map.getSource('wealth').setData(wealth);map.getSource('vru').setData(vru);map.getSource('heat').setData(heatPointsFrom(flag));
+    for(const id of ['net-base','net-imputed','net-real']) map.setFilter(id, filterFor(id,key));
+    map.flyTo({center:c.center,zoom:c.zoom,duration:FLYMS});renderPanel(c);
+    // reset all overlays/build-up to the default view on a city change
+    if(window.__resetLayers)window.__resetLayers();
+    // crash overlay is Manila-only: enable there, disable elsewhere
+    const crb=document.getElementById('crashbtn'),crn=document.getElementById('crashnote');
+    if(crb){const isM=(key==='manila');crb.disabled=!isM;crb.setAttribute('aria-pressed','false');
+      map.setPaintProperty('esri','raster-opacity',0.78);if(crn)crn.hidden=true;}
+    const cmpb=document.getElementById('cmpbtn');if(cmpb)cmpb.disabled=(key!=='manila');   // swipe compare needs crash data (Manila only)
+    // critical-roads mode needs flagged roads: disable it on cities with none (butuan/puerto-princesa/surigao)
+    const ctb=document.getElementById('crit');if(ctb)ctb.disabled=((c.headline_priority_roads_real_posted||[]).length===0);
+    if(location.hash.slice(1)!==key)history.replaceState(null,'','#'+key);
+    document.getElementById('city').value=key;if(window.updateWealthBox)window.updateWealthBox();hideOverlay();
+  }catch(e){if(my===reqToken)showError(key,e.message);}
+}
+function filterFor(id,k){
+  if(id==='net-base')return cityF(k);
+  if(id==='net-imputed')return['all',cityF(k),['>',['get','sss'],0],['==',['get','posted_imputed'],true]];
+  return['all',cityF(k),['>',['get','sss'],0],['==',['get','posted_imputed'],false]];
+}
+
+map.on('load',async()=>{
+  map.addSource('net',{type:'vector',url:'pmtiles://data/sss_all.pmtiles'});
+  map.addLayer({id:'net-base',type:'line',source:'net','source-layer':'segments',filter:cityF('manila'),
+    paint:{'line-color':'#46566b','line-width':BASE_W,'line-opacity':0.6}});
+  map.addLayer({id:'net-imputed',type:'line',source:'net','source-layer':'segments',
+    filter:['all',cityF('manila'),['>',['get','sss'],0],['==',['get','posted_imputed'],true]],
+    paint:{'line-color':'#7587a0','line-width':1.2,'line-opacity':0.4,'line-dasharray':[2,2]}});
+  map.addLayer({id:'net-real',type:'line',source:'net','source-layer':'segments',
+    filter:['all',cityF('manila'),['>',['get','sss'],0],['==',['get','posted_imputed'],false]],
+    layout:{'line-cap':'round'},paint:{'line-color':SSS_COLOR,'line-width':SSS_WIDTH,'line-opacity':REAL_OP,'line-blur':0.4}});
+  // the WHY: vulnerable-user sites (schools, markets, hospitals, worship, transit), on by default
+  map.addSource('vru',{type:'geojson',data:EMPTY});
+  // context, not the danger: soft muted dots for where people are on foot. No dark bead
+  // (that reads as confetti); a faint light edge and a small blur so density reads as presence.
+  map.addLayer({id:'vru-dots',type:'circle',source:'vru',layout:{visibility:'none'},
+    paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,13,2.8,16,5.4],
+      'circle-color':['match',['get','kind'],'school','#E0B354','marketplace','#D98C5F','hospital','#CE8296','place_of_worship','#8E86C4','#5B8DB8'],
+      'circle-opacity':['match',['get','kind'],'bus_stop',0.45,'station',0.55,'bus_station',0.55,'shelter',0.45,0.72],
+      'circle-blur':0.3,'circle-stroke-width':0.5,'circle-stroke-color':'rgba(255,255,255,0.16)'}});
+  // VALIDATION: where crashes actually happened (Manila only, MMDA 2018-2020), hidden by default,
+  // lazy-loaded on first toggle. Rendered as danger-zone pings: a blurred coral glow that blooms
+  // where crashes pile up (density becomes intensity), plus a crisp warm core per point.
+  map.addSource('crash',{type:'geojson',data:EMPTY});
+  map.addLayer({id:'crash-glow',type:'circle',source:'crash',layout:{visibility:'none'},
+    paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,6,14,11,16,18],
+      'circle-color':'#E0574A','circle-opacity':['interpolate',['linear'],['zoom'],11,0.13,16,0.10],'circle-blur':1}});
+  map.addLayer({id:'crash-dots',type:'circle',source:'crash',layout:{visibility:'none'},
+    paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.5,14,2.4,16,3.6],
+      'circle-color':'#FFDCA8','circle-opacity':0.92,'circle-blur':0.2,
+      'circle-stroke-width':0.6,'circle-stroke-color':'rgba(224,87,74,0.6)'}});
+  // wealth overlay (bivariate choropleth), hidden by default
+  map.addSource('wealth',{type:'geojson',data:EMPTY});
+  map.addLayer({id:'wealth-fill',type:'fill',source:'wealth',layout:{visibility:'none'},
+    paint:{'fill-color':['get','color'],'fill-opacity':0.55,'fill-outline-color':'rgba(255,255,255,0.12)'}},'net-base');
+  // crowding overlay: same cells, coloured by mismatch x WorldPop residential density (color_crowd)
+  map.addLayer({id:'crowd-fill',type:'fill',source:'wealth',layout:{visibility:'none'},
+    paint:{'fill-color':['get','color_crowd'],'fill-opacity':0.55,'fill-outline-color':'rgba(255,255,255,0.12)'}},'net-base');
+  // flagged subset (interactions) + critical spotlight
+  map.addSource('flag',{type:'geojson',data:EMPTY});
+  // danger heatmap (overview): strong at city zoom, fades out as you zoom in to the precise glowing lines. Sits under the network so the lines read on top.
+  map.addSource('heat',{type:'geojson',data:EMPTY});
+  map.addLayer({id:'heat-layer',type:'fill',source:'heat',maxzoom:15,paint:{
+    'fill-color':['interpolate',['linear'],['get','t'],0,'#3B0F70',0.3,'#8C2981',0.55,'#B73779',0.78,'#E65D5E',0.92,'#FB9F3A',1,'#FCE38A'],
+    'fill-opacity':['interpolate',['linear'],['zoom'],10,0.72,12.5,0.6,14,0],
+    'fill-outline-color':'rgba(8,10,14,0.55)'}},'net-base');
+  // crash-density hexbins (Manila), same H3 grid + same colour scale as the danger hexbins, for the swipe comparison. Hidden until compare mode.
+  map.addSource('heatcrash',{type:'geojson',data:EMPTY});
+  map.addLayer({id:'heatcrash-layer',type:'fill',source:'heatcrash',layout:{visibility:'none'},paint:{
+    'fill-color':['interpolate',['linear'],['get','t'],0,'#3B0F70',0.3,'#8C2981',0.55,'#B73779',0.78,'#E65D5E',0.92,'#FB9F3A',1,'#FCE38A'],
+    'fill-opacity':0.78,
+    'fill-outline-color':'rgba(8,10,14,0.55)'}},'net-base');
+  map.addSource('crit',{type:'geojson',data:EMPTY});
+  map.addLayer({id:'seg-crit',type:'line',source:'crit',layout:{visibility:'none','line-cap':'round'},
+    paint:{'line-color':'#ffffff','line-width':7,'line-opacity':0.85,'line-blur':1.4}});
+  map.addLayer({id:'seg-crit2',type:'line',source:'crit',layout:{visibility:'none','line-cap':'round'},
+    paint:{'line-color':'#ff2b6a','line-width':3,'line-opacity':1}});
+  // radar ping (fly-to a road): a white ring ripples out + a bright core, both driven by pingAt()
+  map.addSource('ping',{type:'geojson',data:EMPTY});
+  map.addLayer({id:'ping-ring',type:'circle',source:'ping',paint:{
+    'circle-radius':7,'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#ffffff','circle-stroke-width':2.5,'circle-stroke-opacity':0,'circle-opacity':0}});
+  map.addLayer({id:'ping-core',type:'circle',source:'ping',paint:{
+    'circle-radius':6,'circle-color':'#ffffff','circle-opacity':0,'circle-blur':0.35}});
+
+  try{CITIES=await fetchJSON('data/cities.json');}catch(e){showError('manila','Could not load city index: '+e.message);return;}
+  try{OVI=await fetchJSON('data/overlay_index.json');}catch(e){OVI=[];}
+  try{CROWD=await fetchJSON('data/crowd.json');}catch(e){CROWD=null;}
+  const sel=document.getElementById('city');
+  // group the selector by island so a long city list stays scannable
+  const ISLAND={manila:'Luzon',antipolo:'Luzon',olongapo:'Luzon',lucena:'Luzon',santiago:'Luzon',cabanatuan:'Luzon',tarlac:'Luzon','sanfernando-pampanga':'Luzon',malolos:'Luzon',sjdm:'Luzon',lipa:'Luzon',calamba:'Luzon',dasmarinas:'Luzon',urdaneta:'Luzon',laoag:'Luzon',vigan:'Luzon',tuguegarao:'Luzon',baguio:'Luzon',batangas:'Luzon',naga:'Luzon',legazpi:'Luzon',dagupan:'Luzon',angeles:'Luzon',sorsogon:'Luzon','puerto-princesa':'Luzon',
+    cebu:'Visayas',iloilo:'Visayas',bacolod:'Visayas',tacloban:'Visayas',roxas:'Visayas',dumaguete:'Visayas',tagbilaran:'Visayas',ormoc:'Visayas',calbayog:'Visayas',
+    davao:'Mindanao',zamboanga:'Mindanao',cdo:'Mindanao',gensan:'Mindanao',butuan:'Mindanao',iligan:'Mindanao',cotabato:'Mindanao',koronadal:'Mindanao',kidapawan:'Mindanao',tagum:'Mindanao',digos:'Mindanao',pagadian:'Mindanao',dipolog:'Mindanao',ozamiz:'Mindanao',surigao:'Mindanao',marawi:'Mindanao',mati:'Mindanao'};
+  if(CITIES.length>8){
+    const groups=['Luzon','Visayas','Mindanao'];const other=CITIES.filter(c=>!ISLAND[c.key]);
+    sel.innerHTML=groups.map(g=>{const cs=CITIES.filter(c=>ISLAND[c.key]===g);
+      return cs.length?`<optgroup label="${g}">${cs.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'';}).join('')
+      +(other.length?`<optgroup label="Other">${other.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'');
+  }else{
+    sel.innerHTML=CITIES.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('');
+  }
+  sel.onchange=e=>{if(critMode)exitCritical();loadCity(e.target.value);};
+  const start=CITIES.find(c=>c.key===location.hash.slice(1))?location.hash.slice(1):CITIES[0].key;
+  await loadCity(start);
+  window.addEventListener('hashchange',()=>{const k=location.hash.slice(1);if(k&&k!==CUR?.key&&CITIES.some(c=>c.key===k)){if(critMode)exitCritical();loadCity(k);}});
+
+  document.querySelectorAll('#base button').forEach(b=>b.onclick=()=>{
+    document.querySelectorAll('#base button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+    const sat=b.dataset.v==='sat';map.setLayoutProperty('esri','visibility',sat?'visible':'none');map.setLayoutProperty('carto','visibility',sat?'none':'visible');});
+  document.getElementById('find').addEventListener('input',e=>{if(CUR)renderRoads(CUR.headline_priority_roads_real_posted,e.target.value);});
+  document.getElementById('find').addEventListener('keydown',e=>{if(e.key==='Enter'){const f=document.querySelector('#roads .road');if(f)f.click();}});
+  document.getElementById('roads').addEventListener('click',e=>{
+    if(e.target.closest('#roadsmore')){roadsAll=!roadsAll;if(CUR)renderRoads(CUR.headline_priority_roads_real_posted,document.getElementById('find').value);return;}
+    const el=e.target.closest('.road');if(!el||!CUR)return;
+    const r=CUR.headline_priority_roads_real_posted.find(x=>x.name===el.dataset.nm&&x.sss==el.dataset.sss);
+    if(r){showBeforeAfter(r);flyToRoad(r.name,r.sss);}});
+
+  // ---- wealth overlay toggle ----
+  let wealthOn=false;const wbtn=document.getElementById('wealthbtn'),wbox=document.getElementById('wealthbox');
+  function updateWealthBox(){if(!wealthOn||!CUR){wbox.hidden=true;return;}
+    const st=OVI.find(o=>o.key===CUR.key);wbox.hidden=false;
+    if(!st){wbox.innerHTML='<div class="find">No wealth overlay for this city yet.</div>';return;}
+    const B=st.biv;const rows=[2,1,0].map(si=>`${B[si].map(c=>`<i style="background:${c}"></i>`).join('')}`).join('');
+    wbox.innerHTML=`<div class="find">In <b>${esc(CUR.label.split(',')[0])}</b>, ${esc(st.finding)}.</div>
+      <div class="biv">${rows}</div>
+      <div class="bivlbl"><span>← poorer · wealthier →</span></div>
+      <div class="stats">The link between the mismatch and wealth is ρ = ${st.spearman_rho} (p = ${st.spearman_p}, over ${st.cells} squares of about 1.6 km). Magenta squares are high mismatch and low wealth. This shows a link only, it does not prove one causes the other. Nearby squares are not independent (Moran's I = ${st.morans_i}).</div>`;}
+  window.updateWealthBox=updateWealthBox;
+  wbtn.onclick=()=>{wealthOn=!wealthOn;wbtn.setAttribute('aria-pressed',wealthOn);
+    if(wealthOn&&crowdOn){crowdOn=false;cbtn.setAttribute('aria-pressed','false');map.setLayoutProperty('crowd-fill','visibility','none');updateCrowdBox();}
+    map.setLayoutProperty('wealth-fill','visibility',wealthOn?'visible':'none');
+    map.setPaintProperty('esri','raster-opacity',(wealthOn||crowdOn)?0.45:0.78);
+    map.setPaintProperty('net-base','line-opacity',(wealthOn||crowdOn)?0.25:0.6);
+    updateWealthBox();updateHeat();};
+
+  // ---- crowding overlay toggle (speed risk x residential density; parallel to wealth) ----
+  let crowdOn=false;const cbtn=document.getElementById('crowdbtn'),cbox=document.getElementById('crowdbox');
+  function updateCrowdBox(){if(!crowdOn||!CUR){cbox.hidden=true;return;}
+    const st=OVI.find(o=>o.key===CUR.key);cbox.hidden=false;
+    if(!st){cbox.innerHTML='<div class="find">Not enough real-posted road here to grid crowding yet.</div>';return;}
+    const B=st.biv;const rows=[2,1,0].map(si=>`${B[si].map(c=>`<i style="background:${c}"></i>`).join('')}`).join('');
+    const hk=CROWD&&CROWD.hooks&&CROWD.hooks[CUR.key];
+    const hooks=(hk&&hk.length)?'<div class="stats" style="margin:9px 0 3px">Fast roads through the most crowded housing. Tap one to fly there.</div>'+
+      hk.map(h=>`<button class="road" data-lat="${h.lat}" data-lon="${h.lon}" data-crowdhook="1"><span class="nm">${esc(h.road)}</span> <span class="meta">${h.posted}&rarr;${h.safe} &middot; ${Math.round(h.density/1000)}k/km&sup2;</span></button>`).join(''):'';
+    const g=CROWD?`The roads we highlight sit where a median <b>${CROWD.flagged_median_density.toLocaleString()}</b> people/km&sup2; live, against ${CROWD.unflagged_median_density.toLocaleString()} for roads that already fit. Yet the most crowded, most-highlighted region, Metro Manila, has the country's <b>lowest</b> road-death rate (3.6 against 10.9 per 100k). ` : '';
+    cbox.innerHTML=`<div class="find">In <b>${esc(CUR.label.split(',')[0])}</b>, ${esc(st.crowd_finding||'')}.</div>
+      <div class="biv">${rows}</div>
+      <div class="bivlbl"><span>← less &middot; more crowded →</span></div>
+      <div class="stats">${g}The link between the gap and crowding is ρ = ${st.spearman_rho_gap_density} (p = ${st.spearman_p_gap_density}). This shows a link only. It does not prove one causes the other.</div>${hooks}`;}
+  window.updateCrowdBox=updateCrowdBox;
+  cbtn.onclick=()=>{crowdOn=!crowdOn;cbtn.setAttribute('aria-pressed',crowdOn);
+    if(crowdOn&&wealthOn){wealthOn=false;wbtn.setAttribute('aria-pressed','false');map.setLayoutProperty('wealth-fill','visibility','none');updateWealthBox();}
+    map.setLayoutProperty('crowd-fill','visibility',crowdOn?'visible':'none');
+    map.setPaintProperty('esri','raster-opacity',(wealthOn||crowdOn)?0.45:0.78);
+    map.setPaintProperty('net-base','line-opacity',(wealthOn||crowdOn)?0.25:0.6);
+    updateCrowdBox();updateHeat();};
+  cbox.addEventListener('click',e=>{const b=e.target.closest('[data-crowdhook]');if(!b)return;
+    map.flyTo({center:[+b.dataset.lon,+b.dataset.lat],zoom:15.4,duration:FLYMS});});
+
+  // ---- the why: vulnerable-user sites toggle (on by default) ----
+  const vbtn=document.getElementById('vrubtn'),vkey=document.getElementById('vrukey');
+  vbtn.onclick=()=>vruShow(vbtn.getAttribute('aria-pressed')!=='true',false);
+
+  // ---- validation: where crashes actually happened (Manila only, lazy-loaded) ----
+  const crbtn=document.getElementById('crashbtn'),crnote=document.getElementById('crashnote');
+  crnote.textContent='12,634 reported crashes, 2018 to 2020 (MMDA alerts). They land on the roads we highlight. This is a check, not part of the score.';
+  let crashLoaded=false;
+  // breathing danger glow: pulse the crash-glow opacity like a slow heartbeat while it is on
+  let crashRAF=0,crashTs=0;
+  function crashBreath(ts){if(!map.getLayer('crash-glow')){crashRAF=0;return;}
+    if(ts-crashTs>32){crashTs=ts;map.setPaintProperty('crash-glow','circle-opacity',0.13+0.055*Math.sin(ts/430));}
+    crashRAF=requestAnimationFrame(crashBreath);}
+  function startCrashPulse(){if(REDUCE||crashRAF)return;crashRAF=requestAnimationFrame(crashBreath);}
+  function stopCrashPulse(){if(crashRAF){cancelAnimationFrame(crashRAF);crashRAF=0;}if(map.getLayer('crash-glow'))map.setPaintProperty('crash-glow','circle-opacity',0.13);}
+  crbtn.onclick=async()=>{if(crbtn.disabled)return;
+    const on=crbtn.getAttribute('aria-pressed')!=='true';
+    if(on&&!crashLoaded){try{map.getSource('crash').setData(await fetchJSON('data/crashes_manila.geojson'));crashLoaded=true;}catch(e){crnote.textContent='Could not load crash data.';}}
+    crbtn.setAttribute('aria-pressed',on);
+    map.setLayoutProperty('crash-dots','visibility',on?'visible':'none');map.setLayoutProperty('crash-glow','visibility',on?'visible':'none');on?startCrashPulse():stopCrashPulse();crnote.hidden=!on;
+    map.setPaintProperty('net-real','line-opacity',on?0.5:REAL_OP);   // dim glow so crashes pop
+    map.setPaintProperty('esri','raster-opacity',on?0.5:0.78);updateHeat();};
+
+  // ---- road colour mode: Risk (score) / Now (current limit) / Safe (proposed) ----
+  const BANNER={
+    score:'Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour, <span class="tk-ramp score"></span><small>the more the speed limit needs to come down.</small>',
+    current:'<b>Now.</b> Each road shows its <b>current speed limit</b>. <span class="tk-ramp speed"></span><small>teal is 30, coral is 60 or more km/h.</small>',
+    proposed:'<b>Safe.</b> The <b>speed limit each road should have</b>. <span class="tk-ramp speed"></span><small>the fast roads turn teal.</small>'};
+  let roadMode='score';
+  // the danger heatmap is the clean Risk overview only: hide it the moment another mode/overlay takes over (it would muddy them), and let zoom fade handle the rest
+  function updateHeat(){const show=roadMode==='score'&&buildIdx<0&&!critMode&&!wealthOn&&!crowdOn&&crbtn.getAttribute('aria-pressed')!=='true'&&!compareMode;
+    if(map.getLayer('heat-layer'))map.setLayoutProperty('heat-layer','visibility',show?'visible':'none');}
+  function setRoadMode(m){roadMode=m;
+    map.setPaintProperty('net-real','line-color',m==='current'?SPEED_COLOR('v_posted'):m==='proposed'?SPEED_COLOR('v_safe'):SSS_COLOR);
+    document.querySelectorAll('#roadmode .seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+    document.getElementById('topkey').innerHTML=BANNER[m];
+    // keep the in-panel "How to read it" legend in sync with the road colours
+    const speed=(m!=='score');document.getElementById('legramp').className='ramp'+(speed?' speed':'');
+    document.getElementById('legrl').innerHTML=speed?'<span>30 km/h</span><span></span><span>60+ km/h</span>':'<span>already safe</span><span>over the safe speed</span><span>most over</span>';
+    const dot=c=>`<i style="background:${c};border:0;width:8px;height:8px;border-radius:50%"></i>`;
+    document.getElementById('leglead').innerHTML=m==='current'?dot('#E0574A')+'Each road shows its <b>current speed limit</b>. Teal is slow, coral is 60 or more km/h.'
+      :m==='proposed'?dot('#54A89B')+'Each road shows the <b>safe limit it should have</b>. The fast roads turn teal.'
+      :'<i style="border-color:#ff3b3b"></i>Bright glow. The <b>speed limit is higher than the safe speed</b>. The deeper the colour, the bigger the gap between the limit now and the safe one.';updateHeat();}
+  document.querySelectorAll('#roadmode .seg button').forEach(b=>b.onclick=()=>setRoadMode(b.dataset.m));
+
+  // helpers reused by the build-up (also keep the simple toggles honest)
+  function vruShow(on,emph){map.setLayoutProperty('vru-dots','visibility',on?'visible':'none');
+    vbtn.setAttribute('aria-pressed',on);vkey.style.display=on?'':'none';
+    map.setFilter('vru-dots',on&&emph?['match',['get','kind'],['school','marketplace','hospital','place_of_worship'],true,false]:null);
+    map.setPaintProperty('vru-dots','circle-radius',emph?['interpolate',['linear'],['zoom'],11,2.6,14,5,16,8]:['interpolate',['linear'],['zoom'],11,1.4,13,2.6,16,5.5]);}
+  async function crashShow(on){const isM=CUR&&CUR.key==='manila';const show=on&&isM;
+    if(show&&!crashLoaded){try{map.getSource('crash').setData(await fetchJSON('data/crashes_manila.geojson'));crashLoaded=true;}catch(e){}}
+    map.setLayoutProperty('crash-dots','visibility',show?'visible':'none');map.setLayoutProperty('crash-glow','visibility',show?'visible':'none');show?startCrashPulse():stopCrashPulse();crbtn.setAttribute('aria-pressed',show);crnote.hidden=!show;}
+
+  // ---- BUILD THE PICTURE: stack schools -> crashes -> current -> proposed ----
+  const buildBtn=document.getElementById('buildbtn'),buildStep=document.getElementById('buildstep'),layersEl=document.getElementById('layers');
+  let buildIdx=-1;
+  const STEPS=[
+    {t:'1. Where people walk',d:'Schools, markets, hospitals and places of worship. This is where people are on foot and crossing.',
+      banner:'The <b>dots show where people are on foot</b>. Schools, markets, hospitals, places of worship.',
+      apply:()=>{vruShow(true,true);crashShow(false);setRoadMode('score');map.setPaintProperty('net-real','line-opacity',0.28);}},
+    {t:'2. Where crashes happen',d:'Real reported crashes land on the very same roads.',ml:1,
+      banner:'The <b>glowing dots are real reported crashes</b>. They land on the very same roads.',
+      apply:()=>{vruShow(true,true);crashShow(true);setRoadMode('score');map.setPaintProperty('net-real','line-opacity',0.28);}},
+    {t:'3. What the limit is now',d:'The current speed limit. Coral roads are set at 60 or more km/h, right where people cross.',
+      apply:()=>{vruShow(true,true);crashShow(true);map.setPaintProperty('net-real','line-opacity',0.95);setRoadMode('current');}},
+    {t:'4. What it should be',d:'The safe speed. The fast coral roads should turn into the calm teal ones.',
+      apply:()=>{vruShow(true,true);crashShow(true);map.setPaintProperty('net-real','line-opacity',0.95);setRoadMode('proposed');}}];
+  function buildRender(){const s=STEPS[buildIdx];s.apply();
+    if(s.banner){let bn=s.banner;if(s.ml&&!(CUR&&CUR.key==='manila'))bn='<b>Reported crash points are for Metro Manila only.</b> There, the crashes land on the very same highlighted roads.';document.getElementById('topkey').innerHTML=bn;}   // step banner; honest on cities with no crash data
+    const note=(s.ml&&!(CUR&&CUR.key==='manila'))?' <i>(crash data is Manila-only)</i>':'';
+    buildStep.hidden=false;
+    buildStep.innerHTML=`<div class="bs-ix">Step ${buildIdx+1} of 4</div>`+
+      `<div class="bs-t" tabindex="-1">${s.t}</div><div class="bs-d">${s.d}${note}</div>`+
+      `<div class="bs-nav">${buildIdx>0?'<button id="bprev">&larr; Back</button>':'<span></span>'}`+
+      `<button id="bexit">Done</button><button id="bnext">${buildIdx<3?'Next &rarr;':'Finish'}</button></div>`;
+    const pv=document.getElementById('bprev');if(pv)pv.onclick=()=>{buildIdx--;buildRender();};
+    document.getElementById('bnext').onclick=()=>{if(buildIdx<3){buildIdx++;buildRender();}else buildExit();};
+    document.getElementById('bexit').onclick=buildExit;
+    document.getElementById('srtable').textContent=`Step ${buildIdx+1} of 4. ${s.d.replace(/<[^>]+>/g,'')}`;   // announce to screen readers
+    buildStep.querySelector('.bs-t').focus({preventScroll:true});}   // keep focus in the card (Next button was just replaced)
+  function buildEnter(){if(compareMode)exitCompare();if(critMode)exitCritical();buildIdx=0;buildBtn.setAttribute('aria-pressed','true');if(layersEl)layersEl.open=false;document.querySelector('.panel').classList.add('building');buildRender();}
+  function buildExit(){buildIdx=-1;buildStep.hidden=true;buildBtn.setAttribute('aria-pressed','false');document.querySelector('.panel').classList.remove('building');
+    vruShow(false,false);crashShow(false);map.setPaintProperty('net-real','line-opacity',REAL_OP);setRoadMode('score');   // exit the tour = clean overview, banner + legend back to Risk
+    if(window.__isMobile&&window.__isMobile()&&window.__setPanel)window.__setPanel(true);else if(window.__upSeehow)window.__upSeehow();}
+  buildBtn.onclick=()=>{buildIdx<0?buildEnter():buildExit();};
+  window.__resetLayers=()=>{if(compareMode)exitCompare();if(buildIdx>=0)buildExit();vruShow(false,false);
+    if(map.getLayer('crash-dots')){map.setLayoutProperty('crash-dots','visibility','none');map.setLayoutProperty('crash-glow','visibility','none');stopCrashPulse();}
+    wealthOn=false;wbtn.setAttribute('aria-pressed','false');map.setLayoutProperty('wealth-fill','visibility','none');
+    crowdOn=false;cbtn.setAttribute('aria-pressed','false');map.setLayoutProperty('crowd-fill','visibility','none');if(window.updateCrowdBox)window.updateCrowdBox();
+    map.setPaintProperty('esri','raster-opacity',0.78);map.setPaintProperty('net-base','line-opacity',0.6);
+    setRoadMode('score');map.setPaintProperty('net-real','line-opacity',REAL_OP);};
+  document.getElementById('resetbtn').onclick=e=>{e.preventDefault();window.__resetLayers();
+    document.getElementById('find').value='';
+    if(CUR){renderRoads(CUR.headline_priority_roads_real_posted,'');map.flyTo({center:CUR.center,zoom:CUR.zoom,duration:FLYMS});}};
+
+  // ---- critical roads guided mode ----
+  let critMode=false,critList=[],critIdx=0,pulseRAF=null;
+  const stepEl=document.getElementById('stepper'),critBtn=document.getElementById('crit');
+  function critGeom(name){const fs=SEG.features.filter(f=>f.properties.name===name&&f.properties.sss>0&&f.properties.posted_imputed===false);
+    fs.sort((a,b)=>b.properties.sss-a.properties.sss);return fs[0];}
+  function enterCritical(){if(!CUR)return;const list=(CUR.headline_priority_roads_real_posted||[]).slice(0,8);if(!list.length)return;if(compareMode)exitCompare();if(buildIdx>=0)buildExit();critMode=true;critBtn.setAttribute('aria-pressed','true');critBtn.innerHTML='Exit<small>the worst roads</small>';
+    critList=list;
+    const names=new Set(critList.map(r=>r.name));
+    map.getSource('crit').setData({type:'FeatureCollection',features:SEG.features.filter(f=>names.has(f.properties.name))});
+    map.setPaintProperty('esri','raster-opacity',0.32);map.setPaintProperty('net-base','line-opacity',0.18);
+    map.setPaintProperty('net-real','line-opacity',0.22);map.setLayoutProperty('net-imputed','visibility','none');
+    map.setLayoutProperty('seg-crit','visibility','visible');map.setLayoutProperty('seg-crit2','visibility','visible');
+    document.getElementById('roads').style.display='none';document.getElementById('badetail').hidden=true;
+    stepEl.hidden=false;critStep(0);startPulse();updateHeat();}
+  function exitCritical(){critMode=false;critBtn.setAttribute('aria-pressed','false');critBtn.innerHTML='The worst roads<small>one at a time</small>';
+    map.setPaintProperty('esri','raster-opacity',(wealthOn||crowdOn)?0.45:0.78);map.setPaintProperty('net-base','line-opacity',(wealthOn||crowdOn)?0.25:0.6);
+    map.setPaintProperty('net-real','line-opacity',REAL_OP);map.setLayoutProperty('net-imputed','visibility','visible');
+    map.setLayoutProperty('seg-crit','visibility','none');map.setLayoutProperty('seg-crit2','visibility','none');
+    document.getElementById('roads').style.display='';stepEl.hidden=true;stepEl.innerHTML='';stopPulse();updateHeat();}
+  function critStep(i){if(!critList.length)return;critIdx=(i+critList.length)%critList.length;const r=critList[critIdx];
+    const f=critGeom(r.name);let mid=null;if(f){mid=f.geometry.coordinates[Math.floor(f.geometry.coordinates.length/2)];map.flyTo({center:mid,zoom:15.6,duration:FLYMS});pingAt(mid);}
+    stepEl.innerHTML=`<div class="ix">Worst road ${critIdx+1} of ${critList.length}</div><div class="nm">${esc(r.name)}</div>`+
+      `<div class="ba2">${signPair(r.posted_osm,r.safe,true)}</div><div class="signcap" style="text-transform:none;font-size:11px">limit now &rarr; safe limit &middot; cuts deadly-crash risk ~${r.fatal_reduction_pct.toFixed(0)}%</div>`+
+      `<div class="why">Why this road is highlighted. ${whyPlainStr(r.why||'a speed limit above the safe speed for this road').replace(/\.$/,'')}.</div>`+
+      svLink(mid,'See this road on Street View')+
+      `<div class="nav"><button id="cprev" aria-label="Previous">&larr;</button><button id="cexit">Done</button><button id="cnext" aria-label="Next">Next &rarr;</button></div>`;
+    document.getElementById('cprev').onclick=()=>critStep(critIdx-1);document.getElementById('cnext').onclick=()=>critStep(critIdx+1);document.getElementById('cexit').onclick=exitCritical;
+    document.getElementById('srtable').textContent=`Worst road ${critIdx+1} of ${critList.length}. ${r.name}, limit now ${r.posted_osm}, safe limit ${r.safe}.`;}
+  function startPulse(){if(REDUCE)return;let t=0;(function p(){if(!critMode)return;t+=0.05;map.setPaintProperty('seg-crit','line-width',6+Math.sin(t)*2.5);pulseRAF=requestAnimationFrame(p);})();}
+  function stopPulse(){if(pulseRAF)cancelAnimationFrame(pulseRAF);if(map.getLayer('seg-crit'))map.setPaintProperty('seg-crit','line-width',7);}
+  critBtn.onclick=()=>{critMode?exitCritical():enterCritical();};
+
+  // ---- SWIPE COMPARE: speed-limit danger (left) vs where crashes happened (right), Manila only ----
+  let compareMode=false,dividerLng=null,crashFCCache=null;
+  const cmpBtn=document.getElementById('cmpbtn'),swipeEl=document.getElementById('swipe'),cmpExit=document.getElementById('cmpexit');
+  function setSwipeFilters(){map.setFilter('heat-layer',['<',['get','lng'],dividerLng]);map.setFilter('heatcrash-layer',['>=',['get','lng'],dividerLng]);}
+  function positionDivider(){if(!compareMode||dividerLng==null)return;swipeEl.style.left=map.project([dividerLng,map.getCenter().lat]).x+'px';}
+  async function enterCompare(){if(!CUR||CUR.key!=='manila'||compareMode)return;if(buildIdx>=0)buildExit();if(critMode)exitCritical();
+    try{crashFCCache=crashFCCache||await fetchJSON('data/crashes_manila.geojson');}catch(e){return;}
+    const dCounts=cellCounts(segMidpoints(SEG)),cCounts=cellCounts(pointCoords(crashFCCache));
+    map.getSource('heatcrash').setData(hexbinsFromCounts(cCounts));
+    const cells=new Set([...dCounts.keys(),...cCounts.keys()]),xs=[],ys=[];
+    for(const c of cells){xs.push(dCounts.get(c)||0);ys.push(cCounts.get(c)||0);}
+    const rho=spearman(xs,ys);
+    compareMode=true;cmpBtn.setAttribute('aria-pressed','true');cmpBtn.textContent='Exit the swipe compare';
+    vruShow(false,false);
+    map.setLayoutProperty('heat-layer','visibility','visible');map.setPaintProperty('heat-layer','fill-opacity',0.82);
+    map.setLayoutProperty('heatcrash-layer','visibility','visible');
+    map.setPaintProperty('net-real','line-opacity',0);map.setLayoutProperty('net-imputed','visibility','none');map.setPaintProperty('net-base','line-opacity',0.22);
+    dividerLng=CUR.center[0];setSwipeFilters();
+    swipeEl.style.display='block';map.on('move',positionDivider);
+    map.flyTo({center:CUR.center,zoom:Math.min(CUR.zoom,12.1),duration:FLYMS});positionDivider();
+    cmpExit.style.display='block';
+    const rtxt=rho==null?'':` The two line up across the city, ρ = <b>${rho.toFixed(2)}</b> (busy roads get more crashes for many reasons, so this is more than just the limit).`;
+    document.getElementById('topkey').innerHTML=`<b>Left.</b> The roads we highlight as over the safe speed. <b>Right.</b> Where crashes really happened.${rtxt} Drag the divider to sweep.`;}
+  function exitCompare(){if(!compareMode)return;compareMode=false;cmpBtn.setAttribute('aria-pressed','false');cmpBtn.textContent='Swipe to compare our map with real crashes (Manila)';
+    map.off('move',positionDivider);swipeEl.style.display='none';cmpExit.style.display='none';
+    map.setFilter('heat-layer',null);map.setFilter('heatcrash-layer',null);map.setLayoutProperty('heatcrash-layer','visibility','none');
+    map.setPaintProperty('heat-layer','fill-opacity',['interpolate',['linear'],['zoom'],10,0.72,12.5,0.6,14,0]);
+    map.setPaintProperty('net-real','line-opacity',REAL_OP);map.setLayoutProperty('net-imputed','visibility','visible');map.setPaintProperty('net-base','line-opacity',0.6);
+    setRoadMode('score');}   // restores the Risk banner + re-shows the danger overview via updateHeat
+  cmpBtn.onclick=()=>{compareMode?exitCompare():enterCompare();};
+  cmpExit.onclick=exitCompare;
+  (function(){let drag=false;const handle=swipeEl.querySelector('.sw-handle');
+    function toLng(clientX){const r=map.getCanvas().getBoundingClientRect();const x=Math.max(24,Math.min(r.width-24,clientX-r.left));swipeEl.style.left=x+'px';return map.unproject([x,map.getCanvas().clientHeight/2]).lng;}
+    handle.addEventListener('pointerdown',e=>{drag=true;handle.setPointerCapture(e.pointerId);e.preventDefault();});
+    handle.addEventListener('pointermove',e=>{if(!drag)return;dividerLng=toLng(e.clientX);setSwipeFilters();});
+    handle.addEventListener('pointerup',()=>{drag=false;});})();
+
+  // popups from the rendered network
+  const pop=new maplibregl.Popup({closeButton:false,maxWidth:'260px'});
+  function whyPlain(p){return whyPlainStr(p.why);}
+  function popup(e){const p=e.features[0].properties;map.getCanvas().style.cursor='pointer';
+    pop.setLngLat(e.lngLat).setHTML(`<b>${esc(p.name)||'(unnamed road)'}</b><br>`+
+      `${signPair(p.v_posted,p.v_safe,true)}`+
+      `<div class="signcap">Now &rarr; safe limit (km/h)${p.posted_imputed===true||p.posted_imputed==='true'?' &middot; <span style="text-transform:none">limit is a guess</span>':''}</div>`+
+      `<div class="oversafe">&#9650; set ${Math.max(0,p.v_posted-p.v_safe)} km/h over the safe speed</div>`+
+      `<div style="color:#cdd6e0;margin-top:6px">${whyPlain(p)}</div>`+
+      `<div style="color:var(--muted);font-family:var(--font-data);margin-top:4px">cuts deadly-crash risk ~${Math.round(p.fatal_reduction_pct)}%</div>`+
+      svLink([e.lngLat.lng,e.lngLat.lat],'Street View')).addTo(map);}
+  // mousemove for desktop hover; click/tap so touch devices can open it too (the panel copy says "tap any road")
+  for(const lyr of ['net-real','net-imputed']){map.on('mousemove',lyr,popup);map.on('click',lyr,popup);map.on('mouseleave',lyr,()=>{map.getCanvas().style.cursor='';pop.remove();});}
+});
+</script>
+</body>
+</html>

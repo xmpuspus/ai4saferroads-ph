@@ -1,0 +1,76 @@
+{
+  "flagged_median_density": 14620.0,
+  "unflagged_median_density": 9326.0,
+  "prob_flagged_denser": 0.588,
+  "rho_flagdensity_deathrate": -0.093,
+  "ncr": {
+    "flagged": 4664,
+    "median_density": 22872,
+    "death_rate": 3.6,
+    "national_rate": 10.9
+  },
+  "hooks": {
+    "manila": [
+      {
+        "road": "Mel Lopez Boulevard",
+        "posted": 60,
+        "safe": 30,
+        "density": 102795.0,
+        "lat": 14.59941,
+        "lon": 120.96522
+      },
+      {
+        "road": "C. M. Recto Avenue",
+        "posted": 60,
+        "safe": 30,
+        "density": 82562.0,
+        "lat": 14.60174,
+        "lon": 120.9667
+      },
+      {
+        "road": "Capulong Street",
+        "posted": 60,
+        "safe": 30,
+        "density": 77084.0,
+        "lat": 14.61818,
+        "lon": 120.97064
+      },
+      {
+        "road": "Quezon Avenue",
+        "posted": 60,
+        "safe": 30,
+        "density": 75533.0,
+        "lat": 14.62346,
+        "lon": 121.00807
+      }
+    ],
+    "cebu": [
+      {
+        "road": "Natalio Bacalso Avenue",
+        "posted": 60,
+        "safe": 30,
+        "density": 57161.0,
+        "lat": 10.29545,
+        "lon": 123.88343
+      },
+      {
+        "road": "Governor M. Cuenco Avenue",
+        "posted": 50,
+        "safe": 30,
+        "density": 59089.0,
+        "lat": 10.33848,
+        "lon": 123.91145
+      }
+    ],
+    "davao": [
+      {
+        "road": "Davao City Coastal Road",
+        "posted": 60,
+        "safe": 30,
+        "density": 53099.0,
+        "lat": 7.06387,
+        "lon": 125.61772
+      }
+    ]
+  }
+}

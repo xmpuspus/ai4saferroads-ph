@@ -1,0 +1,32 @@
+{
+  "key": "urdaneta",
+  "label": "Urdaneta",
+  "center": [
+    120.5669,
+    15.976
+  ],
+  "zoom": 12.7,
+  "data_date": "2026-06-26",
+  "data_source": "OpenStreetMap via Overpass",
+  "segments_total": 1943,
+  "segments_posted_real_osm": 105,
+  "segments_posted_imputed": 1838,
+  "segments_gap_positive": 233,
+  "segments_flagged_sss_gt0": 233,
+  "segments_flagged_real_posted": 1,
+  "sss_max": 55.9,
+  "sss_mean_flagged": 15.6,
+  "vru_pois": 108,
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 37.7,
+      "name": "Villasis\u2013Urdaneta Bypass Road",
+      "class": "primary",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections"
+    }
+  ],
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+}
