@@ -18,5 +18,11 @@
   "sss_mean_flagged": 17.7,
   "vru_pois": 213,
   "headline_priority_roads_real_posted": [],
-  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+  "design": {
+    "n_flagged_real": 0,
+    "flagged_design_gap_positive": 0,
+    "flagged_design_gap_pos_pct": 0.0,
+    "median_design_gap": 0
+  }
 }

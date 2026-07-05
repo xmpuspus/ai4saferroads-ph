@@ -25,8 +25,15 @@
       "posted_osm": 60,
       "safe": 30,
       "fatal_reduction_pct": 93.8,
-      "why": "local road, frontage/pedestrian mixing"
+      "why": "local road, frontage/pedestrian mixing",
+      "v_design": 40
     }
   ],
-  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+  "design": {
+    "n_flagged_real": 2,
+    "flagged_design_gap_positive": 2,
+    "flagged_design_gap_pos_pct": 100.0,
+    "median_design_gap": 10
+  }
 }

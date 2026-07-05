@@ -25,7 +25,8 @@
       "posted_osm": 80,
       "safe": 50,
       "fatal_reduction_pct": 84.7,
-      "why": "undivided arterial, side-impact intersections"
+      "why": "undivided arterial, side-impact intersections",
+      "v_design": 45
     },
     {
       "sss": 21.1,
@@ -34,7 +35,8 @@
       "posted_osm": 80,
       "safe": 70,
       "fatal_reduction_pct": 41.4,
-      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+      "v_design": 70
     },
     {
       "sss": 14.5,
@@ -43,7 +45,8 @@
       "posted_osm": 80,
       "safe": 70,
       "fatal_reduction_pct": 41.4,
-      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+      "v_design": 70
     },
     {
       "sss": 14.0,
@@ -52,7 +55,8 @@
       "posted_osm": 80,
       "safe": 70,
       "fatal_reduction_pct": 41.4,
-      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+      "v_design": 70
     },
     {
       "sss": 13.1,
@@ -61,8 +65,15 @@
       "posted_osm": 80,
       "safe": 70,
       "fatal_reduction_pct": 41.4,
-      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+      "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+      "v_design": 70
     }
   ],
-  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+  "design": {
+    "n_flagged_real": 31,
+    "flagged_design_gap_positive": 0,
+    "flagged_design_gap_pos_pct": 0.0,
+    "median_design_gap": 0
+  }
 }

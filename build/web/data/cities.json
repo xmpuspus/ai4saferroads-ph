@@ -26,7 +26,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -35,7 +36,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -44,7 +46,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -53,7 +56,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -62,7 +66,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -71,7 +76,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -80,7 +86,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 75.0,
@@ -89,7 +96,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -98,7 +106,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 75.0,
@@ -107,10 +116,17 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 4664,
+      "flagged_design_gap_positive": 4227,
+      "flagged_design_gap_pos_pct": 90.6,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "cebu",
@@ -139,7 +155,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 68.3,
@@ -148,7 +165,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 64.7,
@@ -157,7 +175,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 64.6,
@@ -166,7 +185,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (3 VRU site<=50m)"
+        "why": "pedestrian activity (3 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 50.0,
@@ -175,7 +195,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -184,7 +205,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -193,7 +215,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -202,7 +225,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -211,7 +235,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -220,10 +245,17 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 581,
+      "flagged_design_gap_positive": 573,
+      "flagged_design_gap_pos_pct": 98.6,
+      "median_design_gap": 20
+    }
   },
   {
     "key": "davao",
@@ -252,7 +284,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 74.0,
@@ -261,7 +294,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -270,7 +304,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -279,7 +314,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 25
       },
       {
         "sss": 25.0,
@@ -288,7 +324,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -297,7 +334,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -306,7 +344,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 25
       },
       {
         "sss": 25.0,
@@ -315,7 +354,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -324,7 +364,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -333,10 +374,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 364,
+      "flagged_design_gap_positive": 329,
+      "flagged_design_gap_pos_pct": 90.4,
+      "median_design_gap": 5
+    }
   },
   {
     "key": "zamboanga",
@@ -365,10 +413,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 15,
+      "flagged_design_gap_positive": 0,
+      "flagged_design_gap_pos_pct": 0.0,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "cdo",
@@ -397,7 +452,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 50.0,
@@ -406,7 +462,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 48.4,
@@ -415,7 +472,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 42.0,
@@ -424,7 +482,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 37.3,
@@ -433,7 +492,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -442,7 +502,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 25.0,
@@ -451,7 +512,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -460,7 +522,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -469,7 +532,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 24.4,
@@ -478,10 +542,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 72,
+      "flagged_design_gap_positive": 61,
+      "flagged_design_gap_pos_pct": 84.7,
+      "median_design_gap": 15
+    }
   },
   {
     "key": "gensan",
@@ -510,7 +581,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 28.1,
@@ -519,10 +591,17 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 4,
+      "flagged_design_gap_positive": 2,
+      "flagged_design_gap_pos_pct": 50.0,
+      "median_design_gap": 5
+    }
   },
   {
     "key": "iloilo",
@@ -551,7 +630,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 50.0,
@@ -560,7 +640,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 50.0,
@@ -569,7 +650,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 50.0,
@@ -578,7 +660,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -587,7 +670,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -596,7 +680,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 50.0,
@@ -605,7 +690,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 50.0,
@@ -614,7 +700,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 47.0,
@@ -623,7 +710,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 46.6,
@@ -632,10 +720,17 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 135,
+      "flagged_design_gap_positive": 101,
+      "flagged_design_gap_pos_pct": 74.8,
+      "median_design_gap": 20
+    }
   },
   {
     "key": "bacolod",
@@ -664,7 +759,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 63.1,
@@ -673,7 +769,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 56.1,
@@ -682,7 +779,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 53.7,
@@ -691,7 +789,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -700,7 +799,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 25.0,
@@ -709,7 +809,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -718,7 +819,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -727,7 +829,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -736,7 +839,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 23.0,
@@ -745,10 +849,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 45
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 98,
+      "flagged_design_gap_positive": 81,
+      "flagged_design_gap_pos_pct": 82.7,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "baguio",
@@ -777,7 +888,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (3 VRU site<=50m)"
+        "why": "pedestrian activity (3 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -786,7 +898,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 15.8,
@@ -795,7 +908,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 15.2,
@@ -804,7 +918,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 15.0,
@@ -813,7 +928,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 12.5,
@@ -822,10 +938,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 30
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 23,
+      "flagged_design_gap_positive": 22,
+      "flagged_design_gap_pos_pct": 95.7,
+      "median_design_gap": 20
+    }
   },
   {
     "key": "batangas",
@@ -854,7 +977,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (3 VRU site<=50m)"
+        "why": "pedestrian activity (3 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -863,7 +987,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -872,7 +997,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 22.0,
@@ -881,7 +1007,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 21.5,
@@ -890,7 +1017,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.1,
@@ -899,10 +1027,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 31,
+      "flagged_design_gap_positive": 30,
+      "flagged_design_gap_pos_pct": 96.8,
+      "median_design_gap": 20
+    }
   },
   {
     "key": "butuan",
@@ -924,7 +1059,13 @@
     "sss_mean_flagged": 17.7,
     "vru_pois": 213,
     "headline_priority_roads_real_posted": [],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 0,
+      "flagged_design_gap_positive": 0,
+      "flagged_design_gap_pos_pct": 0.0,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "tacloban",
@@ -953,7 +1094,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 40.4,
@@ -962,10 +1104,17 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 55
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 17,
+      "flagged_design_gap_positive": 14,
+      "flagged_design_gap_pos_pct": 82.4,
+      "median_design_gap": 30
+    }
   },
   {
     "key": "puerto-princesa",
@@ -987,7 +1136,13 @@
     "sss_mean_flagged": 15.2,
     "vru_pois": 100,
     "headline_priority_roads_real_posted": [],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 0,
+      "flagged_design_gap_positive": 0,
+      "flagged_design_gap_pos_pct": 0.0,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "angeles",
@@ -1016,7 +1171,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 53.4,
@@ -1025,7 +1181,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 52.6,
@@ -1034,7 +1191,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 46.2,
@@ -1043,7 +1201,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 46.1,
@@ -1052,7 +1211,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 45.0,
@@ -1061,7 +1221,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.4,
@@ -1070,7 +1231,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -1079,7 +1241,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -1088,7 +1251,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -1097,10 +1261,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 202,
+      "flagged_design_gap_positive": 176,
+      "flagged_design_gap_pos_pct": 87.1,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "naga",
@@ -1129,10 +1300,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 1,
+      "flagged_design_gap_positive": 1,
+      "flagged_design_gap_pos_pct": 100.0,
+      "median_design_gap": 20
+    }
   },
   {
     "key": "legazpi",
@@ -1161,7 +1339,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.3,
@@ -1170,7 +1349,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 18.9,
@@ -1179,7 +1359,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 55
       },
       {
         "sss": 15.9,
@@ -1188,7 +1369,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 55
       },
       {
         "sss": 12.9,
@@ -1197,10 +1379,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 35
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 17,
+      "flagged_design_gap_positive": 15,
+      "flagged_design_gap_pos_pct": 88.2,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "dagupan",
@@ -1229,7 +1418,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 46.1,
@@ -1238,7 +1428,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 45.2,
@@ -1247,7 +1438,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 41.1,
@@ -1256,7 +1448,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 39.7,
@@ -1265,7 +1458,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -1274,7 +1468,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 20.9,
@@ -1283,7 +1478,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 20.7,
@@ -1292,7 +1488,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 17.4,
@@ -1301,7 +1498,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 16.1,
@@ -1310,10 +1508,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 30,
+      "flagged_design_gap_positive": 30,
+      "flagged_design_gap_pos_pct": 100.0,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "antipolo",
@@ -1342,7 +1547,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -1351,7 +1557,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (3 VRU site<=50m)"
+        "why": "pedestrian activity (3 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 23.0,
@@ -1360,7 +1567,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 40
       },
       {
         "sss": 22.6,
@@ -1369,7 +1577,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 19.4,
@@ -1378,7 +1587,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 18.2,
@@ -1387,7 +1597,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 17.2,
@@ -1396,7 +1607,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 16.4,
@@ -1405,7 +1617,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 16.3,
@@ -1414,10 +1627,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 53,
+      "flagged_design_gap_positive": 48,
+      "flagged_design_gap_pos_pct": 90.6,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "olongapo",
@@ -1446,7 +1666,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 22.2,
@@ -1455,7 +1676,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 17.4,
@@ -1464,7 +1686,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 14.8,
@@ -1473,10 +1696,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 48,
+      "flagged_design_gap_positive": 29,
+      "flagged_design_gap_pos_pct": 60.4,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "lucena",
@@ -1505,7 +1735,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -1514,7 +1745,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 22.6,
@@ -1523,7 +1755,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 22.4,
@@ -1532,7 +1765,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 18.6,
@@ -1541,7 +1775,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 12.5,
@@ -1550,10 +1785,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 8,
+      "flagged_design_gap_positive": 7,
+      "flagged_design_gap_pos_pct": 87.5,
+      "median_design_gap": 20
+    }
   },
   {
     "key": "santiago",
@@ -1582,7 +1824,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -1591,7 +1834,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 22.8,
@@ -1600,10 +1844,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 20,
+      "flagged_design_gap_positive": 13,
+      "flagged_design_gap_pos_pct": 65.0,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "iligan",
@@ -1632,7 +1883,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 55
       },
       {
         "sss": 55.5,
@@ -1641,7 +1893,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 54.4,
@@ -1650,7 +1903,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 38.9,
@@ -1659,7 +1913,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 38.1,
@@ -1668,7 +1923,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 35
       },
       {
         "sss": 18.4,
@@ -1677,7 +1933,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 16.2,
@@ -1686,10 +1943,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 29,
+      "flagged_design_gap_positive": 12,
+      "flagged_design_gap_pos_pct": 41.4,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "cabanatuan",
@@ -1718,10 +1982,17 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 2,
+      "flagged_design_gap_positive": 2,
+      "flagged_design_gap_pos_pct": 100.0,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "tarlac",
@@ -1750,7 +2021,8 @@
         "posted_osm": 80,
         "safe": 30,
         "fatal_reduction_pct": 98.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 38.5,
@@ -1759,7 +2031,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 22.9,
@@ -1768,7 +2041,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 19.1,
@@ -1777,7 +2051,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 18.2,
@@ -1786,7 +2061,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 17.6,
@@ -1795,7 +2071,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 14.0,
@@ -1804,10 +2081,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 47,
+      "flagged_design_gap_positive": 6,
+      "flagged_design_gap_pos_pct": 12.8,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "sanfernando-pampanga",
@@ -1836,7 +2120,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 53.5,
@@ -1845,7 +2130,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 48.1,
@@ -1854,7 +2140,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 43.0,
@@ -1863,7 +2150,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 39.2,
@@ -1872,7 +2160,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -1881,7 +2170,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 20.2,
@@ -1890,7 +2180,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 18.7,
@@ -1899,7 +2190,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 18.4,
@@ -1908,7 +2200,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 18.2,
@@ -1917,10 +2210,17 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 134,
+      "flagged_design_gap_positive": 79,
+      "flagged_design_gap_pos_pct": 59.0,
+      "median_design_gap": 5
+    }
   },
   {
     "key": "malolos",
@@ -1949,7 +2249,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -1958,7 +2259,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 21.2,
@@ -1967,7 +2269,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 17.3,
@@ -1976,7 +2279,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 16.8,
@@ -1985,7 +2289,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 16.5,
@@ -1994,7 +2299,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 15.6,
@@ -2003,10 +2309,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 24,
+      "flagged_design_gap_positive": 6,
+      "flagged_design_gap_pos_pct": 25.0,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "sjdm",
@@ -2035,7 +2348,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 75.0,
@@ -2044,7 +2358,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 46.0,
@@ -2053,7 +2368,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -2062,7 +2378,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -2071,7 +2388,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -2080,7 +2398,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (3 VRU site<=50m)"
+        "why": "pedestrian activity (3 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -2089,7 +2408,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (5 VRU site<=50m)"
+        "why": "pedestrian activity (5 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -2098,7 +2418,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 19.5,
@@ -2107,7 +2428,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 19.2,
@@ -2116,10 +2438,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 58,
+      "flagged_design_gap_positive": 55,
+      "flagged_design_gap_pos_pct": 94.8,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "lipa",
@@ -2148,7 +2477,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 23.6,
@@ -2157,7 +2487,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 22.2,
@@ -2166,7 +2497,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 21.4,
@@ -2175,7 +2507,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 20.4,
@@ -2184,7 +2517,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.9,
@@ -2193,7 +2527,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 16.3,
@@ -2202,7 +2537,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 14.4,
@@ -2211,7 +2547,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 13.4,
@@ -2220,10 +2557,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 20,
+      "flagged_design_gap_positive": 15,
+      "flagged_design_gap_pos_pct": 75.0,
+      "median_design_gap": 30
+    }
   },
   {
     "key": "calamba",
@@ -2252,7 +2596,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 47.7,
@@ -2261,7 +2606,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 38.0,
@@ -2270,7 +2616,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 25.9,
@@ -2279,7 +2626,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 25.5,
@@ -2288,7 +2636,8 @@
         "posted_osm": 50,
         "safe": 30,
         "fatal_reduction_pct": 87.0,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 25.0,
@@ -2297,7 +2646,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 17.8,
@@ -2306,7 +2656,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 16.2,
@@ -2315,7 +2666,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 16.0,
@@ -2324,7 +2676,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 15.8,
@@ -2333,10 +2686,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 229,
+      "flagged_design_gap_positive": 187,
+      "flagged_design_gap_pos_pct": 81.7,
+      "median_design_gap": 5
+    }
   },
   {
     "key": "dasmarinas",
@@ -2365,7 +2725,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -2374,7 +2735,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 24.7,
@@ -2383,7 +2745,8 @@
         "posted_osm": 45,
         "safe": 30,
         "fatal_reduction_pct": 80.2,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 15.8,
@@ -2392,7 +2755,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 14.1,
@@ -2401,7 +2765,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 12.8,
@@ -2410,10 +2775,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 45,
+      "flagged_design_gap_positive": 45,
+      "flagged_design_gap_pos_pct": 100.0,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "urdaneta",
@@ -2442,10 +2814,17 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 1,
+      "flagged_design_gap_positive": 1,
+      "flagged_design_gap_pos_pct": 100.0,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "laoag",
@@ -2474,7 +2853,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.7,
@@ -2483,7 +2863,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 16.1,
@@ -2492,7 +2873,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 15.3,
@@ -2501,7 +2883,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 14.3,
@@ -2510,7 +2893,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 13.9,
@@ -2519,7 +2903,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 13.4,
@@ -2528,7 +2913,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 13.4,
@@ -2537,7 +2923,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 13.4,
@@ -2546,10 +2933,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 38,
+      "flagged_design_gap_positive": 33,
+      "flagged_design_gap_pos_pct": 86.8,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "vigan",
@@ -2578,7 +2972,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 20.8,
@@ -2587,7 +2982,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 18.1,
@@ -2596,7 +2992,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 15.5,
@@ -2605,10 +3002,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 24,
+      "flagged_design_gap_positive": 2,
+      "flagged_design_gap_pos_pct": 8.3,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "tuguegarao",
@@ -2637,7 +3041,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 20.4,
@@ -2646,7 +3051,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 19.5,
@@ -2655,7 +3061,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 19.5,
@@ -2664,7 +3071,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 18.1,
@@ -2673,10 +3081,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 5,
+      "flagged_design_gap_positive": 5,
+      "flagged_design_gap_pos_pct": 100.0,
+      "median_design_gap": 20
+    }
   },
   {
     "key": "sorsogon",
@@ -2705,7 +3120,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (3 VRU site<=50m)"
+        "why": "pedestrian activity (3 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 24.2,
@@ -2714,7 +3130,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 24.1,
@@ -2723,7 +3140,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.9,
@@ -2732,7 +3150,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 14.8,
@@ -2741,10 +3160,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 20
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 27,
+      "flagged_design_gap_positive": 22,
+      "flagged_design_gap_pos_pct": 81.5,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "roxas",
@@ -2773,7 +3199,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 25
       },
       {
         "sss": 14.3,
@@ -2782,10 +3209,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 7,
+      "flagged_design_gap_positive": 0,
+      "flagged_design_gap_pos_pct": 0.0,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "dumaguete",
@@ -2814,7 +3248,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 20.5,
@@ -2823,7 +3258,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 15.8,
@@ -2832,7 +3268,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 14.4,
@@ -2841,10 +3278,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 21,
+      "flagged_design_gap_positive": 14,
+      "flagged_design_gap_pos_pct": 66.7,
+      "median_design_gap": 5
+    }
   },
   {
     "key": "tagbilaran",
@@ -2873,7 +3317,8 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 53.6,
@@ -2882,10 +3327,17 @@
         "posted_osm": 60,
         "safe": 30,
         "fatal_reduction_pct": 93.8,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 28,
+      "flagged_design_gap_positive": 12,
+      "flagged_design_gap_pos_pct": 42.9,
+      "median_design_gap": -5
+    }
   },
   {
     "key": "ormoc",
@@ -2914,7 +3366,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 21.1,
@@ -2923,7 +3376,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 14.5,
@@ -2932,7 +3386,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 14.0,
@@ -2941,7 +3396,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 13.1,
@@ -2950,10 +3406,17 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 31,
+      "flagged_design_gap_positive": 0,
+      "flagged_design_gap_pos_pct": 0.0,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "calbayog",
@@ -2982,10 +3445,17 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 13,
+      "flagged_design_gap_positive": 12,
+      "flagged_design_gap_pos_pct": 92.3,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "cotabato",
@@ -3014,7 +3484,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 38.2,
@@ -3023,7 +3494,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -3032,7 +3504,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 25.0,
@@ -3041,7 +3514,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 40
       },
       {
         "sss": 25.0,
@@ -3050,7 +3524,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -3059,7 +3534,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 25.0,
@@ -3068,7 +3544,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -3077,7 +3554,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 25.0,
@@ -3086,7 +3564,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 21.8,
@@ -3095,10 +3574,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 31,
+      "flagged_design_gap_positive": 27,
+      "flagged_design_gap_pos_pct": 87.1,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "koronadal",
@@ -3127,7 +3613,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 35
       },
       {
         "sss": 37.5,
@@ -3136,7 +3623,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 37.5,
@@ -3145,7 +3633,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 20.1,
@@ -3154,7 +3643,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 18.2,
@@ -3163,7 +3653,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 17.8,
@@ -3172,7 +3663,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 17.8,
@@ -3181,7 +3673,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 35
       },
       {
         "sss": 17.8,
@@ -3190,7 +3683,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 17.7,
@@ -3199,7 +3693,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 17.6,
@@ -3208,10 +3703,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)"
+        "why": "pedestrian activity (2 VRU site<=50m)",
+        "v_design": 35
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 99,
+      "flagged_design_gap_positive": 87,
+      "flagged_design_gap_pos_pct": 87.9,
+      "median_design_gap": 5
+    }
   },
   {
     "key": "kidapawan",
@@ -3240,7 +3742,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 37.6,
@@ -3249,7 +3752,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 22.9,
@@ -3258,7 +3762,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 15.9,
@@ -3267,10 +3772,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 18,
+      "flagged_design_gap_positive": 17,
+      "flagged_design_gap_pos_pct": 94.4,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "tagum",
@@ -3299,7 +3811,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 48.6,
@@ -3308,7 +3821,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 44.7,
@@ -3317,7 +3831,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 39.3,
@@ -3326,7 +3841,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 37.5,
@@ -3335,7 +3851,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 37.5,
@@ -3344,7 +3861,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 37.5,
@@ -3353,7 +3871,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 37.5,
@@ -3362,7 +3881,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 40
       },
       {
         "sss": 37.5,
@@ -3371,7 +3891,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 40
       },
       {
         "sss": 37.5,
@@ -3380,10 +3901,17 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 30
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 68,
+      "flagged_design_gap_positive": 47,
+      "flagged_design_gap_pos_pct": 69.1,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "digos",
@@ -3412,7 +3940,8 @@
         "posted_osm": 80,
         "safe": 30,
         "fatal_reduction_pct": 98.0,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 48.8,
@@ -3421,7 +3950,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 39.2,
@@ -3430,7 +3960,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 25.0,
@@ -3439,7 +3970,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 25.0,
@@ -3448,7 +3980,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 14.5,
@@ -3457,7 +3990,8 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       },
       {
         "sss": 14.3,
@@ -3466,7 +4000,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 12.8,
@@ -3475,10 +4010,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 38,
+      "flagged_design_gap_positive": 15,
+      "flagged_design_gap_pos_pct": 39.5,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "pagadian",
@@ -3507,7 +4049,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 55
       },
       {
         "sss": 16.4,
@@ -3516,7 +4059,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 15.0,
@@ -3525,7 +4069,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 12.8,
@@ -3534,10 +4079,17 @@
         "posted_osm": 80,
         "safe": 70,
         "fatal_reduction_pct": 41.4,
-        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)"
+        "why": "trunk highway (head-on only; no at-grade ped mixing assumed)",
+        "v_design": 70
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 16,
+      "flagged_design_gap_positive": 13,
+      "flagged_design_gap_pos_pct": 81.2,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "dipolog",
@@ -3566,7 +4118,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 20.2,
@@ -3575,7 +4128,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.5,
@@ -3584,7 +4138,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 19.1,
@@ -3593,7 +4148,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 18.3,
@@ -3602,7 +4158,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 17.9,
@@ -3611,7 +4168,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 40
       },
       {
         "sss": 17.9,
@@ -3620,7 +4178,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
       },
       {
         "sss": 17.2,
@@ -3629,7 +4188,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 16.5,
@@ -3638,7 +4198,8 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 60
       },
       {
         "sss": 16.0,
@@ -3647,10 +4208,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 33,
+      "flagged_design_gap_positive": 27,
+      "flagged_design_gap_pos_pct": 81.8,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "ozamiz",
@@ -3679,7 +4247,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       },
       {
         "sss": 25.0,
@@ -3688,7 +4257,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 25.0,
@@ -3697,7 +4267,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 25.0,
@@ -3706,7 +4277,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 23.1,
@@ -3715,7 +4287,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 22.9,
@@ -3724,7 +4297,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
       },
       {
         "sss": 21.1,
@@ -3733,7 +4307,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 20.3,
@@ -3742,7 +4317,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 40
       },
       {
         "sss": 20.1,
@@ -3751,7 +4327,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.3,
@@ -3760,10 +4337,17 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 49,
+      "flagged_design_gap_positive": 37,
+      "flagged_design_gap_pos_pct": 75.5,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "surigao",
@@ -3785,7 +4369,13 @@
     "sss_mean_flagged": 17.4,
     "vru_pois": 51,
     "headline_priority_roads_real_posted": [],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 0,
+      "flagged_design_gap_positive": 0,
+      "flagged_design_gap_pos_pct": 0.0,
+      "median_design_gap": 0
+    }
   },
   {
     "key": "marawi",
@@ -3814,7 +4404,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 55
       },
       {
         "sss": 35.1,
@@ -3823,7 +4414,8 @@
         "posted_osm": 40,
         "safe": 20,
         "fatal_reduction_pct": 93.8,
-        "why": "living street (shared space)"
+        "why": "living street (shared space)",
+        "v_design": 15
       },
       {
         "sss": 28.8,
@@ -3832,7 +4424,8 @@
         "posted_osm": 40,
         "safe": 20,
         "fatal_reduction_pct": 93.8,
-        "why": "living street (shared space)"
+        "why": "living street (shared space)",
+        "v_design": 15
       },
       {
         "sss": 25.0,
@@ -3841,7 +4434,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 19.1,
@@ -3850,10 +4444,17 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 19,
+      "flagged_design_gap_positive": 15,
+      "flagged_design_gap_pos_pct": 78.9,
+      "median_design_gap": 10
+    }
   },
   {
     "key": "mati",
@@ -3882,7 +4483,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 39.0,
@@ -3891,7 +4493,8 @@
         "posted_osm": 80,
         "safe": 50,
         "fatal_reduction_pct": 84.7,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 45
       },
       {
         "sss": 18.0,
@@ -3900,7 +4503,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 60
       },
       {
         "sss": 15.8,
@@ -3909,7 +4513,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)"
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 45
       },
       {
         "sss": 15.4,
@@ -3918,7 +4523,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 13.1,
@@ -3927,7 +4533,8 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing"
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 40
       },
       {
         "sss": 12.9,
@@ -3936,9 +4543,16 @@
         "posted_osm": 60,
         "safe": 50,
         "fatal_reduction_pct": 51.8,
-        "why": "undivided arterial, side-impact intersections"
+        "why": "undivided arterial, side-impact intersections",
+        "v_design": 50
       }
     ],
-    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+    "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+    "design": {
+      "n_flagged_real": 49,
+      "flagged_design_gap_positive": 26,
+      "flagged_design_gap_pos_pct": 53.1,
+      "median_design_gap": 10
+    }
   }
 ]

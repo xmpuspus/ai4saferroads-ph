@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Current vs Proposed Speed Limits: 51 Philippine cities, from open data</title>
-<meta name="description" content="An open map of every street's current posted speed limit, the proposed safe limit, and why: where a city posts a limit higher than the speed a person survives, across 51 Philippine cities." />
-<meta property="og:title" content="Current vs Proposed Speed Limits" />
-<meta property="og:description" content="The current speed limit, the proposed safe limit, and why, for every street in 51 Philippine cities. Open data." />
-<meta property="og:image" content="og-card.png" />
+<title>Is speed the problem? Where Philippine roads permit lethal speed near people</title>
+<meta name="description" content="We crawl at 30 in traffic, so a lower limit can feel beside the point. But the crawl is the jam, not the road. This open map shows where 51 Philippine cities' streets are built for a speed people cannot survive, and the crash data showing the share of crashes that injure or kill doubles when the road clears." />
+<meta property="og:title" content="Is speed the problem when we crawl at 30?" />
+<meta property="og:description" content="The crawl is the jam, not the road. Where Philippine streets permit lethal speed near people, and why the crashes that happen when the road clears are twice as likely to injure or kill. Open data, 51 cities." />
+<meta property="og:image" content="https://ai4saferroads-ph.vercel.app/og-card.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta property="og:type" content="website" />
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"
   integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
@@ -148,6 +149,25 @@
   .crashnote{font-size:10.5px;color:var(--muted);margin:6px 2px 0;line-height:1.4}
   .toggle:disabled{opacity:.4;cursor:not-allowed}
   .foot{font-size:10px;color:var(--muted);margin-top:12px;line-height:1.45}.foot a{color:var(--focus)}
+  /* the reframe card: the answer to "is speed even the problem?" leads the panel */
+  .speedq{margin:0 0 13px;padding:13px 14px;border:1px solid var(--accent);border-radius:12px;background:rgba(224,87,74,.08)}
+  .speedq .sq-lead{font-size:13px;line-height:1.5;color:var(--ink)}.speedq .sq-lead b{color:#fff}
+  .sqbtn{width:100%;margin-top:11px;padding:9px;border-radius:9px;border:1px solid var(--accent);background:transparent;color:#E8CFC9;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
+  .sqbtn[aria-expanded=true]{background:var(--accent);color:#160a08}
+  .sqbtn .chev{transition:transform .15s ease}.sqbtn[aria-expanded=true] .chev{transform:rotate(180deg)}
+  #sqbody{margin-top:12px}
+  .sq-h{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#E8CFC9;font-weight:700;margin:14px 0 7px}
+  #sqbody .sq-h:first-child{margin-top:2px}
+  .sq-note{font-size:11.5px;line-height:1.5;color:var(--muted);margin:2px 0}.sq-note b{color:#fff}
+  .sq-cap{font-size:10.5px;color:var(--muted);margin:4px 0 2px;line-height:1.4}.sq-cap b{color:var(--ink)}
+  .sq-foot{font-size:10px;color:var(--muted);margin-top:12px;line-height:1.4;border-top:1px solid var(--line);padding-top:9px}
+  #sevchart svg{width:100%;height:auto;display:block}
+  #satstrip{display:flex;flex-direction:column;gap:8px;margin:4px 0 2px}
+  #satstrip .sat{position:relative;border-radius:9px;overflow:hidden;border:1px solid var(--line);cursor:pointer;background:#0E1116}
+  #satstrip .sat img{width:100%;height:82px;object-fit:cover;display:block;filter:saturate(.92)}
+  #satstrip .sat .cap{position:absolute;left:0;right:0;bottom:0;padding:5px 8px;font-size:10.5px;font-weight:600;color:#fff;
+    background:linear-gradient(0deg,rgba(8,10,14,.9),rgba(8,10,14,0));font-family:var(--font-body)}
+  #satstrip .sat .cap small{display:block;font-weight:500;color:#cdd6e0;font-size:9.5px}
   /* secondary actions: one quiet row of two ghost buttons under the primary Build CTA, so the panel reads as one primary + supporting, not a pile of equal coral bars */
   .actions2{display:flex;gap:8px;margin-top:9px}
   .actions2 .act{flex:1;min-width:0;background:#0E1116;border:1px solid var(--line);border-radius:11px;color:var(--ink);font-weight:600;font-size:12.5px;line-height:1.2;padding:9px 8px;cursor:pointer;text-decoration:none;font-family:inherit;text-align:center}
@@ -242,12 +262,28 @@
   <span class="tk-ramp score" aria-hidden="true"></span><small>the more the speed limit needs to come down.</small></div>
 <div class="panel glass" role="region" aria-label="Current vs proposed speed limits, controls and findings">
   <button id="panelToggle" class="ptoggle" aria-label="Collapse panel" aria-expanded="true">&#9652;</button>
-  <h1>Current vs Proposed <span class="em">Speed Limits</span></h1>
-  <p class="sub">The speed limit now, the safe limit, and why they differ. Tap any road to see it. Every street, from open data.</p>
+  <h1>Is speed the problem <span class="em">when we crawl at 30?</span></h1>
+  <p class="sub">Yes, but not the average speed. The crawl is the jam, not the road. These streets are built for far more, and that is the speed people meet the moment the road clears. This maps where that happens next to people, across 51 cities.</p>
   <div class="row2">
     <select id="city" aria-label="City"></select>
   </div>
   <div id="panelbody">
+  <div id="speedq" class="speedq">
+    <div class="sq-lead">Total crashes peak in the rush-hour jam, with the traffic. But the crashes that happen when the road <b>clears</b> are twice as likely to injure or kill.</div>
+    <button id="sqbtn" class="sqbtn" aria-expanded="false">See the evidence <span class="chev">&#9662;</span></button>
+    <div id="sqbody" hidden>
+      <div class="sq-h">1 &middot; The harm hides in the clear-road hours</div>
+      <div id="sevchart" aria-hidden="true"></div>
+      <div class="sq-cap" id="sevcap"></div>
+      <div class="sq-note">On EDSA, total crashes track the jam. But the share of crashes that injure or kill roughly doubles in the deep-night window, when the road finally clears and vehicles reach the speed it is built for. The clear-road hours carry less enforcement and more impaired driving too, so this points to speed, it does not prove it alone.</div>
+      <div class="sq-h">2 &middot; From space, these roads are built for speed</div>
+      <div id="satstrip"></div>
+      <div class="sq-note">OpenStreetMap has no width here. The satellite shows what the flagged roads are, wide straight multi-lane strips cutting through dense housing. The daytime crawl is congestion. The built form is not.</div>
+      <div class="sq-h">3 &middot; The fix is physical, not a sign</div>
+      <div class="sq-note">A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>21%</b> of Manila's flagged roads have any traffic calming within 100 m, 10% in Cebu, 4% in Davao.</div>
+      <div class="sq-foot">Flagged for review, not an accusation. Statistical indicators from public data. Patterns may have legitimate explanations.</div>
+    </div>
+  </div>
   <div class="row2"><input type="search" id="find" placeholder="Find a road…" aria-label="Find a road" /></div>
   <div id="stats"></div>
   <div id="badetail" hidden></div>
@@ -408,7 +444,35 @@ function spearman(xs,ys){const n=xs.length;if(n<3)return null;
   let num=0,dx=0,dy=0;for(let i=0;i<n;i++){const a=rx[i]-mx,b=ry[i]-my;num+=a*b;dx+=a*a;dy+=b*b;}
   return dx&&dy?num/Math.sqrt(dx*dy):null;}
 const col=s=>s>=75?'#FB9F3A':s>=55?'#E65D5E':s>=30?'#B73779':'#6B1D6E';
-let CITIES=[],OVI=[],CUR=null,SEG=null,reqToken=0,roadsAll=false,CROWD=null;
+let CITIES=[],OVI=[],CUR=null,SEG=null,reqToken=0,roadsAll=false,CROWD=null,SEV=null,SAT=null;
+// severity-by-hour chart (EDSA): grey bars = crashes per hour (peak in the jam), coral line =
+// share of crashes that injure or kill (climbs when the road clears at night). The divergence
+// of the two IS the argument, so both share one small Tufte panel.
+function renderSevChart(s){const el=document.getElementById('sevchart');if(!el||!s)return;
+  const W=298,H=132,padL=6,padR=6,padT=10,padB=20,iw=W-padL-padR,ih=H-padT-padB;
+  const bh=s.by_hour,maxN=Math.max(...bh.map(d=>d.n)),maxS=Math.max(...bh.map(d=>d.casualty_share_pct));
+  const x=h=>padL+iw*(h/23),bw=iw/24*0.74;
+  const yN=v=>padT+ih*(1-v/maxN),yS=v=>padT+ih*(1-v/(maxS*1.08));
+  const bars=bh.map(d=>`<rect x="${(x(d.hour)-bw/2).toFixed(1)}" y="${yN(d.n).toFixed(1)}" width="${bw.toFixed(1)}" height="${(padT+ih-yN(d.n)).toFixed(1)}" fill="#46566b" rx="1"/>`).join('');
+  const line=bh.map((d,i)=>`${i?'L':'M'}${x(d.hour).toFixed(1)},${yS(d.casualty_share_pct).toFixed(1)}`).join(' ');
+  const dots=bh.map(d=>`<circle cx="${x(d.hour).toFixed(1)}" cy="${yS(d.casualty_share_pct).toFixed(1)}" r="1.7" fill="#E0574A"/>`).join('');
+  // faint band over the deep-night clear-road window (0-5h)
+  const night=`<rect x="${x(0)}" y="${padT}" width="${(x(5)-x(0)).toFixed(1)}" height="${ih}" fill="#5B8DB8" opacity="0.10"/>`;
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="On EDSA, crashes peak in rush hour but the share that injure or kill peaks at night.">
+    ${night}${bars}<path d="${line}" fill="none" stroke="#E0574A" stroke-width="1.8"/>${dots}
+    <text x="${x(2.5).toFixed(0)}" y="${padT+8}" fill="#9DD0F0" font-size="8" text-anchor="middle" font-family="var(--font-data)">road clears</text>
+    <text x="${padL}" y="${H-7}" fill="#8B95A5" font-size="8" font-family="var(--font-data)">12a</text>
+    <text x="${x(6).toFixed(0)}" y="${H-7}" fill="#8B95A5" font-size="8" text-anchor="middle" font-family="var(--font-data)">6a</text>
+    <text x="${x(12).toFixed(0)}" y="${H-7}" fill="#8B95A5" font-size="8" text-anchor="middle" font-family="var(--font-data)">noon</text>
+    <text x="${x(18).toFixed(0)}" y="${H-7}" fill="#8B95A5" font-size="8" text-anchor="middle" font-family="var(--font-data)">6p</text>
+    <text x="${W-padR}" y="${H-7}" fill="#8B95A5" font-size="8" text-anchor="end" font-family="var(--font-data)">11p</text>
+  </svg>`;
+  document.getElementById('sevcap').innerHTML=`<span style="color:#46566b">&#9646;</span> crashes per hour &nbsp; <span style="color:#E0574A">&#9644;</span> share that injure or kill. `+
+    `Night <b>${s.night.casualty_share_pct}%</b> vs rush-hour <b>${s.peak.casualty_share_pct}%</b>, about <b>${s.relative_risk_night_over_peak}&times;</b> (${(s.n_casualty).toLocaleString()} injury-or-worse crashes in the set, p&lt;0.001). ${esc(s.source)}.`;}
+function renderSatStrip(sat){const el=document.getElementById('satstrip');if(!el||!sat||!sat.featured)return;
+  el.innerHTML=sat.featured.map(f=>`<a class="sat" href="${esc(f.crop)}" target="_blank" rel="noopener" title="Open the full satellite crop">
+    <img src="${esc(f.crop)}" alt="Satellite view of ${esc(f.road)}" loading="lazy" />
+    <span class="cap">${esc(f.road)}<small>${esc(f.lanes_visible)} lanes visible &middot; posted ${f.posted}, survivable ${f.safe}</small></span></a>`).join('');}
 const ov=document.getElementById('overlay'),ovc=document.getElementById('ovcard');
 const cityF=k=>['==',['get','city'],k];
 function showLoading(l){ovc.innerHTML=`<div class="spin"></div><div>Loading ${esc(l)}…</div>`;ov.classList.add('on');}
@@ -569,6 +633,12 @@ map.on('load',async()=>{
   try{CITIES=await fetchJSON('data/cities.json');}catch(e){showError('manila','Could not load city index: '+e.message);return;}
   try{OVI=await fetchJSON('data/overlay_index.json');}catch(e){OVI=[];}
   try{CROWD=await fetchJSON('data/crowd.json');}catch(e){CROWD=null;}
+  try{SEV=await fetchJSON('data/severity_by_hour.json');renderSevChart(SEV);}catch(e){SEV=null;}
+  try{SAT=await fetchJSON('data/sat_evidence.json');renderSatStrip(SAT);}catch(e){SAT=null;}
+  // reframe card: expand the evidence (severity chart + satellite + calming) on demand
+  (function(){const b=document.getElementById('sqbtn'),body=document.getElementById('sqbody');if(!b)return;
+    b.onclick=()=>{const open=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',open);
+      body.hidden=!open;b.firstChild.textContent=open?'Hide the evidence ':'See the evidence ';};})();
   const sel=document.getElementById('city');
   // group the selector by island so a long city list stays scannable
   const ISLAND={manila:'Luzon',antipolo:'Luzon',olongapo:'Luzon',lucena:'Luzon',santiago:'Luzon',cabanatuan:'Luzon',tarlac:'Luzon','sanfernando-pampanga':'Luzon',malolos:'Luzon',sjdm:'Luzon',lipa:'Luzon',calamba:'Luzon',dasmarinas:'Luzon',urdaneta:'Luzon',laoag:'Luzon',vigan:'Luzon',tuguegarao:'Luzon',baguio:'Luzon',batangas:'Luzon',naga:'Luzon',legazpi:'Luzon',dagupan:'Luzon',angeles:'Luzon',sorsogon:'Luzon','puerto-princesa':'Luzon',
@@ -646,7 +716,7 @@ map.on('load',async()=>{
 
   // ---- validation: where crashes actually happened (Manila only, lazy-loaded) ----
   const crbtn=document.getElementById('crashbtn'),crnote=document.getElementById('crashnote');
-  crnote.textContent='12,634 reported crashes, 2018 to 2020 (MMDA alerts). They land on the roads we highlight. This is a check, not part of the score.';
+  crnote.textContent='12,563 reported crashes, 2018 to 2020 (MMDA alerts). Hover a point to read it. 42% of them land on the 7% of road we highlight. This is a check, not part of the score.';
   let crashLoaded=false;
   // breathing danger glow: pulse the crash-glow opacity like a slow heartbeat while it is on
   let crashRAF=0,crashTs=0;
@@ -808,16 +878,33 @@ map.on('load',async()=>{
   // popups from the rendered network
   const pop=new maplibregl.Popup({closeButton:false,maxWidth:'260px'});
   function whyPlain(p){return whyPlainStr(p.why);}
-  function popup(e){const p=e.features[0].properties;map.getCanvas().style.cursor='pointer';
+  function popup(e){
+    // when the crash overlay is on, a crash point under the cursor owns the hover (the user
+    // asked for a crash tooltip); defer so the road popup does not cover it
+    if(map.getLayer('crash-dots')&&map.getLayoutProperty('crash-dots','visibility')==='visible'
+       &&map.queryRenderedFeatures(e.point,{layers:['crash-dots']}).length){pop.remove();return;}
+    const p=e.features[0].properties;map.getCanvas().style.cursor='pointer';
     pop.setLngLat(e.lngLat).setHTML(`<b>${esc(p.name)||'(unnamed road)'}</b><br>`+
       `${signPair(p.v_posted,p.v_safe,true)}`+
       `<div class="signcap">Now &rarr; safe limit (km/h)${p.posted_imputed===true||p.posted_imputed==='true'?' &middot; <span style="text-transform:none">limit is a guess</span>':''}</div>`+
       `<div class="oversafe">&#9650; set ${Math.max(0,p.v_posted-p.v_safe)} km/h over the safe speed</div>`+
+      (p.v_design?`<div style="color:#9DB4CC;font-family:var(--font-data);font-size:11px;margin-top:5px">Built for about ${p.v_design} km/h when clear (typical for this road type). The daytime crawl is the jam, not the road.</div>`:'')+
       `<div style="color:#cdd6e0;margin-top:6px">${whyPlain(p)}</div>`+
       `<div style="color:var(--muted);font-family:var(--font-data);margin-top:4px">cuts deadly-crash risk ~${Math.round(p.fatal_reduction_pct)}%</div>`+
       svLink([e.lngLat.lng,e.lngLat.lat],'Street View')).addTo(map);}
   // mousemove for desktop hover; click/tap so touch devices can open it too (the panel copy says "tap any road")
   for(const lyr of ['net-real','net-imputed']){map.on('mousemove',lyr,popup);map.on('click',lyr,popup);map.on('mouseleave',lyr,()=>{map.getCanvas().style.cursor='';pop.remove();});}
+  // hover tooltip on the real reported crash points (Manila): date, place, and what was involved
+  const cpop=new maplibregl.Popup({closeButton:false,closeOnClick:false,offset:9,maxWidth:'230px'});
+  function crashTip(e){const p=e.features[0].properties||{};map.getCanvas().style.cursor='pointer';pop.remove();
+    const line2=[p.place,p.city].filter(Boolean).join(', ');
+    const line3=[p.date,p.time].filter(Boolean).join(' · ');
+    cpop.setLngLat(e.lngLat).setHTML(`<b>${esc(p.type)||'Reported crash'}</b>`+
+      (line2?`<div style="color:#cdd6e0;margin-top:2px">${esc(line2)}</div>`:'')+
+      (line3||p.involved?`<div style="color:var(--muted);font-family:var(--font-data);font-size:11px;margin-top:3px">${esc(line3)}${p.involved?' · '+esc(p.involved):''}</div>`:'')+
+      `<div style="color:var(--muted);font-size:10px;margin-top:5px">MMDA alert · a check, not part of the score</div>`).addTo(map);}
+  map.on('mousemove','crash-dots',crashTip);
+  map.on('mouseleave','crash-dots',()=>{map.getCanvas().style.cursor='';cpop.remove();});
 });
 </script>
 </body>

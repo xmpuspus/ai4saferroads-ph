@@ -7,6 +7,47 @@ OpenStreetMap, Meta's Relative Wealth Index, WorldPop 2020, and PSA death record
 Philippine cities. Re-run them to reproduce. Full per-city table: [cities.md](cities.md).
 Crash validation: [validation.md](validation.md).
 
+## 0. Is speed even the problem? The harm hides when the road clears
+
+The objection every Filipino raises is that the cities are gridlocked, so real speeds sit far
+below the posted limit most of the day. "The limit is 60, we crawl at 30, and we still crash."
+The data answers it, and the answer is not the naive one.
+
+On the Mendeley EDSA crash set (22,072 records, 2007-2016, the one open PH set we found with both
+severity and timestamps), **total crashes peak in the rush-hour jam**, tracking traffic volume, not empty
+roads. That kills the simple "crashes happen at night" story. But total crashes are not deaths.
+When we split by severity, the picture inverts: the **share of crashes that injure or kill roughly
+doubles in the deep-night window**, when EDSA finally clears and vehicles reach the speed the road
+is built for.
+
+| Window | Crashes per hour | Share that injure or kill |
+|--------|-----------------:|--------------------------:|
+| Rush-hour peak (7-9am, 5-7pm) | 1,152 | 6.7% |
+| Deep night (12am-5am, road clears) | 301 | 13.5% |
+
+Relative risk 2.02x, chi-square p = 1.3e-18: 203 of the 1,503 deep-night crashes injured or
+killed, against 463 of 6,912 in the peak (the full set holds 1,504 injury-or-worse crashes). Across all 24
+hours the share that injure or kill runs inverse to the crash count (Spearman -0.79): the emptier
+the road, the more likely the crash that does happen hurts someone. This is the 4th-power
+speed-severity law (Nilsson) showing up in real data: the crawl produces fender-benders, the
+clear road produces the casualties.
+
+Two honest caveats. The deep-night window carries **less enforcement and more impaired
+driving** too, so the severity cliff points to speed, it does not prove it alone. And it is one
+road, EDSA, the exact place the objection is strongest. The fatal count itself (22 fatal crashes
+in the set) is too small to read hour by hour, which is why the test runs on injury-or-worse, not
+deaths alone.
+
+What carries the "built for speed" claim independent of the hour is the **satellite**. OpenStreetMap
+has no width tag on most arterials, so the imagery closes the gap: the flagged roads are wide,
+straight, multi-lane strips through dense housing (EDSA at ten-plus lanes, Taft Avenue, Cebu's
+Natalio Bacalso Avenue, the new Davao City Coastal Road). And the fix is physical, not a sign: only
+**21%** of Manila's flagged roads have any traffic calming within 100 m, 10% in Cebu, 4% in Davao.
+A crossing manages where people cross. It does not change how fast the car arrives.
+
+Reproduce: `build/overlay/emit_severity_artifact.py` (the hourly split), `build/overlay/satellite_evidence.py`
+(the crops). Full test, including the confounds, in `tmp/verify-*/PHASE1_VERDICT.md`.
+
 ## 1. Most streets have no posted limit at all
 
 Across the 51 cities, 357,423 drivable streets are scored, but only 37,971 carry a posted
@@ -23,7 +64,7 @@ limit in OpenStreetMap: about 11% overall. Coverage swings wildly by city:
 | **All 51 cities** | **357,423** | **37,971** | **11%** |
 
 The map keeps two cases visually separate: bright glow only where a **real** posted limit
-exceeds the safe speed; the imputed majority never glows. The honest headline is the
+exceeds the safe speed. The imputed majority never glows. The honest headline is the
 real-posted count: 7,586 flagged segments. Three cities (Butuan, Puerto Princesa, Surigao)
 have so little posted-limit data they carry no flagged roads at all. The missing limits are
 not a flaw to hide: they are exactly where official posted-limit data would add the most.
@@ -41,9 +82,9 @@ only three**:
 | Metro Manila | −0.11 | 0.29 | no relationship |
 | Cebu City | +0.21 | 0.25 | no relationship |
 | Davao City | +0.06 | 0.89 | no relationship |
-| Bacolod | −0.61 | 0.035 | **worst mismatch in poorer areas; significant** |
-| Tagum | −0.61 | 0.023 | **worst mismatch in poorer areas; significant** |
-| San Fernando (Pampanga) | −0.42 | 0.026 | **worst mismatch in poorer areas; significant** |
+| Bacolod | −0.61 | 0.035 | **worst mismatch in poorer areas, significant** |
+| Tagum | −0.61 | 0.023 | **worst mismatch in poorer areas, significant** |
+| San Fernando (Pampanga) | −0.42 | 0.026 | **worst mismatch in poorer areas, significant** |
 
 Forty of forty-three cities show no significant link, and none of the three biggest metros
 does either. Where it **is** significant, all three cities point the same way: the worst
@@ -58,15 +99,15 @@ than a country-wide claim.
 it on the full exposure-weighted score instead gives the same three cities and the same story,
 so folding population density into exposure does not manufacture or hide a wealth link.)
 
-## 3. But the danger does cluster, by corridor, not by income
+## 3. But the danger does cluster, along particular roads, not by income
 
 The mismatch is not random noise. Moran's I (spatial autocorrelation) on the gap is positive
 and significant in several cities, Metro Manila +0.09 (p = 0.035), Bacolod +0.33 (p = 0.035),
 San Jose del Monte +0.41 (p = 0.025), Tagum +0.54 (p = 0.025), meaning high-mismatch cells
-sit next to other high-mismatch cells. There are distinct hotspot corridors. The danger is
+sit next to other high-mismatch cells. There are distinct hotspot stretches of road. The danger is
 concentrated somewhere even when it is not concentrated by income, and the map's job is to show
 exactly where. (Malolos, significant on the earlier score-based measure, drops just below the
-line on the gap measure at +0.41, p = 0.08; treat it as a lead, not a corridor.)
+line on the gap measure at +0.41, p = 0.08. Treat it as a lead, not a hotspot.)
 
 ## 4. The crowded, the mismatched, and the deadly are three different maps
 
@@ -94,11 +135,11 @@ on top of each other instead pull apart.
   different questions on purpose.
 
 **The one you can see from space.** The clearest picture of the mismatch is a wide, fast
-corridor slicing through packed low-rise rooftops. In Metro Manila the sharpest examples, all
+road slicing through packed low-rise rooftops. In Metro Manila the sharpest examples, all
 flagged real-posted roads in the top decile of residential density with a posted limit far over
 the survivable speed, are Mel Lopez Boulevard (posted 60, survivable 30, ~103,000 people/km²
 around it), C. M. Recto Avenue (60→30), Capulong Street (60→30), Quezon Avenue (60→30), and
-Magsaysay Boulevard (60→30). In Cebu it is Natalio Bacalso Avenue (60→30); in Davao, the Davao
+Magsaysay Boulevard (60→30). In Cebu it is Natalio Bacalso Avenue (60→30). In Davao, the Davao
 City Coastal Road (60→30). These are the roads where the survivable-speed gap and the crowd sit
 directly on top of each other, and a satellite crop shows why: the road is built for speed and
 the ground beside it is wall-to-wall housing.
@@ -106,13 +147,13 @@ the ground beside it is wall-to-wall housing.
 ## Caveats
 
 - Correlation, not causation. A relationship, or its absence, does not explain why.
-- Forty-three cities tested at p < 0.05 will throw roughly two false positives by chance; the
+- Forty-three cities tested at p < 0.05 will throw roughly two false positives by chance. The
   three significant wealth correlations are barely above that floor. Treat them as leads.
 - The Relative Wealth Index is a model at ~2.4 km and WorldPop is ~90 m constrained
-  (residents, not daytime foot traffic); the grid is coarse and nearby cells are not
+  (residents, not daytime foot traffic). The grid is coarse and nearby cells are not
   independent, so p-values are optimistic.
 - The mismatch metric uses only segments with a real posted limit, to avoid imputation bias.
-- Region death rates are by region of usual residence, not crash location; reading them as a
+- Region death rates are by region of usual residence, not crash location. Reading them as a
   city-level score would be the ecological fallacy.
 - This is a screening layer to prioritise segments for review, not a final determination.
 

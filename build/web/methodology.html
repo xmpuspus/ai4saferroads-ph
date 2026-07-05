@@ -64,6 +64,16 @@ downgraded by nearby ground-level sites: an elevated expressway is not a pedestr
 functional-class default is imputed and flagged as imputed. Official GPS-probe data (posted
 limits and operating speeds) replaces this step directly when available.</p>
 
+<h2>2b. Free-flow design speed (V<sub>design</sub>)</h2>
+<p>The daytime crawl is congestion, not the road. To hold a speed that does not depend on the
+jam, each segment carries a second number, a free-flow design speed: the speed the built form invites when
+the road is clear. It is estimated from the functional class (a design-speed norm) and the
+alignment (curves cap it), so it is the same at 3am and at noon. This is a transparent
+class-based estimate, labelled as one, not a measured operating speed. On the flagged arterials
+it sits at or near the posted limit, so it does not add an independent claim there. Its value is
+holding a congestion-free speed for the roads that carry no posted sign, and framing the map's
+answer to "we only crawl at 30". A measured lanes-and-width or GPS-probe layer would sharpen it.</p>
+
 <h2>3. The score</h2>
 <div class="formula">
 gap = V<sub>posted</sub> &minus; V<sub>safe</sub><br>
@@ -74,7 +84,7 @@ exposure E &isin; [0,1], a probabilistic OR of vulnerable-user sites within 150 
 </div>
 <p>Exposure blends how many pedestrian sites (schools, markets, transit) sit within 150 m with
 how many people live around the road (WorldPop 2020 constrained, about 90 m). Either signal can
-raise the weight; because population density is continuous, the score spans the full range rather
+raise the weight. Because population density is continuous, the score spans the full range rather
 than landing on a handful of steps. Exposure can at most double a gap's score; it never creates
 risk where the gap is zero.
 The recommended limit is V<sub>safe</sub>, and the modeled fatal-risk reduction from adopting
@@ -96,7 +106,7 @@ posted-over-safe gap over segments that have a real posted limit; the gap is use
 exposure-weighted score, so population entering the exposure weight cannot colour the wealth
 result), and each cell is matched to Meta's Relative Wealth Index: a model of relative wealth at
 about 2.4 km from the Data for Good program. The association is the Spearman rank correlation;
-spatial clustering is measured with Moran's I; both carry a permutation p-value. The map draws a
+spatial clustering is measured with Moran's I. Both carry a permutation p-value. The map draws a
 bivariate choropleth (mismatch tercile by wealth tercile). This is a correlation, not a cause: a
 relationship, or its absence, does not explain why, and spatial autocorrelation means nearby
 cells are not independent. The finding shown is whatever the data gives, not a chosen story.</p>
@@ -108,21 +118,39 @@ them against 9,326 for roads that already fit), but the size of the gap does not
 (Spearman about +0.01 across cells): crowding decides which roads flag, not how large the
 mismatch is. Taken to the national level the three pull apart. Metro Manila has the most flagged
 roads and the densest flagged network, yet the country's lowest road-death rate (3.6 per 100,000
-against a national 10.9, PSA 2022); the deadliest regions are rural. The map screens dense city
+against a national 10.9, PSA 2022). The deadliest regions are rural. The map screens dense city
 arterials; the deaths, recorded by region of residence, sit elsewhere.</p>
 
 <h2>6. Does it agree with real crashes?</h2>
 <p>The model applies a published physical law; it does not prove one. But its output can be
-tested against real crashes. We joined 12,526 geolocated Metro Manila crashes (2018-2020, MMDA
-traffic alerts) to the scored network: the roads flagged here are 7% of the network length but
-carry 42% of the reported crashes, and at a 550 m grid, normalised for road length, crash
-density rises with the Speed Safety Score (Spearman +0.35, p = 0.002). The flags land where
-crashes concentrate. This is an association on a convenience sample that over-reports arterials,
+tested against real crashes. We joined the 12,563 geolocated Metro Manila crashes the map shows
+(2018-2020, MMDA traffic alerts) to the scored network by snapping each to its nearest segment;
+12,457 (99%) fall within 30 m of a scored road. The roads flagged here are 7.3% of the network
+length but carry 42.1% of those crashes, and crash density (per km, normalised for road length)
+rises with the Speed Safety Score across a 550 m grid (Spearman +0.41 over 1,222 cells). The flags
+land where crashes concentrate. This is an association on a convenience sample that over-reports arterials,
 with no traffic-volume control and mostly vehicle-to-vehicle crashes, so it is consistent with
 the model, not proof a limit causes a crash. A regional cross-check behaves differently and is
 expected to: PSA road-death rates are recorded by region of residence, not crash site, so Metro
 Manila has the most flagged roads yet the country's lowest death rate. The map screens at the
 segment level and validates there. Full numbers and caveats: see the project's validation notes.</p>
+
+<h2>6b. Is speed even the problem? Severity by hour</h2>
+<p>The objection is that the cities are gridlocked, so real speeds sit far below the limit. On the
+Mendeley EDSA crash set (22,072 records, 2007-2016, the one open PH set we found with both severity and
+timestamps), total crashes peak in the rush-hour jam, tracking volume. But the share of crashes
+that injure or kill roughly doubles when the road clears: 13.5% in the deep-night window (12am to
+5am) against 6.7% in the rush-hour peak, about 2x (chi-square p = 1.3e-18, on a set holding 1,504
+injury-or-worse crashes). Across all 24 hours the injury-or-kill share runs inverse to the crash
+count (Spearman &minus;0.79). Two caveats keep this honest: the clear-road hours carry less
+enforcement and more impaired driving too, so this points to speed rather than proving it alone, and
+it is one road. The 22 fatal crashes in the set are too few to read hour by hour, so the test runs on
+injury-or-worse, not deaths. Independent of the hour, satellite imagery shows the flagged
+roads are wide, straight, multi-lane roads through dense housing (OpenStreetMap has no width
+tag, so the imagery supplies it), and only 21% of Manila's flagged roads have any traffic calming
+within 100 m (10% Cebu, 4% Davao): the crawl is congestion, the built form and the missing
+calming are not. Reproduce with <code>build/overlay/emit_severity_artifact.py</code> and
+<code>build/overlay/satellite_evidence.py</code>.</p>
 
 <h2>7. Limitations</h2>
 <ul>
@@ -141,7 +169,7 @@ residents and nearby sites, not measured daytime foot traffic or traffic volume.
 
 <div class="disc">
 Indicators are derived from open data (OpenStreetMap) and published road-safety research.
-A flag means a segment warrants review, not that any limit is wrong; posted limits may have
+A flag means a segment warrants review, not that any limit is wrong. Posted limits may have
 local context this screening does not capture. Not affiliated with ADB, WHO, or iRAP.
 </div>
 

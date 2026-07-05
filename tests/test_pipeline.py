@@ -42,5 +42,16 @@ eq(sss.safe_speed("primary", 0, {"dual_carriageway": "yes"})[0], 70,
 eq(sss.safe_speed("secondary", 0, {})[0], 50, "undivided secondary arterial -> 50")
 eq(sss.safe_speed("living_street", 0, {})[0], 20, "living street -> 20")
 
+# design_speed proxy (free-flow speed the built form invites; curvature only trims it)
+STRAIGHT = [[121.0, 14.500], [121.0, 14.502]]   # ~222 m dead-straight (sinuosity 1.0)
+eq(sss.design_speed("primary", STRAIGHT, {}), 60, "straight primary design speed -> 60")
+eq(sss.design_speed("motorway", STRAIGHT, {}), 90, "straight motorway design speed -> 90")
+eq(sss.design_speed("residential", STRAIGHT, {}), 35, "straight residential design speed -> 35")
+eq(sss.design_speed("service", STRAIGHT, {}), 25, "service design speed -> 25")
+# a winding alignment is trimmed below the straight class base
+WINDING = [[121.0, 14.500], [121.0015, 14.5006], [121.0, 14.5012], [121.0015, 14.5018], [121.0, 14.502]]
+_dw = sss.design_speed("primary", WINDING, {})
+eq(_dw < 60, True, f"winding primary trimmed below straight base (got {_dw})")
+
 print(f"\n{'ALL PIPELINE TESTS PASS' if not fails else str(len(fails)) + ' FAILED'}")
 raise SystemExit(1 if fails else 0)

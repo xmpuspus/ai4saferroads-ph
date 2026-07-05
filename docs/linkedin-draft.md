@@ -1,47 +1,55 @@
 # LinkedIn draft
 
-There is an ADB challenge running right now, "AI for Safer Roads." I didn't enter it, but I
-spent a weekend on the problem and want to share what I found, in case it is a useful reference.
+I have sat in enough EDSA traffic to have had the thought everyone has. The limit is 60, we are
+crawling at 30, and people still die on this road. So how is speed even the problem?
 
-The clearest thing I found is also the most counterintuitive, and you can see it from space.
+There is an ADB challenge running now, "AI for Safer Roads." I did not enter it, but that
+question stuck with me, so I spent a weekend trying to answer it honestly. If we never reach the
+limit, why would the limit matter.
 
-I built an open map that scores every drivable street in 51 Philippine cities against the speed
-a person can actually survive a crash at, then folded in where people live (WorldPop) and where
-they die (PSA road-death records). Three things you would expect to stack on top of each other
-instead pull apart:
+First I had to find crash data that could actually answer it. Most of what is public is just dots
+on a map, no severity, no time, which cannot tell a fender-bender from a fatality. The one open
+Philippine set I could find that can is MMDA's EDSA crash records, published by University of
+the Philippines researchers, 22,072 crashes from 2007 to 2016,
+each with a severity and a timestamp. So I ran the split.
 
-- The roads the map flags do run through the most crowded places. A flagged road has a median
-  14,620 people per km² living around it, against 9,326 for a road whose limit already fits.
-- But the size of the speed-limit gap does not track how crowded a place is. Crowding decides
-  which roads get flagged, not how large the mismatch is.
-- And the most crowded, most-flagged region, Metro Manila, has the country's lowest road-death
-  rate: 3.6 per 100,000 against a national 10.9. The deadliest regions are rural (Cagayan Valley
-  22.1, Caraga 16.9). Deaths are counted by where people live, dense cities have low free-flow
-  speed and better trauma care, so the map of dangerous limits and the map of deaths point at
-  different places.
+Here is what surprised me. The obvious story is wrong. Crashes do not pile up at night when the
+road is empty. They peak in the morning rush, with the traffic, because more cars means more
+crashes. If I had gone with my gut and posted "crashes happen at night," the data would have
+embarrassed me.
 
-On a satellite image the flagged corridors are obvious once you see them: a wide, fast road
-posted 60 slicing through wall-to-wall low-rise housing, like Mel Lopez Boulevard through Tondo.
-The limit was built for the road; the road was not built for the people beside it.
+But total crashes are not deaths. When I split by severity it flipped. The share of crashes that
+injure or kill roughly doubles in the deep night, when EDSA finally clears and cars reach the speed
+the road is built for. 13.5 percent from midnight to 5am, against 6.7 percent in the rush hour.
+Same road, twice as deadly per crash, when it is empty. The crawl produces the dents. The clear
+road produces the casualties.
 
-The method underneath is deliberately boring. For each of 357,423 streets, take a Safe System
-survivable speed from the road's function and who is around it (30 km/h where people walk, 50 at
-side-impact intersections, 70 on a divided carriageway), compare it to the posted limit from
-OpenStreetMap, weight the gap by nearby schools, markets, transit and residents, and turn it into
-stakes with the Nilsson power model (fatal risk scales with about the fourth power of speed, so
-60 to 30 is roughly a 94% modeled cut). 7,586 streets carry a real posted limit above the
-survivable speed.
+I want to be honest about the limits of that. It is one road, EDSA. The deep-night hours bring less
+enforcement and more drinking, so it points to speed, it does not prove it alone. There are only 22
+fatal crashes in the whole set, too few to read hour by hour, so I measured injuries and deaths
+together instead of deaths alone.
 
-A model is easy to fool, so I checked it against reality: 12,526 geolocated Metro Manila crashes
-(2018-2020, from MMDA's public alerts) joined to the network. The flagged roads are 7% of the
-network but carry 42% of the reported crashes, and crash density climbs with the score (Spearman
-+0.35, p = 0.002). That is an association on a sample biased toward busy roads, not proof a limit
-causes a crash, but the flags land where the crashes are.
+One thing the night does not muddy is the shape of the road. OpenStreetMap has no width for most of these
+streets, so I looked from space instead. The flagged roads all look the same. Wide, dead
+straight, many lanes, cutting through wall-to-wall housing. EDSA at ten-plus lanes. Taft under the
+LRT with homes at the kerb. The new Davao coastal road running past informal settlements. This is
+not reckless drivers. The road is built for a speed no sign changes, and that is the speed it
+delivers the moment it clears.
 
-And when I checked the thing people assume, that dangerous limits fall on poorer areas, the data
-did not back it: across 43 cities the link is significant in only three, about what chance alone
-produces.
+Then I checked it against reality. I dropped 12,563 reported Metro Manila crashes onto the scored
+map. The roads I flag are 7 percent of the street length and carry 42 percent of the crashes. The
+flags land where people actually get hurt.
 
-Live map, method, validation, and the data are here: https://ai4saferroads-ph.vercel.app
+The fix is the uncomfortable part. A lower number on a sign nobody obeys and nobody enforces
+changes nothing. What actually works is physical. A road built so you cannot speed even when it is
+empty. Humps, narrowing, raised crossings. Yet only 21 percent of Manila's flagged roads have
+any of that within 100 meters. In Cebu it is 10 percent. In Davao, 4.
 
-Just a reference for anyone who needs it. Open code, open data, reproducible.
+So the answer to the objection is yes, speed is the problem, just not the average speed. What
+exposes you is not the crawl but the top speed the road permits near you. I put the whole thing on an open
+map, every drivable street in 51 Philippine cities, the current limit against the speed a person
+survives, with the real crashes laid over the satellite so you can see it for yourself.
+
+Is it the limit that is wrong, or the road we built underneath it?
+
+[attach docs/demo.gif]

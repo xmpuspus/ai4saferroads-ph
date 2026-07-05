@@ -243,6 +243,49 @@ def safe_speed(cls, n50, t):
     return 50, "default urban arterial"
 
 
+# Free-flow design-speed proxy (km/h): the speed the built form invites when the road is
+# CLEAR. Congestion-independent, unlike the daytime operating average a jam produces - it is
+# the same at 3am and at noon. From the functional-class design-speed norm (PH DPWH / AASHTO
+# urban ranges), adjusted DOWN only where the alignment actually curves. Labelled a proxy:
+# lanes/width would sharpen it, but OSM lane/width coverage is thin and class + alignment set
+# the free-flow speed. This is the axis that answers "we only crawl at 30": the crawl is the
+# jam, the road is built for this.
+DESIGN_FREEFLOW = {
+    "motorway": 90, "motorway_link": 60, "trunk": 70, "trunk_link": 55,
+    "primary": 60, "primary_link": 45, "secondary": 50, "secondary_link": 40,
+    "tertiary": 45, "tertiary_link": 40, "unclassified": 40,
+    "residential": 35, "living_street": 15, "service": 25,
+}
+
+
+def sinuosity(coords):
+    """Path length / straight-line endpoint distance. 1.0 = dead straight; higher = winding.
+    coords are [lon, lat] pairs."""
+    if len(coords) < 2:
+        return 1.0
+    path = 0.0
+    for i in range(len(coords) - 1):
+        path += haversine((coords[i][1], coords[i][0]), (coords[i + 1][1], coords[i + 1][0]))
+    chord = haversine((coords[0][1], coords[0][0]), (coords[-1][1], coords[-1][0]))
+    return path / chord if chord > 5 else 1.0
+
+
+def design_speed(cls, coords, t):
+    """Free-flow design-speed proxy (km/h) the geometry invites when the road is clear.
+    Segregated busways/BRT read as their high grade-separated free-flow via class; curves
+    cap the achievable speed."""
+    if cls == "service" and ("busway" in str(t.get("name", "")).lower() or t.get("busway")
+                             or t.get("bus") == "designated"):
+        return 60  # BRT running way, free-flowing when clear
+    base = DESIGN_FREEFLOW.get(cls, 40)
+    s = sinuosity(coords)
+    if s >= 1.30:
+        base *= 0.72       # winding: alignment physically caps speed
+    elif s >= 1.10:
+        base *= 0.88       # mildly curved
+    return max(15, min(95, int(round(base / 5.0) * 5)))
+
+
 def build_city(key, cfg):
     s, w, n, e = cfg["bbox"]
     print(f"\n########## {key} - {cfg['label']} ##########")
@@ -305,6 +348,8 @@ def build_city(key, cfg):
         sidewalk_absent = sidewalk in ("no", "none")
 
         v_safe, why = safe_speed(cls, n50, t)
+        v_design = design_speed(cls, coords, t)   # free-flow speed the built form invites when clear
+        design_gap = v_design - v_safe            # congestion-independent excess over survivable
         gap = v_posted - v_safe
         R = round((v_posted / v_safe) ** 4, 2)
         E = min(n150, 5) / 5.0
@@ -328,6 +373,7 @@ def build_city(key, cfg):
                       "properties": {"city": key, "name": t.get("name", ""), "highway": cls,
                                      "v_posted": v_posted, "posted_imputed": imputed,
                                      "v_safe": v_safe, "gap": gap, "R": R,
+                                     "v_design": v_design, "design_gap": design_gap,
                                      "exposure": round(E, 2), "vru_150m": n150,
                                      "sss": sss, "recommended": v_safe,
                                      "fatal_reduction_pct": fatal_red, "why": why}})

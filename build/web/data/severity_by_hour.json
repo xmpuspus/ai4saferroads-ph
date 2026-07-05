@@ -1,0 +1,181 @@
+{
+  "source": "Mendeley EDSA RTA 2007-2016 (MMDA / UP Diliman), n=22072 crashes",
+  "corridor": "EDSA, Metro Manila",
+  "by_hour": [
+    {
+      "hour": 0,
+      "n": 235,
+      "casualty": 20,
+      "casualty_share_pct": 8.51
+    },
+    {
+      "hour": 1,
+      "n": 346,
+      "casualty": 48,
+      "casualty_share_pct": 13.87
+    },
+    {
+      "hour": 2,
+      "n": 269,
+      "casualty": 30,
+      "casualty_share_pct": 11.15
+    },
+    {
+      "hour": 3,
+      "n": 270,
+      "casualty": 49,
+      "casualty_share_pct": 18.15
+    },
+    {
+      "hour": 4,
+      "n": 383,
+      "casualty": 56,
+      "casualty_share_pct": 14.62
+    },
+    {
+      "hour": 5,
+      "n": 515,
+      "casualty": 64,
+      "casualty_share_pct": 12.43
+    },
+    {
+      "hour": 6,
+      "n": 786,
+      "casualty": 84,
+      "casualty_share_pct": 10.69
+    },
+    {
+      "hour": 7,
+      "n": 1125,
+      "casualty": 101,
+      "casualty_share_pct": 8.98
+    },
+    {
+      "hour": 8,
+      "n": 1259,
+      "casualty": 94,
+      "casualty_share_pct": 7.47
+    },
+    {
+      "hour": 9,
+      "n": 1187,
+      "casualty": 76,
+      "casualty_share_pct": 6.4
+    },
+    {
+      "hour": 10,
+      "n": 1318,
+      "casualty": 67,
+      "casualty_share_pct": 5.08
+    },
+    {
+      "hour": 11,
+      "n": 1240,
+      "casualty": 56,
+      "casualty_share_pct": 4.52
+    },
+    {
+      "hour": 12,
+      "n": 1260,
+      "casualty": 67,
+      "casualty_share_pct": 5.32
+    },
+    {
+      "hour": 13,
+      "n": 1146,
+      "casualty": 54,
+      "casualty_share_pct": 4.71
+    },
+    {
+      "hour": 14,
+      "n": 1322,
+      "casualty": 77,
+      "casualty_share_pct": 5.82
+    },
+    {
+      "hour": 15,
+      "n": 1354,
+      "casualty": 71,
+      "casualty_share_pct": 5.24
+    },
+    {
+      "hour": 16,
+      "n": 1157,
+      "casualty": 68,
+      "casualty_share_pct": 5.88
+    },
+    {
+      "hour": 17,
+      "n": 1031,
+      "casualty": 59,
+      "casualty_share_pct": 5.72
+    },
+    {
+      "hour": 18,
+      "n": 1010,
+      "casualty": 75,
+      "casualty_share_pct": 7.43
+    },
+    {
+      "hour": 19,
+      "n": 1300,
+      "casualty": 58,
+      "casualty_share_pct": 4.46
+    },
+    {
+      "hour": 20,
+      "n": 1119,
+      "casualty": 67,
+      "casualty_share_pct": 5.99
+    },
+    {
+      "hour": 21,
+      "n": 909,
+      "casualty": 64,
+      "casualty_share_pct": 7.04
+    },
+    {
+      "hour": 22,
+      "n": 817,
+      "casualty": 52,
+      "casualty_share_pct": 6.36
+    },
+    {
+      "hour": 23,
+      "n": 714,
+      "casualty": 47,
+      "casualty_share_pct": 6.58
+    }
+  ],
+  "peak": {
+    "hours": [
+      7,
+      8,
+      9,
+      17,
+      18,
+      19
+    ],
+    "crashes": 6912,
+    "per_hour": 1152,
+    "casualty_share_pct": 6.7
+  },
+  "night": {
+    "hours": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "crashes": 1503,
+    "per_hour": 301,
+    "casualty_share_pct": 13.5
+  },
+  "relative_risk_night_over_peak": 2.02,
+  "chi2": 77.6,
+  "p_value": 1.3e-18,
+  "n_casualty": 1504,
+  "n_fatal": 22,
+  "disclaimer": "Statistical indicators derived from public data. Patterns may have legitimate explanations."
+}

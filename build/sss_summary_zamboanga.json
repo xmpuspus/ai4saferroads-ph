@@ -25,8 +25,15 @@
       "posted_osm": 60,
       "safe": 50,
       "fatal_reduction_pct": 51.8,
-      "why": "undivided arterial, side-impact intersections"
+      "why": "undivided arterial, side-impact intersections",
+      "v_design": 50
     }
   ],
-  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)"
+  "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
+  "design": {
+    "n_flagged_real": 15,
+    "flagged_design_gap_positive": 0,
+    "flagged_design_gap_pos_pct": 0.0,
+    "median_design_gap": 0
+  }
 }
