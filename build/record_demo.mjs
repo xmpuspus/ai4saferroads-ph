@@ -1,8 +1,9 @@
-// Records a choreographed walkthrough of the REAL map (not a mockup) to webm.
-// Beats walk the "Build the picture" stepper so the GIF SHOWS the argument:
-//   banner + glowing roads -> (1) where people walk -> (2) where crashes happen ->
-//   (3) what the limit is NOW (red corridors) -> (4) what it SHOULD be (the same roads flip green)
-//   -> back to the overview -> Cebu -> home. Current vs proposed limits, 51 PH cities.
+// Records the hero walkthrough of the REAL map (not a mockup) to webm, with a subtitle
+// rail baked into the page so the GIF narrates itself for someone who has never seen the
+// project: the question -> the glowing roads -> real crashes on satellite tracing them ->
+// the night severity flip -> the fix (Safe view) -> where to find it. The panel stays
+// collapsed to its headline so the map and the subtitles carry the whole argument.
+// Every subtitle number comes from the shipped artifacts (docs/findings.md, validation.md).
 import { chromium } from 'playwright';
 import { mkdirSync } from 'fs';
 
@@ -22,48 +23,68 @@ const recStart = Date.now();
 const page = await ctx.newPage();
 const errs = [];
 page.on('pageerror', e => errs.push('PAGEERROR ' + e.message));
-const click = (s, ms) => page.click(s).then(() => page.waitForTimeout(ms)).catch(() => errs.push('click ' + s));
-const pick = (v, ms) => page.selectOption('#city', v).then(() => page.waitForTimeout(ms)).catch(() => errs.push('pick ' + v));
+// JS-dispatch clicks so controls inside the collapsed panel still fire
+const jsClick = (sel, ms) => page.evaluate(s => { const el = document.querySelector(s); if (el) el.click(); else throw new Error('missing ' + s); }, sel)
+  .then(() => page.waitForTimeout(ms)).catch(() => errs.push('click ' + sel));
+// lower-third subtitle: fade the line in, hold it for ms
+const sub = async (text, ms) => {
+  await page.evaluate(t => { const d = document.getElementById('rec-sub');
+    d.style.opacity = 0; setTimeout(() => { d.textContent = t; d.style.opacity = 1; }, 260); }, text).catch(() => errs.push('sub'));
+  await page.waitForTimeout(ms);
+};
 
 await page.goto(URL, { waitUntil: 'networkidle', timeout: 45000 });
 await page.waitForSelector('#roads', { timeout: 30000 }).catch(() => errs.push('no panel'));
 await page.waitForFunction(() => { const o = document.getElementById('overlay'); return o && !o.classList.contains('on'); }, { timeout: 30000 }).catch(() => errs.push('overlay stuck'));
-await page.waitForTimeout(2500);                  // settle tiles after the loading overlay clears
+await page.waitForTimeout(2200);                  // settle tiles after the loading overlay clears
 
-// frame the build-up on central Manila so corridors + dots are both legible
-await page.evaluate(() => window.__map.jumpTo({ center: [120.995, 14.605], zoom: 12.1 })).catch(() => errs.push('jump'));
-await page.waitForTimeout(1400);
+await page.evaluate(() => {
+  window.__setPanel(true);                        // collapse to the headline; the map is the star
+  const d = document.createElement('div'); d.id = 'rec-sub';
+  d.style.cssText = 'position:fixed;left:50%;bottom:36px;transform:translateX(-50%);' +
+    'max-width:900px;padding:15px 28px;background:rgba(10,13,18,0.84);' +
+    'border:1px solid rgba(255,255,255,0.15);border-radius:14px;color:#F2F5F9;' +
+    'font:600 31px/1.35 "IBM Plex Sans",system-ui,sans-serif;text-align:center;' +
+    'z-index:99;opacity:0;transition:opacity .45s;box-shadow:0 8px 30px rgba(0,0,0,.5)';
+  document.body.appendChild(d);
+}).catch(() => errs.push('setup'));
+await page.evaluate(() => window.__map.jumpTo({ center: [121.0, 14.58], zoom: 11.05 })).catch(() => errs.push('jump'));
+await page.waitForTimeout(1500);
 console.log('TRIM_S=' + ((Date.now() - recStart) / 1000).toFixed(1));  // where to start the gif
 
-// The demo walks the hypothesis end to end: do speed limits impact crashes?
-// (1) the question -> (2) crashes actually land on the flagged roads -> (3) and turn deadly
-// when the road clears (speed) -> (4) the lever: drop to the safe limit and the risk falls.
+// BEAT 1 — the question, over the whole glowing metro (dark base)
+await sub('Metro Manila. The speed limit on many of these roads is 60.', 3400);
+await sub('Traffic crawls at 30. So does the limit even matter?', 3500);
 
-// MOVE 1 — the question: the roads whose posted limit sits above the speed a person survives
-await page.waitForTimeout(3200);                 // banner: each glowing road is posted over the survivable speed
+// BEAT 2 — what the glow means, easing into the city core
+await page.evaluate(() => window.__map.easeTo({ center: [120.995, 14.605], zoom: 12.4, duration: 3200 })).catch(() => errs.push('cam2'));
+await sub('Watch the glowing roads. Each one is posted above the speed a person can survive.', 4200);
 
-// MOVE 2 — do crashes actually happen there? real satellite, then light up the 12,563 crash sites
-await click('#layers > summary', 1000);          // open the Layers drawer
-await click('#base button[data-v="sat"]', 3600); // switch to real Esri satellite imagery of the city
-await click('#crashbtn', 5400);                  // the crashes land on the flagged corridors, tracing EDSA and C5 from space
-await page.evaluate(() => { const d = document.getElementById('layers'); if (d) d.open = false; }).catch(() => {});
+// BEAT 3 — real satellite, real crashes, panning up EDSA
+await jsClick('#base button[data-v="sat"]', 2200);
+await jsClick('#crashbtn', 300);
+await page.evaluate(() => window.__map.easeTo({ center: [121.02, 14.55], zoom: 13.05, duration: 1800 })).catch(() => errs.push('cam3'));  // drift toward EDSA while the count reads
+await sub('12,563 real crashes from MMDA reports, 2018 to 2020.', 4000);
+await page.evaluate(() => window.__map.easeTo({ center: [121.052, 14.617], zoom: 13.05, duration: 4800, easing: t => t })).catch(() => errs.push('pan'));
+await sub('They pile up on the glowing roads. 42% happen on just 7% of the street network.', 4800);
+
+// BEAT 4 — night: back to the dark base, the severity flip
+await jsClick('#base button[data-v="dark"]', 1000);
+await sub('Total crashes peak in rush hour, when traffic is heaviest.', 3400);
+await sub('But on EDSA, once the road clears at night, a crash is twice as likely to injure or kill.', 4600);
+
+// BEAT 5 — the fix: flip the network to the safe limits and pull back
+await jsClick('#crashbtn', 250);
+await jsClick('#roadmode .seg button[data-m="proposed"]', 350);
+await page.evaluate(() => window.__map.easeTo({ center: [121.0, 14.58], zoom: 11.3, duration: 3000 })).catch(() => errs.push('cam5'));
+await sub('The fix is the road itself. Bring each one down to a speed people survive.', 3800);
+await sub('Crash research says that cuts the risk of a deadly crash here by about two thirds.', 4200);
+
+// BEAT 6 — where to find it (the URL gets its own line so it never wraps)
+await sub('Every street. 51 Philippine cities. Free and open.', 2400);
+await sub('ai4saferroads-ph.vercel.app', 2600);
+await page.evaluate(() => { document.getElementById('rec-sub').style.opacity = 0; }).catch(() => {});
 await page.waitForTimeout(900);
-
-// MOVE 3 — but we crawl at 30, so is it speed? the severity-by-hour evidence + built-for-speed crops
-await click('#sqbtn', 4400);                     // open "See the evidence": crashes peak in the jam, harm peaks when it clears
-await page.evaluate(() => { const p = document.querySelector('.panel'); if (p) p.scrollBy({ top: 410, behavior: 'smooth' }); });
-await page.waitForTimeout(3300);                 // scroll to the satellite crops: these roads are built for speed
-await page.evaluate(() => { const p = document.querySelector('.panel'); if (p) p.scrollTo({ top: 0, behavior: 'smooth' }); });
-await click('#sqbtn', 900);                      // close the evidence
-
-// MOVE 4 — the lever: one corridor's limit now vs safe, then the whole network adopts the safe limit
-await click('.road', 4200);                      // fly to Taft: 60 -> 30, cuts the chance of a deadly crash ~94%
-await page.evaluate(() => window.__map.flyTo({ center: [120.995, 14.605], zoom: 13.4, duration: 1300 })).catch(() => errs.push('fly'));
-await page.waitForTimeout(1600);                 // pull back so the flip reads across the network
-await click('#layers > summary', 900);           // reopen the drawer for the road-colour switch
-await click('#roadmode .seg button[data-m="proposed"]', 3000); // NOW is red-over-safe; flip to Safe...
-await page.waitForTimeout(2600);                 // ...and the fast red corridors turn teal across the real city
-await page.waitForTimeout(1400);                 // hold on the safer network over the crash-lit satellite
 
 const video = page.video();
 await ctx.close();

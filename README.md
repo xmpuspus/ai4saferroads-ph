@@ -21,12 +21,12 @@
 [![e2e: all pass](https://img.shields.io/badge/e2e-all%20checks%20pass-success.svg)](tests/e2e.sh)
 [![Status: alpha](https://img.shields.io/badge/status-alpha-orange.svg)](#limitations)
 
-[![Is speed the problem? The severity-by-hour evidence, then Metro Manila from space with real crash sites glowing over the flagged roads, and each road's limit now versus the safe speed](docs/demo.gif)](https://ai4saferroads-ph.vercel.app)
+[![A narrated tour of the map. Metro Manila's glowing roads, 12,563 real crash sites on satellite tracing them, the night severity finding, then every road flipped to a speed people survive](docs/demo.gif)](https://ai4saferroads-ph.vercel.app)
 
-<sub>Real recording of the live map (via `build/record_demo.mjs`). It opens on the evidence, the
-severity-by-hour chart and the satellite crops, then switches to real satellite imagery and lights
-up the 12,563 reported Metro Manila crash sites tracing the flagged roads from space, and ends
-on each road's limit now against the speed a person survives. Live:
+<sub>Real recording of the live map (via `build/record_demo.mjs`), subtitled so it reads without
+sound. It opens on the question over the glowing metro, switches to real satellite imagery and
+lights up the 12,563 reported crash sites tracing the flagged roads, states the night severity
+finding, and ends by flipping every road to the speed a person survives. Live:
 [ai4saferroads-ph.vercel.app](https://ai4saferroads-ph.vercel.app).</sub>
 
 ## What it shows

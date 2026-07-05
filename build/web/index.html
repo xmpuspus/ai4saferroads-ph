@@ -412,7 +412,8 @@ window.__map=map;
 
 const SSS_COLOR=['interpolate',['linear'],['get','sss'],0,'#3B0F70',25,'#8C2981',50,'#B73779',75,'#E65D5E',100,'#FB9F3A'];
 // colour a road by an actual speed (km/h): teal = slow/safe, coral = fast. Used for Now / Safe views.
-const SPEED_COLOR=f=>['interpolate',['linear'],['get',f],20,'#54A89B',35,'#9DA871',50,'#C99F52',65,'#E0574A',100,'#FB9F3A'];
+// 30 and below stay solid teal so the Safe flip reads as the banner says ("teal is 30").
+const SPEED_COLOR=f=>['interpolate',['linear'],['get',f],30,'#54A89B',45,'#9DA871',55,'#C99F52',65,'#E0574A',100,'#FB9F3A'];
 const SSS_WIDTH=['interpolate',['linear'],['zoom'],10,['interpolate',['linear'],['get','sss'],0,1.1,75,3.2],
   11,['interpolate',['linear'],['get','sss'],0,0.9,75,2.8],
   14,['interpolate',['linear'],['get','sss'],0,1,75,5],16,['interpolate',['linear'],['get','sss'],0,1.6,75,7]];
