@@ -40,6 +40,9 @@ await page.waitForTimeout(2200);                  // settle tiles after the load
 
 await page.evaluate(() => {
   window.__setPanel(true);                        // collapse to the headline; the map is the star
+  const st = document.createElement('style');     // recording aid: real popups, enlarged to gif scale
+  st.textContent = '.maplibregl-popup-content{zoom:1.55}';
+  document.head.appendChild(st);
   const d = document.createElement('div'); d.id = 'rec-sub';
   d.style.cssText = 'position:fixed;left:50%;bottom:36px;transform:translateX(-50%);' +
     'max-width:900px;padding:15px 28px;background:rgba(10,13,18,0.84);' +
@@ -68,16 +71,76 @@ await sub('12,563 real crashes from MMDA reports, 2018 to 2020.', 4000);
 await page.evaluate(() => window.__map.easeTo({ center: [121.052, 14.617], zoom: 13.05, duration: 4800, easing: t => t })).catch(() => errs.push('pan'));
 await sub('They pile up on the glowing roads. 42% happen on just 7% of the street network.', 4800);
 
+// BEAT 3b — hover a real crash dot: the tooltip is the proof each dot is a report
+const dot = await page.evaluate(async () => {
+  const fc = await (await fetch('data/crashes_manila.geojson')).json();
+  const m = window.__map, c = m.getCenter();
+  let best = null, bestd = 1e9;
+  for (const f of fc.features) {
+    const [lng, lat] = f.geometry.coordinates;
+    const d = Math.hypot(lng - c.lng, lat - c.lat);
+    if (d < bestd) { bestd = d; best = f; }
+  }
+  const pt = m.project(best.geometry.coordinates);
+  return { x: pt.x, y: pt.y };
+}).catch(() => (errs.push('dot'), null));
+if (dot) { await page.mouse.move(dot.x, dot.y, { steps: 6 }); await page.mouse.move(dot.x + 1, dot.y + 1, { steps: 2 }); }
+await page.waitForTimeout(500);
+await sub('Every dot is a real report with a date, a time, and what happened.', 4800);
+await page.waitForTimeout(600);
+await page.mouse.move(60, 400, { steps: 4 });    // off the dots so the tooltip clears
+await page.waitForTimeout(300);
+
 // BEAT 4 — night: back to the dark base, the severity flip
 await jsClick('#base button[data-v="dark"]', 1000);
 await sub('Total crashes peak in rush hour, when traffic is heaviest.', 3400);
 await sub('But on EDSA, once the road clears at night, a crash is twice as likely to injure or kill.', 4600);
 
+// BEAT 4b — hover a flagged road: limit now vs the safe speed, and the risk cut
+await jsClick('#crashbtn', 300);                 // crash layer owns hover while on; release it
+let road = null;
+for (let attempt = 0; attempt < 3 && !road; attempt++) {
+  if (attempt) await page.waitForTimeout(700);
+  road = await page.evaluate(() => {
+  const m = window.__map, c = m.getCanvas();
+  const W = c.clientWidth, H = c.clientHeight;
+  // upper-middle band: the popup opens downward from the point, so anchoring high
+  // keeps its numbers clear of the subtitle rail. Prefer the post's exact story,
+  // a named road posted 60 where 30 is survivable
+  let fallback = null;
+  for (let y = Math.round(H * 0.22); y < H * 0.32; y += 20)
+    for (let x = Math.round(W * 0.32); x < W * 0.88; x += 20) {
+      const fs = m.queryRenderedFeatures([x, y], { layers: ['net-real'] });
+      if (!fs.length || !fs[0].properties.name) continue;
+      const pr = fs[0].properties;
+      if (pr.v_posted >= 60 && pr.v_safe <= 30) return { x, y };
+      if (pr.v_posted >= 60 && !fallback) fallback = { x, y };
+    }
+  return fallback;
+  }).catch(e => (errs.push('road ' + e.message), null));
+}
+console.log('ROAD_PROBE=' + JSON.stringify(road));
+// open the popup with the map's own click event (same delegation wrapper, same hit-test,
+// same handler as a real tap). The pointer stays parked away from the line: under
+// recordVideo the hover hit-test flickers and its mouseleave keeps closing the popup.
+await page.mouse.move(60, 400, { steps: 2 });
+await page.waitForTimeout(200);
+let popupOpen = false;
+if (road) popupOpen = await page.evaluate(r => {
+  const m = window.__map, pt = new maplibregl.Point(r.x, r.y);
+  m.fire('click', { point: pt, lngLat: m.unproject(pt), originalEvent: new MouseEvent('click') });
+  return !!document.querySelector('.maplibregl-popup-content');
+}, road).catch(() => false);
+console.log('POPUP_OPEN=' + popupOpen);
+await sub('Tap any road for its limit now, the speed a person survives, and the risk cut.', 5000);
+await page.evaluate(() => document.querySelectorAll('.maplibregl-popup').forEach(el => el.remove()));
+await page.waitForTimeout(300);
+
 // BEAT 5 — the fix: flip the network to the safe limits and pull back
-await jsClick('#crashbtn', 250);
+console.log('MARK_FLIP=' + ((Date.now() - recStart) / 1000).toFixed(2));  // palette-segment boundary for the encode
 await jsClick('#roadmode .seg button[data-m="proposed"]', 350);
 await page.evaluate(() => window.__map.easeTo({ center: [121.0, 14.58], zoom: 11.3, duration: 3000 })).catch(() => errs.push('cam5'));
-await sub('The fix is the road itself. Bring each one down to a speed people survive.', 3800);
+await sub('The fix is the road itself. Bring each one down to a speed people survive.', 3600);
 await sub('Crash research says that cuts the risk of a deadly crash here by about two thirds.', 4200);
 
 // BEAT 6 — where to find it (the URL gets its own line so it never wraps)
@@ -86,6 +149,7 @@ await sub('ai4saferroads-ph.vercel.app', 2600);
 await page.evaluate(() => { document.getElementById('rec-sub').style.opacity = 0; }).catch(() => {});
 await page.waitForTimeout(900);
 
+console.log('MARK_END=' + ((Date.now() - recStart) / 1000).toFixed(2));
 const video = page.video();
 await ctx.close();
 console.log('VIDEO=' + (await video.path()));
