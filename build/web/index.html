@@ -413,13 +413,17 @@ window.__map=map;
 const SSS_COLOR=['interpolate',['linear'],['get','sss'],0,'#3B0F70',25,'#8C2981',50,'#B73779',75,'#E65D5E',100,'#FB9F3A'];
 // colour a road by an actual speed (km/h): teal = slow/safe, coral = fast. Used for Now / Safe views.
 const SPEED_COLOR=f=>['interpolate',['linear'],['get',f],20,'#54A89B',35,'#9DA871',50,'#C99F52',65,'#E0574A',100,'#FB9F3A'];
-const SSS_WIDTH=['interpolate',['linear'],['zoom'],11,['interpolate',['linear'],['get','sss'],0,0.5,75,2.2],
+const SSS_WIDTH=['interpolate',['linear'],['zoom'],10,['interpolate',['linear'],['get','sss'],0,1.1,75,3.2],
+  11,['interpolate',['linear'],['get','sss'],0,0.9,75,2.8],
   14,['interpolate',['linear'],['get','sss'],0,1,75,5],16,['interpolate',['linear'],['get','sss'],0,1.6,75,7]];
 const BASE_W=['interpolate',['linear'],['zoom'],11,0.25,14,0.7,16,1.1];
 const EMPTY={type:'FeatureCollection',features:[]};
-// net-real fades to faint at city zoom (the heatmap carries the overview) and rises to full as you zoom in to read individual roads
-const REAL_OP=['interpolate',['linear'],['zoom'],11,0.05,12.5,0.3,13.8,0.95];
-// kepler.gl-style H3 hexbin aggregation: bin flagged segments into hexagons, colour each by relative danger density. Crisp discrete cells on the dark base, not a blurry heatmap.
+// the flagged roads ARE the overview: full glow at city zoom (wider + blurred strands), crisp lines zoomed in
+const REAL_OP=['interpolate',['linear'],['zoom'],10,0.85,13.8,0.95];
+const REAL_BLUR=['interpolate',['linear'],['zoom'],10,1.5,13.5,0.4];
+// H3 hexbin aggregation of flagged-segment midpoints. Used ONLY by the swipe compare, where cell
+// density vs crash-cell density on the same grid is the honest unit. Never the default view: hex
+// brightness reads as danger but encodes per-city-relative counts, and it buries the road glow.
 const HEX_RES=8;
 function segMidpoints(fc){const pts=[];   // [lng,lat] midpoint of each flagged (sss>0) segment
   for(const f of (fc&&fc.features)||[]){const g=f.geometry;if(!g)continue;const sc=f.properties&&f.properties.sss;if(!(sc>0))continue;
@@ -576,7 +580,7 @@ map.on('load',async()=>{
     paint:{'line-color':'#7587a0','line-width':1.2,'line-opacity':0.4,'line-dasharray':[2,2]}});
   map.addLayer({id:'net-real',type:'line',source:'net','source-layer':'segments',
     filter:['all',cityF('manila'),['>',['get','sss'],0],['==',['get','posted_imputed'],false]],
-    layout:{'line-cap':'round'},paint:{'line-color':SSS_COLOR,'line-width':SSS_WIDTH,'line-opacity':REAL_OP,'line-blur':0.4}});
+    layout:{'line-cap':'round'},paint:{'line-color':SSS_COLOR,'line-width':SSS_WIDTH,'line-opacity':REAL_OP,'line-blur':REAL_BLUR}});
   // the WHY: vulnerable-user sites (schools, markets, hospitals, worship, transit), on by default
   map.addSource('vru',{type:'geojson',data:EMPTY});
   // context, not the danger: soft muted dots for where people are on foot. No dark bead
@@ -608,7 +612,7 @@ map.on('load',async()=>{
   map.addSource('flag',{type:'geojson',data:EMPTY});
   // danger heatmap (overview): strong at city zoom, fades out as you zoom in to the precise glowing lines. Sits under the network so the lines read on top.
   map.addSource('heat',{type:'geojson',data:EMPTY});
-  map.addLayer({id:'heat-layer',type:'fill',source:'heat',maxzoom:15,paint:{
+  map.addLayer({id:'heat-layer',type:'fill',source:'heat',maxzoom:15,layout:{visibility:'none'},paint:{
     'fill-color':['interpolate',['linear'],['get','t'],0,'#3B0F70',0.3,'#8C2981',0.55,'#B73779',0.78,'#E65D5E',0.92,'#FB9F3A',1,'#FCE38A'],
     'fill-opacity':['interpolate',['linear'],['zoom'],10,0.72,12.5,0.6,14,0],
     'fill-outline-color':'rgba(8,10,14,0.55)'}},'net-base');
@@ -739,9 +743,8 @@ map.on('load',async()=>{
     current:'<b>Now.</b> Each road shows its <b>current speed limit</b>. <span class="tk-ramp speed"></span><small>teal is 30, coral is 60 or more km/h.</small>',
     proposed:'<b>Safe.</b> The <b>speed limit each road should have</b>. <span class="tk-ramp speed"></span><small>the fast roads turn teal.</small>'};
   let roadMode='score';
-  // the danger heatmap is the clean Risk overview only: hide it the moment another mode/overlay takes over (it would muddy them), and let zoom fade handle the rest
-  function updateHeat(){const show=roadMode==='score'&&buildIdx<0&&!critMode&&!wealthOn&&!crowdOn&&crbtn.getAttribute('aria-pressed')!=='true'&&!compareMode;
-    if(map.getLayer('heat-layer'))map.setLayoutProperty('heat-layer','visibility',show?'visible':'none');}
+  // the danger hexbins live in the swipe compare only; every other mode keeps them hidden
+  function updateHeat(){if(!compareMode&&map.getLayer('heat-layer'))map.setLayoutProperty('heat-layer','visibility','none');}
   function setRoadMode(m){roadMode=m;
     map.setPaintProperty('net-real','line-color',m==='current'?SPEED_COLOR('v_posted'):m==='proposed'?SPEED_COLOR('v_safe'):SSS_COLOR);
     document.querySelectorAll('#roadmode .seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
@@ -863,10 +866,10 @@ map.on('load',async()=>{
     document.getElementById('topkey').innerHTML=`<b>Left.</b> The roads we highlight as over the safe speed. <b>Right.</b> Where crashes really happened.${rtxt} Drag the divider to sweep.`;}
   function exitCompare(){if(!compareMode)return;compareMode=false;cmpBtn.setAttribute('aria-pressed','false');cmpBtn.textContent='Swipe to compare our map with real crashes (Manila)';
     map.off('move',positionDivider);swipeEl.style.display='none';cmpExit.style.display='none';
-    map.setFilter('heat-layer',null);map.setFilter('heatcrash-layer',null);map.setLayoutProperty('heatcrash-layer','visibility','none');
-    map.setPaintProperty('heat-layer','fill-opacity',['interpolate',['linear'],['zoom'],10,0.72,12.5,0.6,14,0]);
+    map.setFilter('heat-layer',null);map.setFilter('heatcrash-layer',null);
+    map.setLayoutProperty('heat-layer','visibility','none');map.setLayoutProperty('heatcrash-layer','visibility','none');
     map.setPaintProperty('net-real','line-opacity',REAL_OP);map.setLayoutProperty('net-imputed','visibility','visible');map.setPaintProperty('net-base','line-opacity',0.6);
-    setRoadMode('score');}   // restores the Risk banner + re-shows the danger overview via updateHeat
+    setRoadMode('score');}   // restores the Risk banner; the road glow is the overview again
   cmpBtn.onclick=()=>{compareMode?exitCompare():enterCompare();};
   cmpExit.onclick=exitCompare;
   (function(){let drag=false;const handle=swipeEl.querySelector('.sw-handle');
