@@ -1,7 +1,8 @@
 // Records the hero walkthrough of the REAL map (not a mockup) to webm, with a subtitle
 // rail baked into the page so the GIF narrates itself for someone who has never seen the
 // project: the question -> the glowing roads -> real crashes on satellite tracing them ->
-// the night severity flip -> the fix (Safe view) -> where to find it. The panel stays
+// a street-level dive onto EDSA itself -> the night severity flip -> the fix (Safe view)
+// -> where to find it. The panel stays
 // collapsed to its headline so the map and the subtitles carry the whole argument.
 // Every subtitle number comes from the shipped artifacts (docs/findings.md, validation.md).
 import { chromium } from 'playwright';
@@ -41,7 +42,7 @@ await page.waitForTimeout(2200);                  // settle tiles after the load
 await page.evaluate(() => {
   window.__setPanel(true);                        // collapse to the headline; the map is the star
   const st = document.createElement('style');     // recording aid: real popups, enlarged to gif scale
-  st.textContent = '.maplibregl-popup-content{zoom:1.55}';
+  st.textContent = '.maplibregl-popup-content{zoom:1.42}';  // 1.55 pushed the risk-cut line off-screen
   document.head.appendChild(st);
   const d = document.createElement('div'); d.id = 'rec-sub';
   d.style.cssText = 'position:fixed;left:50%;bottom:36px;transform:translateX(-50%);' +
@@ -77,12 +78,13 @@ const dot = await page.evaluate(async () => {
   const m = window.__map, c = m.getCenter();
   let best = null, bestd = 1e9;
   for (const f of fc.features) {
+    if (!/edsa/i.test(f.properties.place || '')) continue;  // the dive beat names EDSA, so stay on it
     const [lng, lat] = f.geometry.coordinates;
     const d = Math.hypot(lng - c.lng, lat - c.lat);
     if (d < bestd) { bestd = d; best = f; }
   }
   const pt = m.project(best.geometry.coordinates);
-  return { x: pt.x, y: pt.y };
+  return { x: pt.x, y: pt.y, lng: best.geometry.coordinates[0], lat: best.geometry.coordinates[1] };
 }).catch(() => (errs.push('dot'), null));
 if (dot) { await page.mouse.move(dot.x, dot.y, { steps: 6 }); await page.mouse.move(dot.x + 1, dot.y + 1, { steps: 2 }); }
 await page.waitForTimeout(500);
@@ -90,6 +92,13 @@ await sub('Every dot is a real report with a date, a time, and what happened.', 
 await page.waitForTimeout(600);
 await page.mouse.move(60, 400, { steps: 4 });    // off the dots so the tooltip clears
 await page.waitForTimeout(300);
+
+// BEAT 3c — dive to street level: the road those reports sit on, seen from space
+if (dot) await page.evaluate(d => window.__map.flyTo({ center: [d.lng, d.lat], zoom: 17.35, duration: 3800 }), dot).catch(() => errs.push('dive'));
+await sub('This is EDSA from above. Ten lanes of highway running straight through homes and shops.', 4600);
+await page.waitForTimeout(700);                  // let the z17 tiles sharpen before the pull-back
+await page.evaluate(() => window.__map.easeTo({ center: [121.052, 14.617], zoom: 13.05, duration: 2600 })).catch(() => errs.push('rise'));
+await sub('No sign changes what this road is built for.', 3600);
 
 // BEAT 4 — night: back to the dark base, the severity flip
 await jsClick('#base button[data-v="dark"]', 1000);
