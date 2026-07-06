@@ -8,6 +8,7 @@ every artifact stays self-consistent. Idempotent.
 
 Run: python3 build/overlay/fix_busway.py
 """
+
 import json
 import re
 import sys
@@ -37,9 +38,18 @@ def resummarize(key, feats):
             cnt["gap_pos"] += 1
         if p["sss"] > 0:
             cnt["flag"] += 1
-            worst.append((p["sss"], p.get("name", ""), p["highway"], p["v_posted"], p["v_safe"],
-                          p.get("fatal_reduction_pct", 0), p.get("why", ""),
-                          p.get("posted_imputed", False)))
+            worst.append(
+                (
+                    p["sss"],
+                    p.get("name", ""),
+                    p["highway"],
+                    p["v_posted"],
+                    p["v_safe"],
+                    p.get("fatal_reduction_pct", 0),
+                    p.get("why", ""),
+                    p.get("posted_imputed", False),
+                )
+            )
             if not p.get("posted_imputed"):
                 cnt["flag_real"] += 1
     worst.sort(key=lambda x: x[0], reverse=True)
@@ -51,10 +61,14 @@ def resummarize(key, feats):
             by_name[nm] = x
     headline = sorted(by_name.values(), key=lambda y: y[0], reverse=True)[:10]
 
-    flagged_feats = [f for f in feats if f["properties"]["sss"] > 0
-                     and f["properties"]["posted_imputed"] is False]
+    flagged_feats = [
+        f
+        for f in feats
+        if f["properties"]["sss"] > 0 and f["properties"]["posted_imputed"] is False
+    ]
     (WEBDATA / f"sss_flagged_{key}.geojson").write_text(
-        json.dumps({"type": "FeatureCollection", "features": flagged_feats}))
+        json.dumps({"type": "FeatureCollection", "features": flagged_feats})
+    )
     summ = json.loads((BUILD / f"sss_summary_{key}.json").read_text())
     summ["segments_flagged_sss_gt0"] = cnt["flag"]
     summ["segments_flagged_real_posted"] = cnt["flag_real"]
@@ -62,9 +76,17 @@ def resummarize(key, feats):
     summ["sss_max"] = max(sss_vals) if sss_vals else 0
     summ["sss_mean_flagged"] = round(sum(x[0] for x in worst) / max(len(worst), 1), 1)
     summ["headline_priority_roads_real_posted"] = [
-        {"sss": s, "name": nm, "class": c, "posted_osm": vp, "safe": vs,
-         "fatal_reduction_pct": fr, "why": wy}
-        for (s, nm, c, vp, vs, fr, wy, _i) in headline]
+        {
+            "sss": s,
+            "name": nm,
+            "class": c,
+            "posted_osm": vp,
+            "safe": vs,
+            "fatal_reduction_pct": fr,
+            "why": wy,
+        }
+        for (s, nm, c, vp, vs, fr, wy, _i) in headline
+    ]
     (BUILD / f"sss_summary_{key}.json").write_text(json.dumps(summ, indent=2))
     return cnt["flag_real"]
 
@@ -79,8 +101,11 @@ def main():
         zapped = 0
         for f in fc["features"]:
             pr = f["properties"]
-            if (pr.get("highway") == "service" and pr["sss"] > 0
-                    and BUSWAY.search(pr.get("name") or "")):
+            if (
+                pr.get("highway") == "service"
+                and pr["sss"] > 0
+                and BUSWAY.search(pr.get("name") or "")
+            ):
                 pr["sss"] = 0.0
                 pr["v_safe"] = 70
                 pr["gap"] = pr["v_posted"] - 70
@@ -89,9 +114,13 @@ def main():
         if zapped:
             p.write_text(json.dumps(fc))
             fr = resummarize(key, fc["features"])
-            print(f"[fix] {key}: zeroed {zapped} busway segment(s); flagged_real now {fr}")
+            print(
+                f"[fix] {key}: zeroed {zapped} busway segment(s); flagged_real now {fr}"
+            )
             total_zapped += zapped
-    print(f"done: {total_zapped} segregated-busway segment(s) removed from the flagged set")
+    print(
+        f"done: {total_zapped} segregated-busway segment(s) removed from the flagged set"
+    )
 
 
 if __name__ == "__main__":

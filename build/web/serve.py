@@ -48,6 +48,8 @@ if __name__ == "__main__":
     # serve build/ (parent of web/) so /web/index.html matches the deployed paths,
     # shot.mjs, and the Makefile/README URLs
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    print(f"serving {os.getcwd()} on http://localhost:{PORT}/web/index.html (Range-capable)")
+    print(
+        f"serving {os.getcwd()} on http://localhost:{PORT}/web/index.html (Range-capable)"
+    )
     # Loopback only: a dev server has no business being reachable from the LAN.
     ThreadingHTTPServer(("127.0.0.1", PORT), RangeHandler).serve_forever()

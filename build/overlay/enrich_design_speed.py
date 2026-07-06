@@ -6,6 +6,7 @@ the new fields, then re-tiles the combined PMTiles so the map's network carries 
 
 Run: python3 build/overlay/enrich_design_speed.py
 """
+
 import json
 import sys
 from pathlib import Path
@@ -37,10 +38,14 @@ def enrich_city(key):
     fp.write_text(json.dumps(fc))
 
     # web flagged subset (real-posted, sss>0) now carries v_design / design_gap
-    flagged = [f for f in fc["features"]
-               if f["properties"]["sss"] > 0 and f["properties"]["posted_imputed"] is False]
+    flagged = [
+        f
+        for f in fc["features"]
+        if f["properties"]["sss"] > 0 and f["properties"]["posted_imputed"] is False
+    ]
     (WEBDATA / f"sss_flagged_{key}.geojson").write_text(
-        json.dumps({"type": "FeatureCollection", "features": flagged}))
+        json.dumps({"type": "FeatureCollection", "features": flagged})
+    )
 
     # summary: add v_design onto each headline road (match by name+sss) + a design stat block
     sp = BUILD / f"sss_summary_{key}.json"
@@ -57,7 +62,9 @@ def enrich_city(key):
         summ["design"] = {
             "n_flagged_real": n,
             "flagged_design_gap_positive": sum(1 for g in design_gaps if g > 0),
-            "flagged_design_gap_pos_pct": round(100 * sum(1 for g in design_gaps if g > 0) / max(n, 1), 1),
+            "flagged_design_gap_pos_pct": round(
+                100 * sum(1 for g in design_gaps if g > 0) / max(n, 1), 1
+            ),
             "median_design_gap": (sorted(design_gaps)[n // 2] if n else 0),
         }
         sp.write_text(json.dumps(summ, indent=2))

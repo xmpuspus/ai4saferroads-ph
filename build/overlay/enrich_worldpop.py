@@ -22,6 +22,7 @@ WorldPop constrained places people only on mapped built settlements, so it measu
 
 Run:  python3 build/overlay/enrich_worldpop.py            # sample -> calibrate DIV -> rescore
 """
+
 import json
 import math
 import os
@@ -42,9 +43,9 @@ TIF = Path(os.environ.get("WORLDPOP_TIF", OVL / "phl_ppp_2020_constrained.tif"))
 sys.path.insert(0, str(BUILD))
 from sss_pipeline import CITIES  # noqa: E402
 
-PAD = 0.008           # degrees of raster margin around each city bbox
-SAMPLE_STEP_M = 150   # drop a sample point roughly every 150 m along a segment
-MAX_SAMPLES = 12      # cap samples per segment (long arterials)
+PAD = 0.008  # degrees of raster margin around each city bbox
+SAMPLE_STEP_M = 150  # drop a sample point roughly every 150 m along a segment
+MAX_SAMPLES = 12  # cap samples per segment (long arterials)
 
 
 def haversine(la1, lo1, la2, lo2):
@@ -81,10 +82,10 @@ class CityPop:
         s, w, n, e = bbox
         win = from_bounds(w - PAD, s - PAD, e + PAD, n + PAD, ds.transform)
         self.arr = ds.read(1, window=win).astype("float64")
-        self.arr[self.arr < 0] = 0.0          # nodata (-99999) and negatives -> 0 residents
+        self.arr[self.arr < 0] = 0.0  # nodata (-99999) and negatives -> 0 residents
         self.t = ds.window_transform(win)
         self.h, self.wid = self.arr.shape
-        self.px_h_m = abs(self.t.e) * 111320.0        # N-S metres per pixel
+        self.px_h_m = abs(self.t.e) * 111320.0  # N-S metres per pixel
         self.inv = ~self.t
 
     def density(self, lat, lon):
@@ -98,7 +99,9 @@ class CityPop:
         c0, c1 = max(0, c - 1), min(self.wid, c + 2)
         block = self.arr[r0:r1, c0:c1]
         people = float(block.sum())
-        px_w_m = self.t.a * 111320.0 * math.cos(math.radians(lat))  # E-W metres per pixel
+        px_w_m = (
+            self.t.a * 111320.0 * math.cos(math.radians(lat))
+        )  # E-W metres per pixel
         area_km2 = (block.shape[0] * self.px_h_m) * (block.shape[1] * px_w_m) / 1e6
         return (people / area_km2 if area_km2 > 0 else 0.0), people
 
@@ -127,7 +130,7 @@ def main():
 
     # PASS 1: sample residential density for every segment; hold light arrays in memory.
     print(f"PASS 1 - sampling WorldPop for {len(keys)} cities ...")
-    dens_mean = {}   # key -> list[float] aligned to feature order
+    dens_mean = {}  # key -> list[float] aligned to feature order
     dens_peak = {}
     for k in keys:
         cp = CityPop(ds, CITIES[k]["bbox"])
@@ -145,15 +148,26 @@ def main():
     all_d = np.array([v for k in keys for v in dens_mean[k]], float)
     pos = all_d[all_d > 0]
     pctl = {p: float(np.percentile(pos, p)) for p in (50, 75, 90, 95, 99)}
-    DIV = round(pctl[90], 1)   # saturate exposure at the 90th-pctile residential density
-    dump = {"n_segments": int(all_d.size), "n_pos_density": int(pos.size),
-            "density_per_km2_pctiles_over_pos": {str(p): round(v, 1) for p, v in pctl.items()},
-            "DIV_used": DIV, "note": "E_pop = min(pop_density/DIV, 1); DIV = 90th pctile of "
-            "per-segment mean residential density over segments with any resident nearby."}
-    CD = Path(open("/tmp/ai4sr_correlate_dir.txt").read().strip()) if Path(
-        "/tmp/ai4sr_correlate_dir.txt").exists() else OVL
+    DIV = round(pctl[90], 1)  # saturate exposure at the 90th-pctile residential density
+    dump = {
+        "n_segments": int(all_d.size),
+        "n_pos_density": int(pos.size),
+        "density_per_km2_pctiles_over_pos": {
+            str(p): round(v, 1) for p, v in pctl.items()
+        },
+        "DIV_used": DIV,
+        "note": "E_pop = min(pop_density/DIV, 1); DIV = 90th pctile of "
+        "per-segment mean residential density over segments with any resident nearby.",
+    }
+    CD = (
+        Path(open("/tmp/ai4sr_correlate_dir.txt").read().strip())
+        if Path("/tmp/ai4sr_correlate_dir.txt").exists()
+        else OVL
+    )
     (CD / "pop_density_distribution.json").write_text(json.dumps(dump, indent=2))
-    print(f"  density pctiles/km2: {dump['density_per_km2_pctiles_over_pos']}  -> DIV={DIV}")
+    print(
+        f"  density pctiles/km2: {dump['density_per_km2_pctiles_over_pos']}  -> DIV={DIV}"
+    )
 
     # PASS 2: recompute E + SSS, rewrite enriched network + flagged geojson + summary.
     print("PASS 2 - rescoring ...")
@@ -181,17 +195,30 @@ def main():
                 cnt["gap_pos"] += 1
             if new_sss > 0:
                 cnt["flag"] += 1
-                worst.append((new_sss, p.get("name", ""), p["highway"], p["v_posted"],
-                              p["v_safe"], p.get("fatal_reduction_pct", 0), p.get("why", ""),
-                              p.get("posted_imputed", False)))
+                worst.append(
+                    (
+                        new_sss,
+                        p.get("name", ""),
+                        p["highway"],
+                        p["v_posted"],
+                        p["v_safe"],
+                        p.get("fatal_reduction_pct", 0),
+                        p.get("why", ""),
+                        p.get("posted_imputed", False),
+                    )
+                )
                 if not p.get("posted_imputed"):
                     cnt["flag_real"] += 1
 
         (FULLNET / f"sss_segments_{k}.geojson").write_text(json.dumps(fc))
-        flagged_feats = [f for f in feats if f["properties"]["sss"] > 0
-                         and f["properties"]["posted_imputed"] is False]
+        flagged_feats = [
+            f
+            for f in feats
+            if f["properties"]["sss"] > 0 and f["properties"]["posted_imputed"] is False
+        ]
         (WEBDATA / f"sss_flagged_{k}.geojson").write_text(
-            json.dumps({"type": "FeatureCollection", "features": flagged_feats}))
+            json.dumps({"type": "FeatureCollection", "features": flagged_feats})
+        )
 
         worst.sort(key=lambda x: x[0], reverse=True)
         flagged_real = [x for x in worst if not x[7]]
@@ -205,20 +232,37 @@ def main():
         summ = json.loads((BUILD / f"sss_summary_{k}.json").read_text())
         # counts are E-invariant: assert, don't recompute blindly
         assert summ["segments_total"] == cnt["total"], (k, "total drift")
-        assert summ["segments_flagged_real_posted"] == cnt["flag_real"], (k, "flag_real drift")
+        assert summ["segments_flagged_real_posted"] == cnt["flag_real"], (
+            k,
+            "flag_real drift",
+        )
         assert summ["segments_flagged_sss_gt0"] == cnt["flag"], (k, "flag drift")
         summ["sss_max"] = max(sss_vals) if sss_vals else 0
-        summ["sss_mean_flagged"] = round(sum(x[0] for x in worst) / max(len(worst), 1), 1)
-        summ["exposure_model"] = "POI-proximity OR WorldPop residential density (2020 constrained)"
+        summ["sss_mean_flagged"] = round(
+            sum(x[0] for x in worst) / max(len(worst), 1), 1
+        )
+        summ["exposure_model"] = (
+            "POI-proximity OR WorldPop residential density (2020 constrained)"
+        )
         summ["headline_priority_roads_real_posted"] = [
-            {"sss": s, "name": nm, "class": c, "posted_osm": vp, "safe": vs,
-             "fatal_reduction_pct": fr, "why": wy}
-            for (s, nm, c, vp, vs, fr, wy, _i) in headline]
+            {
+                "sss": s,
+                "name": nm,
+                "class": c,
+                "posted_osm": vp,
+                "safe": vs,
+                "fatal_reduction_pct": fr,
+                "why": wy,
+            }
+            for (s, nm, c, vp, vs, fr, wy, _i) in headline
+        ]
         (BUILD / f"sss_summary_{k}.json").write_text(json.dumps(summ, indent=2))
         tot_changed += cnt["total"]
 
     ds.close()
-    print(f"PASS 2 done: rescored {tot_changed:,} segments across {len(keys)} cities. DIV={DIV}")
+    print(
+        f"PASS 2 done: rescored {tot_changed:,} segments across {len(keys)} cities. DIV={DIV}"
+    )
 
 
 if __name__ == "__main__":

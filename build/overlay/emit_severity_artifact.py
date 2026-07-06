@@ -11,6 +11,7 @@ research/correlate-crash-refresh.md, then:
   python3 build/overlay/emit_severity_artifact.py <path-to-RTA_EDSA_2007-2016.xls>
 Defaults to the last verify-dir copy if no path is given.
 """
+
 import glob
 import json
 import sys
@@ -22,13 +23,17 @@ from scipy import stats
 ROOT = Path(__file__).resolve().parent.parent.parent
 WEBDATA = ROOT / "build" / "web" / "data"
 
+
 def find_xls():
     if len(sys.argv) > 1:
         return sys.argv[1]
     hits = sorted(glob.glob(str(ROOT / "tmp" / "verify-*" / "RTA_EDSA_2007-2016.xls")))
     if not hits:
-        sys.exit("EDSA xls not found; pass the path (see research/correlate-crash-refresh.md)")
+        sys.exit(
+            "EDSA xls not found; pass the path (see research/correlate-crash-refresh.md)"
+        )
     return hits[-1]
+
 
 df = pd.read_excel(find_xls())
 dt = pd.to_datetime(df["DATETIME_PST"], errors="coerce")
@@ -42,8 +47,14 @@ for h in range(24):
     m = hour == h
     n = int(m.sum())
     nc = int(casualty[m].sum())
-    by_hour.append({"hour": h, "n": n, "casualty": nc,
-                    "casualty_share_pct": round(100 * nc / max(n, 1), 2)})
+    by_hour.append(
+        {
+            "hour": h,
+            "n": n,
+            "casualty": nc,
+            "casualty_share_pct": round(100 * nc / max(n, 1), 2),
+        }
+    )
 
 peak_h = [7, 8, 9, 17, 18, 19]
 night_h = [0, 1, 2, 3, 4]
@@ -56,18 +67,36 @@ art = {
     "source": "Mendeley EDSA RTA 2007-2016 (MMDA / UP Diliman), n=%d crashes" % len(df),
     "corridor": "EDSA, Metro Manila",
     "by_hour": by_hour,
-    "peak": {"hours": peak_h, "crashes": n_pk, "per_hour": round(n_pk / len(peak_h)),
-             "casualty_share_pct": round(100 * c_pk / n_pk, 1)},
-    "night": {"hours": night_h, "crashes": n_ni, "per_hour": round(n_ni / len(night_h)),
-              "casualty_share_pct": round(100 * c_ni / n_ni, 1)},
+    "peak": {
+        "hours": peak_h,
+        "crashes": n_pk,
+        "per_hour": round(n_pk / len(peak_h)),
+        "casualty_share_pct": round(100 * c_pk / n_pk, 1),
+    },
+    "night": {
+        "hours": night_h,
+        "crashes": n_ni,
+        "per_hour": round(n_ni / len(night_h)),
+        "casualty_share_pct": round(100 * c_ni / n_ni, 1),
+    },
     "relative_risk_night_over_peak": round((c_ni / n_ni) / (c_pk / n_pk), 2),
-    "chi2": round(chi2, 1), "p_value": float(f"{p:.1e}"),
-    "n_casualty": int(casualty.sum()), "n_fatal": int((kt > 0).sum()),
-    "disclaimer": "Statistical indicators derived from public data. Patterns may have legitimate explanations."
+    "chi2": round(chi2, 1),
+    "p_value": float(f"{p:.1e}"),
+    "n_casualty": int(casualty.sum()),
+    "n_fatal": int((kt > 0).sum()),
+    "disclaimer": "Statistical indicators derived from public data. Patterns may have legitimate explanations.",
 }
 (WEBDATA / "severity_by_hour.json").write_text(json.dumps(art, indent=2))
-print("peak casualty share %.1f%% (%d/hr) vs night %.1f%% (%d/hr) | RR %.2f | chi2=%.0f p=%.1e"
-      % (art["peak"]["casualty_share_pct"], art["peak"]["per_hour"],
-         art["night"]["casualty_share_pct"], art["night"]["per_hour"],
-         art["relative_risk_night_over_peak"], art["chi2"], art["p_value"]))
+print(
+    "peak casualty share %.1f%% (%d/hr) vs night %.1f%% (%d/hr) | RR %.2f | chi2=%.0f p=%.1e"
+    % (
+        art["peak"]["casualty_share_pct"],
+        art["peak"]["per_hour"],
+        art["night"]["casualty_share_pct"],
+        art["night"]["per_hour"],
+        art["relative_risk_night_over_peak"],
+        art["chi2"],
+        art["p_value"],
+    )
+)
 print("wrote", WEBDATA / "severity_by_hour.json")

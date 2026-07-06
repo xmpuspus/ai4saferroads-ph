@@ -6,6 +6,7 @@ crash-density vs Speed-Safety-Score rank correlation at a ~550 m grid.
 
 Run: python3 build/overlay/validate_crashes.py
 """
+
 import json
 import math
 from collections import defaultdict
@@ -48,7 +49,9 @@ for f in feats:
     for x, y in c:
         index[(int(x / CELL), int(y / CELL))].append(si)
 
-crashes = [f["geometry"]["coordinates"] for f in json.loads(CRASH.read_text())["features"]]
+crashes = [
+    f["geometry"]["coordinates"] for f in json.loads(CRASH.read_text())["features"]
+]
 snapped = 0
 grid_crash, grid_sss = defaultdict(int), defaultdict(list)
 for lo, la in crashes:
@@ -64,11 +67,13 @@ for lo, la in crashes:
     if best is not None:
         snapped += 1
         segs[best]["n"] += 1
-        gk = (round(lo, 3), round(la, 3))   # ~110 m lon, coarser grid below
+        gk = (round(lo, 3), round(la, 3))  # ~110 m lon, coarser grid below
         grid_crash[(int(lo / 0.005), int(la / 0.005))] += 1
+
 
 def is_flag(p):
     return p["sss"] > 0 and p["posted_imputed"] is False
+
 
 flag_len = sum(s["len"] for s in segs if is_flag(s["p"]))
 tot_len = sum(s["len"] for s in segs)
@@ -82,12 +87,16 @@ for s in segs:
     k = (int(c[0] / 0.005), int(c[1] / 0.005))
     cell_sss[k].append(s["p"]["sss"])
     cell_len[k] += s["len"]
-cells = [k for k in cell_sss if cell_len[k] > 200]   # cells with enough road to be meaningful
+cells = [
+    k for k in cell_sss if cell_len[k] > 200
+]  # cells with enough road to be meaningful
 xs = [sum(cell_sss[k]) / len(cell_sss[k]) for k in cells]
-ys = [grid_crash.get(k, 0) / (cell_len[k] / 1000) for k in cells]   # crashes per km
+ys = [grid_crash.get(k, 0) / (cell_len[k] / 1000) for k in cells]  # crashes per km
+
 
 def spearman(x, y):
     n = len(x)
+
     def rank(a):
         idx = sorted(range(n), key=lambda i: a[i])
         r = [0] * n
@@ -100,6 +109,7 @@ def spearman(x, y):
                 r[idx[k]] = (i + j) / 2 + 1
             i = j + 1
         return r
+
     rx, ry = rank(x), rank(y)
     mx, my = sum(rx) / n, sum(ry) / n
     num = sum((rx[i] - mx) * (ry[i] - my) for i in range(n))
@@ -107,7 +117,9 @@ def spearman(x, y):
     dy = math.sqrt(sum((ry[i] - my) ** 2 for i in range(n)))
     return num / (dx * dy) if dx and dy else 0
 
+
 rho = spearman(xs, ys)
+
 
 # per-bucket table (matches validation.md): flagged real-posted / real-posted not flagged /
 # imputed-or-no-posted, with length (km), snapped crashes, and crashes per km
@@ -117,23 +129,31 @@ def bucket(s):
         return "imputed"
     return "flagged" if p["sss"] > 0 else "real_not_flagged"
 
+
 buckets = defaultdict(lambda: {"len": 0.0, "n": 0})
 for s in segs:
     b = buckets[bucket(s)]
     b["len"] += s["len"]
     b["n"] += s["n"]
-tbl = {k: {"km": round(v["len"] / 1000, 0), "crashes": v["n"],
-           "len_pct": round(100 * v["len"] / tot_len, 1),
-           "crash_pct": round(100 * v["n"] / max(snapped, 1), 1),
-           "per_km": round(v["n"] / (v["len"] / 1000), 2) if v["len"] else 0}
-       for k, v in buckets.items()}
+tbl = {
+    k: {
+        "km": round(v["len"] / 1000, 0),
+        "crashes": v["n"],
+        "len_pct": round(100 * v["len"] / tot_len, 1),
+        "crash_pct": round(100 * v["n"] / max(snapped, 1), 1),
+        "per_km": round(v["n"] / (v["len"] / 1000), 2) if v["len"] else 0,
+    }
+    for k, v in buckets.items()
+}
 
 res = {
-    "crashes_total": len(crashes), "snapped_le30m": snapped,
+    "crashes_total": len(crashes),
+    "snapped_le30m": snapped,
     "snapped_pct": round(100 * snapped / len(crashes), 1),
     "flagged_len_pct": round(100 * flag_len / tot_len, 1),
     "flagged_crash_pct": round(100 * flag_crashes / max(snapped, 1), 1),
-    "grid_cells": len(cells), "spearman_sss_vs_crashdensity": round(rho, 2),
+    "grid_cells": len(cells),
+    "spearman_sss_vs_crashdensity": round(rho, 2),
     "buckets": tbl,
 }
 print(json.dumps(res, indent=2))

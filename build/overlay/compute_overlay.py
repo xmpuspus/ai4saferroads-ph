@@ -14,6 +14,7 @@ density carried on the enriched network.
 Run: python3 build/overlay/compute_overlay.py [manila cebu davao ...]
 Needs the enriched network (build/_fullnet/sss_segments_<key>.geojson) + build/overlay/<cc>_rwi.csv.
 """
+
 import csv
 import json
 import math
@@ -31,13 +32,15 @@ OVL = ROOT / "build" / "overlay"
 sys.path.insert(0, str(ROOT / "build"))
 from sss_pipeline import CITIES  # noqa: E402
 
-RWI = {}                          # all cities are PH -> phl_rwi.csv (override per-key if needed)
-STEP = 0.015                      # ~1.6 km grid cells
-MIN_LEN = 250.0                   # require >=250 m of real-posted road in a cell to score it
+RWI = {}  # all cities are PH -> phl_rwi.csv (override per-key if needed)
+STEP = 0.015  # ~1.6 km grid cells
+MIN_LEN = 250.0  # require >=250 m of real-posted road in a cell to score it
 # Joshua Stevens bivariate palette (rows = SSS mismatch low->high, cols = wealth low->high)
-BIV = [["#e8e8e8", "#ace4e4", "#5ac8c8"],
-       ["#dfb0d6", "#a5add3", "#5698b9"],
-       ["#be64ac", "#8c62aa", "#3b4994"]]
+BIV = [
+    ["#e8e8e8", "#ace4e4", "#5ac8c8"],
+    ["#dfb0d6", "#a5add3", "#5698b9"],
+    ["#be64ac", "#8c62aa", "#3b4994"],
+]
 
 
 def seglen(coords):
@@ -93,7 +96,7 @@ def morans_i(cells, vals):
                 if nb in idx:
                     num += z[k] * z[idx[nb]]
                     W += 1
-    den = (z ** 2).sum()
+    den = (z**2).sum()
     if W == 0 or den == 0:
         return 0.0
     return (n / W) * (num / den)
@@ -112,7 +115,7 @@ def build_city(key):
     acc = {}  # (i,j) -> [gap*L, sss*L, dens*L, Lsum]
     for f in fc["features"]:
         p = f["properties"]
-        if p.get("posted_imputed") is not False:   # only real OSM posted limits
+        if p.get("posted_imputed") is not False:  # only real OSM posted limits
             continue
         coords = f["geometry"]["coordinates"]
         if len(coords) < 2:
@@ -159,19 +162,28 @@ def build_city(key):
     if nclen < 12:
         print(f"[skip] {key}: only {nclen} qualifying cells")
         return None
-    gap_a, sss_a, dens_a, rwi_a = (np.array(gap_v), np.array(sss_v),
-                                   np.array(dens_v), np.array(rwi_v))
+    gap_a, sss_a, dens_a, rwi_a = (
+        np.array(gap_v),
+        np.array(sss_v),
+        np.array(dens_v),
+        np.array(rwi_v),
+    )
 
     # 4) statistics (real, computed). Primary wealth finding uses GAP (E-independent).
-    rho = spearman(gap_a, rwi_a)                       # mismatch (gap) vs wealth  <- finding A
+    rho = spearman(gap_a, rwi_a)  # mismatch (gap) vs wealth  <- finding A
     p_rho = perm_p(gap_a, rwi_a, spearman, rho)
-    rho_sss = spearman(sss_a, rwi_a)                   # exposure-weighted SSS vs wealth (compare)
+    rho_sss = spearman(sss_a, rwi_a)  # exposure-weighted SSS vs wealth (compare)
     p_sss = perm_p(sss_a, rwi_a, spearman, rho_sss)
-    rho_dens = spearman(gap_a, dens_a)                 # mismatch (gap) vs crowding  <- new axis
+    rho_dens = spearman(gap_a, dens_a)  # mismatch (gap) vs crowding  <- new axis
     p_dens = perm_p(gap_a, dens_a, spearman, rho_dens)
-    moran = morans_i(cells, gap_v)                     # spatial clustering of the mismatch
-    p_moran = perm_p(np.arange(nclen, dtype=float), gap_a,
-                     lambda a, b: morans_i(cells, list(b)), moran, k=199)
+    moran = morans_i(cells, gap_v)  # spatial clustering of the mismatch
+    p_moran = perm_p(
+        np.arange(nclen, dtype=float),
+        gap_a,
+        lambda a, b: morans_i(cells, list(b)),
+        moran,
+        k=199,
+    )
 
     # 5) bivariate classes + GeoJSON cells (mismatch gap x wealth, and mismatch gap x crowding)
     g1, g2 = terciles(gap_a)
@@ -181,48 +193,91 @@ def build_city(key):
     for (i, j), gv, sv, dv, rv in zip(cells, gap_v, sss_v, dens_v, rwi_v):
         gt, rt, dt = t_of(gv, g1, g2), t_of(rv, r1, r2), t_of(dv, d1, d2)
         x0, y0 = w + j * STEP, s + i * STEP
-        feats.append({"type": "Feature",
-                      "geometry": {"type": "Polygon", "coordinates": [[
-                          [x0, y0], [x0 + STEP, y0], [x0 + STEP, y0 + STEP],
-                          [x0, y0 + STEP], [x0, y0]]]},
-                      "properties": {"gap": round(gv, 1), "sss": round(sv, 1),
-                                     "rwi": round(rv, 3), "pop_density": round(dv, 0),
-                                     "sss_t": gt, "rwi_t": rt, "cls": gt * 3 + rt,
-                                     "color": BIV[gt][rt],
-                                     "crowd_t": gt * 3 + dt, "color_crowd": BIV[gt][dt]}})
+        feats.append(
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [x0, y0],
+                            [x0 + STEP, y0],
+                            [x0 + STEP, y0 + STEP],
+                            [x0, y0 + STEP],
+                            [x0, y0],
+                        ]
+                    ],
+                },
+                "properties": {
+                    "gap": round(gv, 1),
+                    "sss": round(sv, 1),
+                    "rwi": round(rv, 3),
+                    "pop_density": round(dv, 0),
+                    "sss_t": gt,
+                    "rwi_t": rt,
+                    "cls": gt * 3 + rt,
+                    "color": BIV[gt][rt],
+                    "crowd_t": gt * 3 + dt,
+                    "color_crowd": BIV[gt][dt],
+                },
+            }
+        )
     (WEBDATA / f"overlay_{key}.geojson").write_text(
-        json.dumps({"type": "FeatureCollection", "features": feats}))
+        json.dumps({"type": "FeatureCollection", "features": feats})
+    )
 
     # plain-language direction (on the GAP-vs-wealth finding)
     if p_rho < 0.05 and rho < -0.15:
-        direction = ("poorer", "the worst speed-limit mismatch falls in the city's "
-                     "lower-wealth areas")
+        direction = (
+            "poorer",
+            "the worst speed-limit mismatch falls in the city's lower-wealth areas",
+        )
     elif p_rho < 0.05 and rho > 0.15:
-        direction = ("wealthier", "the worst speed-limit mismatch falls in the city's "
-                     "higher-wealth areas")
+        direction = (
+            "wealthier",
+            "the worst speed-limit mismatch falls in the city's higher-wealth areas",
+        )
     else:
-        direction = ("neither", "speed-limit mismatch shows no clear wealth pattern, "
-                     "it is spread across rich and poor areas alike")
+        direction = (
+            "neither",
+            "speed-limit mismatch shows no clear wealth pattern, "
+            "it is spread across rich and poor areas alike",
+        )
     if p_dens < 0.05 and rho_dens > 0.15:
         crowd_finding = "the worst speed-limit mismatch sits in the more crowded areas"
     elif p_dens < 0.05 and rho_dens < -0.15:
         crowd_finding = "the worst speed-limit mismatch sits in the less crowded areas"
     else:
-        crowd_finding = ("the size of the mismatch does not track how crowded a place is, "
-                         "crowding decides which roads get flagged rather than how large the "
-                         "gap is")
-    stats = {"key": key, "cells": nclen, "step_deg": STEP,
-             "spearman_rho": round(rho, 3), "spearman_p": round(p_rho, 4),
-             "spearman_rho_sss_wealth": round(rho_sss, 3), "spearman_p_sss_wealth": round(p_sss, 4),
-             "spearman_rho_gap_density": round(rho_dens, 3), "spearman_p_gap_density": round(p_dens, 4),
-             "crowd_finding": crowd_finding,
-             "morans_i": round(moran, 3), "morans_p": round(p_moran, 4),
-             "rwi_points_in_bbox": len(pts), "direction": direction[0],
-             "finding": direction[1], "mismatch_var": "gap_kmh", "biv": BIV}
+        crowd_finding = (
+            "the size of the mismatch does not track how crowded a place is, "
+            "crowding decides which roads get flagged rather than how large the "
+            "gap is"
+        )
+    stats = {
+        "key": key,
+        "cells": nclen,
+        "step_deg": STEP,
+        "spearman_rho": round(rho, 3),
+        "spearman_p": round(p_rho, 4),
+        "spearman_rho_sss_wealth": round(rho_sss, 3),
+        "spearman_p_sss_wealth": round(p_sss, 4),
+        "spearman_rho_gap_density": round(rho_dens, 3),
+        "spearman_p_gap_density": round(p_dens, 4),
+        "crowd_finding": crowd_finding,
+        "morans_i": round(moran, 3),
+        "morans_p": round(p_moran, 4),
+        "rwi_points_in_bbox": len(pts),
+        "direction": direction[0],
+        "finding": direction[1],
+        "mismatch_var": "gap_kmh",
+        "biv": BIV,
+    }
     (OVL / f"overlay_stats_{key}.json").write_text(json.dumps(stats, indent=2))
-    print(f"[OK]   {key}: {nclen} cells | gap~wealth rho={rho:+.3f}(p={p_rho:.3f}) | "
-          f"sss~wealth rho={rho_sss:+.3f}(p={p_sss:.3f}) | gap~dens rho={rho_dens:+.3f}(p={p_dens:.3f}) | "
-          f"Moran(gap)={moran:+.3f}(p={p_moran:.3f})")
+    print(
+        f"[OK]   {key}: {nclen} cells | gap~wealth rho={rho:+.3f}(p={p_rho:.3f}) | "
+        f"sss~wealth rho={rho_sss:+.3f}(p={p_sss:.3f}) | gap~dens rho={rho_dens:+.3f}(p={p_dens:.3f}) | "
+        f"Moran(gap)={moran:+.3f}(p={p_moran:.3f})"
+    )
     return stats
 
 
@@ -231,8 +286,11 @@ def main():
     for k in want:
         build_city(k)
     # rebuild the index from EVERY city that has stats on disk (incremental-safe)
-    out = [json.loads((OVL / f"overlay_stats_{k}.json").read_text())
-           for k in CITIES if (OVL / f"overlay_stats_{k}.json").exists()]
+    out = [
+        json.loads((OVL / f"overlay_stats_{k}.json").read_text())
+        for k in CITIES
+        if (OVL / f"overlay_stats_{k}.json").exists()
+    ]
     (WEBDATA / "overlay_index.json").write_text(json.dumps(out, indent=2))
     print(f"\nWrote overlay_index.json ({len(out)} cities)")
 

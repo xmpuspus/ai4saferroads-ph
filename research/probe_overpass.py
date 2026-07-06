@@ -6,6 +6,7 @@ EDSA corridor). Saves raw JSON to research/ and prints a summary. No mock data.
 
 Run: python3 research/probe_overpass.py
 """
+
 import json
 import sys
 import time
@@ -51,9 +52,13 @@ def fetch(query, label):
     for url in MIRRORS:
         try:
             data = urllib.parse.urlencode({"data": query}).encode()
-            req = urllib.request.Request(url, data=data, headers={
-                "User-Agent": "ai4saferroads-ph-feasibility-probe/0.1 (personal research)"
-            })
+            req = urllib.request.Request(
+                url,
+                data=data,
+                headers={
+                    "User-Agent": "ai4saferroads-ph-feasibility-probe/0.1 (personal research)"
+                },
+            )
             with urllib.request.urlopen(req, timeout=130) as r:
                 raw = r.read().decode("utf-8", "replace")
             j = json.loads(raw)
@@ -97,23 +102,40 @@ def main():
             name_present += 1
 
     total = len(ways)
-    drivable = {"motorway", "trunk", "primary", "secondary", "tertiary",
-                "unclassified", "residential", "living_street", "service",
-                "motorway_link", "trunk_link", "primary_link", "secondary_link",
-                "tertiary_link"}
+    drivable = {
+        "motorway",
+        "trunk",
+        "primary",
+        "secondary",
+        "tertiary",
+        "unclassified",
+        "residential",
+        "living_street",
+        "service",
+        "motorway_link",
+        "trunk_link",
+        "primary_link",
+        "secondary_link",
+        "tertiary_link",
+    }
     drivable_ways = [w for w in ways if w.get("tags", {}).get("highway") in drivable]
-    drivable_ms = sum(1 for w in drivable_ways
-                      if "maxspeed" in w.get("tags", {}))
+    drivable_ms = sum(1 for w in drivable_ways if "maxspeed" in w.get("tags", {}))
 
     print("\n================ ROAD NETWORK PROBE ================")
     print(f"AOI bbox (S,W,N,E): {BBOX}  (~5.5km x 6.6km, Metro Manila core)")
     print(f"Total highway ways:        {total}")
     print(f"Drivable ways:             {len(drivable_ways)}")
-    print(f"Ways with maxspeed tag:    {maxspeed_present} "
-          f"({maxspeed_present/total*100:.1f}% of all highways)")
-    print(f"Drivable w/ maxspeed:      {drivable_ms} "
-          f"({drivable_ms/max(len(drivable_ways),1)*100:.1f}% of drivable)")
-    print(f"Ways with name:            {name_present} ({name_present/total*100:.1f}%)")
+    print(
+        f"Ways with maxspeed tag:    {maxspeed_present} "
+        f"({maxspeed_present / total * 100:.1f}% of all highways)"
+    )
+    print(
+        f"Drivable w/ maxspeed:      {drivable_ms} "
+        f"({drivable_ms / max(len(drivable_ways), 1) * 100:.1f}% of drivable)"
+    )
+    print(
+        f"Ways with name:            {name_present} ({name_present / total * 100:.1f}%)"
+    )
     print(f"Ways with sidewalk tag:    {sidewalk_present}")
     print(f"Ways with lanes tag:       {lanes_present}")
     print(f"Ways with lit tag:         {lit_present}")
@@ -142,7 +164,9 @@ def main():
         "drivable_ways": len(drivable_ways),
         "maxspeed_present": maxspeed_present,
         "maxspeed_pct_all": round(maxspeed_present / total * 100, 1),
-        "drivable_maxspeed_pct": round(drivable_ms / max(len(drivable_ways), 1) * 100, 1),
+        "drivable_maxspeed_pct": round(
+            drivable_ms / max(len(drivable_ways), 1) * 100, 1
+        ),
         "name_pct": round(name_present / total * 100, 1),
         "sidewalk_present": sidewalk_present,
         "lanes_present": lanes_present,
@@ -150,8 +174,10 @@ def main():
         "maxspeed_values": dict(maxspeed_vals.most_common()),
     }
     (OUT / "probe_overpass_summary.json").write_text(json.dumps(summary, indent=2))
-    print(f"\nSaved: probe_overpass_summary.json, probe_overpass_roads.json, "
-          f"probe_overpass_pois.json in {OUT}")
+    print(
+        f"\nSaved: probe_overpass_summary.json, probe_overpass_roads.json, "
+        f"probe_overpass_pois.json in {OUT}"
+    )
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@ same incident. Prints the recomputed count so copy can be corrected to it.
 
 Run: python3 build/overlay/emit_crashes_manila.py <path-to-mmda_traffic.csv>
 """
+
 import csv
 import glob
 import json
@@ -15,22 +16,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 WEBDATA = ROOT / "build" / "web" / "data"
 
+
 def find_csv():
     if len(sys.argv) > 1:
         return sys.argv[1]
     hits = sorted(glob.glob(str(ROOT / "tmp" / "verify-*" / "mmda_traffic.csv")))
     if not hits:
-        sys.exit("mmda_traffic.csv not found; pass the path (see research/correlate-crash-refresh.md)")
+        sys.exit(
+            "mmda_traffic.csv not found; pass the path (see research/correlate-crash-refresh.md)"
+        )
     return hits[-1]
 
+
 CRASH_KEYS = ("ACCIDENT", "COLLISION", "HIT", "ON FIRE", "SIDESWIPE", "SIDE SWIPE")
+
 
 def is_crash(t):
     t = t.upper()
     return any(k in t for k in CRASH_KEYS)
 
+
 def ok_ll(la, lo):
     return 13.5 < la < 15.5 and 120.0 < lo < 122.0
+
 
 rows = list(csv.DictReader(open(find_csv())))
 feats, seen, years = [], set(), set()
@@ -47,18 +55,27 @@ for r in rows:
     if key in seen:
         continue
     seen.add(key)
-    d = (r.get("Date") or "")
+    d = r.get("Date") or ""
     if len(d) >= 4:
         years.add(d[:4])
-    feats.append({"type": "Feature",
-                  "geometry": {"type": "Point", "coordinates": [round(lo, 6), round(la, 6)]},
-                  "properties": {
-                      "date": d, "time": (r.get("Time") or "").strip(),
-                      "place": (r.get("Location") or "").strip().title(),
-                      "city": (r.get("City") or "").strip(),
-                      "type": (r.get("Type") or "").strip().title(),
-                      "involved": (r.get("Involved") or "").strip().upper()}})
+    feats.append(
+        {
+            "type": "Feature",
+            "geometry": {"type": "Point", "coordinates": [round(lo, 6), round(la, 6)]},
+            "properties": {
+                "date": d,
+                "time": (r.get("Time") or "").strip(),
+                "place": (r.get("Location") or "").strip().title(),
+                "city": (r.get("City") or "").strip(),
+                "type": (r.get("Type") or "").strip().title(),
+                "involved": (r.get("Involved") or "").strip().upper(),
+            },
+        }
+    )
 
 (WEBDATA / "crashes_manila.geojson").write_text(
-    json.dumps({"type": "FeatureCollection", "features": feats}))
-print(f"crashes: {len(feats)} (years {min(years)}-{max(years)}) -> crashes_manila.geojson")
+    json.dumps({"type": "FeatureCollection", "features": feats})
+)
+print(
+    f"crashes: {len(feats)} (years {min(years)}-{max(years)}) -> crashes_manila.geojson"
+)
