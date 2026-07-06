@@ -1,0 +1,8 @@
+{
+  "name": "ai4saferroads-ph-tooling",
+  "private": true,
+  "description": "Screenshot, e2e and demo-recording tooling for the map (playwright chromium)",
+  "devDependencies": {
+    "playwright": "1.58.2"
+  }
+}

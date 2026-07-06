@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install ruff
+        run: pip install ruff==0.15.0 pytest
+      - name: Lint
+        run: ruff check .
+      - name: Format check
+        run: ruff format --check .
+      - name: Unit tests
+        run: python3 -m pytest tests/ -q
+      - name: E2E invariants (pmtiles is a build artifact, skipped here)
+        run: E2E_SKIP_PMTILES=1 bash tests/e2e.sh
