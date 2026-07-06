@@ -1484,7 +1484,7 @@ map.on('load',async()=>{
       `${signPair(p.v_posted,p.v_safe,true)}`+
       `<div class="signcap">${t('popNowSafe')}${p.posted_imputed===true||p.posted_imputed==='true'?` &middot; <span style="text-transform:none">${t('baGuess')}</span>`:''}</div>`+
       `<div class="oversafe">${t('popOver',Math.max(0,p.v_posted-p.v_safe))}</div>`+
-      (p.v_design?`<div style="color:#9DB4CC;font-family:var(--font-data);font-size:11px;margin-top:5px">${t('popBuilt',p.v_design)}</div>`:'')+
+      (p.v_design&&(p.posted_imputed===true||p.posted_imputed==='true'||p.v_design>p.v_posted)?`<div style="color:#9DB4CC;font-family:var(--font-data);font-size:11px;margin-top:5px">${t('popBuilt',p.v_design)}</div>`:'')+
       `<div style="color:#cdd6e0;margin-top:6px">${whyPlain(p)}</div>`+
       `<div style="color:var(--muted);font-family:var(--font-data);margin-top:4px">${t('popCuts',Math.round(p.fatal_reduction_pct))}</div>`+
       (p.sss>0?`<div class="survival">${t('survival',p.v_posted,p.v_safe,dp,ds)}</div>`:'')+

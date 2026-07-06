@@ -57,6 +57,10 @@ for c in cities:
     )
     check((DATA / f"pois_{key}.geojson").exists(), f"{key}: pois shipped")
     seg_p = FULLNET / f"sss_segments_{key}.geojson"
+    # _fullnet is a gitignored build artifact like the pmtiles; CI clones do not have it
+    if SKIP_PMTILES and not seg_p.exists():
+        print(f"[SKIP] {key}: full network geojson present (E2E_SKIP_PMTILES=1)")
+        continue
     check(seg_p.exists(), f"{key}: full network geojson present")
     if not seg_p.exists():
         continue
