@@ -152,6 +152,48 @@ within 100 m (10% Cebu, 4% Davao). Congestion is temporary, the built form and t
 calming are not. Reproduce with <code>build/overlay/emit_severity_artifact.py</code> and
 <code>build/overlay/satellite_evidence.py</code>.</p>
 
+<h2 id="numbers">The numbers behind the overlays</h2>
+<p>The map states overlay findings in plain words ("the two maps agree about 4 times in 10").
+The exact statistics behind those words load here, straight from the same file the map reads
+(<code>data/overlay_index.json</code>), so this table can never drift from what the map shows.
+&rho; is Spearman's rank correlation between the two quantities across ~1.6 km grid cells
+(1 = always move together, 0 = unrelated); p is the chance of seeing a link that strong in
+random data; Moran's I measures how much neighbouring cells resemble each other (spatial
+autocorrelation), a caution that the cells are not independent samples.</p>
+<table id="numtable" class="src"><thead><tr><th>City</th><th>Cells</th>
+<th>Mismatch &times; wealth &rho;</th><th>p</th><th>Moran's I</th>
+<th>Gap &times; crowding &rho;</th><th>p</th></tr></thead><tbody></tbody></table>
+<p class="src" id="numnote">The Manila swipe compare also reports an agreement between
+flagged-road density and crash density: Spearman +0.41 over 1,222 grid cells, length-normalized
+(see <code>docs/validation.md</code> in the repository for method and caveats).</p>
+<script>
+fetch('data/overlay_index.json').then(function(r){return r.json();}).then(function(ovi){
+  var tb=document.querySelector('#numtable tbody');
+  tb.innerHTML=ovi.map(function(o){return '<tr><td>'+o.key+'</td><td>'+(o.cells||'')+'</td>'+
+    '<td>'+(o.spearman_rho!=null?o.spearman_rho:'')+'</td><td>'+(o.spearman_p!=null?o.spearman_p:'')+'</td>'+
+    '<td>'+(o.morans_i!=null?o.morans_i:'')+'</td>'+
+    '<td>'+(o.spearman_rho_gap_density!=null?o.spearman_rho_gap_density:'')+'</td>'+
+    '<td>'+(o.spearman_p_gap_density!=null?o.spearman_p_gap_density:'')+'</td></tr>';}).join('');
+}).catch(function(e){document.getElementById('numnote').insertAdjacentHTML('afterend',
+  '<p class="src">Could not load overlay_index.json just now; the numbers ship with the repository.</p>');});
+</script>
+
+<h2>Embed this map</h2>
+<p>The map is a static page and can be embedded in an article or dashboard with one iframe.
+The <code>#</code> fragment picks the city (and optionally a road), <code>?embed=1</code>
+hides the panel chrome:</p>
+<p class="src"><code>&lt;iframe src="https://ai4saferroads-ph.vercel.app/?embed=1#cebu"
+width="100%" height="480" style="border:0" loading="lazy"
+title="Speed safety map of Cebu City"&gt;&lt;/iframe&gt;</code></p>
+<p class="src">Attribution is drawn on the map itself. A link back to the full map appears
+in the corner of the embed.</p>
+
+<h2>Privacy</h2>
+<p>No login, no account, no tracking cookies. Map tiles load from Esri (satellite) and CARTO
+(dark basemap); like any tile server, those services see your IP address and the map areas you
+request. Anonymous page counts run through Vercel Web Analytics, which uses no cookies and no
+cross-site identifiers. Nothing you search, tap, or share on this map is stored by us.</p>
+
 <h2>7. Limitations</h2>
 <ul>
 <li>OpenStreetMap posted-limit coverage varies by city (dense in Metro Manila, thin in

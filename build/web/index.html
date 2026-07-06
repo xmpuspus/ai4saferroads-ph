@@ -10,12 +10,15 @@
 <meta property="og:image" content="https://ai4saferroads-ph.vercel.app/og-card.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="og:type" content="website" />
-<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"
-  integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous" />
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
-  integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/pmtiles@3.0.7/dist/pmtiles.js"></script>
-<script src="https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js"></script>
+<link href="vendor/maplibre-gl.css" rel="stylesheet"
+  integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" />
+<script>window.__vendorFail=function(name){window.__vendorErrs=(window.__vendorErrs||[]).concat(name);};</script>
+<script src="vendor/maplibre-gl.js"
+  integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
+  onerror="window.__vendorFail('maplibre-gl.js')"></script>
+<script src="vendor/pmtiles.js" onerror="window.__vendorFail('pmtiles.js')"></script>
+<script src="vendor/h3-js.umd.js" onerror="window.__vendorFail('h3-js.umd.js')"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 <style>
   @font-face{font-family:"IBM Plex Sans Condensed";src:url(fonts/IBMPlexSansCondensed-600.woff2) format("woff2");font-weight:600;font-display:swap}
   @font-face{font-family:"IBM Plex Sans Condensed";src:url(fonts/IBMPlexSansCondensed-700.woff2) format("woff2");font-weight:700;font-display:swap}
@@ -218,7 +221,7 @@
     details.more>summary .lgrp-sub{display:none}
     .panel.collapsed{max-height:none;overflow:visible}
     .panel.collapsed .sub,.panel.collapsed #panelbody{display:none}
-    .stamp{display:none}
+    .stamp{font-size:9.5px;padding:5px 8px;bottom:14px}
     #seehow.show{display:block;animation:ctapulse 2.4s ease-in-out infinite}
     /* guided-build on a phone: drop the panel to a compact bottom card showing only the
        step, so the map (where the dots and the red->green flip happen) stays visible above. */
@@ -254,122 +257,542 @@
   .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip{border-top-color:rgba(13,17,24,.94)}
   .maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:rgba(13,17,24,.94)}
   .maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:rgba(13,17,24,.94)}
+  /* language toggle: small EN | FIL segmented control, inline beside the city selector */
+  .langtoggle{display:flex;flex:none;align-self:stretch;border:1px solid var(--line);
+    border-radius:9px;overflow:hidden;background:rgba(255,255,255,.07)}
+  .row2 select{flex:1;min-width:0}
+  .sub2 a{color:#86AED2}
+  .langtoggle button{background:transparent;color:var(--muted);border:0;padding:6px 9px;font-size:11px;
+    font-weight:700;cursor:pointer;font-family:inherit}
+  .langtoggle button[aria-pressed=true]{background:var(--accent);color:#160a08}
+  /* my-location map control, styled like the NavigationControl group beside it */
+  .mylocbtn{position:absolute;bottom:96px;right:10px;z-index:5;width:29px;height:29px;border:0;
+    border-radius:4px;background:#fff;color:#333;font-size:15px;cursor:pointer;box-shadow:0 0 0 2px rgba(0,0,0,.1)}
+  .mylocbtn:hover{background:#f2f2f2}
+  /* toast: "Link copied" and similar one-line confirmations */
+  #toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%) translateY(8px);z-index:9;
+    padding:9px 16px;border-radius:20px;font-size:12.5px;font-weight:600;opacity:0;pointer-events:none;
+    transition:opacity .2s ease,transform .2s ease}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  /* share row under the before/after card and the road popup */
+  .sharerow{display:flex;gap:7px;margin-top:9px}
+  .sharerow button{flex:1;background:#0E1116;border:1px solid var(--line);border-radius:8px;color:var(--ink);
+    font-weight:600;font-size:11.5px;padding:7px 6px;cursor:pointer;font-family:inherit}
+  .sharerow button:hover{border-color:var(--focus)}
+  /* LGU letter modal: a simple centered card over a dim backdrop */
+  #lgumodal{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;
+    background:rgba(6,8,12,.66);padding:20px}
+  #lgumodal.show{display:flex}
+  #lgumodal .card2{max-width:420px;width:100%;max-height:82vh;overflow:auto;padding:18px 20px;text-align:left}
+  #lgumodal h3{margin:0 0 8px;font-family:var(--font-display);font-size:17px}
+  #lgumodal textarea{width:100%;min-height:220px;background:#0E1116;color:var(--ink);border:1px solid var(--line);
+    border-radius:9px;padding:10px;font-size:11.5px;line-height:1.5;font-family:var(--font-body);resize:vertical}
+  #lgumodal .lgu-actions{display:flex;gap:8px;margin-top:11px}
+  #lgumodal .lgu-actions a,#lgumodal .lgu-actions button{flex:1;text-align:center;background:var(--accent);
+    color:#160a08;border:0;border-radius:9px;padding:9px;font-weight:700;font-size:12.5px;cursor:pointer;
+    text-decoration:none;font-family:inherit}
+  #lgumodal .lgu-actions .ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  #lguclose{position:absolute;top:10px;right:12px;background:transparent;border:0;color:var(--muted);
+    font-size:18px;cursor:pointer}
+  /* my-street survival line inside the popup / before-after card */
+  .survival{font-size:11px;color:#cdd6e0;margin-top:6px;line-height:1.5}
+  .survival a{color:#86AED2}
+  /* embed mode: hide panel chrome, keep map + banner; a small link back to the full site */
+  body.embed .panel,body.embed .stamp,body.embed #seehow,body.embed #cmpexit{display:none !important}
+  #embedback{display:none;position:absolute;bottom:14px;left:14px;z-index:6;font-size:11px;padding:7px 11px;
+    color:var(--ink);text-decoration:none}
+  body.embed #embedback{display:block}
+  /* route-check mode: a small floating instruction pill + results panel */
+  #routepill{display:none;position:fixed;left:50%;top:70px;transform:translateX(-50%);z-index:6;
+    padding:9px 16px;font-size:12.5px;font-weight:600}
+  #routepill.show{display:block}
+  #routebox{margin-top:9px}
+  #routebox .rr{font-size:11.5px;padding:4px 0;border-bottom:1px dashed var(--line)}
+  /* city-compare bars, drawn client-side from cities.json (already loaded, no new fetch) */
+  #cmpwrap{margin-top:8px}
+  .cmprow{display:flex;align-items:center;gap:7px;font-size:11px;margin:4px 0}
+  .cmprow .cnm{width:84px;flex:0 0 auto;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cmprow .cbar{flex:1;height:9px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden}
+  .cmprow .cbar i{display:block;height:100%;background:var(--accent);border-radius:5px}
+  .cmprow.me .cnm{color:#fff;font-weight:700}
+  .cmprow .cval{width:36px;flex:0 0 auto;text-align:right;font-family:var(--font-data);color:var(--muted)}
+  @media print{
+    html,body{background:#fff !important;overflow:visible}
+    body *{visibility:hidden}
+    #printview,#printview *{visibility:visible}
+    #printview{display:block !important;position:absolute;top:0;left:0;width:100%;background:#fff;color:#111;padding:24px}
+    #printview h1{color:#111;font-size:22px}
+    #printview table{width:100%;border-collapse:collapse;font-size:12px}
+    #printview th,#printview td{border:1px solid #999;padding:5px 7px;text-align:left}
+    #printview .pdisc{font-size:10.5px;color:#444;margin-top:14px}
+  }
+  #printview{display:none}
 </style>
 </head>
 <body>
 <div id="map"></div>
-<div class="topkey" id="topkey">Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour,
+<div class="topkey" id="topkey" data-i18n-html="bannerScore">Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour,
   <span class="tk-ramp score" aria-hidden="true"></span><small>the more the speed limit needs to come down.</small></div>
 <div class="panel glass" role="region" aria-label="Current vs proposed speed limits, controls and findings">
   <button id="panelToggle" class="ptoggle" aria-label="Collapse panel" aria-expanded="true">&#9652;</button>
-  <h1>Is speed the problem <span class="em">when traffic keeps us under 30?</span></h1>
-  <p class="sub">Yes, but not the average speed. Traffic makes the road slow. The road itself is built for far more, and that is the speed people meet the moment it clears. This maps where that happens next to people, across 51 cities.</p>
+  <h1 id="h1title" data-i18n-html="h1Title">Is speed the problem <span class="em">when traffic keeps us under 30?</span></h1>
+  <p class="sub" data-i18n="h1_lead">Yes, but not the average speed. Traffic makes the road slow. The road itself is built for far more, and that is the speed people meet the moment it clears. This maps where that happens next to people, across 51 cities.</p>
   <div class="row2">
     <select id="city" aria-label="City"></select>
+    <div class="langtoggle" id="langtoggle" role="group" aria-label="Language">
+      <button data-lang="en" aria-pressed="true">EN</button>
+      <button data-lang="fil" aria-pressed="false">FIL</button>
+    </div>
   </div>
   <div id="panelbody">
   <div id="speedq" class="speedq">
-    <div class="sq-lead">Total crashes peak in rush-hour traffic, when the road is fullest. But the crashes that happen when the road <b>clears</b> are twice as likely to injure or kill.</div>
+    <div class="sq-lead" data-i18n-html="sqLead">Total crashes peak in rush-hour traffic, when the road is fullest. But the crashes that happen when the road <b>clears</b> are twice as likely to injure or kill.</div>
     <button id="sqbtn" class="sqbtn" aria-expanded="false">See the evidence <span class="chev">&#9662;</span></button>
     <div id="sqbody" hidden>
-      <div class="sq-h">1 &middot; The harm hides in the clear-road hours</div>
+      <div class="sq-h" data-i18n-html="sqH1">1 &middot; The harm hides in the clear-road hours</div>
       <div id="sevchart" aria-hidden="true"></div>
       <div class="sq-cap" id="sevcap"></div>
-      <div class="sq-note">On EDSA, total crashes rise and fall with traffic. But the share of crashes that injure or kill roughly doubles between midnight and 5am. That is when the road finally clears and vehicles reach the speed it is built for. The clear-road hours have less enforcement and more drunk driving too, so this points to speed, it does not prove it alone.</div>
-      <div class="sq-h">2 &middot; From space, these roads are built for speed</div>
+      <div class="sq-note" data-i18n-html="sqNote1">On EDSA, total crashes rise and fall with traffic. But the share of crashes that injure or kill roughly doubles between midnight and 5am. That is when the road finally clears and vehicles reach the speed it is built for. The clear-road hours have less enforcement and more drunk driving too, so this points to speed, it does not prove it alone.</div>
+      <div class="sq-h" data-i18n-html="sqH2">2 &middot; From space, these roads are built for speed</div>
       <div id="satstrip"></div>
-      <div class="sq-note">The map data has no road widths here. The satellite shows what the flagged roads are, wide straight multi-lane strips cutting through dense housing. Daytime traffic comes and goes. The road itself stays.</div>
-      <div class="sq-h">3 &middot; The fix is physical, not a sign</div>
-      <div class="sq-note">A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>21%</b> of Manila's flagged roads have any traffic calming within 100 m, 10% in Cebu, 4% in Davao.</div>
-      <div class="sq-foot">Flagged for review, not an accusation. Statistical indicators from public data. Patterns may have legitimate explanations.</div>
+      <div class="sq-note" data-i18n-html="sqNote2">The map data has no road widths here. The satellite shows what the flagged roads are, wide straight multi-lane strips cutting through dense housing. Daytime traffic comes and goes. The road itself stays.</div>
+      <div class="sq-h" data-i18n-html="sqH3">3 &middot; The fix is physical, not a sign</div>
+      <div class="sq-note" data-i18n-html="sqNote3">A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>21%</b> of Manila's flagged roads have any traffic calming within 100 m, 10% in Cebu, 4% in Davao.</div>
+      <div class="sq-foot" data-i18n="sqFoot">Flagged for review, not an accusation. Statistical indicators from public data. Patterns may have legitimate explanations.</div>
     </div>
   </div>
-  <div class="row2"><input type="search" id="find" placeholder="Find a road…" aria-label="Find a road" /></div>
+  <div class="row2"><input type="search" id="find" placeholder="Find a road…" data-i18n-ph="findPh" aria-label="Find a road" /></div>
   <div id="stats"></div>
   <div id="badetail" hidden></div>
-  <div class="sec">Worst roads</div>
+  <div class="sec" data-i18n="worstRoads">Worst roads</div>
   <div id="roads"></div>
-  <button id="buildbtn" class="bigbtn" aria-pressed="false">&#9654; Show me how it works, step by step</button>
+  <button id="buildbtn" class="bigbtn" aria-pressed="false" data-i18n-html="buildBtn">&#9654; Show me how it works, step by step</button>
   <div id="buildstep" hidden></div>
   <div class="actions2">
-    <button id="crit" class="act" aria-pressed="false">The worst roads<small>one at a time</small></button>
-    <a class="act simbtn" href="sim.html">Why the limit matters<small>60 vs 30 km/h</small></a>
+    <button id="crit" class="act" aria-pressed="false"><span data-i18n="critLabel">The worst roads</span><small data-i18n="critSmall">one at a time</small></button>
+    <a class="act simbtn" id="simlink" href="sim.html"><span data-i18n="simLabel">Why the limit matters</span><small data-i18n="simSmall">60 vs 30 km/h</small></a>
   </div>
   <div id="stepper" hidden></div>
   <details class="more" id="layers">
-    <summary><svg class="licon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Layers <span class="lgrp-sub">base map &middot; road colour &middot; overlays</span><span class="chev">&#9662;</span></summary>
-    <div class="llbl" style="margin-top:2px">Base map</div>
+    <summary><svg class="licon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Layers <span class="lgrp-sub" data-i18n-html="layersSub">base map &middot; road colour &middot; overlays</span><span class="chev">&#9662;</span></summary>
+    <div class="llbl" style="margin-top:2px" data-i18n="baseMap">Base map</div>
     <div class="seg" id="base" role="group" aria-label="Basemap">
-      <button data-v="sat" aria-pressed="false">Satellite</button>
-      <button data-v="dark" aria-pressed="true">Dark</button>
+      <button data-v="sat" aria-pressed="false" data-i18n="satellite">Satellite</button>
+      <button data-v="dark" aria-pressed="true" data-i18n="dark">Dark</button>
     </div>
-    <div class="llbl">Road colour</div>
+    <div class="llbl" data-i18n="roadColour">Road colour</div>
     <div class="roadmode" id="roadmode">
       <div class="seg" role="group" aria-label="Road colour">
-        <button data-m="score" aria-pressed="true">Risk</button>
-        <button data-m="current" aria-pressed="false">Now</button>
-        <button data-m="proposed" aria-pressed="false">Safe</button>
+        <button data-m="score" aria-pressed="true" data-i18n="risk">Risk</button>
+        <button data-m="current" aria-pressed="false" data-i18n="now">Now</button>
+        <button data-m="proposed" aria-pressed="false" data-i18n="safe">Safe</button>
       </div></div>
-    <div class="llbl">Overlays</div>
-    <button id="vrubtn" class="toggle" aria-pressed="false">What makes them dangerous</button>
+    <div class="llbl" data-i18n="overlays">Overlays</div>
+    <button id="vrubtn" class="toggle" aria-pressed="false" data-i18n="vruBtn">What makes them dangerous</button>
     <div class="vrukey" id="vrukey" style="display:none"><i style="background:#E0B354"></i>school <i style="background:#D98C5F"></i>market <i style="background:#CE8296"></i>hospital <i style="background:#8E86C4"></i>worship <i style="background:#5B8DB8"></i>transit</div>
-    <button id="crashbtn" class="toggle" aria-pressed="false">Where crashes really happened (Manila)</button>
+    <button id="crashbtn" class="toggle" aria-pressed="false" data-i18n="crashBtn">Where crashes really happened (Manila)</button>
     <div class="crashnote" id="crashnote" hidden></div>
-    <button id="cmpbtn" class="toggle" aria-pressed="false">Swipe to compare our map with real crashes (Manila)</button>
-    <button id="wealthbtn" class="toggle" aria-pressed="false">Is the danger about wealth?</button>
+    <button id="cmpbtn" class="toggle" aria-pressed="false" data-i18n="cmpBtn">Swipe to compare our map with real crashes (Manila)</button>
+    <button id="wealthbtn" class="toggle" aria-pressed="false" data-i18n="wealthBtn">Is the danger about wealth?</button>
     <div id="wealthbox" hidden></div>
-    <button id="crowdbtn" class="toggle" aria-pressed="false">Is the danger about crowding?</button>
+    <button id="crowdbtn" class="toggle" aria-pressed="false" data-i18n="crowdBtn">Is the danger about crowding?</button>
     <div id="crowdbox" hidden></div>
+    <button id="routebtn" class="toggle" aria-pressed="false" data-i18n="routeBtn">Check a route (tap two points)</button>
+    <div id="routebox" hidden></div>
+  </details>
+  <details class="infodet" id="cmpdet">
+    <summary data-i18n="howCompare">How does my city compare</summary>
+    <div id="cmpwrap"></div>
   </details>
   <details class="infodet">
-    <summary>How to read the map</summary>
+    <summary data-i18n="howRead">How to read the map</summary>
     <div class="ramp" id="legramp" aria-hidden="true"></div>
     <div class="rl" id="legrl"><span>already safe</span><span>over the safe speed</span><span>most over</span></div>
     <div class="legend">
-      <div id="leglead"><i style="border-color:#ff3b3b"></i>Bright glow. The <b>speed limit is higher than the safe speed</b>. The deeper the colour, the bigger the gap between the limit now and the safe one.</div>
-      <div><i style="border-top-style:dashed;border-color:#7587a0"></i>Faint dashed. The limit is a <b>guess</b> from the road type, so it is left out of the counts.</div>
-      <div><i style="border-color:#46566b"></i>Thin grey. Every other street, where the limit already fits.</div>
+      <div id="leglead" data-i18n-html="legLeadScore"><i style="border-color:#ff3b3b"></i>Bright glow. The <b>speed limit is higher than the safe speed</b>. The deeper the colour, the bigger the gap between the limit now and the safe one.</div>
+      <div data-i18n-html="legGuess"><i style="border-top-style:dashed;border-color:#7587a0"></i>Faint dashed. The limit is a <b>guess</b> from the road type, so it is left out of the counts.</div>
+      <div data-i18n-html="legGrey"><i style="border-color:#46566b"></i>Thin grey. Every other street, where the limit already fits.</div>
     </div>
   </details>
-  <p class="foot"><a href="#" id="resetbtn">&#8634; Reset view</a> &middot; <a href="methodology.html">Method and sources</a> ·
-    <a id="dl" href="#" download>Download this city's data</a><br>
+  <p class="foot"><a href="#" id="resetbtn" data-i18n-html="resetView">&#8634; Reset view</a> &middot; <a href="methodology.html" data-i18n="methodLink">Method and sources</a> ·
+    <a id="dl" href="#" download data-i18n="dlLabel">Download this city's data</a> ·
+    <a id="dlcsv" href="#" data-i18n="dlCsvLabel">as spreadsheet (CSV)</a> ·
+    <a id="printlink" href="#" data-i18n="printLabel">Print this city's summary</a> ·
+    <a id="citysharebtn" href="#" data-i18n="shareCity">Share this city</a><br>
     Safe speeds from Tingvall &amp; Haworth 1999 / ITF-OECD 2018 / WHO · Nilsson (fatal &prop; speed<sup>4</sup>).<br>
-    A highlighted road is a road to check. It does not mean the limit is definitely wrong. Not affiliated with ADB / WHO / iRAP.</p>
+    A highlighted road is a road to check. It does not mean the limit is definitely wrong. Not affiliated with ADB / WHO / iRAP.<br>
+    <span data-i18n="noLogin">No login, no account, no tracking cookies. Open data, open code.</span></p>
   <div id="srtable" class="sronly" aria-live="polite"></div>
   <table id="srranked" class="sronly"></table>
   </div>
 </div>
 <div class="stamp glass" id="stamp">open data</div>
 <div class="overlay" id="overlay"><div class="card glass" id="ovcard"></div></div>
-<button id="seehow" type="button">&#9654; See how it works</button>
+<button id="seehow" type="button" data-i18n-html="seeHow">&#9654; See how it works</button>
+<button id="mylocbtn" type="button" class="mylocbtn" title="Find my location" data-i18n-title="myLocTitle" aria-label="Find my location">&#9678;</button>
 <div id="swipe" aria-hidden="true">
   <div class="sw-lbl sw-l">roads over the safe speed</div>
   <div class="sw-lbl sw-r">real crashes</div>
   <div class="sw-handle">&#8596;</div>
 </div>
-<button id="cmpexit" type="button">Done comparing</button>
+<button id="cmpexit" type="button" data-i18n="doneComparing">Done comparing</button>
+<div id="toast" class="glass" role="status" aria-live="polite"></div>
+<div id="lgumodal" role="dialog" aria-modal="true" aria-label="Report this road">
+  <div class="card2 glass">
+    <button id="lguclose" aria-label="Close">&times;</button>
+    <h3 id="lgutitle" data-i18n="letterTitle">Report this road to your city</h3>
+    <p class="sub2" id="lgusub" style="margin-bottom:9px" data-i18n="letterSub">A pre-filled letter you can send as-is or edit. Fill in the office's email before sending.</p>
+    <textarea id="lgutext" readonly></textarea>
+    <div class="lgu-actions">
+      <a id="lgumailto" href="#" data-i18n="letterOpenMail">Open in mail app</a>
+      <button id="lgucopy" class="ghost" type="button" data-i18n="letterCopy">Copy text</button>
+    </div>
+  </div>
+</div>
+<a id="embedback" href="index.html" target="_top" data-i18n-html="embedFull">&#8599; Full map</a>
+<div id="routepill" class="glass"></div>
+<div id="printview">
+  <h1 id="pv-city"></h1>
+  <div id="pv-stats"></div>
+  <table id="pv-table"></table>
+  <p class="pdisc">Statistical indicators from public data. A flag means a road warrants review, not that the limit is definitely wrong. Not affiliated with ADB / WHO / iRAP.</p>
+</div>
 <script>
 const REDUCE=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FLYMS=REDUCE?0:800;
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+// ---- I18N: a flat string table per language. Values are plain strings or functions(args...)->string
+// for copy that needs numbers/names interpolated. Adding a third language is additive: one more key.
+const I18N={
+  en:{
+    h1_lead:'Yes, but not the average speed. Traffic makes the road slow. The road itself is built for far more, and that is the speed people meet the moment it clears. This maps where that happens next to people, across 51 cities.',
+    findPh:'Find a road…',
+    worstRoads:'Worst roads',
+    buildBtn:'&#9654; Show me how it works, step by step',
+    critLabel:'The worst roads',critSmall:'one at a time',
+    simLabel:'Why the limit matters',simSmall:'60 vs 30 km/h',
+    layersSub:'base map &middot; road colour &middot; overlays',
+    baseMap:'Base map',roadColour:'Road colour',overlays:'Overlays',
+    satellite:'Satellite',dark:'Dark',risk:'Risk',now:'Now',safe:'Safe',
+    vruBtn:'What makes them dangerous',
+    crashBtn:'Where crashes really happened (Manila)',
+    cmpBtn:'Swipe to compare our map with real crashes (Manila)',
+    wealthBtn:'Is the danger about wealth?',
+    crowdBtn:'Is the danger about crowding?',
+    routeBtn:'Check a route (tap two points)',
+    routeBtnExit:'Exit the route check',
+    howCompare:'How does my city compare',
+    howRead:'How to read the map',
+    resetView:'&#8634; Reset view',
+    methodLink:'Method and sources',
+    dlLabel:'Download this city\'s data',
+    dlCsvLabel:'as spreadsheet (CSV)',
+    printLabel:'Print this city\'s summary',
+    noLogin:'No login, no account, no tracking cookies. Open data, open code.',
+    seeHow:'&#9654; See how it works',
+    doneComparing:'Done comparing',
+    myLocTitle:'Find my location',
+    geoSearching:'Finding your location…',
+    geoDenied:'Location access was not allowed, so we cannot find the nearest flagged road for you. You can still use the search box.',
+    geoUnavailable:'Your device could not report a location just now. Try again, or use the search box.',
+    geoNoneNear:(km)=>`No flagged road was found within ${km} km of your location.`,
+    geoNearest:(dist,name)=>`The nearest flagged road is <b>${esc(name)}</b>, about ${dist} from you.`,
+    shareRoad:'Share this road',shareCity:'Share this city',
+    linkCopied:'Link copied',
+    reportRoad:'Report this road',
+    letterTitle:'Report this road to your city',
+    letterSub:'A pre-filled letter you can send as-is or edit. Fill in the office\'s email before sending.',
+    letterOpenMail:'Open in mail app',letterCopy:'Copy text',
+    lguLetter:(road,city,posted,safe,cut,svurl)=>
+`To the City Engineering Office / Traffic Management Office,
+
+I am writing about ${road} in ${city}. Its posted speed limit is ${posted} km/h. Based on how the road is used nearby (people on foot, side streets, and building frontage), a Safe System screening puts the survivable speed at ${safe} km/h; the modeled cut in deadly-crash risk from adopting it is about ${cut}%.
+
+I ask that your office review the posted limit and the road's physical design on this segment. You can view the road here: ${svurl}
+
+This is a screening flag, not a claim that the current limit is wrong; I am asking for a review, not asserting an error.
+
+Thank you for your time and for the work your office does to keep our streets safe.
+
+Sincerely,
+A resident
+
+--
+Statistical indicators from public data. A flag means a road warrants review, not that the limit is definitely wrong. Not affiliated with ADB / WHO / iRAP.`,
+    shareText:(name,posted,safe,url)=>`${name}: posted ${posted} km/h where ${safe} km/h is survivable. See it on the map: ${url}`,
+    shareCityText:(label,pct,url)=>`In ${label}, roads posted above the survivable speed sit right next to schools, markets and stops (${pct}% of streets with a limit). See the map: ${url}`,
+    survival:(posted,safe,dp,ds)=>`Hit at ${posted}: about ${dp} in 10 chance a walker dies. At ${safe}: about ${ds} in 10. <a href="${'sim.html?v1='+posted+'&v2='+safe}">See it play out &rarr;</a>`,
+    zeroNoData:'OpenStreetMap has almost no speed limits recorded for this city yet, so nothing can be flagged. You can help by adding them on openstreetmap.org.',
+    zeroNoneOver:'None of the recorded speed limits here sits above the survivable speed.',
+    noMatch:'No flagged road matches. It may be fine, or OpenStreetMap may have no speed limit recorded for it.',
+    routeCaveat:'This checks a straight line between your two points, not the actual route you would walk or drive.',
+    routeInstruction:'Tap two points on the map: a start and an end.',
+    routeNone:'No flagged road sits within 100 m of that straight line.',
+    routeCount:(n)=>`${n} flagged road${n===1?'':'s'} within 100 m of that line:`,
+    embedFull:'&#8599; Full map',
+    errGeneric:'Something on the map failed to load. The rest of the page should still work.',
+    errVendor:(name)=>`The map could not load its engine (${name}). Reload the page or try again later.`,
+    nearLandmark:(name)=>` &middot; near ${esc(name)}`,
+    csvHeaders:['Road','Posted (km/h)','Safe (km/h)','Gap (km/h)','Score','Why'],
+    h1Title:'Is speed the problem <span class="em">when traffic keeps us under 30?</span>',
+    bannerScore:'Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour, <span class="tk-ramp score"></span><small>the more the speed limit needs to come down.</small>',
+    bannerCurrent:'<b>Now.</b> Each road shows its <b>current speed limit</b>. <span class="tk-ramp speed"></span><small>teal is 30, coral is 60 or more km/h.</small>',
+    bannerProposed:'<b>Safe.</b> The <b>speed limit each road should have</b>. <span class="tk-ramp speed"></span><small>the fast roads turn teal.</small>',
+    sqLead:'Total crashes peak in rush-hour traffic, when the road is fullest. But the crashes that happen when the road <b>clears</b> are twice as likely to injure or kill.',
+    sqSee:'See the evidence ',sqHide:'Hide the evidence ',
+    sqH1:'1 &middot; The harm hides in the clear-road hours',
+    sqNote1:'On EDSA, total crashes rise and fall with traffic. But the share of crashes that injure or kill roughly doubles between midnight and 5am. That is when the road finally clears and vehicles reach the speed it is built for. The clear-road hours have less enforcement and more drunk driving too, so this points to speed, it does not prove it alone.',
+    sqH2:'2 &middot; From space, these roads are built for speed',
+    sqNote2:'The map data has no road widths here. The satellite shows what the flagged roads are, wide straight multi-lane strips cutting through dense housing. Daytime traffic comes and goes. The road itself stays.',
+    sqH3:'3 &middot; The fix is physical, not a sign',
+    sqNote3:'A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>21%</b> of Manila\'s flagged roads have any traffic calming within 100 m, 10% in Cebu, 4% in Davao.',
+    sqFoot:'Flagged for review, not an accusation. Statistical indicators from public data. Patterns may have legitimate explanations.',
+    statOver:'Set over the safe speed',
+    statOf:(posted,total)=>`of ${posted} streets that have a speed limit (${total} checked in all).`,
+    statBeside:(n)=>` ${n} schools, markets and stops sit right beside them.`,
+    statAdopt:'If every road drops to its safe limit',
+    statAdoptSub:'the average drop in the chance a crash there kills someone. Switch the Road colour to Safe to see it.',
+    exactNumbers:'The exact numbers',
+    zeroCounts:(posted,total)=>` (${posted} streets have a recorded limit, ${total} checked in all.)`,
+    legLeadScore:'<i style="border-color:#ff3b3b"></i>Bright glow. The <b>speed limit is higher than the safe speed</b>. The deeper the colour, the bigger the gap between the limit now and the safe one.',
+    legLeadCurrent:'Each road shows its <b>current speed limit</b>. Teal is slow, coral is 60 or more km/h.',
+    legLeadProposed:'Each road shows the <b>safe limit it should have</b>. The fast roads turn teal.',
+    legGuess:'<i style="border-top-style:dashed;border-color:#7587a0"></i>Faint dashed. The limit is a <b>guess</b> from the road type, so it is left out of the counts.',
+    legGrey:'<i style="border-color:#46566b"></i>Thin grey. Every other street, where the limit already fits.',
+    legAlready:'already safe',legOver:'over the safe speed',legMost:'most over',
+    step1t:'1. Where people walk',step1d:'Schools, markets, hospitals and places of worship. This is where people are on foot and crossing.',
+    stepBanner1:'The <b>dots show where people are on foot</b>. Schools, markets, hospitals, places of worship.',
+    step2t:'2. Where crashes happen',step2d:'Real reported crashes land on the very same roads.',
+    stepBanner2:'The <b>glowing dots are real reported crashes</b>. They land on the very same roads.',
+    stepBannerNoCrash:'<b>Reported crash points are for Metro Manila only.</b> There, the crashes land on the very same highlighted roads.',
+    step3t:'3. What the limit is now',step3d:'The current speed limit. Coral roads are set at 60 or more km/h, right where people cross.',
+    step4t:'4. What it should be',step4d:'The safe speed. The fast coral roads should turn into the calm teal ones.',
+    stepOf:(i)=>`Step ${i} of 4`,stepBack:'&larr; Back',stepDone:'Done',stepNext:'Next &rarr;',stepFinish:'Finish',
+    stepNoCrash:' <i>(crash data is Manila-only)</i>',
+    baTitle:(nm)=>`What the speed limit should be on ${esc(nm)}`,
+    baCap:'limit now &rarr; safe limit',baGuess:'limit is a guess',
+    baCut:(pct)=>`Dropping it to the safe limit cuts the chance of a deadly crash by about <b>${pct}%</b>.`,
+    svSee:'See this road on Street View',svShort:'Street View',
+    popNowSafe:'Now &rarr; safe limit (km/h)',
+    popOver:(g)=>`&#9650; set ${g} km/h over the safe speed`,
+    popBuilt:(v)=>`Built for about ${v} km/h when clear (typical for this road type). Slow daytime speeds come from traffic. The road allows more.`,
+    popCuts:(pct)=>`cuts deadly-crash risk ~${pct}%`,
+    whyVru:'A school, market, or stop sits right here, so people cross on foot.',
+    whyLocal:'A local street people walk along.',
+    whyUndiv:'A wide road with cross-traffic and no divider.',
+    whyDiv:'A fast divided road.',whyTrunk:'A major through-road.',
+    whyLiving:'A shared street where people walk.',
+    whyHead:'Why this road is highlighted.',
+    tagPed:(n)=>'people cross on foot'+(n>1?` &middot; ${n} sites`:''),
+    tagUndiv:'wide road, no divider',tagLocal:'homes and shops alongside',tagTrunk:'fast through-road',
+    tagLiving:'shared street',tagDiv:'fast divided road',tagOver:'over the safe speed',
+    showAll:(n)=>`Show all ${n} &darr;`,showFewer:'Show fewer',
+    critOf:(i,n)=>`Worst road ${i} of ${n}`,
+    critExit:'Exit<small>the worst roads</small>',critEnter:'The worst roads<small>one at a time</small>',
+    cmpExitLabel:'Exit the swipe compare',
+    cmpBanner:(rtxt)=>`<b>Left.</b> The roads we highlight as over the safe speed. <b>Right.</b> Where crashes really happened.${rtxt} Drag the divider to sweep.`,
+    cmpAgree:(times)=>` The two maps agree about <b>${times}</b> across the city (busy roads get more crashes for many reasons, so this is more than just the limit). <a href="methodology.html#numbers" style="color:#9DD0F0">Exact numbers</a>.`,
+    rhoTimes:(n)=>`${n===1?'once':n+' times'} in 10`,
+    crashNote:'12,563 reported crashes, 2018 to 2020 (MMDA alerts). Hover a point to read it. 42% of them land on the 7% of road we highlight. This is a check, not part of the score.',
+    crashFail:'Could not load crash data.',
+  },
+  fil:{
+    h1_lead:'Oo, pero hindi ito tungkol sa average speed. Bagal ng biyahe dahil sa traffic, pero ang disenyo ng kalsada mismo ay para sa mas mabilis pa. Iyon ang bilis na matatagpuan pagdating ng oras na humupa ang trapiko. Ipinapakita rito kung saan nangyayari iyon malapit sa mga tao, sa 51 lungsod.',
+    findPh:'Maghanap ng kalsada…',
+    worstRoads:'Pinakadelikadong kalsada',
+    buildBtn:'&#9654; Ipakita paano ito ginagawa, hakbang-hakbang',
+    critLabel:'Ang pinakadelikadong kalsada',critSmall:'isa-isa',
+    simLabel:'Bakit mahalaga ang speed limit',simSmall:'60 laban sa 30 km/h',
+    layersSub:'base map &middot; kulay ng kalsada &middot; overlay',
+    baseMap:'Base map',roadColour:'Kulay ng kalsada',overlays:'Overlay',
+    satellite:'Satellite',dark:'Madilim',risk:'Panganib',now:'Ngayon',safe:'Ligtas',
+    vruBtn:'Ano ang dahilan ng panganib',
+    crashBtn:'Saan talaga nangyari ang mga aksidente (Manila)',
+    cmpBtn:'I-swipe para ikumpara ang mapa namin sa totoong aksidente (Manila)',
+    wealthBtn:'Tungkol ba ito sa kayamanan?',
+    crowdBtn:'Tungkol ba ito sa dami ng tao?',
+    routeBtn:'Suriin ang isang ruta (tapikin ang dalawang punto)',
+    routeBtnExit:'Umalis sa pagsuri ng ruta',
+    howCompare:'Paano ihinahambing ang aking lungsod',
+    howRead:'Paano basahin ang mapa',
+    resetView:'&#8634; I-reset ang view',
+    methodLink:'Pamamaraan at mga pinagkunan',
+    dlLabel:'I-download ang datos ng lungsod na ito',
+    dlCsvLabel:'bilang spreadsheet (CSV)',
+    printLabel:'I-print ang buod ng lungsod na ito',
+    noLogin:'Walang login, walang account, walang tracking cookies. Bukas na datos, bukas na code.',
+    seeHow:'&#9654; Tingnan kung paano ito gumagana',
+    doneComparing:'Tapos na ikumpara',
+    myLocTitle:'Hanapin ang aking lokasyon',
+    geoSearching:'Hinahanap ang iyong lokasyon…',
+    geoDenied:'Hindi pinayagan ang location access, kaya hindi namin mahahanap ang pinakamalapit na naka-flag na kalsada. Puwede mo pa ring gamitin ang search box.',
+    geoUnavailable:'Hindi maibigay ng iyong device ang lokasyon ngayon. Subukan ulit, o gamitin ang search box.',
+    geoNoneNear:(km)=>`Walang naka-flag na kalsada sa loob ng ${km} km mula sa iyong lokasyon.`,
+    geoNearest:(dist,name)=>`Ang pinakamalapit na naka-flag na kalsada ay ang <b>${esc(name)}</b>, mga ${dist} mula sa iyo.`,
+    shareRoad:'I-share ang kalsadang ito',shareCity:'I-share ang lungsod na ito',
+    linkCopied:'Nakopya ang link',
+    reportRoad:'I-report ang kalsadang ito',
+    letterTitle:'I-report ang kalsadang ito sa inyong lungsod',
+    letterSub:'Isang handang liham na maaari mong ipadala agad o i-edit muna. Punan ang email ng opisina bago ipadala.',
+    letterOpenMail:'Buksan sa mail app',letterCopy:'Kopyahin ang teksto',
+    lguLetter:(road,city,posted,safe,cut,svurl)=>
+`Sa City Engineering Office / Traffic Management Office,
+
+Sumusulat ako tungkol sa ${road} sa ${city}. Ang naka-post na speed limit dito ay ${posted} km/h. Batay sa paraan ng paggamit ng kalsadang ito (mga taong naglalakad, tabing-kalsada, at mga gusali sa gilid), inirerekomenda ng isang Safe System screening ang ${safe} km/h bilang ligtas na bilis; humigit-kumulang ${cut}% ang modelong pagbaba sa panganib ng nakamamatay na aksidente kung ito ang gagamitin.
+
+Hinihiling kong suriin ng inyong opisina ang naka-post na limitasyon at ang pisikal na disenyo ng bahaging ito ng kalsada. Makikita ninyo ang kalsada rito: ${svurl}
+
+Isa lamang itong screening flag, hindi paratang na mali ang kasalukuyang limitasyon; humihiling ako ng pagsusuri, hindi ng pag-amin ng pagkakamali.
+
+Maraming salamat sa inyong oras at sa gawaing ginagawa ng inyong opisina para sa kaligtasan ng aming mga kalsada.
+
+Taos-puso,
+Isang residente
+
+--
+Mga tagapagpahiwatig mula sa bukas na datos. Ang isang flag ay nangangahulugang kailangang suriin ang kalsada, hindi na tiyak na mali ang limitasyon. Hindi kaakibat ng ADB / WHO / iRAP.`,
+    shareText:(name,posted,safe,url)=>`${name}: naka-post sa ${posted} km/h samantalang ${safe} km/h lang ang ligtas. Tingnan sa mapa: ${url}`,
+    shareCityText:(label,pct,url)=>`Sa ${label}, ang mga kalsadang naka-post nang mas mataas sa ligtas na bilis ay katabi mismo ng mga paaralan, palengke, at himpilan (${pct}% ng mga kalsadang may limitasyon). Tingnan ang mapa: ${url}`,
+    survival:(posted,safe,dp,ds)=>`Kung tatamaan sa ${posted}: mga ${dp} sa 10 ang tsansang mamamatay ang naglalakad. Sa ${safe}: mga ${ds} sa 10. <a href="${'sim.html?v1='+posted+'&v2='+safe}">Panoorin &rarr;</a>`,
+    zeroNoData:'Halos walang naka-rekord na speed limit ang OpenStreetMap para sa lungsod na ito, kaya walang mafla-flag. Makakatulong ka sa pagdagdag nito sa openstreetmap.org.',
+    zeroNoneOver:'Wala sa mga naka-rekord na speed limit dito ang lampas sa ligtas na bilis.',
+    noMatch:'Walang tumugmang naka-flag na kalsada. Maaaring ligtas ito, o walang naka-rekord na speed limit ang OpenStreetMap para rito.',
+    routeCaveat:'Sinusuri lang nito ang tuwid na linya sa pagitan ng dalawang punto mo, hindi ang aktwal na ruta na iyong lalakaran o dadaanan.',
+    routeInstruction:'Tapikin ang dalawang punto sa mapa: simula at tapusan.',
+    routeNone:'Walang naka-flag na kalsada sa loob ng 100 m ng tuwid na linyang iyon.',
+    routeCount:(n)=>`${n} naka-flag na kalsada sa loob ng 100 m ng linyang iyon:`,
+    embedFull:'&#8599; Buong mapa',
+    errGeneric:'May bahagi ng mapa na hindi na-load. Dapat gumana pa rin ang ibang bahagi ng pahina.',
+    errVendor:(name)=>`Hindi na-load ng mapa ang kailangan nitong engine (${name}). I-reload ang pahina o subukan mamaya.`,
+    nearLandmark:(name)=>` &middot; malapit sa ${esc(name)}`,
+    csvHeaders:['Kalsada','Naka-post (km/h)','Ligtas (km/h)','Agwat (km/h)','Marka','Dahilan'],
+    h1Title:'Problema ba ang bilis <span class="em">kung traffic ang pumipigil sa atin sa ilalim ng 30?</span>',
+    bannerScore:'Bawat <b>kumikinang na kalsada ay may speed limit na mas mataas sa kayang tagalan ng tao sa isang banggaan</b>. Habang mas maliwanag ang kulay, <span class="tk-ramp score"></span><small>mas kailangang ibaba ang speed limit.</small>',
+    bannerCurrent:'<b>Ngayon.</b> Ipinapakita ng bawat kalsada ang <b>kasalukuyang speed limit</b> nito. <span class="tk-ramp speed"></span><small>teal ay 30, coral ay 60 pataas na km/h.</small>',
+    bannerProposed:'<b>Ligtas.</b> Ang <b>speed limit na dapat sa bawat kalsada</b>. <span class="tk-ramp speed"></span><small>nagiging teal ang mabibilis na kalsada.</small>',
+    sqLead:'Pinakamarami ang aksidente sa rush hour, kapag pinakapuno ang kalsada. Pero ang mga aksidenteng nangyayari kapag <b>luwag</b> ang kalsada ay dobleng mas malamang na makasakit o makamatay.',
+    sqSee:'Tingnan ang ebidensya ',sqHide:'Itago ang ebidensya ',
+    sqH1:'1 &middot; Nagtatago ang pinsala sa mga oras na maluwag ang kalsada',
+    sqNote1:'Sa EDSA, tumataas at bumababa ang bilang ng aksidente kasabay ng traffic. Pero ang bahagi ng mga aksidenteng nakasasakit o nakamamatay ay halos dumodoble sa pagitan ng hatinggabi at alas-5 ng umaga. Iyon ang oras na lumuluwag ang kalsada at naaabot ng mga sasakyan ang bilis na pinagdisenyuhan nito. Mas kaunti rin ang bantay at mas marami ang lasing na nagmamaneho sa mga oras na iyon, kaya bilis ang itinuturo nito, hindi pa ito patunay nang mag-isa.',
+    sqH2:'2 &middot; Mula sa himpapawid, dinisenyo ang mga kalsadang ito para sa bilis',
+    sqNote2:'Walang lapad ng kalsada sa datos ng mapa. Ipinapakita ng satellite kung ano talaga ang mga naka-flag na kalsada: malalapad, tuwid, maraming lane, dumadaan sa siksikang kabahayan. Dumarating at umaalis ang traffic. Nananatili ang kalsada.',
+    sqH3:'3 &middot; Pisikal ang solusyon, hindi karatula',
+    sqNote3:'Walang binabago ang mas mababang numerong walang sumusunod sa traffic at walang nagpapatupad. Tanging disenyo ng kalsadang naglilimita ng bilis kapag walang tao ang gumagana. Pero <b>21%</b> lang ng mga naka-flag na kalsada sa Manila ang may kahit anong traffic calming sa loob ng 100 m, 10% sa Cebu, 4% sa Davao.',
+    sqFoot:'Naka-flag para suriin, hindi paratang. Mga estadistikang palatandaan mula sa bukas na datos. Maaaring may lehitimong paliwanag ang mga pattern.',
+    statOver:'Nakatakda nang lampas sa ligtas na bilis',
+    statOf:(posted,total)=>`sa ${posted} kalsadang may speed limit (${total} ang sinuri lahat).`,
+    statBeside:(n)=>` ${n} paaralan, palengke, at himpilan ang katabi mismo ng mga ito.`,
+    statAdopt:'Kung bababa ang lahat ng kalsada sa ligtas nitong limitasyon',
+    statAdoptSub:'ang average na pagbaba sa tsansang may mamatay sa isang aksidente roon. Ilipat ang kulay ng kalsada sa Ligtas para makita.',
+    exactNumbers:'Ang eksaktong mga numero',
+    zeroCounts:(posted,total)=>` (${posted} kalsada ang may naka-rekord na limitasyon, ${total} ang sinuri lahat.)`,
+    legLeadScore:'<i style="border-color:#ff3b3b"></i>Maliwanag na kinang. Ang <b>speed limit ay mas mataas sa ligtas na bilis</b>. Habang mas matingkad ang kulay, mas malaki ang agwat ng limitasyon ngayon sa ligtas.',
+    legLeadCurrent:'Ipinapakita ng bawat kalsada ang <b>kasalukuyang speed limit</b> nito. Mabagal ang teal, 60 pataas na km/h ang coral.',
+    legLeadProposed:'Ipinapakita ng bawat kalsada ang <b>ligtas na limitasyong nararapat dito</b>. Nagiging teal ang mabibilis na kalsada.',
+    legGuess:'<i style="border-top-style:dashed;border-color:#7587a0"></i>Malabo at putol-putol. Ang limitasyon ay <b>hula</b> mula sa uri ng kalsada, kaya hindi ito kasama sa bilang.',
+    legGrey:'<i style="border-color:#46566b"></i>Manipis na abo. Lahat ng ibang kalsada, kung saan akma na ang limitasyon.',
+    legAlready:'ligtas na',legOver:'lampas sa ligtas na bilis',legMost:'pinakalampas',
+    step1t:'1. Saan naglalakad ang mga tao',step1d:'Mga paaralan, palengke, ospital, at simbahan. Dito naglalakad at tumatawid ang mga tao.',
+    stepBanner1:'Ang <b>mga tuldok ay kung saan may mga taong naglalakad</b>. Mga paaralan, palengke, ospital, simbahan.',
+    step2t:'2. Saan nangyayari ang mga aksidente',step2d:'Ang mga totoong naiulat na aksidente ay bumabagsak sa parehong mga kalsada.',
+    stepBanner2:'Ang <b>kumikinang na mga tuldok ay totoong naiulat na aksidente</b>. Bumabagsak ang mga ito sa parehong mga kalsada.',
+    stepBannerNoCrash:'<b>Ang mga tuldok ng aksidente ay para sa Metro Manila lamang.</b> Doon, bumabagsak ang mga aksidente sa parehong mga naka-highlight na kalsada.',
+    step3t:'3. Ano ang limitasyon ngayon',step3d:'Ang kasalukuyang speed limit. Ang mga coral na kalsada ay nakatakda sa 60 pataas na km/h, mismo kung saan tumatawid ang mga tao.',
+    step4t:'4. Ano ang nararapat',step4d:'Ang ligtas na bilis. Ang mabibilis na coral na kalsada ay dapat maging kalmadong teal.',
+    stepOf:(i)=>`Hakbang ${i} ng 4`,stepBack:'&larr; Balik',stepDone:'Tapos',stepNext:'Susunod &rarr;',stepFinish:'Tapusin',
+    stepNoCrash:' <i>(Manila lang ang datos ng aksidente)</i>',
+    baTitle:(nm)=>`Ano dapat ang speed limit sa ${esc(nm)}`,
+    baCap:'limitasyon ngayon &rarr; ligtas na limitasyon',baGuess:'hula ang limitasyon',
+    baCut:(pct)=>`Ang pagbaba sa ligtas na limitasyon ay nagbabawas sa tsansa ng nakamamatay na aksidente nang humigit-kumulang <b>${pct}%</b>.`,
+    svSee:'Tingnan ang kalsadang ito sa Street View',svShort:'Street View',
+    popNowSafe:'Ngayon &rarr; ligtas na limitasyon (km/h)',
+    popOver:(g)=>`&#9650; nakatakda nang ${g} km/h lampas sa ligtas na bilis`,
+    popBuilt:(v)=>`Dinisenyo para sa humigit-kumulang ${v} km/h kapag maluwag (karaniwan sa ganitong uri ng kalsada). Mabagal ang biyahe sa araw dahil sa traffic. Mas mabilis ang kayang payagan ng kalsada.`,
+    popCuts:(pct)=>`nagbabawas ng ~${pct}% sa panganib ng nakamamatay na aksidente`,
+    whyVru:'May paaralan, palengke, o himpilan mismo rito, kaya tumatawid ang mga tao.',
+    whyLocal:'Isang lokal na kalyeng nilalakaran ng mga tao.',
+    whyUndiv:'Malapad na kalsadang may salubong na trapiko at walang divider.',
+    whyDiv:'Mabilis na kalsadang may divider.',whyTrunk:'Isang pangunahing daanang kalsada.',
+    whyLiving:'Isang kalyeng pinagsasaluhan ng mga naglalakad.',
+    whyHead:'Bakit naka-highlight ang kalsadang ito.',
+    tagPed:(n)=>'tumatawid ang mga tao'+(n>1?` &middot; ${n} lugar`:''),
+    tagUndiv:'malapad, walang divider',tagLocal:'may mga bahay at tindahan sa gilid',tagTrunk:'mabilis na daanang kalsada',
+    tagLiving:'pinagsasaluhang kalye',tagDiv:'mabilis, may divider',tagOver:'lampas sa ligtas na bilis',
+    showAll:(n)=>`Ipakita lahat ng ${n} &darr;`,showFewer:'Mas kaunti',
+    critOf:(i,n)=>`Pinakadelikadong kalsada ${i} ng ${n}`,
+    critExit:'Lumabas<small>sa pinakadelikado</small>',critEnter:'Ang pinakadelikadong kalsada<small>isa-isa</small>',
+    cmpExitLabel:'Lumabas sa paghahambing',
+    cmpBanner:(rtxt)=>`<b>Kaliwa.</b> Ang mga kalsadang hina-highlight naming lampas sa ligtas na bilis. <b>Kanan.</b> Kung saan talaga nangyari ang mga aksidente.${rtxt} I-drag ang divider para magpalipat.`,
+    cmpAgree:(times)=>` Nagkakasundo ang dalawang mapa nang humigit-kumulang <b>${times}</b> sa buong lungsod (maraming dahilan kung bakit mas maraming aksidente sa abalang kalsada, kaya higit pa ito sa limitasyon lang). <a href="methodology.html#numbers" style="color:#9DD0F0">Eksaktong numero</a>.`,
+    rhoTimes:(n)=>`${n} sa 10 beses`,
+    crashNote:'12,563 naiulat na aksidente, 2018 hanggang 2020 (mga alerto ng MMDA). I-hover ang tuldok para basahin. 42% ng mga ito ay nasa 7% ng kalsadang hina-highlight namin. Pagsusuri ito, hindi bahagi ng marka.',
+    crashFail:'Hindi ma-load ang datos ng aksidente.',
+  }
+};
+let LANG=localStorage.getItem('lang')==='fil'?'fil':'en';
+function t(key,...args){const src=(I18N[LANG]&&key in I18N[LANG])?I18N[LANG]:I18N.en;const v=src[key];
+  return typeof v==='function'?v(...args):v;}
+window.__afterLangChange=null;   // the load handler wires this once renderPanel/setRoadMode etc. exist
+function applyLang(l){LANG=l;localStorage.setItem('lang',l);
+  document.documentElement.lang=l==='fil'?'fil':'en';
+  document.querySelectorAll('#langtoggle button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n);});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml);});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=t(el.dataset.i18nPh);});
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>{el.title=t(el.dataset.i18nTitle);el.setAttribute('aria-label',t(el.dataset.i18nTitle));});
+  if(window.__afterLangChange)window.__afterLangChange();}
+document.querySelectorAll('#langtoggle button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
+
+// toast: a small "Link copied"-style one-line confirmation, reused by share + copy actions
+let toastT=0;
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
+  if(toastT)clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2600);}
+function copyText(s){if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(s);
+  const ta=document.createElement('textarea');ta.value=s;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);return Promise.resolve();}
+// slug a road name for the URL hash: lowercase, ascii-fold, dashes
+function slugify(s){return String(s||'').normalize('NFKD').replace(/[̀-ͯ]/g,'')
+  .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+
+// Tefft (2011, AAA Foundation) pedestrian fatality risk by impact speed, ported from sim.html so the
+// road popup can show the same odds without a second copy of the curve going stale independently.
+const TEFFT_RISK=[[0,0],[24,2],[37,10],[51,25],[68,50],[80,75],[93,90],[120,97]];
+function fatalRiskPct(kmh){for(let i=1;i<TEFFT_RISK.length;i++){if(kmh<=TEFFT_RISK[i][0]){const[a,b]=TEFFT_RISK[i-1],[c,d]=TEFFT_RISK[i];
+  return b+(d-b)*(kmh-a)/(c-a||1);}}return 97;}
+function fatalRiskIn10(kmh){return Math.round(fatalRiskPct(kmh)/10);}
+
+// haversine-scale local projection: converts [lng,lat] to approximate metres around a reference
+// latitude, good enough for the short point-to-line distances the route check needs
+function toXYm(pt,originLat){const mLat=111320,mLng=111320*Math.cos(originLat*Math.PI/180);
+  return [pt[0]*mLng,pt[1]*mLat];}
+function haversineM(a,b){const R=6371000,toRad=d=>d*Math.PI/180;
+  const dLat=toRad(b[1]-a[1]),dLng=toRad(b[0]-a[0]);
+  const sa=Math.sin(dLat/2)**2+Math.cos(toRad(a[1]))*Math.cos(toRad(b[1]))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(sa));}
+function fmtDist(m){return m<950?Math.round(m/10)*10+' m':(m/1000).toFixed(1)+' km';}
+function distPointToSegmentXY(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1];const len2=dx*dx+dy*dy;
+  let tt=len2?((p[0]-a[0])*dx+(p[1]-a[1])*dy)/len2:0;tt=Math.max(0,Math.min(1,tt));
+  const cx=a[0]+tt*dx,cy=a[1]+tt*dy;return Math.hypot(p[0]-cx,p[1]-cy);}
+
 // translate the raw OSM "why" string to plain language (shared by the popup, before/after card, and critical card)
 function whyPlainStr(why){const w=(why||'').toLowerCase();
-  if(w.includes('pedestrian activity')||w.includes('vru'))return 'A school, market, or stop sits right here, so people cross on foot.';
-  if(w.includes('frontage')||w.includes('local road'))return 'A local street people walk along.';
-  if(w.includes('undivided')||w.includes('side-impact'))return 'A wide road with cross-traffic and no divider.';
-  if(w.includes('divided carriageway'))return 'A fast divided road.';
-  if(w.includes('trunk'))return 'A major through-road.';
-  if(w.includes('living street'))return 'A shared street where people walk.';
+  if(w.includes('pedestrian activity')||w.includes('vru'))return t('whyVru');
+  if(w.includes('frontage')||w.includes('local road'))return t('whyLocal');
+  if(w.includes('undivided')||w.includes('side-impact'))return t('whyUndiv');
+  if(w.includes('divided carriageway'))return t('whyDiv');
+  if(w.includes('trunk'))return t('whyTrunk');
+  if(w.includes('living street'))return t('whyLiving');
   return esc(why||'');}
 // short scannable tag for the worst-roads list: the actual reason a road is flagged (varies per road), not the constant risk % (which is the same for every 60->30 road)
 function whyTag(why){const w=(why||'').toLowerCase();
-  if(w.includes('pedestrian')||w.includes('vru')){const m=w.match(/(\d+)\s*vru/);const n=m?+m[1]:0;return 'people cross on foot'+(n>1?` &middot; ${n} sites`:'');}
-  if(w.includes('undivided')||w.includes('side-impact'))return 'wide road, no divider';
-  if(w.includes('frontage')||w.includes('local road'))return 'homes and shops alongside';
-  if(w.includes('trunk'))return 'fast through-road';
-  if(w.includes('living street'))return 'shared street';
-  if(w.includes('divided carriageway'))return 'fast divided road';
-  return 'over the safe speed';}
+  if(w.includes('pedestrian')||w.includes('vru')){const m=w.match(/(\d+)\s*vru/);const n=m?+m[1]:0;return t('tagPed',n);}
+  if(w.includes('undivided')||w.includes('side-impact'))return t('tagUndiv');
+  if(w.includes('frontage')||w.includes('local road'))return t('tagLocal');
+  if(w.includes('trunk'))return t('tagTrunk');
+  if(w.includes('living street'))return t('tagLiving');
+  if(w.includes('divided carriageway'))return t('tagDiv');
+  return t('tagOver');}
 // posted vs proposed limit as paired PH speed-limit signs; the posted one is struck + red-glowing (it is over the safe speed)
 function signPair(posted,safe,big){const c=big?'':' sm';
   return `<span class="signrow"><span class="sign over strike${c}">${posted}</span><span class="ar">&rarr;</span><span class="sign${c}">${safe}</span></span>`;}
@@ -386,15 +809,29 @@ const ESRI={type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/se
 const r2=devicePixelRatio>1.5?'@2x':'';
 const CARTO={type:'raster',tiles:['a','b','c'].map(s=>`https://${s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}${r2}.png`),tileSize:256,attribution:'© OpenStreetMap contributors © CARTO'};
 
-const map=new maplibregl.Map({container:'map',
+// WebGL can be unavailable on old devices and overloaded machines; fail with a message, not a dark page
+let map;
+try{map=new maplibregl.Map({container:'map',
   style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources:{esri:ESRI,carto:CARTO},
     layers:[{id:'bg',type:'background',paint:{'background-color':'#0E1116'}},
       {id:'esri',type:'raster',source:'esri',layout:{visibility:'none'},paint:{'raster-opacity':0.78,'raster-saturation':-0.25,'raster-brightness-max':0.9}},
       {id:'carto',type:'raster',source:'carto',paint:{'raster-opacity':1}}]},
-  center:[121.02,14.59],zoom:11.6,attributionControl:true});
+  center:[121.02,14.59],zoom:11.6,attributionControl:true});}
+catch(e){console.warn('WebGL init failed',e);
+  const el=document.getElementById('toast');
+  el.textContent=t('errVendor','WebGL');el.style.background='rgba(160,40,40,.92)';el.classList.add('show');
+  throw e;}
 map.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');
 window.__map=map;
+// item 10: route tile/source failures to the same non-blocking banner language, throttled to once
+// per source per session so a flaky basemap tile doesn't spam the user
+map.on('error',ev=>{const src=(ev&&ev.sourceId)||'map';console.warn('map error',src,ev&&ev.error);
+  showErrBanner(t('errGeneric'),'map-'+src);});
+// script-load failures for the self-hosted vendor libs (item 13): surface once, not silently dark
+if(window.__vendorErrs&&window.__vendorErrs.length)window.__vendorErrs.forEach(n=>showErrBanner(t('errVendor',n),'vendor-'+n));
+window.onerror=function(msg,src){if(src&&src.indexOf('_vercel/insights')!==-1)return;   // analytics script never surfaces to the user (item 16)
+  console.warn('window error',msg,src);showErrBanner(t('errGeneric'),'winerr');};
 
 // collapsible panel: on phones it defaults to a compact header so the map is visible
 (function(){const p=document.querySelector('.panel'),b=document.getElementById('panelToggle'),sh=document.getElementById('seehow');
@@ -450,6 +887,7 @@ function spearman(xs,ys){const n=xs.length;if(n<3)return null;
   return dx&&dy?num/Math.sqrt(dx*dy):null;}
 const col=s=>s>=75?'#FB9F3A':s>=55?'#E65D5E':s>=30?'#B73779':'#6B1D6E';
 let CITIES=[],OVI=[],CUR=null,SEG=null,reqToken=0,roadsAll=false,CROWD=null,SEV=null,SAT=null;
+const OVERLAY_FAIL=new Set();   // city keys whose overlay geojson failed to fetch (item 15: surface, don't swallow)
 // severity-by-hour chart (EDSA): grey bars = crashes per hour (peak in rush-hour traffic), coral line =
 // share of crashes that injure or kill (climbs when the road clears at night). The divergence
 // of the two IS the argument, so both share one small Tufte panel.
@@ -475,16 +913,42 @@ function renderSevChart(s){const el=document.getElementById('sevchart');if(!el||
   document.getElementById('sevcap').innerHTML=`<span style="color:#46566b">&#9646;</span> crashes per hour &nbsp; <span style="color:#E0574A">&#9644;</span> share that injure or kill. `+
     `Night <b>${s.night.casualty_share_pct}%</b> vs rush-hour <b>${s.peak.casualty_share_pct}%</b>, about <b>${s.relative_risk_night_over_peak}&times;</b> (${(s.n_casualty).toLocaleString()} injury-or-worse crashes in the set, p&lt;0.001). ${esc(s.source)}.`;}
 function renderSatStrip(sat){const el=document.getElementById('satstrip');if(!el||!sat||!sat.featured)return;
-  el.innerHTML=sat.featured.map(f=>`<a class="sat" href="${esc(f.crop)}" target="_blank" rel="noopener" title="Open the full satellite crop">
+  el.innerHTML=sat.featured.map(f=>`<a class="sat" href="${esc(f.full||f.crop)}" target="_blank" rel="noopener" title="Open the full satellite crop">
     <img src="${esc(f.crop)}" alt="Satellite view of ${esc(f.road)}" loading="lazy" />
     <span class="cap">${esc(f.road)}<small>${esc(f.lanes_visible)} lanes visible &middot; posted ${f.posted}, survivable ${f.safe}</small></span></a>`).join('');}
 const ov=document.getElementById('overlay'),ovc=document.getElementById('ovcard');
 const cityF=k=>['==',['get','city'],k];
 function showLoading(l){ovc.innerHTML=`<div class="spin"></div><div>Loading ${esc(l)}…</div>`;ov.classList.add('on');}
 function hideOverlay(){ov.classList.remove('on');}
-function showError(key,msg){ov.classList.add('on');
+function showError(key,msg,retryFn){ov.classList.add('on');
   ovc.innerHTML=`<div style="font-size:15px;margin-bottom:6px">Could not load the map data</div><div style="font-size:12px;color:#9bb0c2">${esc(msg)}</div><button id="retry">Try again</button>`;
-  document.getElementById('retry').onclick=()=>loadCity(key);}
+  document.getElementById('retry').onclick=retryFn||(()=>loadCity(key));}
+// small, non-blocking banner for map/script errors (item 10), distinct from the modal showError above
+let errBannerT=0,seenErrKeys=new Set();
+function showErrBanner(msg,key){if(key){if(seenErrKeys.has(key))return;seenErrKeys.add(key);}
+  const el=document.getElementById('toast');el.textContent=msg;el.style.background='rgba(160,40,40,.92)';el.classList.add('show');
+  if(errBannerT)clearTimeout(errBannerT);errBannerT=setTimeout(()=>{el.classList.remove('show');el.style.background='';},4200);}
+
+// ---- canonical road row: headline-list entries use posted_osm/safe, SEG features use v_posted/v_safe.
+// Normalize both into one shape so search, the road list, and the before/after card share one path.
+function rowFromHeadline(r){return {name:r.name,posted:r.posted_osm,safe:r.safe,sss:r.sss,why:r.why,
+  fatal_reduction_pct:r.fatal_reduction_pct,posted_imputed:false};}
+function rowFromFeature(f){const p=f.properties;return {name:p.name,posted:p.v_posted,safe:p.v_safe,sss:p.sss,why:p.why,
+  fatal_reduction_pct:p.fatal_reduction_pct,posted_imputed:p.posted_imputed===true||p.posted_imputed==='true'};}
+function foldKey(s){return String(s||'').normalize('NFKD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();}
+// every named, really-posted flagged road in the loaded city, deduped by name (keep the worst instance)
+function allFlaggedRows(){if(!SEG)return[];const byKey=new Map();
+  for(const f of SEG.features){const p=f.properties;if(!(p.sss>0)||p.posted_imputed===true||p.posted_imputed==='true'||!p.name)continue;
+    const k=foldKey(p.name);const row=rowFromFeature(f);
+    const prev=byKey.get(k);if(!prev||row.sss>prev.sss)byKey.set(k,row);}
+  return[...byKey.values()].sort((a,b)=>b.sss-a.sss);}
+let lastRoadsRows=[];   // the rows currently rendered in #roads, so the click handler can look one up by name+sss
+let POI_CUR=null;   // lazily-loaded VRU/POI geojson for the current city (item 14); used for "near <landmark>" tags
+function nearestLandmark(mid){if(!POI_CUR||!mid)return '';
+  let best=null,bestD=Infinity;
+  for(const f of POI_CUR.features){if(!f.geometry||f.geometry.type!=='Point'||!f.properties||!f.properties.name)continue;
+    const d=haversineM(mid,f.geometry.coordinates);if(d<bestD){bestD=d;best=f;}}
+  return(best&&bestD<=200)?t('nearLandmark',best.properties.name):'';}
 
 function renderPanel(c){
   document.getElementById('find').value='';   // clear the search box so it never disagrees with the freshly-loaded list
@@ -493,11 +957,23 @@ function renderPanel(c){
   // city-wide before/after: mean modeled fatal-risk reduction if every flagged road adopts its safe limit
   const frs=(SEG&&SEG.features?SEG.features:[]).map(f=>f.properties.fatal_reduction_pct).filter(x=>x>0);
   const meanFR=frs.length?Math.round(frs.reduce((a,b)=>a+b,0)/frs.length):0;
-  const adopt=meanFR?`<div class="stat"><span>If every road drops to its safe limit</span><span class="big" style="color:var(--safe)">&minus;${meanFR}%</span></div>
-    <p class="sub2">the average drop in the chance a crash there kills someone (Nilsson). Switch the Road colour to Safe to see it.</p>`:'';
-  document.getElementById('stats').innerHTML=`
-    <div class="stat"><span>Set over the safe speed</span><span class="big" style="color:var(--accent)">${real.toLocaleString()} &middot; ${pct}%</span></div>
-    <p class="sub2">of ${c.segments_posted_real_osm.toLocaleString()} streets that have a speed limit (${c.segments_total.toLocaleString()} checked in all). ${c.vru_pois.toLocaleString()} schools, markets and stops sit right beside them.</p>${adopt}`;
+  const adopt=meanFR?`<div class="stat"><span>${t('statAdopt')}</span><span class="big" style="color:var(--safe)">&minus;${meanFR}%</span></div>
+    <p class="sub2">${t('statAdoptSub')} <a href="methodology.html#numbers">${t('exactNumbers')}</a>.</p>`:'';
+  // honest zero-flagged message (item 8): branch on whether OpenStreetMap has posted limits here at all
+  const nearZeroPosted=c.segments_posted_real_osm<20;
+  const vruLine=real>0?t('statBeside',c.vru_pois.toLocaleString()):'';
+  let statLine;
+  if(real>0){
+    statLine=`<div class="stat"><span>${t('statOver')}</span><span class="big" style="color:var(--accent)">${real.toLocaleString()} &middot; ${pct}%</span></div>
+    <p class="sub2">${t('statOf',c.segments_posted_real_osm.toLocaleString(),c.segments_total.toLocaleString())}${vruLine}</p>`;
+  }else if(nearZeroPosted){
+    statLine=`<div class="stat"><span>${t('statOver')}</span><span class="big">0</span></div>
+    <p class="sub2">${t('zeroNoData')}</p>`;
+  }else{
+    statLine=`<div class="stat"><span>${t('statOver')}</span><span class="big">0 &middot; 0%</span></div>
+    <p class="sub2">${t('zeroNoneOver')}${t('zeroCounts',c.segments_posted_real_osm.toLocaleString(),c.segments_total.toLocaleString())}</p>`;
+  }
+  document.getElementById('stats').innerHTML=statLine+adopt;
   renderRoads(c.headline_priority_roads_real_posted,'');
   document.getElementById('srtable').textContent=`In ${c.label}, ${real} of ${c.segments_posted_real_osm} roads that have a speed limit are set over the safe speed.`;
   // sr-only ranked table of the worst highlighted roads (static, not announced on every update)
@@ -508,23 +984,94 @@ function renderPanel(c){
   document.getElementById('dl').href=`data/sss_flagged_${c.key}.geojson`;
   document.getElementById('stamp').textContent=`OpenStreetMap as of ${esc(c.data_date||'2026')}`;
 }
+// rows: either the headline top-N list (default view) or search results (canonical rows already); q: search text
 function renderRoads(rows,q){
-  const f=q?rows.filter(r=>r.name.toLowerCase().includes(q.toLowerCase())):rows;
-  const lim=q?8:(roadsAll?8:5);   // 5 by default to keep the panel calm; "show all" reveals the rest
-  const list=f.slice(0,lim).map(r=>`
+  let f;
+  if(q){
+    // item 1: search the whole loaded flagged network (SEG), not just the top-10 headline list
+    const qk=foldKey(q);
+    f=allFlaggedRows().filter(r=>foldKey(r.name).includes(qk));
+  }else{
+    f=(rows||[]).map(rowFromHeadline);
+  }
+  const lim=q?12:(roadsAll?8:5);   // 5 by default to keep the panel calm; "show all" reveals the rest
+  const shown=f.slice(0,lim);
+  lastRoadsRows=shown;
+  const list=shown.map(r=>{
+    const mid=roadMid(r.name,r.sss);
+    return`
     <button class="road" data-nm="${esc(r.name)}" data-sss="${r.sss}">
       <span class="chip" style="background:${col(r.sss)};color:${r.sss>=75?'#160a08':'#fff'}">${r.sss.toFixed(0)}</span>
       <span class="nm">${esc(r.name)}</span><br>
-      <span class="meta">${signPair(r.posted_osm,r.safe,false)} <span class="rtag">${whyTag(r.why)}</span></span>
-    </button>`).join('');
-  const more=(!q&&f.length>5)?`<button class="showall" id="roadsmore">${roadsAll?'Show fewer':'Show all '+Math.min(f.length,8)+' &darr;'}</button>`:'';
-  document.getElementById('roads').innerHTML=(list+more)||`<div class="meta" style="font-size:12px;color:var(--muted)">${q?'No match.':'No roads here are set above the safe speed, or OpenStreetMap has no speed limits for this city yet.'}</div>`;
+      <span class="meta">${signPair(r.posted,r.safe,false)} <span class="rtag">${whyTag(r.why)}${esc(nearestLandmark(mid))}</span></span>
+    </button>`;}).join('');
+  const more=(!q&&f.length>5)?`<button class="showall" id="roadsmore">${roadsAll?t('showFewer'):t('showAll',Math.min(f.length,8))}</button>`:'';
+  document.getElementById('roads').innerHTML=(list+more)||`<div class="meta" style="font-size:12px;color:var(--muted)">${q?esc(t('noMatch')):(CUR&&CUR.segments_posted_real_osm<20?esc(t('zeroNoData')):esc(t('zeroNoneOver')))}</div>`;
 }
 function showBeforeAfter(r){const el=document.getElementById('badetail');el.hidden=false;
-  el.innerHTML=`<div class="ba"><div class="t">What the speed limit should be on ${esc(r.name)}</div>
-    <div class="v">${signPair(r.posted_osm,r.safe,true)}</div><div class="signcap">limit now &rarr; safe limit</div>
-    <div class="r">Dropping it to the safe limit cuts the chance of a deadly crash by about <b>${r.fatal_reduction_pct.toFixed(0)}%</b> (Nilsson). ${whyPlainStr(r.why)}</div>
-    ${svLink(roadMid(r.name,r.sss),'See this road on Street View')}</div>`;}
+  const mid=roadMid(r.name,r.sss);
+  const dp=fatalRiskIn10(r.posted),ds=fatalRiskIn10(r.safe);
+  el.innerHTML=`<div class="ba"><div class="t">${t('baTitle',r.name)}</div>
+    <div class="v">${signPair(r.posted,r.safe,true)}</div><div class="signcap">${t('baCap')}${r.posted_imputed?` &middot; <span style="text-transform:none">${t('baGuess')}</span>`:''}</div>
+    <div class="r">${t('baCut',r.fatal_reduction_pct.toFixed(0))} ${whyPlainStr(r.why)}</div>
+    <div class="survival">${t('survival',r.posted,r.safe,dp,ds)}</div>
+    ${svLink(mid,t('svSee'))}
+    <div class="sharerow">
+      <button id="ba-share" type="button">${t('shareRoad')}</button>
+      <button id="ba-report" type="button">${t('reportRoad')}</button>
+    </div></div>`;
+  const svu=mid?svUrl(mid[1],mid[0]):'';
+  const shareBtn=document.getElementById('ba-share');if(shareBtn)shareBtn.onclick=()=>shareRoad(r,mid);
+  const reportBtn=document.getElementById('ba-report');if(reportBtn)reportBtn.onclick=()=>openLguLetter(r,svu);}
+// one selection path for list click, search result, map tap, and (future) route-check results:
+// fly + ping + before/after card + hash slug, so every entry point stays in sync (keystone: one path)
+function selectRoad(r){showBeforeAfter(r);flyToRoad(r.name,r.sss);
+  if(CUR)history.replaceState(null,'','#'+CUR.key+'/'+slugify(r.name));}
+
+// ---- item 2: share a road (Web Share API, copy-link fallback) ----
+function shareRoad(r,mid){if(!CUR)return;
+  const url=location.origin+location.pathname+'#'+CUR.key+'/'+slugify(r.name);
+  const text=t('shareText',r.name,r.posted,r.safe,url);
+  if(navigator.share){navigator.share({title:r.name,text,url}).catch(()=>{});}
+  else{copyText(url).then(()=>toast(t('linkCopied')));}}
+function shareCity(){if(!CUR)return;
+  const url=location.origin+location.pathname+'#'+CUR.key;
+  const pct=Math.round(100*CUR.segments_flagged_real_posted/Math.max(CUR.segments_posted_real_osm,1));
+  const text=t('shareCityText',CUR.label,pct,url);
+  if(navigator.share){navigator.share({title:CUR.label,text,url}).catch(()=>{});}
+  else{copyText(url).then(()=>toast(t('linkCopied')));}}
+
+// ---- item 4: LGU report letter, pre-filled, conservative language, mailto + copy ----
+function openLguLetter(r,svUrlStr){
+  const cityLabel=(CUR&&CUR.label)||'';
+  const cut=r.fatal_reduction_pct?r.fatal_reduction_pct.toFixed(0):'0';
+  const body=t('lguLetter',r.name,cityLabel,r.posted,r.safe,cut,svUrlStr||'');
+  document.getElementById('lgutext').value=body;
+  document.getElementById('lgumailto').href='mailto:?subject='+encodeURIComponent('Speed limit review: '+r.name+', '+cityLabel)+'&body='+encodeURIComponent(body);
+  document.getElementById('lgumodal').classList.add('show');}
+function closeLguLetter(){document.getElementById('lgumodal').classList.remove('show');}
+document.getElementById('lguclose').onclick=closeLguLetter;
+document.getElementById('lgumodal').addEventListener('click',e=>{if(e.target.id==='lgumodal')closeLguLetter();});
+document.getElementById('lgucopy').onclick=()=>copyText(document.getElementById('lgutext').value).then(()=>toast(t('linkCopied')));
+document.getElementById('citysharebtn').onclick=e=>{e.preventDefault();shareCity();};
+
+// ---- item 3: my-location, nearest flagged road, graceful denied/unavailable messages ----
+function nearestFlaggedRow(lng,lat){const rows=allFlaggedRows();let best=null,bestD=Infinity;
+  for(const r of rows){const mid=roadMid(r.name,r.sss);if(!mid)continue;
+    const d=haversineM([lng,lat],mid);if(d<bestD){bestD=d;best=r;}}
+  return best?{row:best,dist:bestD}:null;}
+document.getElementById('mylocbtn').onclick=()=>{
+  if(!navigator.geolocation){toast(t('geoUnavailable'));return;}
+  toast(t('geoSearching'));
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const lng=pos.coords.longitude,lat=pos.coords.latitude;
+    map.flyTo({center:[lng,lat],zoom:14,duration:FLYMS});
+    const hit=nearestFlaggedRow(lng,lat);
+    if(!hit){toast(t('geoNoneNear',20));return;}
+    selectRoad(hit.row);
+    const el=document.getElementById('badetail');
+    if(el&&!el.hidden)el.insertAdjacentHTML('afterbegin',`<div class="survival" style="margin-bottom:6px">${t('geoNearest',fmtDist(hit.dist),hit.row.name)}</div>`);
+  },err=>{toast(err.code===1?t('geoDenied'):t('geoUnavailable'));},{timeout:10000,maximumAge:60000});};
 // a radar ping drawn as a map layer (projection-correct): a white ring ripples out with a bright
 // core, so the eye lands on the road the camera flew to
 let pingRAF=0;
@@ -542,15 +1089,19 @@ function pingAt(c){if(REDUCE||!c||!map.getSource('ping'))return;
 function flyToRoad(nm,sss){const c=roadMid(nm,sss);if(c){map.flyTo({center:c,zoom:16,duration:FLYMS});pingAt(c);}}
 
 function fetchJSON(u){return fetch(u).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status+' on '+u);return r.json();});}
-async function loadCity(key){
+let poisFor=null;   // city key POI_CUR was last loaded for (item 14: POIs load lazily, on first VRU toggle)
+async function loadCity(key,roadSlug){
   const c=CITIES.find(x=>x.key===key);if(!c)return;const my=++reqToken;
   showLoading(c.label);document.getElementById('badetail').hidden=true;
   try{
-    const flag=await fetchJSON(`data/sss_flagged_${key}.geojson`);
-    let wealth=EMPTY;if(OVI.some(o=>o.key===key)){try{wealth=await fetchJSON(`data/overlay_${key}.geojson`);}catch(e){}}
-    let vru=EMPTY;try{vru=await fetchJSON(`data/pois_${key}.geojson`);}catch(e){}
+    // item 13: the three per-city fetches run in parallel instead of stacked awaits
+    const [flag,wealth]=await Promise.all([
+      fetchJSON(`data/sss_flagged_${key}.geojson`),
+      OVI.some(o=>o.key===key)?fetchJSON(`data/overlay_${key}.geojson`).catch(e=>{console.warn('overlay load failed',e);OVERLAY_FAIL.add(key);return EMPTY;}):Promise.resolve(EMPTY),
+    ]);
     if(my!==reqToken)return;
-    SEG=flag;CUR=c;map.getSource('flag').setData(flag);map.getSource('wealth').setData(wealth);map.getSource('vru').setData(vru);map.getSource('heat').setData(heatPointsFrom(flag));
+    SEG=flag;CUR=c;poisFor=null;POI_CUR=null;map.getSource('vru').setData(EMPTY);
+    map.getSource('wealth').setData(wealth);map.getSource('heat').setData(heatPointsFrom(flag));
     for(const id of ['net-base','net-imputed','net-real']) map.setFilter(id, filterFor(id,key));
     map.flyTo({center:c.center,zoom:c.zoom,duration:FLYMS});renderPanel(c);
     // reset all overlays/build-up to the default view on a city change
@@ -562,8 +1113,11 @@ async function loadCity(key){
     const cmpb=document.getElementById('cmpbtn');if(cmpb)cmpb.disabled=(key!=='manila');   // swipe compare needs crash data (Manila only)
     // critical-roads mode needs flagged roads: disable it on cities with none (butuan/puerto-princesa/surigao)
     const ctb=document.getElementById('crit');if(ctb)ctb.disabled=((c.headline_priority_roads_real_posted||[]).length===0);
-    if(location.hash.slice(1)!==key)history.replaceState(null,'','#'+key);
-    document.getElementById('city').value=key;if(window.updateWealthBox)window.updateWealthBox();hideOverlay();
+    if(!roadSlug&&location.hash.slice(1)!==key)history.replaceState(null,'','#'+key);
+    document.getElementById('city').value=key;if(window.updateWealthBox)window.updateWealthBox();if(window.updateCrowdBox)window.updateCrowdBox();
+    if(window.__renderCompare)window.__renderCompare();hideOverlay();
+    // item 2: a #city/road-slug deep link opens straight to that road's before/after card
+    if(roadSlug){const row=allFlaggedRows().find(r=>slugify(r.name)===roadSlug);if(row)selectRoad(row);}
   }catch(e){if(my===reqToken)showError(key,e.message);}
 }
 function filterFor(id,k){
@@ -609,8 +1163,10 @@ map.on('load',async()=>{
   // crowding overlay: same cells, coloured by mismatch x WorldPop residential density (color_crowd)
   map.addLayer({id:'crowd-fill',type:'fill',source:'wealth',layout:{visibility:'none'},
     paint:{'fill-color':['get','color_crowd'],'fill-opacity':0.55,'fill-outline-color':'rgba(255,255,255,0.12)'}},'net-base');
-  // flagged subset (interactions) + critical spotlight
-  map.addSource('flag',{type:'geojson',data:EMPTY});
+  // item 21: the route-check line between the two tapped points
+  map.addSource('routeline',{type:'geojson',data:EMPTY});
+  map.addLayer({id:'routeline-layer',type:'line',source:'routeline',layout:{visibility:'none'},
+    paint:{'line-color':'#5B8DB8','line-width':3,'line-dasharray':[2,2]}});
   // danger heatmap (overview): strong at city zoom, fades out as you zoom in to the precise glowing lines. Sits under the network so the lines read on top.
   map.addSource('heat',{type:'geojson',data:EMPTY});
   map.addLayer({id:'heat-layer',type:'fill',source:'heat',maxzoom:15,layout:{visibility:'none'},paint:{
@@ -635,54 +1191,78 @@ map.on('load',async()=>{
   map.addLayer({id:'ping-core',type:'circle',source:'ping',paint:{
     'circle-radius':6,'circle-color':'#ffffff','circle-opacity':0,'circle-blur':0.35}});
 
-  try{CITIES=await fetchJSON('data/cities.json');}catch(e){showError('manila','Could not load city index: '+e.message);return;}
-  try{OVI=await fetchJSON('data/overlay_index.json');}catch(e){OVI=[];}
-  try{CROWD=await fetchJSON('data/crowd.json');}catch(e){CROWD=null;}
-  try{SEV=await fetchJSON('data/severity_by_hour.json');renderSevChart(SEV);}catch(e){SEV=null;}
-  try{SAT=await fetchJSON('data/sat_evidence.json');renderSatStrip(SAT);}catch(e){SAT=null;}
+  // item 2: hash is #city/road-slug; parse both parts, road part optional
+  function parseHash(){const [k,...rest]=location.hash.slice(1).split('/');return{key:k,roadSlug:rest.join('/')||null};}
   // reframe card: expand the evidence (severity chart + satellite + calming) on demand
   (function(){const b=document.getElementById('sqbtn'),body=document.getElementById('sqbody');if(!b)return;
     b.onclick=()=>{const open=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',open);
-      body.hidden=!open;b.firstChild.textContent=open?'Hide the evidence ':'See the evidence ';};})();
+      body.hidden=!open;b.firstChild.textContent=open?t('sqHide'):t('sqSee');};
+    window.__sqBtnLang=()=>{b.firstChild.textContent=b.getAttribute('aria-expanded')==='true'?t('sqHide'):t('sqSee');};})();
   const sel=document.getElementById('city');
   // group the selector by island so a long city list stays scannable
   const ISLAND={manila:'Luzon',antipolo:'Luzon',olongapo:'Luzon',lucena:'Luzon',santiago:'Luzon',cabanatuan:'Luzon',tarlac:'Luzon','sanfernando-pampanga':'Luzon',malolos:'Luzon',sjdm:'Luzon',lipa:'Luzon',calamba:'Luzon',dasmarinas:'Luzon',urdaneta:'Luzon',laoag:'Luzon',vigan:'Luzon',tuguegarao:'Luzon',baguio:'Luzon',batangas:'Luzon',naga:'Luzon',legazpi:'Luzon',dagupan:'Luzon',angeles:'Luzon',sorsogon:'Luzon','puerto-princesa':'Luzon',
     cebu:'Visayas',iloilo:'Visayas',bacolod:'Visayas',tacloban:'Visayas',roxas:'Visayas',dumaguete:'Visayas',tagbilaran:'Visayas',ormoc:'Visayas',calbayog:'Visayas',
     davao:'Mindanao',zamboanga:'Mindanao',cdo:'Mindanao',gensan:'Mindanao',butuan:'Mindanao',iligan:'Mindanao',cotabato:'Mindanao',koronadal:'Mindanao',kidapawan:'Mindanao',tagum:'Mindanao',digos:'Mindanao',pagadian:'Mindanao',dipolog:'Mindanao',ozamiz:'Mindanao',surigao:'Mindanao',marawi:'Mindanao',mati:'Mindanao'};
-  if(CITIES.length>8){
-    const groups=['Luzon','Visayas','Mindanao'];const other=CITIES.filter(c=>!ISLAND[c.key]);
-    sel.innerHTML=groups.map(g=>{const cs=CITIES.filter(c=>ISLAND[c.key]===g);
-      return cs.length?`<optgroup label="${g}">${cs.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'';}).join('')
-      +(other.length?`<optgroup label="Other">${other.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'');
-  }else{
-    sel.innerHTML=CITIES.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('');
+  // item 11: retry after a cities.json failure must re-run the whole boot sequence, not just loadCity
+  // (loadCity early-returns forever against an empty CITIES array, which made the old retry button a no-op)
+  async function boot(){
+    try{CITIES=await fetchJSON('data/cities.json');}catch(e){showError('manila','Could not load city index: '+e.message,boot);return;}
+    try{OVI=await fetchJSON('data/overlay_index.json');}catch(e){console.warn('overlay index load failed',e);OVI=[];}
+    try{CROWD=await fetchJSON('data/crowd.json');}catch(e){console.warn('crowd.json load failed',e);CROWD=null;}
+    try{SEV=await fetchJSON('data/severity_by_hour.json');renderSevChart(SEV);}catch(e){console.warn('severity load failed',e);SEV=null;}
+    try{SAT=await fetchJSON('data/sat_evidence.json');renderSatStrip(SAT);}catch(e){console.warn('satellite evidence load failed',e);SAT=null;}
+    if(CITIES.length>8){
+      const groups=['Luzon','Visayas','Mindanao'];const other=CITIES.filter(c=>!ISLAND[c.key]);
+      sel.innerHTML=groups.map(g=>{const cs=CITIES.filter(c=>ISLAND[c.key]===g);
+        return cs.length?`<optgroup label="${g}">${cs.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'';}).join('')
+        +(other.length?`<optgroup label="Other">${other.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'');
+    }else{
+      sel.innerHTML=CITIES.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('');
+    }
+    sel.onchange=e=>{if(critMode)exitCritical();loadCity(e.target.value);};
+    const h=parseHash();
+    const start=CITIES.find(c=>c.key===h.key)?h.key:CITIES[0].key;
+    await loadCity(start,h.roadSlug);
+    if(window.__renderCompare)window.__renderCompare();
   }
-  sel.onchange=e=>{if(critMode)exitCritical();loadCity(e.target.value);};
-  const start=CITIES.find(c=>c.key===location.hash.slice(1))?location.hash.slice(1):CITIES[0].key;
-  await loadCity(start);
-  window.addEventListener('hashchange',()=>{const k=location.hash.slice(1);if(k&&k!==CUR?.key&&CITIES.some(c=>c.key===k)){if(critMode)exitCritical();loadCity(k);}});
+  await boot();
+  window.addEventListener('hashchange',()=>{const h=parseHash();if(h.key&&h.key!==CUR?.key&&CITIES.some(c=>c.key===h.key)){if(critMode)exitCritical();loadCity(h.key,h.roadSlug);}
+    else if(h.key===CUR?.key&&h.roadSlug){const row=allFlaggedRows().find(r=>slugify(r.name)===h.roadSlug);if(row)selectRoad(row);}});
+  // item 6: re-render everything CUR-dependent after a language switch, since renderPanel/setRoadMode
+  // etc. are only in scope here (inside map.on('load')), not at top level where applyLang() lives
+  window.__afterLangChange=()=>{if(CUR){renderPanel(CUR);setRoadMode(roadMode);}
+    if(window.updateWealthBox)window.updateWealthBox();if(window.updateCrowdBox)window.updateCrowdBox();
+    if(window.__renderCompare)window.__renderCompare();
+    if(window.__sqBtnLang)window.__sqBtnLang();if(window.__crnoteLang)window.__crnoteLang();
+    if(!critMode)critBtn.innerHTML=t('critEnter');
+    if(!compareMode)cmpBtn.textContent=t('cmpBtn');};
 
   document.querySelectorAll('#base button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#base button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
     const sat=b.dataset.v==='sat';map.setLayoutProperty('esri','visibility',sat?'visible':'none');map.setLayoutProperty('carto','visibility',sat?'none':'visible');});
+  // item 1: search the whole loaded flagged network, not just the top-10 headline list
   document.getElementById('find').addEventListener('input',e=>{if(CUR)renderRoads(CUR.headline_priority_roads_real_posted,e.target.value);});
   document.getElementById('find').addEventListener('keydown',e=>{if(e.key==='Enter'){const f=document.querySelector('#roads .road');if(f)f.click();}});
   document.getElementById('roads').addEventListener('click',e=>{
     if(e.target.closest('#roadsmore')){roadsAll=!roadsAll;if(CUR)renderRoads(CUR.headline_priority_roads_real_posted,document.getElementById('find').value);return;}
-    const el=e.target.closest('.road');if(!el||!CUR)return;
-    const r=CUR.headline_priority_roads_real_posted.find(x=>x.name===el.dataset.nm&&x.sss==el.dataset.sss);
-    if(r){showBeforeAfter(r);flyToRoad(r.name,r.sss);}});
+    const el=e.target.closest('.road');if(!el)return;
+    const r=lastRoadsRows.find(x=>x.name===el.dataset.nm&&x.sss==el.dataset.sss);
+    if(r)selectRoad(r);});
 
+  // item 7: plain-English stand-in for a rho, e.g. 0.42 -> "agree about 4 times in 10"; exact
+  // rho/p/Moran's I move to methodology.html#numbers so nothing is lost, just relocated
+  function rhoPlain(rho){const n=Math.max(0,Math.min(10,Math.round(Math.abs(rho)*10)));return`${n===1?'once':n+' times'} in 10`;}
   // ---- wealth overlay toggle ----
   let wealthOn=false;const wbtn=document.getElementById('wealthbtn'),wbox=document.getElementById('wealthbox');
   function updateWealthBox(){if(!wealthOn||!CUR){wbox.hidden=true;return;}
     const st=OVI.find(o=>o.key===CUR.key);wbox.hidden=false;
     if(!st){wbox.innerHTML='<div class="find">No wealth overlay for this city yet.</div>';return;}
     const B=st.biv;const rows=[2,1,0].map(si=>`${B[si].map(c=>`<i style="background:${c}"></i>`).join('')}`).join('');
-    wbox.innerHTML=`<div class="find">In <b>${esc(CUR.label.split(',')[0])}</b>, ${esc(st.finding)}.</div>
+    const failNote=OVERLAY_FAIL.has(CUR.key)?' <span style="color:var(--accent)">The overlay shapes could not load just now; the finding below still applies.</span>':'';
+    wbox.innerHTML=`<div class="find">In <b>${esc(CUR.label.split(',')[0])}</b>, ${esc(st.finding)}.${failNote}</div>
       <div class="biv">${rows}</div>
       <div class="bivlbl"><span>← poorer · wealthier →</span></div>
-      <div class="stats">The link between the mismatch and wealth is ρ = ${st.spearman_rho} (p = ${st.spearman_p}, over ${st.cells} squares of about 1.6 km). Magenta squares are high mismatch and low wealth. This shows a link only, it does not prove one causes the other. Nearby squares are not independent (Moran's I = ${st.morans_i}).</div>`;}
+      <div class="stats">Across the city, the mismatch and neighbourhood wealth move together only weakly, agreeing ${rhoPlain(st.spearman_rho)}. Magenta squares are high mismatch and low wealth. This shows a link only, it does not prove one causes the other. <a href="methodology.html#numbers">The exact numbers</a>.</div>`;}
   window.updateWealthBox=updateWealthBox;
   wbtn.onclick=()=>{wealthOn=!wealthOn;wbtn.setAttribute('aria-pressed',wealthOn);
     if(wealthOn&&crowdOn){crowdOn=false;cbtn.setAttribute('aria-pressed','false');map.setLayoutProperty('crowd-fill','visibility','none');updateCrowdBox();}
@@ -701,10 +1281,11 @@ map.on('load',async()=>{
     const hooks=(hk&&hk.length)?'<div class="stats" style="margin:9px 0 3px">Fast roads through the most crowded housing. Tap one to fly there.</div>'+
       hk.map(h=>`<button class="road" data-lat="${h.lat}" data-lon="${h.lon}" data-crowdhook="1"><span class="nm">${esc(h.road)}</span> <span class="meta">${h.posted}&rarr;${h.safe} &middot; ${Math.round(h.density/1000)}k/km&sup2;</span></button>`).join(''):'';
     const g=CROWD?`The roads we highlight sit where a median <b>${CROWD.flagged_median_density.toLocaleString()}</b> people/km&sup2; live, against ${CROWD.unflagged_median_density.toLocaleString()} for roads that already fit. Yet the most crowded, most-highlighted region, Metro Manila, has the country's <b>lowest</b> road-death rate (3.6 against 10.9 per 100k). ` : '';
-    cbox.innerHTML=`<div class="find">In <b>${esc(CUR.label.split(',')[0])}</b>, ${esc(st.crowd_finding||'')}.</div>
+    const failNote=OVERLAY_FAIL.has(CUR.key)?' <span style="color:var(--accent)">The overlay shapes could not load just now; the finding below still applies.</span>':'';
+    cbox.innerHTML=`<div class="find">In <b>${esc(CUR.label.split(',')[0])}</b>, ${esc(st.crowd_finding||'')}.${failNote}</div>
       <div class="biv">${rows}</div>
       <div class="bivlbl"><span>← less &middot; more crowded →</span></div>
-      <div class="stats">${g}The link between the gap and crowding is ρ = ${st.spearman_rho_gap_density} (p = ${st.spearman_p_gap_density}). This shows a link only. It does not prove one causes the other.</div>${hooks}`;}
+      <div class="stats">${g}Crowding decides which roads get flagged, but not how big the gap is: the two barely move together. <a href="methodology.html#numbers">The exact numbers</a>.</div>${hooks}`;}
   window.updateCrowdBox=updateCrowdBox;
   cbtn.onclick=()=>{crowdOn=!crowdOn;cbtn.setAttribute('aria-pressed',crowdOn);
     if(crowdOn&&wealthOn){wealthOn=false;wbtn.setAttribute('aria-pressed','false');map.setLayoutProperty('wealth-fill','visibility','none');updateWealthBox();}
@@ -721,7 +1302,8 @@ map.on('load',async()=>{
 
   // ---- validation: where crashes actually happened (Manila only, lazy-loaded) ----
   const crbtn=document.getElementById('crashbtn'),crnote=document.getElementById('crashnote');
-  crnote.textContent='12,563 reported crashes, 2018 to 2020 (MMDA alerts). Hover a point to read it. 42% of them land on the 7% of road we highlight. This is a check, not part of the score.';
+  crnote.textContent=t('crashNote');
+  window.__crnoteLang=()=>{crnote.textContent=t('crashNote');};
   let crashLoaded=false;
   // breathing danger glow: pulse the crash-glow opacity like a slow heartbeat while it is on
   let crashRAF=0,crashTs=0;
@@ -732,68 +1314,75 @@ map.on('load',async()=>{
   function stopCrashPulse(){if(crashRAF){cancelAnimationFrame(crashRAF);crashRAF=0;}if(map.getLayer('crash-glow'))map.setPaintProperty('crash-glow','circle-opacity',0.13);}
   crbtn.onclick=async()=>{if(crbtn.disabled)return;
     const on=crbtn.getAttribute('aria-pressed')!=='true';
-    if(on&&!crashLoaded){try{map.getSource('crash').setData(await fetchJSON('data/crashes_manila.geojson'));crashLoaded=true;}catch(e){crnote.textContent='Could not load crash data.';}}
+    if(on&&!crashLoaded){try{map.getSource('crash').setData(await fetchJSON('data/crashes_manila.geojson'));crashLoaded=true;}catch(e){crnote.textContent=t('crashFail');}}
     crbtn.setAttribute('aria-pressed',on);
     map.setLayoutProperty('crash-dots','visibility',on?'visible':'none');map.setLayoutProperty('crash-glow','visibility',on?'visible':'none');on?startCrashPulse():stopCrashPulse();crnote.hidden=!on;
     map.setPaintProperty('net-real','line-opacity',on?0.5:REAL_OP);   // dim glow so crashes pop
     map.setPaintProperty('esri','raster-opacity',on?0.5:0.78);updateHeat();};
 
   // ---- road colour mode: Risk (score) / Now (current limit) / Safe (proposed) ----
-  const BANNER={
-    score:'Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour, <span class="tk-ramp score"></span><small>the more the speed limit needs to come down.</small>',
-    current:'<b>Now.</b> Each road shows its <b>current speed limit</b>. <span class="tk-ramp speed"></span><small>teal is 30, coral is 60 or more km/h.</small>',
-    proposed:'<b>Safe.</b> The <b>speed limit each road should have</b>. <span class="tk-ramp speed"></span><small>the fast roads turn teal.</small>'};
+  const bannerFor=m=>t(m==='current'?'bannerCurrent':m==='proposed'?'bannerProposed':'bannerScore');
   let roadMode='score';
   // the danger hexbins live in the swipe compare only; every other mode keeps them hidden
   function updateHeat(){if(!compareMode&&map.getLayer('heat-layer'))map.setLayoutProperty('heat-layer','visibility','none');}
   function setRoadMode(m){roadMode=m;
     map.setPaintProperty('net-real','line-color',m==='current'?SPEED_COLOR('v_posted'):m==='proposed'?SPEED_COLOR('v_safe'):SSS_COLOR);
     document.querySelectorAll('#roadmode .seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
-    document.getElementById('topkey').innerHTML=BANNER[m];
+    document.getElementById('topkey').innerHTML=bannerFor(m);
     // keep the in-panel "How to read it" legend in sync with the road colours
     const speed=(m!=='score');document.getElementById('legramp').className='ramp'+(speed?' speed':'');
-    document.getElementById('legrl').innerHTML=speed?'<span>30 km/h</span><span></span><span>60+ km/h</span>':'<span>already safe</span><span>over the safe speed</span><span>most over</span>';
+    document.getElementById('legrl').innerHTML=speed?'<span>30 km/h</span><span></span><span>60+ km/h</span>':`<span>${t('legAlready')}</span><span>${t('legOver')}</span><span>${t('legMost')}</span>`;
     const dot=c=>`<i style="background:${c};border:0;width:8px;height:8px;border-radius:50%"></i>`;
-    document.getElementById('leglead').innerHTML=m==='current'?dot('#E0574A')+'Each road shows its <b>current speed limit</b>. Teal is slow, coral is 60 or more km/h.'
-      :m==='proposed'?dot('#54A89B')+'Each road shows the <b>safe limit it should have</b>. The fast roads turn teal.'
-      :'<i style="border-color:#ff3b3b"></i>Bright glow. The <b>speed limit is higher than the safe speed</b>. The deeper the colour, the bigger the gap between the limit now and the safe one.';updateHeat();}
+    document.getElementById('leglead').innerHTML=m==='current'?dot('#E0574A')+t('legLeadCurrent')
+      :m==='proposed'?dot('#54A89B')+t('legLeadProposed')
+      :t('legLeadScore');updateHeat();}
   document.querySelectorAll('#roadmode .seg button').forEach(b=>b.onclick=()=>setRoadMode(b.dataset.m));
 
+  // item 14: POIs (schools/markets/hospitals/etc) load lazily on first VRU toggle, not eagerly per city
+  let poisNote=null;
+  function ensurePOIs(){if(!CUR||poisFor===CUR.key)return;
+    const key=CUR.key;
+    fetchJSON(`data/pois_${key}.geojson`).then(d=>{
+      if(!CUR||CUR.key!==key)return;POI_CUR=d;poisFor=key;map.getSource('vru').setData(d);
+      // landmark tags depend on POI_CUR; refresh the currently-shown road list now that it is available
+      if(CUR&&!document.getElementById('find').value)renderRoads(CUR.headline_priority_roads_real_posted,'');
+    }).catch(e=>{console.warn('POI load failed',e,key);
+      if(vkey)vkey.insertAdjacentHTML('beforeend',poisNote||(poisNote='<span style="color:var(--muted)"> &middot; could not load sites</span>'));});}
   // helpers reused by the build-up (also keep the simple toggles honest)
-  function vruShow(on,emph){map.setLayoutProperty('vru-dots','visibility',on?'visible':'none');
+  function vruShow(on,emph){if(on)ensurePOIs();
+    map.setLayoutProperty('vru-dots','visibility',on?'visible':'none');
     vbtn.setAttribute('aria-pressed',on);vkey.style.display=on?'':'none';
     map.setFilter('vru-dots',on&&emph?['match',['get','kind'],['school','marketplace','hospital','place_of_worship'],true,false]:null);
     map.setPaintProperty('vru-dots','circle-radius',emph?['interpolate',['linear'],['zoom'],11,2.6,14,5,16,8]:['interpolate',['linear'],['zoom'],11,1.4,13,2.6,16,5.5]);}
   async function crashShow(on){const isM=CUR&&CUR.key==='manila';const show=on&&isM;
-    if(show&&!crashLoaded){try{map.getSource('crash').setData(await fetchJSON('data/crashes_manila.geojson'));crashLoaded=true;}catch(e){}}
+    if(show&&!crashLoaded){try{map.getSource('crash').setData(await fetchJSON('data/crashes_manila.geojson'));crashLoaded=true;}
+      catch(e){console.warn('crash data load failed',e);crnote.textContent=t('crashFail');crnote.hidden=false;}}
     map.setLayoutProperty('crash-dots','visibility',show?'visible':'none');map.setLayoutProperty('crash-glow','visibility',show?'visible':'none');show?startCrashPulse():stopCrashPulse();crbtn.setAttribute('aria-pressed',show);crnote.hidden=!show;}
 
   // ---- BUILD THE PICTURE: stack schools -> crashes -> current -> proposed ----
   const buildBtn=document.getElementById('buildbtn'),buildStep=document.getElementById('buildstep'),layersEl=document.getElementById('layers');
   let buildIdx=-1;
   const STEPS=[
-    {t:'1. Where people walk',d:'Schools, markets, hospitals and places of worship. This is where people are on foot and crossing.',
-      banner:'The <b>dots show where people are on foot</b>. Schools, markets, hospitals, places of worship.',
+    {tk:'step1t',dk:'step1d',bk:'stepBanner1',
       apply:()=>{vruShow(true,true);crashShow(false);setRoadMode('score');map.setPaintProperty('net-real','line-opacity',0.28);}},
-    {t:'2. Where crashes happen',d:'Real reported crashes land on the very same roads.',ml:1,
-      banner:'The <b>glowing dots are real reported crashes</b>. They land on the very same roads.',
+    {tk:'step2t',dk:'step2d',bk:'stepBanner2',ml:1,
       apply:()=>{vruShow(true,true);crashShow(true);setRoadMode('score');map.setPaintProperty('net-real','line-opacity',0.28);}},
-    {t:'3. What the limit is now',d:'The current speed limit. Coral roads are set at 60 or more km/h, right where people cross.',
+    {tk:'step3t',dk:'step3d',
       apply:()=>{vruShow(true,true);crashShow(true);map.setPaintProperty('net-real','line-opacity',0.95);setRoadMode('current');}},
-    {t:'4. What it should be',d:'The safe speed. The fast coral roads should turn into the calm teal ones.',
+    {tk:'step4t',dk:'step4d',
       apply:()=>{vruShow(true,true);crashShow(true);map.setPaintProperty('net-real','line-opacity',0.95);setRoadMode('proposed');}}];
   function buildRender(){const s=STEPS[buildIdx];s.apply();
-    if(s.banner){let bn=s.banner;if(s.ml&&!(CUR&&CUR.key==='manila'))bn='<b>Reported crash points are for Metro Manila only.</b> There, the crashes land on the very same highlighted roads.';document.getElementById('topkey').innerHTML=bn;}   // step banner; honest on cities with no crash data
-    const note=(s.ml&&!(CUR&&CUR.key==='manila'))?' <i>(crash data is Manila-only)</i>':'';
+    if(s.bk){let bn=t(s.bk);if(s.ml&&!(CUR&&CUR.key==='manila'))bn=t('stepBannerNoCrash');document.getElementById('topkey').innerHTML=bn;}   // step banner; honest on cities with no crash data
+    const note=(s.ml&&!(CUR&&CUR.key==='manila'))?t('stepNoCrash'):'';
     buildStep.hidden=false;
-    buildStep.innerHTML=`<div class="bs-ix">Step ${buildIdx+1} of 4</div>`+
-      `<div class="bs-t" tabindex="-1">${s.t}</div><div class="bs-d">${s.d}${note}</div>`+
-      `<div class="bs-nav">${buildIdx>0?'<button id="bprev">&larr; Back</button>':'<span></span>'}`+
-      `<button id="bexit">Done</button><button id="bnext">${buildIdx<3?'Next &rarr;':'Finish'}</button></div>`;
+    buildStep.innerHTML=`<div class="bs-ix">${t('stepOf',buildIdx+1)}</div>`+
+      `<div class="bs-t" tabindex="-1">${t(s.tk)}</div><div class="bs-d">${t(s.dk)}${note}</div>`+
+      `<div class="bs-nav">${buildIdx>0?`<button id="bprev">${t('stepBack')}</button>`:'<span></span>'}`+
+      `<button id="bexit">${t('stepDone')}</button><button id="bnext">${buildIdx<3?t('stepNext'):t('stepFinish')}</button></div>`;
     const pv=document.getElementById('bprev');if(pv)pv.onclick=()=>{buildIdx--;buildRender();};
     document.getElementById('bnext').onclick=()=>{if(buildIdx<3){buildIdx++;buildRender();}else buildExit();};
     document.getElementById('bexit').onclick=buildExit;
-    document.getElementById('srtable').textContent=`Step ${buildIdx+1} of 4. ${s.d.replace(/<[^>]+>/g,'')}`;   // announce to screen readers
+    document.getElementById('srtable').textContent=`${t('stepOf',buildIdx+1)}. ${t(s.dk).replace(/<[^>]+>/g,'')}`;   // announce to screen readers
     buildStep.querySelector('.bs-t').focus({preventScroll:true});}   // keep focus in the card (Next button was just replaced)
   function buildEnter(){if(compareMode)exitCompare();if(critMode)exitCritical();buildIdx=0;buildBtn.setAttribute('aria-pressed','true');if(layersEl)layersEl.open=false;document.querySelector('.panel').classList.add('building');buildRender();}
   function buildExit(){buildIdx=-1;buildStep.hidden=true;buildBtn.setAttribute('aria-pressed','false');document.querySelector('.panel').classList.remove('building');
@@ -815,7 +1404,7 @@ map.on('load',async()=>{
   const stepEl=document.getElementById('stepper'),critBtn=document.getElementById('crit');
   function critGeom(name){const fs=SEG.features.filter(f=>f.properties.name===name&&f.properties.sss>0&&f.properties.posted_imputed===false);
     fs.sort((a,b)=>b.properties.sss-a.properties.sss);return fs[0];}
-  function enterCritical(){if(!CUR)return;const list=(CUR.headline_priority_roads_real_posted||[]).slice(0,8);if(!list.length)return;if(compareMode)exitCompare();if(buildIdx>=0)buildExit();critMode=true;critBtn.setAttribute('aria-pressed','true');critBtn.innerHTML='Exit<small>the worst roads</small>';
+  function enterCritical(){if(!CUR)return;const list=(CUR.headline_priority_roads_real_posted||[]).slice(0,8);if(!list.length)return;if(compareMode)exitCompare();if(buildIdx>=0)buildExit();critMode=true;critBtn.setAttribute('aria-pressed','true');critBtn.innerHTML=t('critExit');
     critList=list;
     const names=new Set(critList.map(r=>r.name));
     map.getSource('crit').setData({type:'FeatureCollection',features:SEG.features.filter(f=>names.has(f.properties.name))});
@@ -824,18 +1413,18 @@ map.on('load',async()=>{
     map.setLayoutProperty('seg-crit','visibility','visible');map.setLayoutProperty('seg-crit2','visibility','visible');
     document.getElementById('roads').style.display='none';document.getElementById('badetail').hidden=true;
     stepEl.hidden=false;critStep(0);startPulse();updateHeat();}
-  function exitCritical(){critMode=false;critBtn.setAttribute('aria-pressed','false');critBtn.innerHTML='The worst roads<small>one at a time</small>';
+  function exitCritical(){critMode=false;critBtn.setAttribute('aria-pressed','false');critBtn.innerHTML=t('critEnter');
     map.setPaintProperty('esri','raster-opacity',(wealthOn||crowdOn)?0.45:0.78);map.setPaintProperty('net-base','line-opacity',(wealthOn||crowdOn)?0.25:0.6);
     map.setPaintProperty('net-real','line-opacity',REAL_OP);map.setLayoutProperty('net-imputed','visibility','visible');
     map.setLayoutProperty('seg-crit','visibility','none');map.setLayoutProperty('seg-crit2','visibility','none');
     document.getElementById('roads').style.display='';stepEl.hidden=true;stepEl.innerHTML='';stopPulse();updateHeat();}
   function critStep(i){if(!critList.length)return;critIdx=(i+critList.length)%critList.length;const r=critList[critIdx];
     const f=critGeom(r.name);let mid=null;if(f){mid=f.geometry.coordinates[Math.floor(f.geometry.coordinates.length/2)];map.flyTo({center:mid,zoom:15.6,duration:FLYMS});pingAt(mid);}
-    stepEl.innerHTML=`<div class="ix">Worst road ${critIdx+1} of ${critList.length}</div><div class="nm">${esc(r.name)}</div>`+
-      `<div class="ba2">${signPair(r.posted_osm,r.safe,true)}</div><div class="signcap" style="text-transform:none;font-size:11px">limit now &rarr; safe limit &middot; cuts deadly-crash risk ~${r.fatal_reduction_pct.toFixed(0)}%</div>`+
-      `<div class="why">Why this road is highlighted. ${whyPlainStr(r.why||'a speed limit above the safe speed for this road').replace(/\.$/,'')}.</div>`+
-      svLink(mid,'See this road on Street View')+
-      `<div class="nav"><button id="cprev" aria-label="Previous">&larr;</button><button id="cexit">Done</button><button id="cnext" aria-label="Next">Next &rarr;</button></div>`;
+    stepEl.innerHTML=`<div class="ix">${t('critOf',critIdx+1,critList.length)}</div><div class="nm">${esc(r.name)}</div>`+
+      `<div class="ba2">${signPair(r.posted_osm,r.safe,true)}</div><div class="signcap" style="text-transform:none;font-size:11px">${t('baCap')} &middot; ${t('popCuts',r.fatal_reduction_pct.toFixed(0))}</div>`+
+      `<div class="why">${t('whyHead')} ${whyPlainStr(r.why||'a speed limit above the safe speed for this road').replace(/\.$/,'')}.</div>`+
+      svLink(mid,t('svSee'))+
+      `<div class="nav"><button id="cprev" aria-label="Previous">&larr;</button><button id="cexit">${t('stepDone')}</button><button id="cnext">${t('stepNext')}</button></div>`;
     document.getElementById('cprev').onclick=()=>critStep(critIdx-1);document.getElementById('cnext').onclick=()=>critStep(critIdx+1);document.getElementById('cexit').onclick=exitCritical;
     document.getElementById('srtable').textContent=`Worst road ${critIdx+1} of ${critList.length}. ${r.name}, limit now ${r.posted_osm}, safe limit ${r.safe}.`;}
   function startPulse(){if(REDUCE)return;let t=0;(function p(){if(!critMode)return;t+=0.05;map.setPaintProperty('seg-crit','line-width',6+Math.sin(t)*2.5);pulseRAF=requestAnimationFrame(p);})();}
@@ -854,7 +1443,7 @@ map.on('load',async()=>{
     const cells=new Set([...dCounts.keys(),...cCounts.keys()]),xs=[],ys=[];
     for(const c of cells){xs.push(dCounts.get(c)||0);ys.push(cCounts.get(c)||0);}
     const rho=spearman(xs,ys);
-    compareMode=true;cmpBtn.setAttribute('aria-pressed','true');cmpBtn.textContent='Exit the swipe compare';
+    compareMode=true;cmpBtn.setAttribute('aria-pressed','true');cmpBtn.textContent=t('cmpExitLabel');
     vruShow(false,false);
     map.setLayoutProperty('heat-layer','visibility','visible');map.setPaintProperty('heat-layer','fill-opacity',0.82);
     map.setLayoutProperty('heatcrash-layer','visibility','visible');
@@ -863,9 +1452,9 @@ map.on('load',async()=>{
     swipeEl.style.display='block';map.on('move',positionDivider);
     map.flyTo({center:CUR.center,zoom:Math.min(CUR.zoom,12.1),duration:FLYMS});positionDivider();
     cmpExit.style.display='block';
-    const rtxt=rho==null?'':` The two line up across the city, ρ = <b>${rho.toFixed(2)}</b> (busy roads get more crashes for many reasons, so this is more than just the limit).`;
-    document.getElementById('topkey').innerHTML=`<b>Left.</b> The roads we highlight as over the safe speed. <b>Right.</b> Where crashes really happened.${rtxt} Drag the divider to sweep.`;}
-  function exitCompare(){if(!compareMode)return;compareMode=false;cmpBtn.setAttribute('aria-pressed','false');cmpBtn.textContent='Swipe to compare our map with real crashes (Manila)';
+    const rtxt=rho==null?'':t('cmpAgree',t('rhoTimes',Math.max(0,Math.min(10,Math.round(Math.abs(rho)*10)))));
+    document.getElementById('topkey').innerHTML=t('cmpBanner',rtxt);}
+  function exitCompare(){if(!compareMode)return;compareMode=false;cmpBtn.setAttribute('aria-pressed','false');cmpBtn.textContent=t('cmpBtn');
     map.off('move',positionDivider);swipeEl.style.display='none';cmpExit.style.display='none';
     map.setFilter('heat-layer',null);map.setFilter('heatcrash-layer',null);
     map.setLayoutProperty('heat-layer','visibility','none');map.setLayoutProperty('heatcrash-layer','visibility','none');
@@ -882,22 +1471,32 @@ map.on('load',async()=>{
   // popups from the rendered network
   const pop=new maplibregl.Popup({closeButton:false,maxWidth:'260px'});
   function whyPlain(p){return whyPlainStr(p.why);}
-  function popup(e){
+  function popup(e,isClick){
+    if(typeof routeMode!=='undefined'&&routeMode)return;   // route-check mode owns taps on the map (item 21)
     // when the crash overlay is on, a crash point under the cursor owns the hover (the user
     // asked for a crash tooltip); defer so the road popup does not cover it
     if(map.getLayer('crash-dots')&&map.getLayoutProperty('crash-dots','visibility')==='visible'
        &&map.queryRenderedFeatures(e.point,{layers:['crash-dots']}).length){pop.remove();return;}
     const p=e.features[0].properties;map.getCanvas().style.cursor='pointer';
+    const mid=[e.lngLat.lng,e.lngLat.lat];
+    const dp=fatalRiskIn10(p.v_posted),ds=fatalRiskIn10(p.v_safe);
     pop.setLngLat(e.lngLat).setHTML(`<b>${esc(p.name)||'(unnamed road)'}</b><br>`+
       `${signPair(p.v_posted,p.v_safe,true)}`+
-      `<div class="signcap">Now &rarr; safe limit (km/h)${p.posted_imputed===true||p.posted_imputed==='true'?' &middot; <span style="text-transform:none">limit is a guess</span>':''}</div>`+
-      `<div class="oversafe">&#9650; set ${Math.max(0,p.v_posted-p.v_safe)} km/h over the safe speed</div>`+
-      (p.v_design?`<div style="color:#9DB4CC;font-family:var(--font-data);font-size:11px;margin-top:5px">Built for about ${p.v_design} km/h when clear (typical for this road type). Slow daytime speeds come from traffic. The road allows more.</div>`:'')+
+      `<div class="signcap">${t('popNowSafe')}${p.posted_imputed===true||p.posted_imputed==='true'?` &middot; <span style="text-transform:none">${t('baGuess')}</span>`:''}</div>`+
+      `<div class="oversafe">${t('popOver',Math.max(0,p.v_posted-p.v_safe))}</div>`+
+      (p.v_design?`<div style="color:#9DB4CC;font-family:var(--font-data);font-size:11px;margin-top:5px">${t('popBuilt',p.v_design)}</div>`:'')+
       `<div style="color:#cdd6e0;margin-top:6px">${whyPlain(p)}</div>`+
-      `<div style="color:var(--muted);font-family:var(--font-data);margin-top:4px">cuts deadly-crash risk ~${Math.round(p.fatal_reduction_pct)}%</div>`+
-      svLink([e.lngLat.lng,e.lngLat.lat],'Street View')).addTo(map);}
+      `<div style="color:var(--muted);font-family:var(--font-data);margin-top:4px">${t('popCuts',Math.round(p.fatal_reduction_pct))}</div>`+
+      (p.sss>0?`<div class="survival">${t('survival',p.v_posted,p.v_safe,dp,ds)}</div>`:'')+
+      svLink(mid,t('svShort'))+
+      (p.sss>0?`<div class="sharerow"><button id="pop-share" type="button">${t('shareRoad')}</button><button id="pop-report" type="button">${t('reportRoad')}</button></div>`:'')
+      ).addTo(map);
+    const shareBtn=document.getElementById('pop-share');if(shareBtn)shareBtn.onclick=()=>shareRoad(rowFromFeature(e.features[0]),mid);
+    const reportBtn=document.getElementById('pop-report');if(reportBtn)reportBtn.onclick=()=>openLguLetter(rowFromFeature(e.features[0]),svUrl(mid[1],mid[0]));
+    // a deliberate tap/click on a flagged road updates the shareable hash (hover never does; item 2)
+    if(isClick&&CUR&&p.sss>0&&p.name)history.replaceState(null,'','#'+CUR.key+'/'+slugify(p.name));}
   // mousemove for desktop hover; click/tap so touch devices can open it too (the panel copy says "tap any road")
-  for(const lyr of ['net-real','net-imputed']){map.on('mousemove',lyr,popup);map.on('click',lyr,popup);map.on('mouseleave',lyr,()=>{map.getCanvas().style.cursor='';pop.remove();});}
+  for(const lyr of ['net-real','net-imputed']){map.on('mousemove',lyr,e=>popup(e,false));map.on('click',lyr,e=>popup(e,true));map.on('mouseleave',lyr,()=>{map.getCanvas().style.cursor='';pop.remove();});}
   // hover tooltip on the real reported crash points (Manila): date, place, and what was involved
   const cpop=new maplibregl.Popup({closeButton:false,closeOnClick:false,offset:9,maxWidth:'230px'});
   function crashTip(e){const p=e.features[0].properties||{};map.getCanvas().style.cursor='pointer';pop.remove();
@@ -909,6 +1508,73 @@ map.on('load',async()=>{
       `<div style="color:var(--muted);font-size:10px;margin-top:5px">MMDA alert · a check, not part of the score</div>`).addTo(map);}
   map.on('mousemove','crash-dots',crashTip);
   map.on('mouseleave','crash-dots',()=>{map.getCanvas().style.cursor='';cpop.remove();});
+
+  // ---- item 17: CSV download of the currently loaded city's flagged roads ----
+  document.getElementById('dlcsv').onclick=e=>{e.preventDefault();if(!SEG)return;
+    const rows=allFlaggedRows();
+    const head=t('csvHeaders').map(h=>'"'+h.replace(/"/g,'""')+'"').join(',');
+    const body=rows.map(r=>[r.name,r.posted,r.safe,r.posted-r.safe,r.sss.toFixed(0),whyTag(r.why)]
+      .map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+    const blob=new Blob(['﻿'+head+'\n'+body],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download=`sss_flagged_${CUR?CUR.key:'city'}.csv`;a.click();URL.revokeObjectURL(a.href);};
+
+  // ---- item 19: print one-pager (stats + worst-roads table + disclaimer; @media print in the CSS) ----
+  document.getElementById('printlink').onclick=e=>{e.preventDefault();if(!CUR)return;
+    document.getElementById('pv-city').textContent=CUR.label;
+    const real=CUR.segments_flagged_real_posted,pct=Math.round(100*real/Math.max(CUR.segments_posted_real_osm,1));
+    document.getElementById('pv-stats').innerHTML=`<p>${real.toLocaleString()} of ${CUR.segments_posted_real_osm.toLocaleString()} streets with a recorded speed limit (${pct}%) are set above the survivable speed. Data: ${esc(document.getElementById('stamp').textContent)}.</p>`;
+    const rows=allFlaggedRows().slice(0,20);
+    document.getElementById('pv-table').innerHTML=`<thead><tr><th>Road</th><th>Limit now</th><th>Safe</th><th>Score</th></tr></thead><tbody>`+
+      rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.posted}</td><td>${r.safe}</td><td>${r.sss.toFixed(0)}</td></tr>`).join('')+`</tbody>`;
+    window.print();};
+
+  // ---- item 20: how does my city compare (bar list from cities.json, already loaded) ----
+  function renderCompare(){const el=document.getElementById('cmpwrap');if(!el||!CITIES.length)return;
+    const ranked=CITIES.map(c=>({key:c.key,label:c.label.split(',')[0],n:c.segments_flagged_real_posted||0,
+      pct:Math.round(100*(c.segments_flagged_real_posted||0)/Math.max(c.segments_posted_real_osm||1,1))}))
+      .sort((a,b)=>b.n-a.n).slice(0,12);
+    const maxN=Math.max(1,...ranked.map(r=>r.n));
+    el.innerHTML=ranked.map(r=>`<div class="cmprow${CUR&&r.key===CUR.key?' me':''}"><span class="cnm">${esc(r.label)}</span>`+
+      `<span class="cbar"><i style="width:${Math.max(2,Math.round(100*r.n/maxN))}%"></i></span>`+
+      `<span class="cval">${r.n.toLocaleString()}</span></div>`).join('');}
+  window.__renderCompare=renderCompare;
+
+  // ---- item 18: embed mode (?embed=1 hides panel/header chrome, keeps map + banner + attribution) ----
+  if(new URLSearchParams(location.search).get('embed')==='1')document.body.classList.add('embed');
+
+  // ---- item 21: route check v1 (tap two points, list flagged roads within 100 m of the straight line) ----
+  let routeMode=false,routePts=[];
+  const routeBtn=document.getElementById('routebtn'),routeBox=document.getElementById('routebox'),routePill=document.getElementById('routepill');
+  function routeRender(){
+    if(routePts.length<2){routeBox.innerHTML='';map.getSource('routeline').setData(EMPTY);map.setLayoutProperty('routeline-layer','visibility','none');return;}
+    const [a,b]=routePts;
+    map.getSource('routeline').setData({type:'Feature',geometry:{type:'LineString',coordinates:[a,b]},properties:{}});
+    map.setLayoutProperty('routeline-layer','visibility','visible');
+    const originLat=(a[1]+b[1])/2,A=toXYm(a,originLat),B=toXYm(b,originLat);
+    const hits=allFlaggedRows().map(r=>{const mid=roadMid(r.name,r.sss);if(!mid)return null;
+      const P=toXYm(mid,originLat);const d=distPointToSegmentXY(P,A,B);return d<=100?{r,d}:null;}).filter(Boolean);
+    hits.sort((x,y)=>x.d-y.d);
+    routeBox.innerHTML=`<div class="crashnote">${t('routeCaveat')}</div>`+
+      (hits.length?`<div class="crashnote">${t('routeCount',hits.length)}</div>`+
+        hits.map(h=>`<div class="rr"><span class="chip" style="background:${col(h.r.sss)};color:${h.r.sss>=75?'#160a08':'#fff'}">${h.r.sss.toFixed(0)}</span> ${esc(h.r.name)} ${signPair(h.r.posted,h.r.safe,false)} &middot; ${fmtDist(h.d)}</div>`).join('')
+        :`<div class="crashnote">${t('routeNone')}</div>`);}
+  function routeExit(){routeMode=false;routePts=[];routeBtn.setAttribute('aria-pressed','false');routeBtn.textContent=t('routeBtn');
+    routeBox.hidden=true;routePill.classList.remove('show');map.getCanvas().style.cursor='';
+    map.getSource('routeline').setData(EMPTY);map.setLayoutProperty('routeline-layer','visibility','none');}
+  function routeMapClick(e){if(!routeMode)return;
+    routePts.push([e.lngLat.lng,e.lngLat.lat]);if(routePts.length>2)routePts=routePts.slice(-2);
+    routePill.textContent=routePts.length<2?t('routeInstruction'):t('routeCaveat');
+    routeRender();}
+  routeBtn.onclick=()=>{routeMode=!routeMode;routeBtn.setAttribute('aria-pressed',routeMode);
+    routeBtn.textContent=routeMode?t('routeBtnExit'):t('routeBtn');
+    routeBox.hidden=!routeMode;map.getCanvas().style.cursor=routeMode?'crosshair':'';
+    if(routeMode){routePts=[];routePill.textContent=t('routeInstruction');routePill.classList.add('show');}
+    else routeExit();};
+  map.on('click',routeMapClick);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&routeMode)routeBtn.click();});
+
+  renderCompare();
 });
 </script>
 </body>

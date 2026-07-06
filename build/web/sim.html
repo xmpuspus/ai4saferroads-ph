@@ -58,11 +58,41 @@ const SHOT=location.hash==='#shot';
 const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
+// language follows the map's persisted EN/FIL toggle (same origin, same localStorage key)
+const FIL=(()=>{try{return localStorage.getItem('lang')==='fil';}catch(e){return false;}})();
+const TXT=FIL?{
+  h1:'Parehong drayber. Parehong 22 m. Ang speed limit ang nagpasya.',
+  sub:(nm,loc,vp,vs)=>`Sa <b>${esc(nm)}</b>${loc}, isang bata ang tumapak sa tawiran 22 m sa unahan. Parehong bilis ng reaksyon, parehong preno. Ang tanging pagkakaiba ay ang bilis na pinapayagan ng limitasyon. Nakatakda ito sa <b>${vp}</b>, pero <b>${vs}</b> lang ang ligtas.`,
+  struck:'BANGGA',stopped:'HUMINTO',reaction:'reaksyon',
+  hits:(k,r)=>`Tatama sa ${k} km/h. ${r}% ang tsansang mamatay ang naglalakad`,
+  hitsub:m=>`ang reaksyon pa lang ay ${m} m na, kaya aabot ang sasakyan sa tawiran bago pa makapreno`,
+  stops:m=>`Humihinto ${m} m bago ang tawiran. Ligtas ang naglalakad`,
+  stopsub:(a,b,c,g)=>`reaksyon ${a} m + preno ${b} m = ${c} m, malayo sa ${g} m`,
+  replay:'Ulitin',back:'&larr; Mapa'
+}:{
+  h1:'Same driver. Same 22 m. The limit decides.',
+  sub:(nm,loc,vp,vs)=>`On <b>${esc(nm)}</b>${loc}, a child steps onto the crossing 22 m ahead. Same reaction time, same brakes. The only difference is the speed the limit allows. It is set to <b>${vp}</b>, but only <b>${vs}</b> is survivable.`,
+  struck:'STRUCK',stopped:'STOPPED',reaction:'reaction',
+  hits:(k,r)=>`Hits at ${k} km/h. ${r}% chance the pedestrian dies`,
+  hitsub:m=>`reaction alone uses ${m} m, so the car reaches the crossing before it can brake`,
+  stops:m=>`Stops ${m} m before the crossing. The pedestrian is safe`,
+  stopsub:(a,b,c,g)=>`reaction ${a} m + braking ${b} m = ${c} m, well short of ${g} m`,
+  replay:'Replay',back:'&larr; Map'
+};
+if(FIL)document.documentElement.lang='fil';
+document.getElementById('h1').textContent=TXT.h1;
+document.getElementById('replay').textContent=TXT.replay;
+document.querySelector('.ctl a').innerHTML=TXT.back;
+
+// per-road deep link from the map popup: sim.html?v1=<posted>&v2=<safe>&road=<name>
+const Q=new URLSearchParams(location.search);
+const qv1=parseInt(Q.get('v1'),10),qv2=parseInt(Q.get('v2'),10);
+const fromLink=qv1>=20&&qv1<=120&&qv2>=10&&qv2<=100&&qv2<qv1;
 let CORR={name:'a busy main road',v_posted:60,v_safe:30};
-try{CORR=await fetch('data/corridor.json').then(r=>r.json());}catch(e){}
-document.getElementById('sub').innerHTML=
- `On <b>${esc(CORR.name)}</b>, Metro Manila, a child steps onto the crossing 22 m ahead. Same reaction `
- +`time, same brakes. The only difference is the speed the limit allows. It is set to <b>${CORR.v_posted}</b>, but only <b>${CORR.v_safe}</b> is survivable.`;
+if(fromLink){CORR={name:Q.get('road')||(FIL?'isang kalsadang tulad nito':'a road like this one'),v_posted:qv1,v_safe:qv2};}
+else try{CORR=await fetch('data/corridor.json').then(r=>r.json());}catch(e){console.warn('corridor.json load failed',e);}
+const locTxt=fromLink?'':', Metro Manila';
+document.getElementById('sub').innerHTML=TXT.sub(CORR.name,locTxt,CORR.v_posted,CORR.v_safe);
 
 const cv=document.getElementById('c'), ctx=cv.getContext('2d');
 let W,H,DPR;
@@ -73,8 +103,8 @@ addEventListener('resize',resize);resize();
 function mkScene(v,label,theme){return{v0:v/3.6,v:v/3.6,kmh:v,x:0,t:0,state:'react',
   impact:null,stopX:null,label,theme};}
 let scenes=[];
-function reset(){scenes=[mkScene(CORR.v_posted,'Limit now '+CORR.v_posted+' km/h','danger'),
-                        mkScene(CORR.v_safe,'Safe '+CORR.v_safe+' km/h','safe')];}
+function reset(){scenes=[mkScene(CORR.v_posted,(FIL?'Limitasyon ngayon ':'Limit now ')+CORR.v_posted+' km/h','danger'),
+                        mkScene(CORR.v_safe,(FIL?'Ligtas ':'Safe ')+CORR.v_safe+' km/h','safe')];}
 reset();
 
 function step(s,dt){
@@ -121,7 +151,7 @@ function drawScene(s,top,h){
   ctx.fillRect(mx(reactM),road-9,mx(reactM+brakeM)-mx(reactM),6);
   // bar labels (non-colour cue for what the distance is made of)
   if(reactM>0.5){ctx.font='9px "IBM Plex Sans",sans-serif';ctx.fillStyle='#caa15a';ctx.textAlign='center';
-    ctx.fillText('reaction',(mx(0)+mx(reactM))/2,road-12);}
+    ctx.fillText(TXT.reaction,(mx(0)+mx(reactM))/2,road-12);}
   // pedestrian at crossing
   ped(cx,road,s.state==='done'&&s.impact>0);
   // car
@@ -129,20 +159,20 @@ function drawScene(s,top,h){
   // text result badge (carries the outcome without relying on colour)
   if(s.state==='done'){ctx.font='800 12px "IBM Plex Sans",sans-serif';ctx.textAlign='center';
     ctx.fillStyle=s.impact>0?'#E0574A':'#54A89B';
-    ctx.fillText(s.impact>0?'STRUCK':'STOPPED',mx(s.x),road-34);}
+    ctx.fillText(s.impact>0?TXT.struck:TXT.stopped,mx(s.x),road-34);}
   // outcome
   if(s.state==='done'){
     ctx.textAlign='left';ctx.font='700 14px "IBM Plex Sans",sans-serif';
     if(s.impact>0){const k=s.impact*3.6,risk=fatalRisk(k);
       ctx.fillStyle='#E0574A';
-      ctx.fillText(`Hits at ${k.toFixed(0)} km/h. ${risk.toFixed(0)}% chance the pedestrian dies`,mx(0)-6,road-22);
+      ctx.fillText(TXT.hits(k.toFixed(0),risk.toFixed(0)),mx(0)-6,road-22);
       ctx.font='11px "IBM Plex Sans",sans-serif';ctx.fillStyle='#ECC4BE';
-      ctx.fillText(`reaction alone uses ${(s.v0*TR).toFixed(0)} m, so the car reaches the crossing before it can brake`,mx(0)-6,road+62);
+      ctx.fillText(TXT.hitsub((s.v0*TR).toFixed(0)),mx(0)-6,road+62);
     }else{const short=GAP-s.stopX;
       ctx.fillStyle='#54A89B';
-      ctx.fillText(`Stops ${short.toFixed(0)} m before the crossing. The pedestrian is safe`,mx(0)-6,road-22);
+      ctx.fillText(TXT.stops(short.toFixed(0)),mx(0)-6,road-22);
       ctx.font='11px "IBM Plex Sans",sans-serif';ctx.fillStyle='#A9D9CF';
-      ctx.fillText(`reaction ${(s.v0*TR).toFixed(0)} m + braking ${(s.stopX-s.v0*TR).toFixed(0)} m = ${s.stopX.toFixed(0)} m, well short of ${GAP} m`,mx(0)-6,road+62);
+      ctx.fillText(TXT.stopsub((s.v0*TR).toFixed(0),(s.stopX-s.v0*TR).toFixed(0),s.stopX.toFixed(0),GAP),mx(0)-6,road+62);
       ctx.strokeStyle='#54A89B';ctx.setLineDash([3,3]);ctx.beginPath();
       ctx.moveTo(mx(s.stopX),road-14);ctx.lineTo(mx(s.stopX),road+30);ctx.stroke();ctx.setLineDash([]);}
   }

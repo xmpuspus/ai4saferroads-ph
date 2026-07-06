@@ -130,8 +130,15 @@ and the "speed risk × crowding" overlay: [docs/findings.md](docs/findings.md).
   vulnerable-user sites for any city, computes the Speed Safety Score, and writes per-city GeoJSON.
 - `build/web/index.html`: the map: every street scored (MapLibre + PMTiles), a city selector
   grouped by island, a guided "critical roads & why" mode, "speed risk × wealth" and "speed risk
-  × crowding" overlays, road search, shareable city links, per-road before/after, and a city-wide
-  modeled fatal-risk cut. Single static file.
+  × crowding" overlays, and a city-wide modeled fatal-risk cut. Single static file. Built for a
+  non-technical reader: search any street in the loaded city (not just the worst list), a
+  shareable link per road (`#city/road-name`), an English/Filipino toggle, a my-location button
+  that finds the nearest flagged road, a straight-line route check between two tapped points,
+  a pre-filled report-a-road letter for the city engineering office, survival odds in every road
+  popup (Tefft 2011), CSV download next to the GeoJSON, a printable one-page city summary, a
+  "how does my city compare" ranking, and an `?embed=1` mode for newsrooms (iframe recipe on the
+  methodology page). No login, no account, no tracking cookies. If the map engine or a tile
+  source fails, the page says so instead of going dark.
 - `build/overlay/`: `enrich_worldpop.py` folds WorldPop population density into the exposure
   weight. `compute_overlay.py` joins the scores to Meta's Relative Wealth Index and computes the
   Spearman correlations + Moran's I. `correlate_crowd_deaths.py` builds the crowding-and-deaths
@@ -145,14 +152,27 @@ and the "speed risk × crowding" overlay: [docs/findings.md](docs/findings.md).
 ## Run it
 
 ```sh
-make data     # pull live OSM and score all cities
+make data     # pull live OSM and score all cities (slow: Overpass rate limits, 2 s between queries)
 make serve    # http://127.0.0.1:8799/web/index.html  (Range-capable serve.py)
 make e2e      # unit + wiring + invariant checks, all pass
 make shot     # render screenshots (needs node + playwright chromium)
 ```
 
-The pipeline uses the Python standard library only. The site is static. Deploy is a single
-`vercel --prod` from `build/web`.
+The pipeline uses the Python standard library only (plus `tippecanoe` on PATH to build the
+vector tiles). The site is static. Deploy is a single `vercel --prod` from `build/web`.
+
+Notes for a fresh clone: `build/web/data/sss_all.pmtiles` is a build artifact (34 MB,
+gitignored), so run `make data` once before the first full `make e2e` or deploy.
+`E2E_SKIP_PMTILES=1 bash tests/e2e.sh` runs everything else without it (this is what CI does),
+and `E2E_SMOKE=1` adds a real-browser smoke test. The screenshot and demo tooling needs
+`cd build && npm install` (pins playwright). CI runs ruff, pytest, and the e2e suite on every
+push; a scheduled workflow pings the live site every two hours and fails loudly if the page or
+its headline goes missing.
+
+After changing `build/sss_pipeline.py` scoring inputs without wanting a fresh OSM pull, use
+`python3 build/rescore_pois.py`: it recomputes exposure and scores from the cached
+`build/_fullnet/` segments, keeps the data vintage, asserts that no flagged count moves, and
+re-tiles the PMTiles.
 
 ## Method, briefly
 

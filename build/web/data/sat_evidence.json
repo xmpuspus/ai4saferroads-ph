@@ -3,22 +3,22 @@
   "featured": [
     {
       "city": "manila", "road": "EDSA", "posted": 60, "safe": 30, "v_design": 60,
-      "lanes_visible": "10 or more", "crop": "data/sat/manila_edsa.png",
+      "lanes_visible": "10 or more", "crop": "data/sat/manila_edsa.webp", "full": "data/sat/manila_edsa.png",
       "read": "A ten-plus lane megahighway with side service roads, bumper to bumper in the daytime image. The traffic in this picture is what a skeptic points to. The road under it is built like a racetrack. When it clears at night, the crash you have is twice as likely to injure or kill."
     },
     {
       "city": "manila", "road": "Taft Avenue", "posted": 60, "safe": 30, "v_design": 60,
-      "lanes_visible": "about 4", "crop": "data/sat/manila_taft-avenue.png",
+      "lanes_visible": "about 4", "crop": "data/sat/manila_taft-avenue.webp", "full": "data/sat/manila_taft-avenue.png",
       "read": "A dead-straight arterial under the LRT-1 line, cutting through wall-to-wall housing on both sides. Straight and wide invites speed the moment it clears."
     },
     {
       "city": "cebu", "road": "Natalio Bacalso Avenue", "posted": 60, "safe": 30, "v_design": 60,
-      "lanes_visible": "about 4", "crop": "data/sat/cebu_natalio-bacalso-avenue.png",
+      "lanes_visible": "about 4", "crop": "data/sat/cebu_natalio-bacalso-avenue.webp", "full": "data/sat/cebu_natalio-bacalso-avenue.png",
       "read": "A straight arterial slicing through Cebu's dense core, homes and a church right at the kerb."
     },
     {
       "city": "davao", "road": "Davao City Coastal Road", "posted": 60, "safe": 30, "v_design": 60,
-      "lanes_visible": "about 4, divided", "crop": "data/sat/davao_davao-city-coastal-road.png",
+      "lanes_visible": "about 4, divided", "crop": "data/sat/davao_davao-city-coastal-road.webp", "full": "data/sat/davao_davao-city-coastal-road.png",
       "read": "A new, wide, divided coastal highway running directly past dense informal housing. Built new for speed, next to people on foot."
     }
   ]

@@ -13,9 +13,11 @@ by eye against the scale bar and hand-verified into the manifest before entering
 
 Run: python3 build/overlay/satellite_evidence.py
 """
+
 import io
 import json
 import math
+import subprocess
 import urllib.request
 from pathlib import Path
 
@@ -30,24 +32,37 @@ ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapSe
 LANE_M = 3.35  # typical urban lane width for the lane-count estimate
 
 CITY_ROADS = {  # top flagged real-posted corridors to image, by city
-    "manila": 4, "cebu": 2, "davao": 2,
+    "manila": 4,
+    "cebu": 2,
+    "davao": 2,
 }
 
 
 def gpx(lon, lat, z):
-    n = 2 ** z
+    n = 2**z
     x = (lon + 180.0) / 360.0 * n * 256
-    y = (1.0 - math.log(math.tan(math.radians(lat)) + 1 / math.cos(math.radians(lat))) / math.pi) / 2.0 * n * 256
+    y = (
+        (
+            1.0
+            - math.log(math.tan(math.radians(lat)) + 1 / math.cos(math.radians(lat)))
+            / math.pi
+        )
+        / 2.0
+        * n
+        * 256
+    )
     return x, y
 
 
 def mpp(lat, z):
-    return 156543.03392 * math.cos(math.radians(lat)) / (2 ** z)
+    return 156543.03392 * math.cos(math.radians(lat)) / (2**z)
 
 
 def fetch_tile(z, x, y):
     url = ESRI.format(z=z, x=x, y=y)
-    req = urllib.request.Request(url, headers={"User-Agent": "ai4saferroads-ph/0.4 (personal civic research)"})
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "ai4saferroads-ph/0.4 (personal civic research)"}
+    )
     with urllib.request.urlopen(req, timeout=30) as r:
         return Image.open(io.BytesIO(r.read())).convert("RGB")
 
@@ -59,13 +74,36 @@ def crop(lon, lat, z, half=1):
     for i, tx in enumerate(range(x0 - half, x0 + half + 1)):
         for j, ty in enumerate(range(y0 - half, y0 + half + 1)):
             canvas.paste(fetch_tile(z, tx, ty), (i * 256, j * 256))
-    origin = ((x0 - half) * 256, (y0 - half) * 256)   # global px of crop top-left
+    origin = ((x0 - half) * 256, (y0 - half) * 256)  # global px of crop top-left
     return canvas, origin
 
 
 def local_px(lon, lat, z, origin):
     gx, gy = gpx(lon, lat, z)
     return gx - origin[0], gy - origin[1]
+
+
+def to_webp(png_path):
+    """Emit a ~720px-wide q80 webp next to the png so the pair stays in sync on regen."""
+    webp_path = png_path.with_suffix(".webp")
+    subprocess.run(
+        [
+            "cwebp",
+            "-q",
+            "80",
+            "-resize",
+            "720",
+            "720",
+            "-m",
+            "6",
+            str(png_path),
+            "-o",
+            str(webp_path),
+        ],
+        check=True,
+        capture_output=True,
+    )
+    return webp_path
 
 
 def font(sz):
@@ -83,7 +121,9 @@ def annotate(canvas, poly_px, mpp_, road, design, caption_extra=""):
     d = ImageDraw.Draw(canvas, "RGBA")
     W, H = canvas.size
     if len(poly_px) >= 2:
-        d.line(poly_px, fill=(91, 141, 184, 200), width=2)   # subject road centerline (steel blue)
+        d.line(
+            poly_px, fill=(91, 141, 184, 200), width=2
+        )  # subject road centerline (steel blue)
     # scale bar 25 m, bottom-left
     bar = 25 / mpp_
     bx, by = 18, H - 26
@@ -106,8 +146,15 @@ def main():
         heads = summ.get("headline_priority_roads_real_posted", [])[:topn]
         for r in heads:
             nm, sss = r["name"], r["sss"]
-            feat = next((f for f in flag["features"]
-                         if f["properties"].get("name") == nm and round(f["properties"]["sss"], 1) == round(sss, 1)), None)
+            feat = next(
+                (
+                    f
+                    for f in flag["features"]
+                    if f["properties"].get("name") == nm
+                    and round(f["properties"]["sss"], 1) == round(sss, 1)
+                ),
+                None,
+            )
             if not feat:
                 continue
             coords = feat["geometry"]["coordinates"]
@@ -118,20 +165,39 @@ def main():
             design = r.get("v_design")
             # map the whole subject polyline into crop pixels (clip loosely to canvas)
             poly_px = [local_px(c[0], c[1], z, origin) for c in coords]
-            poly_px = [(x, y) for (x, y) in poly_px if -80 <= x <= canvas.size[0] + 80 and -80 <= y <= canvas.size[1] + 80]
+            poly_px = [
+                (x, y)
+                for (x, y) in poly_px
+                if -80 <= x <= canvas.size[0] + 80 and -80 <= y <= canvas.size[1] + 80
+            ]
             annotate(canvas, poly_px, m, nm, design)
             slug = f"{key}_{nm.lower().replace(' ', '-').replace('.', '')}"
-            canvas.save(OUT / f"{slug}.png")
-            row = {"city": key, "road": nm, "sss": sss, "posted": r["posted_osm"], "safe": r["safe"],
-                   "v_design": design, "lat": round(lat, 6), "lon": round(lon, 6),
-                   "mpp": round(m, 3), "crop": f"data/sat/{slug}.png",
-                   "lanes_verified": None, "width_m_verified": None}
+            png_path = OUT / f"{slug}.png"
+            canvas.save(png_path)
+            to_webp(png_path)
+            row = {
+                "city": key,
+                "road": nm,
+                "sss": sss,
+                "posted": r["posted_osm"],
+                "safe": r["safe"],
+                "v_design": design,
+                "lat": round(lat, 6),
+                "lon": round(lon, 6),
+                "mpp": round(m, 3),
+                "crop": f"data/sat/{slug}.webp",
+                "full": f"data/sat/{slug}.png",
+                "lanes_verified": None,
+                "width_m_verified": None,
+            }
             manifest.append(row)
             print(f"[sat] {key:7s} {nm:26s} design {design}  -> {slug}.png")
     # raw candidates only: the shipped sat_evidence.json is hand-verified (lane counts read
     # by eye, schema the map consumes) and must never be clobbered by a re-run
     (WEBDATA / "sat_evidence_raw.json").write_text(json.dumps(manifest, indent=2))
-    print(f"\nwrote {len(manifest)} crops -> {OUT}  + sat_evidence_raw.json (hand-verify into sat_evidence.json)")
+    print(
+        f"\nwrote {len(manifest)} crops -> {OUT}  + sat_evidence_raw.json (hand-verify into sat_evidence.json)"
+    )
 
 
 if __name__ == "__main__":
