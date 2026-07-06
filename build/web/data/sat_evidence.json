@@ -1,10 +1,10 @@
 {
-  "note": "Satellite crops (Esri World Imagery, z18) of the top flagged crash corridors. OSM records no lane or width tag on these roads, so the design-speed proxy leans on class and alignment; the satellite is the physical evidence that closes the gap. Lane counts are read by eye against the 25 m scale bar on each crop and hand-verified, not auto-measured (an automated grey-pixel transect was tried and discarded as unreliable over medians, elevated rail, and water). Width in metres is deliberately not asserted per road; the image plus scale bar is the evidence.",
+  "note": "Satellite crops (Esri World Imagery, z18) of the top flagged crash roads. OSM records no lane or width tag on these roads, so the design-speed proxy leans on class and alignment; the satellite is the physical evidence that closes the gap. Lane counts are read by eye against the 25 m scale bar on each crop and hand-verified, not auto-measured (an automated grey-pixel transect was tried and discarded as unreliable over medians, elevated rail, and water). Width in metres is deliberately not asserted per road; the image plus scale bar is the evidence.",
   "featured": [
     {
       "city": "manila", "road": "EDSA", "posted": 60, "safe": 30, "v_design": 60,
       "lanes_visible": "10 or more", "crop": "data/sat/manila_edsa.png",
-      "read": "A ten-plus lane megahighway with side service roads, bumper to bumper in the daytime image. The jam is the crawl a skeptic points to; the road is built as a speedway. When it clears at night, the crash you have is twice as likely to injure or kill."
+      "read": "A ten-plus lane megahighway with side service roads, bumper to bumper in the daytime image. The traffic in this picture is what a skeptic points to. The road under it is built like a racetrack. When it clears at night, the crash you have is twice as likely to injure or kill."
     },
     {
       "city": "manila", "road": "Taft Avenue", "posted": 60, "safe": 30, "v_design": 60,

@@ -1,7 +1,7 @@
 # LinkedIn draft
 
-I have sat in enough EDSA traffic to have had the thought everyone has. The limit is 60, we are
-crawling at 30, and people still die on this road. So how is speed even the problem?
+I have sat in enough EDSA traffic to have had the thought everyone has. The limit is 60, traffic
+keeps us under 30, and people still die on this road. So how is speed even the problem?
 
 There is an ADB challenge running now, "AI for Safer Roads." I did not enter it, but that
 question stuck with me, so I spent a weekend trying to answer it honestly. If we never reach the
@@ -19,12 +19,12 @@ crashes. If I had gone with my gut and posted "crashes happen at night," the dat
 embarrassed me.
 
 But total crashes are not deaths. When I split by severity it flipped. The share of crashes that
-injure or kill roughly doubles in the deep night, when EDSA finally clears and cars reach the speed
-the road is built for. 13.5 percent from midnight to 5am, against 6.7 percent in the rush hour.
-Same road, twice as deadly per crash, when it is empty. The crawl produces the dents. The clear
-road produces the casualties.
+injure or kill roughly doubles late at night. That is when EDSA finally clears and cars reach the
+speed the road is built for. 13.5 percent from midnight to 5am, against 6.7 percent in the rush hour.
+Same road, twice as deadly per crash, when it is empty. Traffic produces the fender-benders. The
+clear road produces the casualties.
 
-I want to be honest about the limits of that. It is one road, EDSA. The deep-night hours bring less
+I want to be honest about the limits of that. It is one road, EDSA. Those late-night hours bring less
 enforcement and more drinking, so it points to speed, it does not prove it alone. There are only 22
 fatal crashes in the whole set, too few to read hour by hour, so I measured injuries and deaths
 together instead of deaths alone.
@@ -46,7 +46,8 @@ empty. Humps, narrowing, raised crossings. Yet only 21 percent of Manila's flagg
 any of that within 100 meters. In Cebu it is 10 percent. In Davao, 4.
 
 So the answer to the objection is yes, speed is the problem, just not the average speed. What
-exposes you is not the crawl but the top speed the road permits near you. I put the whole thing on an open
+puts you in danger is the top speed the road lets cars reach near you, however slow the traffic
+is right now. I put the whole thing on an open
 map, every drivable street in 51 Philippine cities, the current limit against the speed a person
 survives, with the real crashes laid over the satellite so you can see it for yourself.
 

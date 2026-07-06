@@ -17,7 +17,7 @@ const browser = await chromium.launch({
          '--ignore-gpu-blocklist', '--enable-webgl', '--in-process-gpu'],
 });
 const ctx = await browser.newContext({
-  viewport: { width: 1280, height: 800 }, deviceScaleFactor: 2,
+  viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1,  // dsf2 thrashes under memory pressure; video is 1280x800 either way
   recordVideo: { dir: DIR, size: { width: 1280, height: 800 } },
 });
 const recStart = Date.now();
@@ -42,7 +42,7 @@ await page.waitForTimeout(2200);                  // settle tiles after the load
 await page.evaluate(() => {
   window.__setPanel(true);                        // collapse to the headline; the map is the star
   const st = document.createElement('style');     // recording aid: real popups, enlarged to gif scale
-  st.textContent = '.maplibregl-popup-content{zoom:1.42}';  // 1.55 pushed the risk-cut line off-screen
+  st.textContent = '.maplibregl-popup-content{zoom:1.34}';  // sized so the risk-cut line clears the subtitle rail
   document.head.appendChild(st);
   const d = document.createElement('div'); d.id = 'rec-sub';
   d.style.cssText = 'position:fixed;left:50%;bottom:36px;transform:translateX(-50%);' +
@@ -58,7 +58,7 @@ console.log('TRIM_S=' + ((Date.now() - recStart) / 1000).toFixed(1));  // where 
 
 // BEAT 1 — the question, over the whole glowing metro (dark base)
 await sub('Metro Manila. The speed limit on many of these roads is 60.', 3400);
-await sub('Traffic crawls at 30. So does the limit even matter?', 3500);
+await sub('Traffic keeps cars under 30. So does the limit even matter?', 3500);
 
 // BEAT 2 — what the glow means, easing into the city core
 await page.evaluate(() => window.__map.easeTo({ center: [120.995, 14.605], zoom: 12.4, duration: 3200 })).catch(() => errs.push('cam2'));
@@ -117,7 +117,7 @@ for (let attempt = 0; attempt < 3 && !road; attempt++) {
   // keeps its numbers clear of the subtitle rail. Prefer the post's exact story,
   // a named road posted 60 where 30 is survivable
   let fallback = null;
-  for (let y = Math.round(H * 0.22); y < H * 0.32; y += 20)
+  for (let y = Math.round(H * 0.20); y < H * 0.30; y += 20)
     for (let x = Math.round(W * 0.32); x < W * 0.88; x += 20) {
       const fs = m.queryRenderedFeatures([x, y], { layers: ['net-real'] });
       if (!fs.length || !fs[0].properties.name) continue;

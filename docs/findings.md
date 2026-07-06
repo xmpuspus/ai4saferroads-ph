@@ -10,30 +10,30 @@ Crash validation: [validation.md](validation.md).
 ## 0. Is speed even the problem? The harm hides when the road clears
 
 The objection every Filipino raises is that the cities are gridlocked, so real speeds sit far
-below the posted limit most of the day. "The limit is 60, we crawl at 30, and we still crash."
+below the posted limit most of the day. "The limit is 60, traffic keeps us under 30, and we still crash."
 The data answers it, and the answer is not the naive one.
 
 On the Mendeley EDSA crash set (22,072 records, 2007-2016, the one open PH set we found with both
-severity and timestamps), **total crashes peak in the rush-hour jam**, tracking traffic volume, not empty
-roads. That kills the simple "crashes happen at night" story. But total crashes are not deaths.
+severity and timestamps), **total crashes peak in the rush hour**, tracking traffic volume rather
+than empty roads. That kills the simple "crashes happen at night" story. But total crashes are not deaths.
 When we split by severity, the picture inverts: the **share of crashes that injure or kill roughly
-doubles in the deep-night window**, when EDSA finally clears and vehicles reach the speed the road
+doubles in the late-night window**, when EDSA finally clears and vehicles reach the speed the road
 is built for.
 
 | Window | Crashes per hour | Share that injure or kill |
 |--------|-----------------:|--------------------------:|
 | Rush-hour peak (7-9am, 5-7pm) | 1,152 | 6.7% |
-| Deep night (12am-5am, road clears) | 301 | 13.5% |
+| Late night (12am-5am, road clears) | 301 | 13.5% |
 
-Relative risk 2.02x, chi-square p = 1.3e-18: 203 of the 1,503 deep-night crashes injured or
+Relative risk 2.02x, chi-square p = 1.3e-18: 203 of the 1,503 late-night crashes injured or
 killed, against 463 of 6,912 in the peak (the full set holds 1,504 injury-or-worse crashes). Across all 24
 hours the share that injure or kill runs inverse to the crash count (Spearman -0.79): the emptier
 the road, the more likely the crash that does happen hurts someone. This is the 4th-power
-speed-severity law (Nilsson) showing up in real data: the crawl produces fender-benders, the
-clear road produces the casualties.
+speed-severity law (Nilsson) showing up in real data: congested traffic produces fender-benders,
+the clear road produces the casualties.
 
-Two honest caveats. The deep-night window carries **less enforcement and more impaired
-driving** too, so the severity cliff points to speed, it does not prove it alone. And it is one
+Two honest caveats. The late-night window has **less enforcement and more impaired
+driving** too, so the severity jump points to speed, it does not prove it alone. And it is one
 road, EDSA, the exact place the objection is strongest. The fatal count itself (22 fatal crashes
 in the set) is too small to read hour by hour, which is why the test runs on injury-or-worse, not
 deaths alone.

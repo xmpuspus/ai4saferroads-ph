@@ -107,7 +107,7 @@ speed): only 21% of flagged roads in Manila, 10% in Cebu, and 4% in Davao have a
 That distinction is the whole argument. A crossing manages *where* people cross. It does not
 change *how fast the car arrives*. A marked crossing on a road posted 60 where 30 is survivable
 still leaves the pedestrian exposed to a 60 km/h impact. So "the roads have crossings" is not
-reassurance, it is the point: the protection that exists addresses the wrong variable. The lever
+reassurance, it is the point: the protection that exists addresses the wrong variable. The fix
 is the limit and the calming that enforces it, which is what the score measures.
 
 ## Data sources

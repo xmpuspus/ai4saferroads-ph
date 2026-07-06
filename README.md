@@ -1,15 +1,16 @@
-# Is speed the problem when we crawl at 30?
+# Is speed the problem when traffic keeps us under 30?
 
-> Metro Manila is gridlocked, so a lower speed limit can feel beside the point. But the crawl is
-> the jam, not the road. On EDSA, total crashes peak in the rush-hour jam, yet the share of
-> crashes that injure or kill roughly doubles in the deep-night window when the road clears and
+> Metro Manila is gridlocked, so a lower speed limit can feel beside the point. But the slow pace
+> comes from traffic, and the road underneath is built for far more. On EDSA, total crashes peak
+> in rush-hour traffic. Yet the share that injure or kill roughly doubles between midnight and
+> 5am. That is when the road clears and
 > vehicles reach the speed it is built for: 13.5% against 6.7%, about 2x (p < 0.001, Mendeley EDSA
 > 2007-2016: 22,072 crashes, 1,504 of them injury-or-worse). You are exposed to the top speed a road permits
 > near you, not the average. This open map scores every street in 51 Philippine cities against the
 > speed a person survives a crash at: 357,423 scored from OpenStreetMap, 7,586 posted above the safe
 > speed, 4,664 in Metro Manila. Satellite imagery shows the flagged roads for what they are,
-> wide straight multi-lane roads through dense housing, built for a speed no sign and no crawl
-> changes. And the danger does not track wealth, across the 43 cities with enough data the link is
+> wide straight multi-lane roads through dense housing, built for a speed no sign and no traffic
+> jam changes. And the danger does not track wealth, across the 43 cities with enough data the link is
 > significant in only three ([findings](docs/findings.md)).
 
 [![Live](https://img.shields.io/badge/live-ai4saferroads--ph.vercel.app-success.svg)](https://ai4saferroads-ph.vercel.app)
@@ -34,7 +35,7 @@ live at [ai4saferroads-ph.vercel.app](https://ai4saferroads-ph.vercel.app).</sub
 ## What it shows
 
 The question is not whether drivers speed. It is whether the road itself permits a lethal speed
-next to people, whatever the daytime crawl. For every drivable road segment the model computes:
+next to people, however slow the daytime traffic runs. For every drivable road segment the model computes:
 
 - a **Safe System recommended speed** from the road's class and the vulnerable-user sites
   around it (schools, markets, hospitals, transit),
@@ -56,18 +57,18 @@ The honest objection is that Philippine cities are gridlocked, so real speeds si
 posted limit most of the day. The answer follows the data, in three moves.
 
 1. **The harm hides in the clear-road hours.** On the Mendeley EDSA crash set (22,072 records,
-   2007-2016), total crashes peak in the rush-hour jam, tracking traffic volume. But the share of
-   crashes that injure or kill roughly doubles when the road clears: **13.5%** in the deep-night
+   2007-2016), total crashes peak in the rush hour, tracking traffic volume. But the share of
+   crashes that injure or kill roughly doubles when the road clears: **13.5%** in the late-night
    window (12am to 5am) against **6.7%** in the rush-hour peak, about **2x** (chi-square p = 1.3e-18,
    on a set holding 1,504 injury-or-worse crashes). The clear-road hours carry less enforcement and more
    impaired driving too, so this points to speed, it does not prove it alone. It is one road, EDSA,
    and its 22 fatal crashes are too few to read hour by hour, so the test runs on injury-or-worse crashes,
-   not deaths alone. The naive "crashes happen at night" claim stays false: crashes peak in the jam,
-   it is their severity that peaks when it clears.
+   not deaths alone. The naive "crashes happen at night" claim stays false: crashes peak in daytime
+   traffic, it is their severity that peaks when the road clears.
 2. **From space, the flagged roads are built for speed.** OpenStreetMap has no width tag on most
    arterials, so the satellite closes the gap. The flagged roads are wide, straight, multi-lane
    strips through dense housing: EDSA (ten-plus lanes), Taft Avenue, Cebu's Natalio Bacalso Avenue,
-   the new Davao City Coastal Road. The crawl is congestion. The built form is not.
+   the new Davao City Coastal Road. Congestion is temporary. The road itself is not.
 3. **The fix is physical, not a sign.** A lower number no one obeys in traffic and no one enforces
    changes nothing. Only road design that caps speed when the road is empty works, and only **21%**
    of Manila's flagged roads have any traffic calming within 100 m (10% in Cebu, 4% in Davao).

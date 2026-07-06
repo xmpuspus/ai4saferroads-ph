@@ -65,14 +65,14 @@ functional-class default is imputed and flagged as imputed. Official GPS-probe d
 limits and operating speeds) replaces this step directly when available.</p>
 
 <h2>2b. Free-flow design speed (V<sub>design</sub>)</h2>
-<p>The daytime crawl is congestion, not the road. To hold a speed that does not depend on the
-jam, each segment carries a second number, a free-flow design speed: the speed the built form invites when
+<p>The slow daytime pace comes from congestion rather than the road. To hold a speed that does not
+depend on traffic, each segment carries a second number, a free-flow design speed: the speed the built form invites when
 the road is clear. It is estimated from the functional class (a design-speed norm) and the
 alignment (curves cap it), so it is the same at 3am and at noon. This is a transparent
 class-based estimate, labelled as one, not a measured operating speed. On the flagged arterials
 it sits at or near the posted limit, so it does not add an independent claim there. Its value is
 holding a congestion-free speed for the roads that carry no posted sign, and framing the map's
-answer to "we only crawl at 30". A measured lanes-and-width or GPS-probe layer would sharpen it.</p>
+answer to "traffic never lets us reach the limit anyway". A measured lanes-and-width or GPS-probe layer would sharpen it.</p>
 
 <h2>3. The score</h2>
 <div class="formula">
@@ -138,8 +138,8 @@ segment level and validates there. Full numbers and caveats: see the project's v
 <h2>6b. Is speed even the problem? Severity by hour</h2>
 <p>The objection is that the cities are gridlocked, so real speeds sit far below the limit. On the
 Mendeley EDSA crash set (22,072 records, 2007-2016, the one open PH set we found with both severity and
-timestamps), total crashes peak in the rush-hour jam, tracking volume. But the share of crashes
-that injure or kill roughly doubles when the road clears: 13.5% in the deep-night window (12am to
+timestamps), total crashes peak in the rush hour, tracking volume. But the share of crashes
+that injure or kill roughly doubles when the road clears: 13.5% in the late-night window (12am to
 5am) against 6.7% in the rush-hour peak, about 2x (chi-square p = 1.3e-18, on a set holding 1,504
 injury-or-worse crashes). Across all 24 hours the injury-or-kill share runs inverse to the crash
 count (Spearman &minus;0.79). Two caveats keep this honest: the clear-road hours carry less
@@ -148,7 +148,7 @@ it is one road. The 22 fatal crashes in the set are too few to read hour by hour
 injury-or-worse, not deaths. Independent of the hour, satellite imagery shows the flagged
 roads are wide, straight, multi-lane roads through dense housing (OpenStreetMap has no width
 tag, so the imagery supplies it), and only 21% of Manila's flagged roads have any traffic calming
-within 100 m (10% Cebu, 4% Davao): the crawl is congestion, the built form and the missing
+within 100 m (10% Cebu, 4% Davao). Congestion is temporary, the built form and the missing
 calming are not. Reproduce with <code>build/overlay/emit_severity_artifact.py</code> and
 <code>build/overlay/satellite_evidence.py</code>.</p>
 
