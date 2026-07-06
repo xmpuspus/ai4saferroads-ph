@@ -6,7 +6,9 @@ regress: a score only where the posted limit exceeds the Safe System speed, grad
 roads never downgraded to a pedestrian speed, every over-posted segment carries a fatal-risk
 reduction, scores in range, and the wealth correlation is a real number (not fabricated).
 """
+
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -14,6 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "build" / "web" / "data"
 FULLNET = ROOT / "build" / "_fullnet"
 OVL = ROOT / "build" / "overlay"
+SKIP_PMTILES = os.environ.get("E2E_SKIP_PMTILES") == "1"
 fails = []
 
 
@@ -27,11 +30,31 @@ cities_path = DATA / "cities.json"
 check(cities_path.exists(), "cities.json exists")
 cities = json.loads(cities_path.read_text()) if cities_path.exists() else []
 check(len(cities) >= 1, f"cities.json lists cities (got {len(cities)})")
-check((DATA / "sss_all.pmtiles").exists(), "combined PMTiles exists (full network render)")
+
+pmtiles_path = DATA / "sss_all.pmtiles"
+if SKIP_PMTILES:
+    print("[SKIP] combined PMTiles exists (E2E_SKIP_PMTILES=1)")
+    print(
+        "[SKIP] combined PMTiles is at least as fresh as the newest _fullnet segments"
+    )
+else:
+    check(pmtiles_path.exists(), "combined PMTiles exists (full network render)")
+    if pmtiles_path.exists() and FULLNET.exists():
+        newest_seg_mtime = max(
+            (p.stat().st_mtime for p in FULLNET.glob("sss_segments_*.geojson")),
+            default=0,
+        )
+        check(
+            pmtiles_path.stat().st_mtime >= newest_seg_mtime,
+            "combined PMTiles is at least as fresh as the newest _fullnet segments "
+            "(guards stale-tiles-beside-fresh-geojson)",
+        )
 
 for c in cities:
     key = c["key"]
-    check((DATA / f"sss_flagged_{key}.geojson").exists(), f"{key}: flagged subset shipped")
+    check(
+        (DATA / f"sss_flagged_{key}.geojson").exists(), f"{key}: flagged subset shipped"
+    )
     check((DATA / f"pois_{key}.geojson").exists(), f"{key}: pois shipped")
     seg_p = FULLNET / f"sss_segments_{key}.geojson"
     check(seg_p.exists(), f"{key}: full network geojson present")
@@ -52,16 +75,26 @@ for c in cities:
             bad_range += 1
     check(bad_score == 0, f"{key}: no score where gap<=0 ({bad_score})")
     check(bad_motorway == 0, f"{key}: no motorway downgraded to 30 ({bad_motorway})")
-    check(bad_red == 0, f"{key}: every over-posted segment has a fatal-risk reduction ({bad_red})")
+    check(
+        bad_red == 0,
+        f"{key}: every over-posted segment has a fatal-risk reduction ({bad_red})",
+    )
     check(bad_range == 0, f"{key}: scores/reductions in range ({bad_range})")
     # wealth overlay is optional (small cities lack enough real-posted road to grid);
     # but if a city has stats, the GeoJSON it draws must ship and rho must be a real number
     st_p = OVL / f"overlay_stats_{key}.json"
     if st_p.exists():
         st = json.loads(st_p.read_text())
-        check((DATA / f"overlay_{key}.geojson").exists(), f"{key}: wealth overlay shipped (has stats)")
-        check(-1 <= st["spearman_rho"] <= 1 and 0 <= st["spearman_p"] <= 1,
-              f"{key}: wealth correlation is a real value (rho={st['spearman_rho']})")
+        check(
+            (DATA / f"overlay_{key}.geojson").exists(),
+            f"{key}: wealth overlay shipped (has stats)",
+        )
+        check(
+            -1 <= st["spearman_rho"] <= 1 and 0 <= st["spearman_p"] <= 1,
+            f"{key}: wealth correlation is a real value (rho={st['spearman_rho']})",
+        )
 
-print(f"\n{'ALL INVARIANTS PASS' if not fails else str(len(fails)) + ' INVARIANT(S) FAILED'}")
+print(
+    f"\n{'ALL INVARIANTS PASS' if not fails else str(len(fails)) + ' INVARIANT(S) FAILED'}"
+)
 sys.exit(1 if fails else 0)

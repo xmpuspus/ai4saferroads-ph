@@ -16,7 +16,7 @@
     "segments_flagged_sss_gt0": 7570,
     "segments_flagged_real_posted": 4664,
     "sss_max": 75.0,
-    "sss_mean_flagged": 29.6,
+    "sss_mean_flagged": 29.7,
     "vru_pois": 5669,
     "headline_priority_roads_real_posted": [
       {
@@ -145,7 +145,7 @@
     "segments_flagged_sss_gt0": 1230,
     "segments_flagged_real_posted": 581,
     "sss_max": 75.0,
-    "sss_mean_flagged": 26.6,
+    "sss_mean_flagged": 26.7,
     "vru_pois": 858,
     "headline_priority_roads_real_posted": [
       {
@@ -403,7 +403,7 @@
     "segments_flagged_sss_gt0": 171,
     "segments_flagged_real_posted": 15,
     "sss_max": 46.8,
-    "sss_mean_flagged": 17.7,
+    "sss_mean_flagged": 17.8,
     "vru_pois": 159,
     "headline_priority_roads_real_posted": [
       {
@@ -620,7 +620,7 @@
     "segments_flagged_sss_gt0": 368,
     "segments_flagged_real_posted": 135,
     "sss_max": 75.0,
-    "sss_mean_flagged": 23.3,
+    "sss_mean_flagged": 23.4,
     "vru_pois": 398,
     "headline_priority_roads_real_posted": [
       {
@@ -749,7 +749,7 @@
     "segments_flagged_sss_gt0": 232,
     "segments_flagged_real_posted": 98,
     "sss_max": 71.7,
-    "sss_mean_flagged": 20.4,
+    "sss_mean_flagged": 20.5,
     "vru_pois": 258,
     "headline_priority_roads_real_posted": [
       {
@@ -967,7 +967,7 @@
     "segments_flagged_sss_gt0": 357,
     "segments_flagged_real_posted": 31,
     "sss_max": 75.0,
-    "sss_mean_flagged": 19.4,
+    "sss_mean_flagged": 19.5,
     "vru_pois": 383,
     "headline_priority_roads_real_posted": [
       {
@@ -1084,7 +1084,7 @@
     "segments_flagged_sss_gt0": 275,
     "segments_flagged_real_posted": 17,
     "sss_max": 75.0,
-    "sss_mean_flagged": 24.7,
+    "sss_mean_flagged": 24.9,
     "vru_pois": 311,
     "headline_priority_roads_real_posted": [
       {
@@ -1290,7 +1290,7 @@
     "segments_flagged_sss_gt0": 147,
     "segments_flagged_real_posted": 1,
     "sss_max": 63.0,
-    "sss_mean_flagged": 23.8,
+    "sss_mean_flagged": 23.9,
     "vru_pois": 164,
     "headline_priority_roads_real_posted": [
       {
@@ -1329,7 +1329,7 @@
     "segments_flagged_sss_gt0": 145,
     "segments_flagged_real_posted": 17,
     "sss_max": 37.4,
-    "sss_mean_flagged": 15.4,
+    "sss_mean_flagged": 15.5,
     "vru_pois": 144,
     "headline_priority_roads_real_posted": [
       {
@@ -1408,7 +1408,7 @@
     "segments_flagged_sss_gt0": 142,
     "segments_flagged_real_posted": 30,
     "sss_max": 61.6,
-    "sss_mean_flagged": 18.5,
+    "sss_mean_flagged": 18.6,
     "vru_pois": 165,
     "headline_priority_roads_real_posted": [
       {
@@ -1537,7 +1537,7 @@
     "segments_flagged_sss_gt0": 937,
     "segments_flagged_real_posted": 53,
     "sss_max": 75.0,
-    "sss_mean_flagged": 24.9,
+    "sss_mean_flagged": 25.0,
     "vru_pois": 418,
     "headline_priority_roads_real_posted": [
       {
@@ -1972,7 +1972,7 @@
     "segments_flagged_sss_gt0": 229,
     "segments_flagged_real_posted": 2,
     "sss_max": 47.5,
-    "sss_mean_flagged": 14.8,
+    "sss_mean_flagged": 14.9,
     "vru_pois": 170,
     "headline_priority_roads_real_posted": [
       {
@@ -2045,7 +2045,7 @@
         "v_design": 70
       },
       {
-        "sss": 19.1,
+        "sss": 21.1,
         "name": "Romulo Boulevard",
         "class": "trunk",
         "posted_osm": 80,
@@ -2110,7 +2110,7 @@
     "segments_flagged_sss_gt0": 384,
     "segments_flagged_real_posted": 134,
     "sss_max": 66.6,
-    "sss_mean_flagged": 17.7,
+    "sss_mean_flagged": 17.8,
     "vru_pois": 342,
     "headline_priority_roads_real_posted": [
       {
@@ -2239,7 +2239,7 @@
     "segments_flagged_sss_gt0": 222,
     "segments_flagged_real_posted": 24,
     "sss_max": 68.5,
-    "sss_mean_flagged": 16.8,
+    "sss_mean_flagged": 16.9,
     "vru_pois": 277,
     "headline_priority_roads_real_posted": [
       {
@@ -2715,7 +2715,7 @@
     "segments_flagged_sss_gt0": 1481,
     "segments_flagged_real_posted": 45,
     "sss_max": 75.0,
-    "sss_mean_flagged": 28.2,
+    "sss_mean_flagged": 28.3,
     "vru_pois": 580,
     "headline_priority_roads_real_posted": [
       {
@@ -2735,7 +2735,7 @@
         "posted_osm": 40,
         "safe": 30,
         "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (2 VRU site<=50m)",
+        "why": "pedestrian activity (1 VRU site<=50m)",
         "v_design": 50
       },
       {
@@ -2847,6 +2847,16 @@
     "vru_pois": 98,
     "headline_priority_roads_real_posted": [
       {
+        "sss": 21.5,
+        "name": "J. P. Rizal Avenue",
+        "class": "secondary",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "pedestrian activity (1 VRU site<=50m)",
+        "v_design": 50
+      },
+      {
         "sss": 20.8,
         "name": "Josefa Llanes Escoda National Highway",
         "class": "primary",
@@ -2855,16 +2865,6 @@
         "fatal_reduction_pct": 68.4,
         "why": "pedestrian activity (1 VRU site<=50m)",
         "v_design": 60
-      },
-      {
-        "sss": 19.7,
-        "name": "J. P. Rizal Avenue",
-        "class": "secondary",
-        "posted_osm": 40,
-        "safe": 30,
-        "fatal_reduction_pct": 68.4,
-        "why": "pedestrian activity (1 VRU site<=50m)",
-        "v_design": 50
       },
       {
         "sss": 16.1,
@@ -3189,7 +3189,7 @@
     "segments_flagged_sss_gt0": 179,
     "segments_flagged_real_posted": 7,
     "sss_max": 60.9,
-    "sss_mean_flagged": 15.2,
+    "sss_mean_flagged": 15.3,
     "vru_pois": 103,
     "headline_priority_roads_real_posted": [
       {
@@ -3356,7 +3356,7 @@
     "segments_flagged_sss_gt0": 166,
     "segments_flagged_real_posted": 31,
     "sss_max": 40.9,
-    "sss_mean_flagged": 15.9,
+    "sss_mean_flagged": 16.0,
     "vru_pois": 116,
     "headline_priority_roads_real_posted": [
       {
@@ -3435,7 +3435,7 @@
     "segments_flagged_sss_gt0": 70,
     "segments_flagged_real_posted": 13,
     "sss_max": 55.2,
-    "sss_mean_flagged": 19.5,
+    "sss_mean_flagged": 19.6,
     "vru_pois": 58,
     "headline_priority_roads_real_posted": [
       {
@@ -4281,6 +4281,16 @@
         "v_design": 35
       },
       {
+        "sss": 23.3,
+        "name": "Abanil Street",
+        "class": "residential",
+        "posted_osm": 40,
+        "safe": 30,
+        "fatal_reduction_pct": 68.4,
+        "why": "local road, frontage/pedestrian mixing",
+        "v_design": 35
+      },
+      {
         "sss": 23.1,
         "name": "Animas Street",
         "class": "unclassified",
@@ -4289,16 +4299,6 @@
         "fatal_reduction_pct": 68.4,
         "why": "local road, frontage/pedestrian mixing",
         "v_design": 40
-      },
-      {
-        "sss": 22.9,
-        "name": "Abanil Street",
-        "class": "residential",
-        "posted_osm": 40,
-        "safe": 30,
-        "fatal_reduction_pct": 68.4,
-        "why": "local road, frontage/pedestrian mixing",
-        "v_design": 35
       },
       {
         "sss": 21.1,
@@ -4366,7 +4366,7 @@
     "segments_flagged_sss_gt0": 97,
     "segments_flagged_real_posted": 0,
     "sss_max": 75.0,
-    "sss_mean_flagged": 17.4,
+    "sss_mean_flagged": 17.5,
     "vru_pois": 51,
     "headline_priority_roads_real_posted": [],
     "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
@@ -4394,7 +4394,7 @@
     "segments_flagged_sss_gt0": 99,
     "segments_flagged_real_posted": 19,
     "sss_max": 56.6,
-    "sss_mean_flagged": 18.7,
+    "sss_mean_flagged": 18.8,
     "vru_pois": 85,
     "headline_priority_roads_real_posted": [
       {

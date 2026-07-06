@@ -15,7 +15,7 @@
   "segments_flagged_sss_gt0": 1481,
   "segments_flagged_real_posted": 45,
   "sss_max": 75.0,
-  "sss_mean_flagged": 28.2,
+  "sss_mean_flagged": 28.3,
   "vru_pois": 580,
   "headline_priority_roads_real_posted": [
     {
@@ -35,7 +35,7 @@
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
-      "why": "pedestrian activity (2 VRU site<=50m)",
+      "why": "pedestrian activity (1 VRU site<=50m)",
       "v_design": 50
     },
     {

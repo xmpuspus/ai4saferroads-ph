@@ -15,7 +15,7 @@
   "segments_flagged_sss_gt0": 97,
   "segments_flagged_real_posted": 0,
   "sss_max": 75.0,
-  "sss_mean_flagged": 17.4,
+  "sss_mean_flagged": 17.5,
   "vru_pois": 51,
   "headline_priority_roads_real_posted": [],
   "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",

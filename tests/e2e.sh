@@ -14,7 +14,11 @@ chk "methodology page present"         "test -f build/web/methodology.html"
 chk "sim present"                      "test -f build/web/sim.html"
 chk "corridor metadata present"        "test -f build/web/data/corridor.json"
 chk "cities index present"             "test -f build/web/data/cities.json"
-chk "full-network PMTiles present"     "test -f build/web/data/sss_all.pmtiles"
+if [ "${E2E_SKIP_PMTILES:-0}" = "1" ]; then
+  echo "[SKIP] full-network PMTiles present (E2E_SKIP_PMTILES=1)"
+else
+  chk "full-network PMTiles present"   "test -f build/web/data/sss_all.pmtiles"
+fi
 chk "wealth overlay script present"    "test -f build/overlay/compute_overlay.py"
 chk "LICENSE present"                  "test -f LICENSE"
 
@@ -57,6 +61,27 @@ if python3 tests/test_pipeline.py; then :; else fail=1; fi
 
 echo "== invariants =="
 if python3 tests/check_invariants.py; then :; else fail=1; fi
+
+echo "== browser smoke test =="
+if [ "${E2E_SMOKE:-0}" = "1" ] && command -v node >/dev/null 2>&1; then
+  SMOKE_PORT="${SMOKE_PORT:-8799}"
+  python3 build/web/serve.py "$SMOKE_PORT" >/tmp/ai4sr_smoke_serve.log 2>&1 &
+  SERVE_PID=$!
+  trap 'kill "$SERVE_PID" >/dev/null 2>&1' EXIT
+  for _ in $(seq 1 20); do
+    curl -sf "http://127.0.0.1:$SMOKE_PORT/web/index.html" >/dev/null 2>&1 && break
+    sleep 0.3
+  done
+  if BASE_URL="http://127.0.0.1:$SMOKE_PORT/web/index.html" node tests/smoke.mjs; then
+    pass "playwright smoke test (map loads, stats render, error card on blocked fetch)"
+  else
+    echo "[FAIL] playwright smoke test"; fail=1
+  fi
+  kill "$SERVE_PID" >/dev/null 2>&1
+  trap - EXIT
+else
+  echo "[SKIP] browser smoke test (set E2E_SMOKE=1 with node on PATH to run it)"
+fi
 
 echo ""
 if [ "$fail" -eq 0 ]; then echo "E2E: ALL CHECKS PASS"; else echo "E2E: FAILURES PRESENT"; fi
