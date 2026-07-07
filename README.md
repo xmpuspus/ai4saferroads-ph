@@ -1,4 +1,4 @@
-# Is speed the problem when traffic keeps us under 30?
+# Will a lower speed limit actually make us safer?
 
 > Metro Manila is gridlocked, so a lower speed limit can feel beside the point. But the slow pace
 > comes from traffic, and the road underneath is built for far more. On EDSA, total crashes peak

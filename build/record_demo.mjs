@@ -58,7 +58,7 @@ console.log('TRIM_S=' + ((Date.now() - recStart) / 1000).toFixed(1));  // where 
 
 // BEAT 1 — the question, over the whole glowing metro (dark base)
 await sub('Metro Manila. The speed limit on many of these roads is 60.', 3400);
-await sub('Traffic keeps cars under 30. So does the limit even matter?', 3500);
+await sub('Traffic keeps cars under 30. Will a lower limit make anyone safer?', 3500);
 
 // BEAT 2 — what the glow means, easing into the city core
 await page.evaluate(() => window.__map.easeTo({ center: [120.995, 14.605], zoom: 12.4, duration: 3200 })).catch(() => errs.push('cam2'));

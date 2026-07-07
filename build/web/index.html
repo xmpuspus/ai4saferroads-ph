@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Is speed the problem? Where Philippine roads permit lethal speed near people</title>
-<meta name="description" content="Traffic keeps Metro Manila under 30, so a lower speed limit can feel beside the point. But slow traffic is temporary and the road underneath is built for far more. This open map shows where 51 Philippine cities' streets are built for a speed people cannot survive. The crash data shows the share of crashes that injure or kill doubles when the road clears." />
-<meta property="og:title" content="Is speed the problem when traffic keeps us under 30?" />
+<title>Will a lower speed limit actually make us safer? Where Philippine roads permit lethal speed near people</title>
+<meta name="description" content="Not on its own: a lower number no one obeys changes nothing. But the road itself is built for a speed, and people meet it the moment traffic clears. This open map shows where 51 Philippine cities' streets are built for a speed people cannot survive. The crash data shows the share of crashes that injure or kill doubles when the road clears." />
+<meta property="og:title" content="Will a lower speed limit actually make us safer?" />
 <meta property="og:description" content="Slow traffic hides what the road permits. Where Philippine streets allow lethal speed near people. The crashes that happen when the road clears are twice as likely to injure or kill. Open data, 51 cities." />
 <meta property="og:image" content="https://ai4saferroads-ph.vercel.app/og-card.png" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -335,8 +335,8 @@
   <span class="tk-ramp score" aria-hidden="true"></span><small>the more the speed limit needs to come down.</small></div>
 <div class="panel glass" role="region" aria-label="Current vs proposed speed limits, controls and findings">
   <button id="panelToggle" class="ptoggle" aria-label="Collapse panel" aria-expanded="true">&#9652;</button>
-  <h1 id="h1title" data-i18n-html="h1Title">Is speed the problem <span class="em">when traffic keeps us under 30?</span></h1>
-  <p class="sub" data-i18n="h1_lead">Yes, but not the average speed. Traffic makes the road slow. The road itself is built for far more, and that is the speed people meet the moment it clears. This maps where that happens next to people, across 51 cities.</p>
+  <h1 id="h1title" data-i18n-html="h1Title">Will a lower speed limit <span class="em">actually make us safer?</span></h1>
+  <p class="sub" data-i18n="h1_lead">Not on its own. A lower number no one obeys changes nothing. But the road itself is built for a speed, and people meet it the moment traffic clears. This maps where that speed is higher than a person can survive, next to schools and markets, across 51 cities.</p>
   <div class="row2">
     <select id="city" aria-label="City"></select>
     <div class="langtoggle" id="langtoggle" role="group" aria-label="Language">
@@ -466,7 +466,7 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;',
 // for copy that needs numbers/names interpolated. Adding a third language is additive: one more key.
 const I18N={
   en:{
-    h1_lead:'Yes, but not the average speed. Traffic makes the road slow. The road itself is built for far more, and that is the speed people meet the moment it clears. This maps where that happens next to people, across 51 cities.',
+    h1_lead:'Not on its own. A lower number no one obeys changes nothing. But the road itself is built for a speed, and people meet it the moment traffic clears. This maps where that speed is higher than a person can survive, next to schools and markets, across 51 cities.',
     findPh:'Find a road…',
     worstRoads:'Worst roads',
     buildBtn:'&#9654; Show me how it works, step by step',
@@ -535,7 +535,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
     errVendor:(name)=>`The map could not load its engine (${name}). Reload the page or try again later.`,
     nearLandmark:(name)=>` &middot; near ${esc(name)}`,
     csvHeaders:['Road','Posted (km/h)','Safe (km/h)','Gap (km/h)','Score','Why'],
-    h1Title:'Is speed the problem <span class="em">when traffic keeps us under 30?</span>',
+    h1Title:'Will a lower speed limit <span class="em">actually make us safer?</span>',
     bannerScore:'Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour, <span class="tk-ramp score"></span><small>the more the speed limit needs to come down.</small>',
     bannerCurrent:'<b>Now.</b> Each road shows its <b>current speed limit</b>. <span class="tk-ramp speed"></span><small>teal is 30, coral is 60 or more km/h.</small>',
     bannerProposed:'<b>Safe.</b> The <b>speed limit each road should have</b>. <span class="tk-ramp speed"></span><small>the fast roads turn teal.</small>',
@@ -598,7 +598,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
     crashFail:'Could not load crash data.',
   },
   fil:{
-    h1_lead:'Oo, pero hindi ito tungkol sa average speed. Bagal ng biyahe dahil sa traffic, pero ang disenyo ng kalsada mismo ay para sa mas mabilis pa. Iyon ang bilis na matatagpuan pagdating ng oras na humupa ang trapiko. Ipinapakita rito kung saan nangyayari iyon malapit sa mga tao, sa 51 lungsod.',
+    h1_lead:'Hindi kung numero lang sa karatula. Walang binabago ang mas mababang limitasyong walang sumusunod. Pero dinisenyo ang bawat kalsada para sa isang bilis, at iyon ang sasalubong sa mga tao kapag humupa ang traffic. Ipinapakita rito kung saan mas mataas ang bilis na iyon kaysa kayang tagalan ng tao, malapit sa mga paaralan at palengke, sa 51 lungsod.',
     findPh:'Maghanap ng kalsada…',
     worstRoads:'Pinakadelikadong kalsada',
     buildBtn:'&#9654; Ipakita paano ito ginagawa, hakbang-hakbang',
@@ -667,7 +667,7 @@ Mga tagapagpahiwatig mula sa bukas na datos. Ang isang flag ay nangangahulugang 
     errVendor:(name)=>`Hindi na-load ng mapa ang kailangan nitong engine (${name}). I-reload ang pahina o subukan mamaya.`,
     nearLandmark:(name)=>` &middot; malapit sa ${esc(name)}`,
     csvHeaders:['Kalsada','Naka-post (km/h)','Ligtas (km/h)','Agwat (km/h)','Marka','Dahilan'],
-    h1Title:'Problema ba ang bilis <span class="em">kung traffic ang pumipigil sa atin sa ilalim ng 30?</span>',
+    h1Title:'Magiging mas ligtas ba tayo <span class="em">kung ibababa ang speed limit?</span>',
     bannerScore:'Bawat <b>kumikinang na kalsada ay may speed limit na mas mataas sa kayang tagalan ng tao sa isang banggaan</b>. Habang mas maliwanag ang kulay, <span class="tk-ramp score"></span><small>mas kailangang ibaba ang speed limit.</small>',
     bannerCurrent:'<b>Ngayon.</b> Ipinapakita ng bawat kalsada ang <b>kasalukuyang speed limit</b> nito. <span class="tk-ramp speed"></span><small>teal ay 30, coral ay 60 pataas na km/h.</small>',
     bannerProposed:'<b>Ligtas.</b> Ang <b>speed limit na dapat sa bawat kalsada</b>. <span class="tk-ramp speed"></span><small>nagiging teal ang mabibilis na kalsada.</small>',

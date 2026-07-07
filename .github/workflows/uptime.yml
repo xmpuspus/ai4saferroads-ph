@@ -12,7 +12,7 @@ jobs:
       - name: Fetch the live map and check a known copy string
         run: |
           body=$(curl -fsSL --max-time 30 https://ai4saferroads-ph.vercel.app)
-          echo "$body" | grep -q "Is speed the problem" || {
+          echo "$body" | grep -q "Will a lower speed limit" || {
             echo "Live page is up but the expected headline is missing"; exit 1; }
       - name: Check the sim page responds
         run: curl -fsS -o /dev/null --max-time 30 https://ai4saferroads-ph.vercel.app/sim.html
