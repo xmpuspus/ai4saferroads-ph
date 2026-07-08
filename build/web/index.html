@@ -361,7 +361,7 @@
       <div class="sq-foot" data-i18n="sqFoot">Flagged for review, not an accusation. Statistical indicators from public data. Patterns may have legitimate explanations.</div>
     </div>
   </div>
-  <div class="row2"><input type="search" id="find" placeholder="Find a road…" data-i18n-ph="findPh" aria-label="Find a road" /></div>
+  <div class="row2"><input type="search" id="find" placeholder="Find a flagged road…" data-i18n-ph="findPh" aria-label="Find a flagged road" /></div>
   <div id="stats"></div>
   <div id="badetail" hidden></div>
   <div class="sec" data-i18n="worstRoads">Worst roads</div>
@@ -467,7 +467,7 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;',
 const I18N={
   en:{
     h1_lead:'Not on its own. A lower number no one obeys changes nothing. But the road itself is built for a speed, and people meet it the moment traffic clears. This maps where that speed is higher than a person can survive, next to schools and markets, across 51 cities.',
-    findPh:'Find a road…',
+    findPh:'Find a flagged road…',
     worstRoads:'Worst roads',
     buildBtn:'&#9654; Show me how it works, step by step',
     critLabel:'The worst roads',critSmall:'one at a time',
@@ -599,7 +599,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
   },
   fil:{
     h1_lead:'Hindi kung numero lang sa karatula. Walang binabago ang mas mababang limitasyong walang sumusunod. Pero dinisenyo ang bawat kalsada para sa isang bilis, at iyon ang sasalubong sa mga tao kapag humupa ang traffic. Ipinapakita rito kung saan mas mataas ang bilis na iyon kaysa kayang tagalan ng tao, malapit sa mga paaralan at palengke, sa 51 lungsod.',
-    findPh:'Maghanap ng kalsada…',
+    findPh:'Maghanap ng naka-flag na kalsada…',
     worstRoads:'Pinakadelikadong kalsada',
     buildBtn:'&#9654; Ipakita paano ito ginagawa, hakbang-hakbang',
     critLabel:'Ang pinakadelikadong kalsada',critSmall:'isa-isa',
@@ -1014,7 +1014,7 @@ function showBeforeAfter(r){const el=document.getElementById('badetail');el.hidd
   el.innerHTML=`<div class="ba"><div class="t">${t('baTitle',r.name)}</div>
     <div class="v">${signPair(r.posted,r.safe,true)}</div><div class="signcap">${t('baCap')}${r.posted_imputed?` &middot; <span style="text-transform:none">${t('baGuess')}</span>`:''}</div>
     <div class="r">${t('baCut',r.fatal_reduction_pct.toFixed(0))} ${whyPlainStr(r.why)}</div>
-    <div class="survival">${t('survival',r.posted,r.safe,dp,ds)}</div>
+    ${r.safe<=50?`<div class="survival">${t('survival',r.posted,r.safe,dp,ds)}</div>`:''}
     ${svLink(mid,t('svSee'))}
     <div class="sharerow">
       <button id="ba-share" type="button">${t('shareRoad')}</button>
@@ -1045,7 +1045,11 @@ function shareCity(){if(!CUR)return;
 function openLguLetter(r,svUrlStr){
   const cityLabel=(CUR&&CUR.label)||'';
   const cut=r.fatal_reduction_pct?r.fatal_reduction_pct.toFixed(0):'0';
-  const body=t('lguLetter',r.name,cityLabel,r.posted,r.safe,cut,svUrlStr||'');
+  let body=t('lguLetter',r.name,cityLabel,r.posted,r.safe,cut,svUrlStr||'');
+  // drop the segment's coordinates in beside the Street View link so an engineer can snap to the
+  // exact spot, not just eyeball the pano (mid is [lon,lat])
+  const mid=roadMid(r.name,r.sss);
+  if(mid&&svUrlStr)body=body.replace(svUrlStr,`${svUrlStr} (${mid[1].toFixed(5)}, ${mid[0].toFixed(5)})`);
   document.getElementById('lgutext').value=body;
   document.getElementById('lgumailto').href='mailto:?subject='+encodeURIComponent('Speed limit review: '+r.name+', '+cityLabel)+'&body='+encodeURIComponent(body);
   document.getElementById('lgumodal').classList.add('show');}
@@ -1063,11 +1067,16 @@ function nearestFlaggedRow(lng,lat){const rows=allFlaggedRows();let best=null,be
 document.getElementById('mylocbtn').onclick=()=>{
   if(!navigator.geolocation){toast(t('geoUnavailable'));return;}
   toast(t('geoSearching'));
-  navigator.geolocation.getCurrentPosition(pos=>{
+  navigator.geolocation.getCurrentPosition(async pos=>{
     const lng=pos.coords.longitude,lat=pos.coords.latitude;
+    // the nearest flagged road only searches the loaded city, so load the city the user is
+    // actually in first (nearest centroid) - otherwise a user in Cebu is handed a Manila road
+    let nk=null,nd=Infinity;
+    for(const c of CITIES){const d=haversineM([lng,lat],c.center);if(d<nd){nd=d;nk=c.key;}}
+    if(nk&&nk!==CUR?.key)await loadCity(nk);
     map.flyTo({center:[lng,lat],zoom:14,duration:FLYMS});
     const hit=nearestFlaggedRow(lng,lat);
-    if(!hit){toast(t('geoNoneNear',20));return;}
+    if(!hit||hit.dist>20000){toast(t('geoNoneNear',20));return;}
     selectRoad(hit.row);
     const el=document.getElementById('badetail');
     if(el&&!el.hidden)el.insertAdjacentHTML('afterbegin',`<div class="survival" style="margin-bottom:6px">${t('geoNearest',fmtDist(hit.dist),hit.row.name)}</div>`);
@@ -1102,7 +1111,7 @@ async function loadCity(key,roadSlug){
     if(my!==reqToken)return;
     SEG=flag;CUR=c;poisFor=null;POI_CUR=null;map.getSource('vru').setData(EMPTY);
     map.getSource('wealth').setData(wealth);map.getSource('heat').setData(heatPointsFrom(flag));
-    for(const id of ['net-base','net-imputed','net-real']) map.setFilter(id, filterFor(id,key));
+    for(const id of ['net-base','net-imputed','net-real','net-hit']) map.setFilter(id, filterFor(id,key));
     map.flyTo({center:c.center,zoom:c.zoom,duration:FLYMS});renderPanel(c);
     // reset all overlays/build-up to the default view on a city change
     if(window.__resetLayers)window.__resetLayers();
@@ -1111,7 +1120,7 @@ async function loadCity(key,roadSlug){
     if(crb){const isM=(key==='manila');crb.disabled=!isM;crb.setAttribute('aria-pressed','false');
       map.setPaintProperty('esri','raster-opacity',0.78);if(crn)crn.hidden=true;}
     const cmpb=document.getElementById('cmpbtn');if(cmpb)cmpb.disabled=(key!=='manila');   // swipe compare needs crash data (Manila only)
-    // critical-roads mode needs flagged roads: disable it on cities with none (butuan/puerto-princesa/surigao)
+    // critical-roads mode needs flagged roads: disable it on cities with none (butuan/puerto-princesa)
     const ctb=document.getElementById('crit');if(ctb)ctb.disabled=((c.headline_priority_roads_real_posted||[]).length===0);
     if(!roadSlug&&location.hash.slice(1)!==key)history.replaceState(null,'','#'+key);
     document.getElementById('city').value=key;if(window.updateWealthBox)window.updateWealthBox();if(window.updateCrowdBox)window.updateCrowdBox();
@@ -1122,6 +1131,7 @@ async function loadCity(key,roadSlug){
 }
 function filterFor(id,k){
   if(id==='net-base')return cityF(k);
+  if(id==='net-hit')return['all',cityF(k),['>',['get','sss'],0]];
   if(id==='net-imputed')return['all',cityF(k),['>',['get','sss'],0],['==',['get','posted_imputed'],true]];
   return['all',cityF(k),['>',['get','sss'],0],['==',['get','posted_imputed'],false]];
 }
@@ -1136,6 +1146,10 @@ map.on('load',async()=>{
   map.addLayer({id:'net-real',type:'line',source:'net','source-layer':'segments',
     filter:['all',cityF('manila'),['>',['get','sss'],0],['==',['get','posted_imputed'],false]],
     layout:{'line-cap':'round'},paint:{'line-color':SSS_COLOR,'line-width':SSS_WIDTH,'line-opacity':REAL_OP,'line-blur':REAL_BLUR}});
+  // a fat invisible line over every flagged road so a fingertip can hit a 1-2px glow on a phone
+  map.addLayer({id:'net-hit',type:'line',source:'net','source-layer':'segments',
+    filter:['all',cityF('manila'),['>',['get','sss'],0]],
+    paint:{'line-color':'#000','line-width':16,'line-opacity':0}});
   // the WHY: vulnerable-user sites (schools, markets, hospitals, worship, transit), on by default
   map.addSource('vru',{type:'geojson',data:EMPTY});
   // context, not the danger: soft muted dots for where people are on foot. No dark bead
@@ -1213,9 +1227,11 @@ map.on('load',async()=>{
     try{SAT=await fetchJSON('data/sat_evidence.json');renderSatStrip(SAT);}catch(e){console.warn('satellite evidence load failed',e);SAT=null;}
     if(CITIES.length>8){
       const groups=['Luzon','Visayas','Mindanao'];const other=CITIES.filter(c=>!ISLAND[c.key]);
+      const byLabel=(a,b)=>a.label.localeCompare(b.label);  // alphabetical so a city is findable in a long group
+      const opts=list=>list.slice().sort(byLabel).map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('');
       sel.innerHTML=groups.map(g=>{const cs=CITIES.filter(c=>ISLAND[c.key]===g);
-        return cs.length?`<optgroup label="${g}">${cs.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'';}).join('')
-        +(other.length?`<optgroup label="Other">${other.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('')}</optgroup>`:'');
+        return cs.length?`<optgroup label="${g}">${opts(cs)}</optgroup>`:'';}).join('')
+        +(other.length?`<optgroup label="Other">${opts(other)}</optgroup>`:'');
     }else{
       sel.innerHTML=CITIES.map(c=>`<option value="${esc(c.key)}">${esc(c.label)}</option>`).join('');
     }
@@ -1487,7 +1503,7 @@ map.on('load',async()=>{
       (p.v_design&&(p.posted_imputed===true||p.posted_imputed==='true'||p.v_design>p.v_posted)?`<div style="color:#9DB4CC;font-family:var(--font-data);font-size:11px;margin-top:5px">${t('popBuilt',p.v_design)}</div>`:'')+
       `<div style="color:#cdd6e0;margin-top:6px">${whyPlain(p)}</div>`+
       `<div style="color:var(--muted);font-family:var(--font-data);margin-top:4px">${t('popCuts',Math.round(p.fatal_reduction_pct))}</div>`+
-      (p.sss>0?`<div class="survival">${t('survival',p.v_posted,p.v_safe,dp,ds)}</div>`:'')+
+      (p.sss>0&&p.v_safe<=50?`<div class="survival">${t('survival',p.v_posted,p.v_safe,dp,ds)}</div>`:'')+
       svLink(mid,t('svShort'))+
       (p.sss>0?`<div class="sharerow"><button id="pop-share" type="button">${t('shareRoad')}</button><button id="pop-report" type="button">${t('reportRoad')}</button></div>`:'')
       ).addTo(map);
@@ -1496,7 +1512,7 @@ map.on('load',async()=>{
     // a deliberate tap/click on a flagged road updates the shareable hash (hover never does; item 2)
     if(isClick&&CUR&&p.sss>0&&p.name)history.replaceState(null,'','#'+CUR.key+'/'+slugify(p.name));}
   // mousemove for desktop hover; click/tap so touch devices can open it too (the panel copy says "tap any road")
-  for(const lyr of ['net-real','net-imputed']){map.on('mousemove',lyr,e=>popup(e,false));map.on('click',lyr,e=>popup(e,true));map.on('mouseleave',lyr,()=>{map.getCanvas().style.cursor='';pop.remove();});}
+  for(const lyr of ['net-hit']){map.on('mousemove',lyr,e=>popup(e,false));map.on('click',lyr,e=>popup(e,true));map.on('mouseleave',lyr,()=>{map.getCanvas().style.cursor='';pop.remove();});}
   // hover tooltip on the real reported crash points (Manila): date, place, and what was involved
   const cpop=new maplibregl.Popup({closeButton:false,closeOnClick:false,offset:9,maxWidth:'230px'});
   function crashTip(e){const p=e.features[0].properties||{};map.getCanvas().style.cursor='pointer';pop.remove();
@@ -1531,11 +1547,15 @@ map.on('load',async()=>{
 
   // ---- item 20: how does my city compare (bar list from cities.json, already loaded) ----
   function renderCompare(){const el=document.getElementById('cmpwrap');if(!el||!CITIES.length)return;
-    const ranked=CITIES.map(c=>({key:c.key,label:c.label.split(',')[0],n:c.segments_flagged_real_posted||0,
+    const all=CITIES.map(c=>({key:c.key,label:c.label.split(',')[0],n:c.segments_flagged_real_posted||0,
       pct:Math.round(100*(c.segments_flagged_real_posted||0)/Math.max(c.segments_posted_real_osm||1,1))}))
-      .sort((a,b)=>b.n-a.n).slice(0,12);
+      .sort((a,b)=>b.n-a.n);
+    const ranked=all.slice(0,12);
+    // always show the user's own city, with its true rank, even when it falls outside the top 12
+    if(CUR&&!ranked.some(r=>r.key===CUR.key)){const i=all.findIndex(r=>r.key===CUR.key);
+      if(i>=0)ranked.push({...all[i],rank:i+1});}
     const maxN=Math.max(1,...ranked.map(r=>r.n));
-    el.innerHTML=ranked.map(r=>`<div class="cmprow${CUR&&r.key===CUR.key?' me':''}"><span class="cnm">${esc(r.label)}</span>`+
+    el.innerHTML=ranked.map(r=>`<div class="cmprow${CUR&&r.key===CUR.key?' me':''}"><span class="cnm">${esc(r.label)}${r.rank?` (#${r.rank} of ${CITIES.length})`:''}</span>`+
       `<span class="cbar"><i style="width:${Math.max(2,Math.round(100*r.n/maxN))}%"></i></span>`+
       `<span class="cval">${r.n.toLocaleString()}</span></div>`).join('');}
   window.__renderCompare=renderCompare;
