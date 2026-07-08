@@ -11,23 +11,13 @@
   "segments_total": 21063,
   "segments_posted_real_osm": 4432,
   "segments_posted_imputed": 16631,
-  "segments_gap_positive": 1481,
-  "segments_flagged_sss_gt0": 1481,
+  "segments_gap_positive": 1483,
+  "segments_flagged_sss_gt0": 1483,
   "segments_flagged_real_posted": 45,
-  "sss_max": 75.0,
-  "sss_mean_flagged": 28.3,
+  "sss_max": 100.0,
+  "sss_mean_flagged": 39.2,
   "vru_pois": 580,
   "headline_priority_roads_real_posted": [
-    {
-      "sss": 54.6,
-      "name": "Governor's Drive",
-      "class": "primary",
-      "posted_osm": 60,
-      "safe": 30,
-      "fatal_reduction_pct": 93.8,
-      "why": "pedestrian activity (1 VRU site<=50m)",
-      "v_design": 60
-    },
     {
       "sss": 25.0,
       "name": "Arnaldo Highway",
@@ -35,18 +25,31 @@
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
-      "why": "pedestrian activity (1 VRU site<=50m)",
+      "why": "pedestrian activity (2 VRU site<=50m)",
+      "flagged_segments": 10,
       "v_design": 50
     },
     {
-      "sss": 24.7,
+      "sss": 20.8,
       "name": "FCIE Main Drive",
       "class": "unclassified",
       "posted_osm": 45,
       "safe": 30,
       "fatal_reduction_pct": 80.2,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 19,
       "v_design": 40
+    },
+    {
+      "sss": 18.1,
+      "name": "Governor's Drive",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 3,
+      "v_design": 60
     },
     {
       "sss": 15.8,
@@ -56,16 +59,18 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 2,
       "v_design": 40
     },
     {
-      "sss": 14.1,
+      "sss": 13.9,
       "name": "Greenbreeze Avenue",
       "class": "residential",
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 3,
       "v_design": 35
     },
     {
@@ -76,6 +81,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 1,
       "v_design": 40
     }
   ],

@@ -113,8 +113,8 @@ cells are not independent. The finding shown is whatever the data gives, not a c
 
 <h2>5b. Crowding overlay (WorldPop)</h2>
 <p>The same grid supports a second reading: the mismatch against residential crowding, from
-WorldPop 2020. The flagged roads do sit in denser places (a median 14,620 people/km&sup2; around
-them against 9,326 for roads that already fit), but the size of the gap does not track density
+WorldPop 2020. The flagged roads do sit in denser places (a median 12,916 people/km&sup2; around
+them against 9,450 for roads that already fit), but the size of the gap does not track density
 (Spearman about +0.01 across cells): crowding decides which roads flag, not how large the
 mismatch is. Taken to the national level the three pull apart. Metro Manila has the most flagged
 roads and the densest flagged network, yet the country's lowest road-death rate (3.6 per 100,000
@@ -125,9 +125,9 @@ arterials; the deaths, recorded by region of residence, sit elsewhere.</p>
 <p>The model applies a published physical law; it does not prove one. But its output can be
 tested against real crashes. We joined the 12,563 geolocated Metro Manila crashes the map shows
 (2018-2020, MMDA traffic alerts) to the scored network by snapping each to its nearest segment;
-12,457 (99%) fall within 30 m of a scored road. The roads flagged here are 7.3% of the network
-length but carry 42.1% of those crashes, and crash density (per km, normalised for road length)
-rises with the Speed Safety Score across a 550 m grid (Spearman +0.41 over 1,222 cells). The flags
+12,457 (99%) fall within 30 m of a scored road. The roads flagged here are 8.5% of the network
+length but carry 76.2% of those crashes, and crash density (per km, normalised for road length)
+rises with the Speed Safety Score across a 550 m grid (Spearman +0.46 over 1,222 cells). The flags
 land where crashes concentrate. This is an association on a convenience sample that over-reports arterials,
 with no traffic-volume control and mostly vehicle-to-vehicle crashes, so it is consistent with
 the model, not proof a limit causes a crash. A regional cross-check behaves differently and is
@@ -143,12 +143,14 @@ that injure or kill roughly doubles when the road clears: 13.5% in the late-nigh
 5am) against 6.7% in the rush-hour peak, about 2x (chi-square p = 1.3e-18, on a set holding 1,504
 injury-or-worse crashes). Across all 24 hours the injury-or-kill share runs inverse to the crash
 count (Spearman &minus;0.79). Two caveats keep this honest: the clear-road hours carry less
-enforcement and more impaired driving too, so this points to speed rather than proving it alone, and
+enforcement and more impaired driving too, so this points to speed rather than proving it alone.
+Night property-damage-only crashes are also likely under-reported (fewer police out, the alert feeds
+skew to daytime), which shrinks the denominator and can inflate the casualty share on its own. And
 it is one road. The 22 fatal crashes in the set are too few to read hour by hour, so the test runs on
 injury-or-worse, not deaths. Independent of the hour, satellite imagery shows the flagged
 roads are wide, straight, multi-lane roads through dense housing (OpenStreetMap has no width
-tag, so the imagery supplies it), and only 21% of Manila's flagged roads have any traffic calming
-within 100 m (10% Cebu, 4% Davao). Congestion is temporary, the built form and the missing
+tag, so the imagery supplies it), and only 20% of Manila's flagged roads have any traffic calming
+within 100 m (16% Cebu, 4% Davao). Congestion is temporary, the built form and the missing
 calming are not. Reproduce with <code>build/overlay/emit_severity_artifact.py</code> and
 <code>build/overlay/satellite_evidence.py</code>.</p>
 
@@ -164,7 +166,7 @@ autocorrelation), a caution that the cells are not independent samples.</p>
 <th>Mismatch &times; wealth &rho;</th><th>p</th><th>Moran's I</th>
 <th>Gap &times; crowding &rho;</th><th>p</th></tr></thead><tbody></tbody></table>
 <p class="src" id="numnote">The Manila swipe compare also reports an agreement between
-flagged-road density and crash density: Spearman +0.41 over 1,222 grid cells, length-normalized
+flagged-road density and crash density: Spearman +0.46 over 1,222 grid cells, length-normalized
 (see <code>docs/validation.md</code> in the repository for method and caveats).</p>
 <script>
 fetch('data/overlay_index.json').then(function(r){return r.json();}).then(function(ovi){
@@ -206,6 +208,9 @@ arterials default to the side-impact survivable speed (50 km/h) unless OpenStree
 them as a divided carriageway. Official data would sharpen this.</li>
 <li>Exposure blends point-of-interest proximity with WorldPop residential density; it counts
 residents and nearby sites, not measured daytime foot traffic or traffic volume.</li>
+<li>The survival odds in the popup are the pedestrian fatality curve (Tefft 2011). Riders on
+powered two- and three-wheelers are the largest share of Philippine road deaths, and this map
+does not model a separate rider-survival curve; no calibrated open one exists for the country.</li>
 <li>This is a screening layer to prioritize segments for review, not a final determination.</li>
 </ul>
 

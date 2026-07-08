@@ -62,6 +62,9 @@ if python3 tests/test_pipeline.py; then :; else fail=1; fi
 echo "== invariants =="
 if python3 tests/check_invariants.py; then :; else fail=1; fi
 
+echo "== published-number claims (recompute from committed artifacts, fail on drift) =="
+if python3 tests/verify_claims.py; then :; else fail=1; fi
+
 echo "== browser smoke test =="
 if [ "${E2E_SMOKE:-0}" = "1" ] && command -v node >/dev/null 2>&1; then
   SMOKE_PORT="${SMOKE_PORT:-8799}"

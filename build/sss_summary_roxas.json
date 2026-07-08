@@ -14,8 +14,8 @@
   "segments_gap_positive": 179,
   "segments_flagged_sss_gt0": 179,
   "segments_flagged_real_posted": 7,
-  "sss_max": 60.9,
-  "sss_mean_flagged": 15.3,
+  "sss_max": 65.2,
+  "sss_mean_flagged": 17.6,
   "vru_pois": 103,
   "headline_priority_roads_real_posted": [
     {
@@ -26,16 +26,18 @@
       "safe": 30,
       "fatal_reduction_pct": 93.8,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 1,
       "v_design": 25
     },
     {
-      "sss": 14.3,
+      "sss": 13.6,
       "name": "Roxas City Circumferential Road",
       "class": "secondary",
       "posted_osm": 60,
       "safe": 50,
       "fatal_reduction_pct": 51.8,
       "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 6,
       "v_design": 50
     }
   ],

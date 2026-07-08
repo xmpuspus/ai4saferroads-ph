@@ -11,13 +11,25 @@
   "segments_total": 1082,
   "segments_posted_real_osm": 18,
   "segments_posted_imputed": 1064,
-  "segments_gap_positive": 97,
-  "segments_flagged_sss_gt0": 97,
-  "segments_flagged_real_posted": 0,
+  "segments_gap_positive": 103,
+  "segments_flagged_sss_gt0": 103,
+  "segments_flagged_real_posted": 6,
   "sss_max": 75.0,
-  "sss_mean_flagged": 17.5,
+  "sss_mean_flagged": 22.3,
   "vru_pois": 51,
-  "headline_priority_roads_real_posted": [],
+  "headline_priority_roads_real_posted": [
+    {
+      "sss": 14.8,
+      "name": "Surigao-Butuan National Highway",
+      "class": "trunk",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 6,
+      "v_design": 70
+    }
+  ],
   "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",
   "design": {
     "n_flagged_real": 0,

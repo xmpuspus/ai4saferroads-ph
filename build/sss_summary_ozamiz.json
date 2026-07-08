@@ -11,11 +11,11 @@
   "segments_total": 1209,
   "segments_posted_real_osm": 164,
   "segments_posted_imputed": 1045,
-  "segments_gap_positive": 153,
-  "segments_flagged_sss_gt0": 153,
-  "segments_flagged_real_posted": 49,
-  "sss_max": 37.5,
-  "sss_mean_flagged": 15.9,
+  "segments_gap_positive": 192,
+  "segments_flagged_sss_gt0": 192,
+  "segments_flagged_real_posted": 88,
+  "sss_max": 46.9,
+  "sss_mean_flagged": 15.8,
   "vru_pois": 73,
   "headline_priority_roads_real_posted": [
     {
@@ -26,6 +26,7 @@
       "safe": 50,
       "fatal_reduction_pct": 84.7,
       "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 5,
       "v_design": 50
     },
     {
@@ -36,17 +37,8 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 2,
       "v_design": 40
-    },
-    {
-      "sss": 25.0,
-      "name": "Laurel Street",
-      "class": "residential",
-      "posted_osm": 40,
-      "safe": 30,
-      "fatal_reduction_pct": 68.4,
-      "why": "local road, frontage/pedestrian mixing",
-      "v_design": 35
     },
     {
       "sss": 25.0,
@@ -56,16 +48,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
-      "v_design": 35
-    },
-    {
-      "sss": 23.3,
-      "name": "Abanil Street",
-      "class": "residential",
-      "posted_osm": 40,
-      "safe": 30,
-      "fatal_reduction_pct": 68.4,
-      "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 2,
       "v_design": 35
     },
     {
@@ -76,7 +59,19 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 1,
       "v_design": 40
+    },
+    {
+      "sss": 21.3,
+      "name": "Laurel Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 3,
+      "v_design": 35
     },
     {
       "sss": 21.1,
@@ -86,17 +81,19 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 45
     },
     {
-      "sss": 20.3,
-      "name": "Cotta Road",
-      "class": "unclassified",
+      "sss": 21.0,
+      "name": "Abanil Street",
+      "class": "residential",
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
-      "why": "pedestrian activity (1 VRU site<=50m)",
-      "v_design": 40
+      "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 3,
+      "v_design": 35
     },
     {
       "sss": 20.1,
@@ -106,17 +103,30 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 2,
       "v_design": 60
     },
     {
-      "sss": 19.3,
-      "name": "Ozamiz-Pagadian Road",
-      "class": "secondary",
-      "posted_osm": 60,
-      "safe": 50,
-      "fatal_reduction_pct": 51.8,
-      "why": "undivided arterial, side-impact intersections",
-      "v_design": 50
+      "sss": 19.4,
+      "name": "Cotta Road",
+      "class": "unclassified",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 5,
+      "v_design": 40
+    },
+    {
+      "sss": 19.0,
+      "name": "La Purisma Street",
+      "class": "tertiary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
+      "v_design": 45
     }
   ],
   "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",

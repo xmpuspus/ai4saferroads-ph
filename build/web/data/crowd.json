@@ -1,11 +1,11 @@
 {
-  "flagged_median_density": 14620.0,
-  "unflagged_median_density": 9326.0,
-  "prob_flagged_denser": 0.588,
-  "rho_flagdensity_deathrate": -0.093,
+  "flagged_median_density": 12916.0,
+  "unflagged_median_density": 9450.0,
+  "prob_flagged_denser": 0.562,
+  "rho_flagdensity_deathrate": -0.168,
   "ncr": {
-    "flagged": 4664,
-    "median_density": 22872,
+    "flagged": 5328,
+    "median_density": 22599,
     "death_rate": 3.6,
     "national_rate": 10.9
   },
@@ -26,6 +26,14 @@
         "density": 82562.0,
         "lat": 14.60174,
         "lon": 120.9667
+      },
+      {
+        "road": "Samson Road",
+        "posted": 60,
+        "safe": 30,
+        "density": 77759.0,
+        "lat": 14.65794,
+        "lon": 120.97152
       },
       {
         "road": "Capulong Street",
@@ -49,9 +57,9 @@
         "road": "Natalio Bacalso Avenue",
         "posted": 60,
         "safe": 30,
-        "density": 57161.0,
-        "lat": 10.29545,
-        "lon": 123.88343
+        "density": 49402.0,
+        "lat": 10.29699,
+        "lon": 123.88693
       },
       {
         "road": "Governor M. Cuenco Avenue",

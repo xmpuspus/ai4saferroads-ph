@@ -11,11 +11,11 @@
   "segments_total": 2244,
   "segments_posted_real_osm": 192,
   "segments_posted_imputed": 2052,
-  "segments_gap_positive": 108,
-  "segments_flagged_sss_gt0": 108,
-  "segments_flagged_real_posted": 5,
-  "sss_max": 23.1,
-  "sss_mean_flagged": 14.2,
+  "segments_gap_positive": 131,
+  "segments_flagged_sss_gt0": 131,
+  "segments_flagged_real_posted": 28,
+  "sss_max": 61.9,
+  "sss_mean_flagged": 20.4,
   "vru_pois": 111,
   "headline_priority_roads_real_posted": [
     {
@@ -26,6 +26,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 60
     },
     {
@@ -36,6 +37,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 50
     },
     {
@@ -46,6 +48,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 50
     },
     {
@@ -56,6 +59,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 50
     },
     {
@@ -66,7 +70,30 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 50
+    },
+    {
+      "sss": 15.6,
+      "name": "Enrile Boulevard",
+      "class": "trunk",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 7,
+      "v_design": 70
+    },
+    {
+      "sss": 13.8,
+      "name": "Maharlika Highway",
+      "class": "trunk",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 15,
+      "v_design": 70
     }
   ],
   "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",

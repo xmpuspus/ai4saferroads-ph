@@ -53,8 +53,20 @@ def test_safe_speed_motorway_never_ped_downgraded():
     assert sss.safe_speed("motorway", 5, {})[0] == 100
 
 
-def test_safe_speed_trunk_never_ped_downgraded():
-    assert sss.safe_speed("trunk", 5, {})[0] == 70
+def test_safe_speed_trunk_at_grade_gets_pedestrian_downgrade():
+    # OSM `trunk` is a functional class, not a grade-separation flag; an at-grade national
+    # arterial (EDSA, Roxas) with pedestrian sites nearby must downgrade to 30 like any other
+    # arterial. Regression guard for the round-1 doubt-loop trunk fix.
+    assert sss.safe_speed("trunk", 5, {})[0] == 30
+
+
+def test_safe_speed_trunk_undivided_default_is_side_impact_speed():
+    assert sss.safe_speed("trunk", 0, {})[0] == 50
+
+
+def test_safe_speed_trunk_named_expressway_stays_grade_separated():
+    # only a trunk that names itself an expressway/flyover keeps the head-on-only 70
+    assert sss.safe_speed("trunk", 5, {"name": "South Luzon Expressway"})[0] == 70
 
 
 def test_safe_speed_oneway_arterial_is_not_divided():

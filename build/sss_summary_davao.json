@@ -11,23 +11,13 @@
   "segments_total": 10873,
   "segments_posted_real_osm": 2658,
   "segments_posted_imputed": 8215,
-  "segments_gap_positive": 411,
-  "segments_flagged_sss_gt0": 411,
-  "segments_flagged_real_posted": 364,
+  "segments_gap_positive": 482,
+  "segments_flagged_sss_gt0": 482,
+  "segments_flagged_real_posted": 435,
   "sss_max": 75.0,
-  "sss_mean_flagged": 18.8,
+  "sss_mean_flagged": 18.9,
   "vru_pois": 466,
   "headline_priority_roads_real_posted": [
-    {
-      "sss": 75.0,
-      "name": "Davao City Coastal Road",
-      "class": "primary",
-      "posted_osm": 60,
-      "safe": 30,
-      "fatal_reduction_pct": 93.8,
-      "why": "pedestrian activity (1 VRU site<=50m)",
-      "v_design": 60
-    },
     {
       "sss": 74.0,
       "name": "Buhangin-Cabantian Road",
@@ -36,27 +26,30 @@
       "safe": 30,
       "fatal_reduction_pct": 93.8,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 2,
       "v_design": 50
     },
     {
       "sss": 25.0,
-      "name": "Luisa Street",
-      "class": "residential",
-      "posted_osm": 40,
-      "safe": 30,
-      "fatal_reduction_pct": 68.4,
-      "why": "local road, frontage/pedestrian mixing",
-      "v_design": 35
+      "name": "Roxas Rotunda",
+      "class": "primary",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 6,
+      "v_design": 60
     },
     {
       "sss": 25.0,
-      "name": "Saturn Street",
+      "name": "Do\u00f1a Candelaria Avenue",
       "class": "residential",
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
-      "v_design": 25
+      "flagged_segments": 4,
+      "v_design": 35
     },
     {
       "sss": 25.0,
@@ -66,27 +59,19 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 3,
       "v_design": 35
     },
     {
       "sss": 25.0,
-      "name": "Oriole Street",
-      "class": "residential",
+      "name": "Old Airport Road",
+      "class": "unclassified",
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
-      "v_design": 35
-    },
-    {
-      "sss": 25.0,
-      "name": "Dove Street",
-      "class": "residential",
-      "posted_osm": 40,
-      "safe": 30,
-      "fatal_reduction_pct": 68.4,
-      "why": "local road, frontage/pedestrian mixing",
-      "v_design": 25
+      "flagged_segments": 3,
+      "v_design": 40
     },
     {
       "sss": 25.0,
@@ -96,27 +81,52 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 2,
       "v_design": 35
     },
     {
       "sss": 25.0,
-      "name": "Diamond Street",
+      "name": "Emerald Street",
       "class": "residential",
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 2,
       "v_design": 35
     },
     {
       "sss": 25.0,
-      "name": "Cesario Street",
+      "name": "Sparrow Street",
       "class": "residential",
       "posted_osm": 40,
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 2,
       "v_design": 35
+    },
+    {
+      "sss": 25.0,
+      "name": "Melate Street",
+      "class": "residential",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 2,
+      "v_design": 35
+    },
+    {
+      "sss": 25.0,
+      "name": "G. E. Torres Street",
+      "class": "secondary",
+      "posted_osm": 40,
+      "safe": 30,
+      "fatal_reduction_pct": 68.4,
+      "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 2,
+      "v_design": 50
     }
   ],
   "exposure_model": "POI-proximity OR WorldPop residential density (2020 constrained)",

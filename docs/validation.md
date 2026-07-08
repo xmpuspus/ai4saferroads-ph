@@ -29,22 +29,22 @@ Manila network.
 
 | Road bucket | Network length | Reported crashes | Crashes per km |
 |------|---------------:|-----------------:|---------------:|
-| Flagged (real posted limit over safe speed) | 566 km (7.3%) | 5,247 (42%) | 9.26 |
-| Real posted limit, not flagged | 1,333 km | 5,423 | 4.07 |
+| Flagged (real posted limit over safe speed) | 662 km (8.5%) | 9,487 (76.2%) | 14.32 |
+| Real posted limit, not flagged | 1,237 km | 1,183 | 0.96 |
 | Imputed or no posted limit | 5,897 km | 1,787 | 0.30 |
 
-The roads the model flags are **7.3% of the network but carry 42% of reported crashes**, at
-9.3 crashes/km against 0.3/km for roads with no posted-limit problem.
+The roads the model flags are **8.5% of the network but carry 76.2% of reported crashes**, at
+14.3 crashes/km against 0.3/km for roads with no posted-limit problem.
 
 Aggregated to a 550 m grid and normalised by road length (so this is not just "more road, more
 crashes"), crash density rises with the score: crash density per km against the cell's mean Speed
-Safety Score gives **Spearman +0.41** over 1,222 cells, recomputed on the 12,563 crashes the map
+Safety Score gives **Spearman +0.46** over 1,222 cells, recomputed on the 12,563 crashes the map
 now shows (`build/overlay/validate_crashes.py`). The association holds through the exposure weight
 folding in WorldPop residential density and through the crash-set refresh, because the flagged set
-does not move when exposure changes, so the headline (7.3% of length, 42% of crashes) is stable.
+does not move when exposure changes, so the headline (8.5% of length, 76.2% of crashes) is stable.
 
-Within road class the same direction holds (flagged primary roads 18 crashes/km vs 2.3 for
-unflagged primary), though almost every Manila arterial is flagged, so the unflagged comparison
+Within road class the same direction holds (flagged primary roads carry far more crashes per km
+than unflagged primary), though almost every Manila arterial is flagged, so the unflagged comparison
 group is small and that ratio is suggestive rather than decisive.
 
 **What this does and does not show.** It shows the flags land where crashes concentrate, which
@@ -96,13 +96,13 @@ one.
 
 The naive hypothesis did not hold. In the well-mapped metros the flagged roads are **better**
 covered by crossings, not worse: in Metro Manila a flagged segment's nearest crossing is a median
-36 m away versus 71 m for unflagged real-posted roads. In Cebu, 22 m versus 54 m. The reason is
+38 m away versus 74 m for unflagged real-posted roads. In Cebu, 24 m versus 55 m. The reason is
 simple, and it is a confound: flagged roads are arterials, and arterials have crossings at their
-signalised intersections. (Davao, where OSM crossing data is sparse, runs the other way: 70% of
+signalised intersections. (Davao, where OSM crossing data is sparse, runs the other way: 69% of
 flagged roads have no crossing within 100 m.)
 
 What flagged roads consistently lack is **traffic calming** (the thing that actually lowers
-speed): only 21% of flagged roads in Manila, 10% in Cebu, and 4% in Davao have any within 100 m.
+speed): only 20% of flagged roads in Manila, 16% in Cebu, and 4% in Davao have any within 100 m.
 
 That distinction is the whole argument. A crossing manages *where* people cross. It does not
 change *how fast the car arrives*. A marked crossing on a road posted 60 where 30 is survivable

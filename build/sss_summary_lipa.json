@@ -11,11 +11,11 @@
   "segments_total": 9898,
   "segments_posted_real_osm": 724,
   "segments_posted_imputed": 9174,
-  "segments_gap_positive": 393,
-  "segments_flagged_sss_gt0": 393,
-  "segments_flagged_real_posted": 20,
-  "sss_max": 75.0,
-  "sss_mean_flagged": 17.3,
+  "segments_gap_positive": 408,
+  "segments_flagged_sss_gt0": 408,
+  "segments_flagged_real_posted": 28,
+  "sss_max": 100.0,
+  "sss_mean_flagged": 26.8,
   "vru_pois": 259,
   "headline_priority_roads_real_posted": [
     {
@@ -26,6 +26,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (2 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 60
     },
     {
@@ -36,6 +37,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (2 VRU site<=50m)",
+      "flagged_segments": 4,
       "v_design": 60
     },
     {
@@ -46,6 +48,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 50
     },
     {
@@ -56,6 +59,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 60
     },
     {
@@ -66,6 +70,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 4,
       "v_design": 60
     },
     {
@@ -76,16 +81,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
-      "v_design": 50
-    },
-    {
-      "sss": 16.3,
-      "name": "Manila-Batangas Bypass Road",
-      "class": "secondary",
-      "posted_osm": 60,
-      "safe": 50,
-      "fatal_reduction_pct": 51.8,
-      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 2,
       "v_design": 50
     },
     {
@@ -96,7 +92,19 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 1,
       "v_design": 35
+    },
+    {
+      "sss": 14.3,
+      "name": "Manila-Batangas Bypass Road",
+      "class": "trunk",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 12,
+      "v_design": 70
     },
     {
       "sss": 13.4,
@@ -106,6 +114,7 @@
       "safe": 50,
       "fatal_reduction_pct": 51.8,
       "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 1,
       "v_design": 50
     }
   ],

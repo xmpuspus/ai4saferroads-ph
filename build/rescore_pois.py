@@ -33,6 +33,7 @@ from sss_pipeline import (  # noqa: E402
     CITIES,
     FULLNET,
     WEBDATA,
+    build_headline,
     build_poi_grid,
     finalize,
     pois_within,
@@ -109,6 +110,7 @@ def rescore_city(key):
                     p.get("fatal_reduction_pct", 0),
                     p.get("why", ""),
                     p.get("posted_imputed", False),
+                    p.get("v_design"),
                 )
             )
 
@@ -133,12 +135,6 @@ def rescore_city(key):
 
     worst.sort(key=lambda x: x[0], reverse=True)
     flagged_real = [x for x in worst if not x[7]]
-    by_name = {}
-    for x in flagged_real:
-        nm = x[1] or ""
-        if nm and (nm not in by_name or x[0] > by_name[nm][0]):
-            by_name[nm] = x
-    headline = sorted(by_name.values(), key=lambda y: y[0], reverse=True)[:10]
 
     sp = BUILD / f"sss_summary_{key}.json"
     summ = json.loads(sp.read_text())
@@ -153,29 +149,7 @@ def rescore_city(key):
 
     summ["sss_max"] = max(sss_vals) if sss_vals else 0
     summ["sss_mean_flagged"] = round(sum(x[0] for x in worst) / max(len(worst), 1), 1)
-    new_headline = [
-        {
-            "sss": s,
-            "name": nm,
-            "class": c,
-            "posted_osm": vp,
-            "safe": vs,
-            "fatal_reduction_pct": fr,
-            "why": wy,
-        }
-        for (s, nm, c, vp, vs, fr, wy, _i) in headline
-    ]
-    # v_design rode along on headline entries (enrich_design_speed.py's join); carry it over
-    vdesign = {
-        (f["properties"].get("name", ""), round(f["properties"]["sss"], 1)): f[
-            "properties"
-        ].get("v_design")
-        for f in flagged_feats
-    }
-    for r in new_headline:
-        vd = vdesign.get((r["name"], round(r["sss"], 1)))
-        if vd is not None:
-            r["v_design"] = vd
+    new_headline = build_headline(flagged_real)
     summ["headline_priority_roads_real_posted"] = new_headline
     sp.write_text(json.dumps(summ, indent=2))
 

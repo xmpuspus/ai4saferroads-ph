@@ -11,21 +11,22 @@
   "segments_total": 3886,
   "segments_posted_real_osm": 35,
   "segments_posted_imputed": 3851,
-  "segments_gap_positive": 229,
-  "segments_flagged_sss_gt0": 229,
-  "segments_flagged_real_posted": 2,
-  "sss_max": 47.5,
-  "sss_mean_flagged": 14.9,
+  "segments_gap_positive": 230,
+  "segments_flagged_sss_gt0": 230,
+  "segments_flagged_real_posted": 3,
+  "sss_max": 73.0,
+  "sss_mean_flagged": 21.9,
   "vru_pois": 170,
   "headline_priority_roads_real_posted": [
     {
-      "sss": 38.3,
+      "sss": 37.5,
       "name": "Emilio Vergara Highway",
       "class": "unclassified",
       "posted_osm": 60,
       "safe": 30,
       "fatal_reduction_pct": 93.8,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 3,
       "v_design": 40
     }
   ],

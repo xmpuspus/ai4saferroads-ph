@@ -1,0 +1,32 @@
+{
+  "crashes_total": 12563,
+  "snapped_le30m": 12457,
+  "snapped_pct": 99.2,
+  "flagged_len_pct": 8.5,
+  "flagged_crash_pct": 76.2,
+  "grid_cells": 1222,
+  "spearman_sss_vs_crashdensity": 0.46,
+  "buckets": {
+    "flagged": {
+      "km": 662.0,
+      "crashes": 9487,
+      "len_pct": 8.5,
+      "crash_pct": 76.2,
+      "per_km": 14.32
+    },
+    "imputed": {
+      "km": 5897.0,
+      "crashes": 1787,
+      "len_pct": 75.6,
+      "crash_pct": 14.3,
+      "per_km": 0.3
+    },
+    "real_not_flagged": {
+      "km": 1237.0,
+      "crashes": 1183,
+      "len_pct": 15.9,
+      "crash_pct": 9.5,
+      "per_km": 0.96
+    }
+  }
+}

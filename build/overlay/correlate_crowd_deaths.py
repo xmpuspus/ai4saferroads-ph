@@ -367,6 +367,38 @@ def main():
     }
     (OUT / "crowd_deaths_stats.json").write_text(json.dumps(result, indent=2))
 
+    # crowd.json is the small subset the map + findings.md read; emit it here (it used to be
+    # hand-synced from the stats file, which silently went stale on any rescore).
+    ncr_reg = next((r for r in regions if r["name"] == "NCR"), None)
+    crowd = {
+        "flagged_median_density": seg["median_density_flagged"],
+        "unflagged_median_density": seg["median_density_unflagged"],
+        "prob_flagged_denser": seg["prob_flagged_denser_than_unflagged"],
+        "rho_flagdensity_deathrate": triple["rho_flagdensity_vs_deathrate"],
+        "ncr": {
+            "flagged": ncr_reg["n_flagged"],
+            "median_density": round(ncr_reg["median_flag_density"]),
+            "death_rate": ncr_reg["death_rate_2022"],
+            "national_rate": 10.9,  # PSA SDG 3.6.1 national road-death rate per 100k (2022)
+        },
+        "hooks": {
+            k: [
+                {
+                    "road": h["road"],
+                    "posted": h["posted"],
+                    "safe": h["safe"],
+                    "density": h["density_km2"],
+                    "lat": h["lat"],
+                    "lon": h["lon"],
+                }
+                for h in lst
+            ]
+            for k, lst in hooks.items()
+            if lst
+        },
+    }
+    (WEBDATA / "crowd.json").write_text(json.dumps(crowd, indent=2))
+
     # console
     print("=== 1. SEGMENT CROWDING (flagged vs unflagged, real-posted, pooled) ===")
     print(

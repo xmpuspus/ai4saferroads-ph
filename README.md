@@ -7,11 +7,11 @@
 > vehicles reach the speed it is built for: 13.5% against 6.7%, about 2x (p < 0.001, Mendeley EDSA
 > 2007-2016: 22,072 crashes, 1,504 of them injury-or-worse). You are exposed to the top speed a road permits
 > near you, not the average. This open map scores every street in 51 Philippine cities against the
-> speed a person survives a crash at: 357,423 scored from OpenStreetMap, 7,586 posted above the safe
-> speed, 4,664 in Metro Manila. Satellite imagery shows the flagged roads for what they are,
+> speed a person survives a crash at: 357,423 scored from OpenStreetMap, 9,435 posted above the safe
+> speed, 5,328 in Metro Manila. Satellite imagery shows the flagged roads for what they are,
 > wide straight multi-lane roads through dense housing, built for a speed no sign and no traffic
 > jam changes. And the danger does not track wealth, across the 43 cities with enough data the link is
-> significant in only three ([findings](docs/findings.md)).
+> significant in only four ([findings](docs/findings.md)).
 
 [![Live](https://img.shields.io/badge/live-ai4saferroads--ph.vercel.app-success.svg)](https://ai4saferroads-ph.vercel.app)
 [![Code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
@@ -61,7 +61,9 @@ posted limit most of the day. The answer follows the data, in three moves.
    crashes that injure or kill roughly doubles when the road clears: **13.5%** in the late-night
    window (12am to 5am) against **6.7%** in the rush-hour peak, about **2x** (chi-square p = 1.3e-18,
    on a set holding 1,504 injury-or-worse crashes). The clear-road hours carry less enforcement and more
-   impaired driving too, so this points to speed, it does not prove it alone. It is one road, EDSA,
+   impaired driving too, so this points to speed, it does not prove it alone. Night property-damage-only
+   crashes are also likely under-reported (fewer police out, the alert feeds skew to daytime), which
+   shrinks the denominator and can inflate a casualty share on its own. It is one road, EDSA,
    and its 22 fatal crashes are too few to read hour by hour, so the test runs on injury-or-worse crashes,
    not deaths alone. The naive "crashes happen at night" claim stays false: crashes peak in daytime
    traffic, it is their severity that peaks when the road clears.
@@ -70,8 +72,8 @@ posted limit most of the day. The answer follows the data, in three moves.
    strips through dense housing: EDSA (ten-plus lanes), Taft Avenue, Cebu's Natalio Bacalso Avenue,
    the new Davao City Coastal Road. Congestion is temporary. The road itself is not.
 3. **The fix is physical, not a sign.** A lower number no one obeys in traffic and no one enforces
-   changes nothing. Only road design that caps speed when the road is empty works, and only **21%**
-   of Manila's flagged roads have any traffic calming within 100 m (10% in Cebu, 4% in Davao).
+   changes nothing. Only road design that caps speed when the road is empty works, and only **20%**
+   of Manila's flagged roads have any traffic calming within 100 m (16% in Cebu, 4% in Davao).
 
 Reproduce: `python3 build/overlay/emit_severity_artifact.py <EDSA.xls>` (the severity chart),
 `python3 build/overlay/satellite_evidence.py` (the crops), `tmp/verify-*/PHASE1_VERDICT.md` (the
@@ -95,30 +97,30 @@ Mindanao. The top of the list by flagged-road count:
 
 | City | Streets scored | With a real posted limit | Flagged: limit over safe speed | Vulnerable-user sites |
 |------|----------------:|-------------------------:|-------------------------------:|----------------------:|
-| Metro Manila | 87,123 | 14,163 | 4,664 | 5,669 |
-| Cebu City | 22,402 | 2,027 | 581 | 858 |
-| Davao City | 10,873 | 2,658 | 364 | 466 |
+| Metro Manila | 87,123 | 14,163 | 5,328 | 5,669 |
+| Cebu City | 22,402 | 2,027 | 727 | 858 |
+| Davao City | 10,873 | 2,658 | 435 | 466 |
+| San Fernando (Pampanga) | 10,209 | 708 | 322 | 342 |
+| Angeles City | 14,211 | 974 | 243 | 431 |
 | Calamba | 9,499 | 698 | 229 | 284 |
-| Angeles City | 14,211 | 974 | 202 | 431 |
-| Iloilo City | 6,433 | 758 | 135 | 398 |
-| San Fernando (Pampanga) | 10,209 | 708 | 134 | 342 |
-| Koronadal | 3,274 | 476 | 99 | 86 |
+| Iloilo City | 6,433 | 758 | 199 | 398 |
+| Cagayan de Oro | 8,555 | 441 | 148 | 307 |
+| Iligan City | 2,265 | 176 | 117 | 176 |
+| Koronadal | 3,274 | 476 | 105 | 86 |
 | Bacolod | 8,167 | 475 | 98 | 258 |
-| Cagayan de Oro | 8,555 | 441 | 72 | 307 |
-| Tagum | 5,382 | 277 | 68 | 128 |
-| San Jose del Monte | 13,027 | 335 | 58 | 489 |
-| **All 51 cities** | **357,423** | **37,971** | **7,586** | **16,399** |
+| Malolos | 7,025 | 212 | 93 | 277 |
+| **All 51 cities** | **357,423** | **37,971** | **9,435** | **16,399** |
 
 Full per-city numbers are in [docs/cities.md](docs/cities.md). The whole urban network of each
 city is pulled, scored, and served as vector tiles so the entire street grid draws at once.
 Posted-limit coverage in OpenStreetMap varies a lot: dense in Metro Manila, thin in smaller
-cities, and sparse enough in three (Butuan, Puerto Princesa, Surigao) that they carry no
+cities, and sparse enough in two (Butuan, Puerto Princesa) that they carry no
 flagged roads at all. That gap is the point, not a flaw: it is exactly where official
 posted-limit data would add the most.
 
 Three patterns fall out of the data, and none goes the way you would guess. The mismatch does
-not track wealth. It does sit on the crowded arterials (WorldPop puts a median 14,620 people per
-km² around a flagged road, against 9,326 for one that fits), yet the size of the gap does not
+not track wealth. It does sit on the crowded arterials (WorldPop puts a median 12,916 people per
+km² around a flagged road, against 9,450 for one that fits), yet the size of the gap does not
 track how crowded a place is. And the crowded, most-flagged region, Metro Manila, has the
 country's lowest road-death rate, because the deaths are on rural highways and counted by region
 of residence. The crowded, the mismatched, and the deadly are three different maps. Full numbers
@@ -131,8 +133,8 @@ and the "speed risk × crowding" overlay: [docs/findings.md](docs/findings.md).
 - `build/web/index.html`: the map: every street scored (MapLibre + PMTiles), a city selector
   grouped by island, a guided "critical roads & why" mode, "speed risk × wealth" and "speed risk
   × crowding" overlays, and a city-wide modeled fatal-risk cut. Single static file. Built for a
-  non-technical reader: search any street in the loaded city (not just the worst list), a
-  shareable link per road (`#city/road-name`), an English/Filipino toggle, a my-location button
+  non-technical reader: search the flagged roads in the loaded city by name (not just the worst
+  list), a shareable link per road (`#city/road-name`), an English/Filipino toggle, a my-location button
   that finds the nearest flagged road, a straight-line route check between two tapped points,
   a pre-filled report-a-road letter for the city engineering office, survival odds in every road
   popup (Tefft 2011), CSV download next to the GeoJSON, a printable one-page city summary, a
@@ -195,8 +197,8 @@ limits, which is how posted limits drift out of step with the road.
 The model applies a published physical law (Nilsson). It does not prove one. But the map's
 output can be tested. Joining the 12,563 geolocated Metro Manila crashes the map shows (2018-2020,
 MMDA traffic alerts) to the scored network, 12,457 (99%) fall within 30 m of a scored road. The
-flagged roads are 7.3% of the network length but carry 42.1% of them, and on a 550 m grid
-normalized for road length, crash density rises with the score (Spearman +0.41 over 1,222 cells).
+flagged roads are 8.5% of the network length but carry 76.2% of them, and on a 550 m grid
+normalized for road length, crash density rises with the score (Spearman +0.46 over 1,222 cells).
 The flags land where crashes concentrate. This is an
 association on a convenience sample biased to arterials, with no traffic-volume control, so it is
 consistent with the model, not proof a limit causes a crash. A regional cross-check against PSA

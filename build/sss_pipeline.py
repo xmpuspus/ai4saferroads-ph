@@ -540,6 +540,20 @@ def pois_within(grid, poi_pts, mid, radius_m):
     return c
 
 
+# OSM tags elevated expressways and flyovers as highway=trunk too, so a name signal keeps the
+# genuinely grade-separated trunk segments at head-on-only 70. Everything else tagged trunk is an
+# at-grade national arterial (EDSA, Roxas, MacArthur) and gets the same pedestrian/side-impact
+# logic as any other arterial - the OSM class alone is not a grade-separation flag.
+GRADE_SEP_NAMES = (
+    "expressway",
+    "flyover",
+    "skyway",
+    "viaduct",
+    "elevated",
+    "underpass",
+)
+
+
 def safe_speed(cls, n50, t):
     """Safe System recommended speed (km/h) - transparent classifier (DOSSIER Phase 4).
     Grade-separated classes checked first so 2D POI proximity can never downgrade an
@@ -558,8 +572,11 @@ def safe_speed(cls, n50, t):
         return 70, "segregated busway/BRT (no at-grade pedestrian mixing)"
     if cls in ("motorway", "motorway_link"):
         return 100, "grade-separated, no conflict"
-    if cls in ("trunk", "trunk_link"):
-        return 70, "trunk highway (head-on only; no at-grade ped mixing assumed)"
+    # only a trunk segment that names itself an expressway/flyover/viaduct is grade-separated;
+    # the rest fall through to the arterial logic below (pedestrian downgrade + side-impact),
+    # so a school beside EDSA is no longer exempt just because OSM tags it trunk
+    if cls in ("trunk", "trunk_link") and any(k in name for k in GRADE_SEP_NAMES):
+        return 70, "grade-separated highway (no at-grade ped mixing)"
     if cls == "living_street":
         return 20, "living street (shared space)"
     if n50 > 0:
@@ -567,6 +584,8 @@ def safe_speed(cls, n50, t):
     if cls in ("residential", "service", "unclassified"):
         return 30, "local road, frontage/pedestrian mixing"
     if cls in (
+        "trunk",
+        "trunk_link",
         "tertiary",
         "tertiary_link",
         "secondary",
@@ -639,6 +658,44 @@ def design_speed(cls, coords, t):
     elif s >= 1.10:
         base *= 0.88  # mildly curved
     return max(15, min(95, int(round(base / 5.0) * 5)))
+
+
+def build_headline(flagged_real, top=10):
+    """Characterize each flagged road by its MEDIAN flagged segment, not its single worst one,
+    so one anomalous maxspeed tag (a lone EDSA segment mistagged 90) cannot make the whole road
+    read as 90->50. Groups flagged real-posted segments by name, ranks roads by their median
+    flagged SSS then by how many of their segments are flagged, and returns the median segment's
+    numbers plus that flagged-segment count. Input tuples:
+    (sss, name, cls, v_posted, v_safe, fatal_reduction, why, imputed[, v_design])."""
+    by = {}
+    for x in flagged_real:
+        nm = x[1] or ""
+        if nm:
+            by.setdefault(nm, []).append(x)
+    rows = []
+    for nm, segs in by.items():
+        segs.sort(key=lambda x: x[0])
+        rep = segs[
+            len(segs) // 2
+        ]  # a real median-SSS segment, so every field stays consistent
+        rows.append((rep, len(segs)))
+    rows.sort(key=lambda r: (r[0][0], r[1]), reverse=True)
+    out = []
+    for rep, cnt in rows[:top]:
+        d = {
+            "sss": rep[0],
+            "name": rep[1],
+            "class": rep[2],
+            "posted_osm": rep[3],
+            "safe": rep[4],
+            "fatal_reduction_pct": rep[5],
+            "why": rep[6],
+            "flagged_segments": cnt,
+        }
+        if len(rep) > 8 and rep[8] is not None:
+            d["v_design"] = rep[8]
+        out.append(d)
+    return out
 
 
 def build_city(key, cfg):
@@ -723,7 +780,17 @@ def build_city(key, cfg):
             stats["gap_positive"] += 1
         if sss > 0:
             worst.append(
-                (sss, t.get("name", ""), cls, v_posted, v_safe, fatal_red, why, imputed)
+                (
+                    sss,
+                    t.get("name", ""),
+                    cls,
+                    v_posted,
+                    v_safe,
+                    fatal_red,
+                    why,
+                    imputed,
+                    v_design,
+                )
             )
 
         feats.append(
@@ -788,14 +855,7 @@ def build_city(key, cfg):
     worst.sort(key=lambda x: x[0], reverse=True)
     flagged = [x for x in worst if x[0] > 0]
     flagged_real = [x for x in flagged if not x[7]]
-    by_name = {}
-    for x in flagged_real:
-        nm = x[1] or ""
-        if not nm:
-            continue
-        if nm not in by_name or x[0] > by_name[nm][0]:
-            by_name[nm] = x
-    headline = sorted(by_name.values(), key=lambda y: y[0], reverse=True)[:10]
+    headline = build_headline(flagged_real)
 
     summary = {
         "key": key,
@@ -813,18 +873,7 @@ def build_city(key, cfg):
         "sss_max": max(sss_vals) if sss_vals else 0,
         "sss_mean_flagged": round(sum(x[0] for x in flagged) / max(len(flagged), 1), 1),
         "vru_pois": len(poi_pts),
-        "headline_priority_roads_real_posted": [
-            {
-                "sss": s,
-                "name": nm,
-                "class": c,
-                "posted_osm": vp,
-                "safe": vs,
-                "fatal_reduction_pct": fr,
-                "why": wy,
-            }
-            for (s, nm, c, vp, vs, fr, wy, _i) in headline
-        ],
+        "headline_priority_roads_real_posted": headline,
     }
     (BUILD / f"sss_summary_{key}.json").write_text(json.dumps(summary, indent=2))
 
@@ -832,9 +881,11 @@ def build_city(key, cfg):
         f"  segments {stats['total']} | real-posted {summary['segments_posted_real_osm']} "
         f"| flagged(real) {len(flagged_real)} | VRU {len(poi_pts)} | max SSS {summary['sss_max']}"
     )
-    for s, nm, c, vp, vs, fr, wy, _i in headline[:5]:
+    for h in headline[:5]:
         print(
-            f"    SSS {s:5.1f} | {(nm or '(unnamed)')[:30]:30s} | {vp}->{vs} | -{fr:.0f}% fatal | {wy}"
+            f"    SSS {h['sss']:5.1f} | {(h['name'] or '(unnamed)')[:30]:30s} | "
+            f"{h['posted_osm']}->{h['safe']} | -{h['fatal_reduction_pct']:.0f}% fatal | "
+            f"x{h['flagged_segments']} | {h['why']}"
         )
     return summary
 

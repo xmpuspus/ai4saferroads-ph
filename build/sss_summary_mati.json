@@ -11,11 +11,11 @@
   "segments_total": 1336,
   "segments_posted_real_osm": 197,
   "segments_posted_imputed": 1139,
-  "segments_gap_positive": 126,
-  "segments_flagged_sss_gt0": 126,
-  "segments_flagged_real_posted": 49,
-  "sss_max": 50.5,
-  "sss_mean_flagged": 14.3,
+  "segments_gap_positive": 142,
+  "segments_flagged_sss_gt0": 142,
+  "segments_flagged_real_posted": 65,
+  "sss_max": 60.0,
+  "sss_mean_flagged": 18.0,
   "vru_pois": 42,
   "headline_priority_roads_real_posted": [
     {
@@ -26,6 +26,7 @@
       "safe": 50,
       "fatal_reduction_pct": 84.7,
       "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 1,
       "v_design": 45
     },
     {
@@ -36,17 +37,19 @@
       "safe": 50,
       "fatal_reduction_pct": 84.7,
       "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 1,
       "v_design": 45
     },
     {
-      "sss": 18.0,
+      "sss": 38.5,
       "name": "President Diosdado P. Macapagal Highway",
-      "class": "primary",
-      "posted_osm": 40,
-      "safe": 30,
-      "fatal_reduction_pct": 68.4,
-      "why": "pedestrian activity (1 VRU site<=50m)",
-      "v_design": 60
+      "class": "trunk",
+      "posted_osm": 80,
+      "safe": 50,
+      "fatal_reduction_pct": 84.7,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 19,
+      "v_design": 70
     },
     {
       "sss": 15.8,
@@ -56,6 +59,7 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "pedestrian activity (1 VRU site<=50m)",
+      "flagged_segments": 1,
       "v_design": 45
     },
     {
@@ -66,7 +70,19 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 1,
       "v_design": 40
+    },
+    {
+      "sss": 13.9,
+      "name": "Mati Diversion Road",
+      "class": "trunk",
+      "posted_osm": 60,
+      "safe": 50,
+      "fatal_reduction_pct": 51.8,
+      "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 16,
+      "v_design": 70
     },
     {
       "sss": 13.1,
@@ -76,16 +92,18 @@
       "safe": 30,
       "fatal_reduction_pct": 68.4,
       "why": "local road, frontage/pedestrian mixing",
+      "flagged_segments": 1,
       "v_design": 40
     },
     {
-      "sss": 12.9,
+      "sss": 12.8,
       "name": "Dahican-Lawigan Road",
       "class": "secondary",
       "posted_osm": 60,
       "safe": 50,
       "fatal_reduction_pct": 51.8,
       "why": "undivided arterial, side-impact intersections",
+      "flagged_segments": 5,
       "v_design": 50
     }
   ],

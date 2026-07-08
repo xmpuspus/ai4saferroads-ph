@@ -9,6 +9,7 @@ Run: python3 build/overlay/validate_crashes.py
 
 import json
 import math
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -157,3 +158,10 @@ res = {
     "buckets": tbl,
 }
 print(json.dumps(res, indent=2))
+
+# --emit pins the validation numbers into a committed artifact so tests/verify_claims.py can
+# recheck them in CI without the gitignored _fullnet (which this script needs to recompute).
+if "--emit" in sys.argv:
+    out = ROOT / "build" / "web" / "data" / "crash_validation.json"
+    out.write_text(json.dumps(res, indent=2) + "\n")
+    print(f"\nwrote {out}")
