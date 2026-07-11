@@ -9,7 +9,7 @@
 set -euo pipefail
 
 WEBM=$1; TRIM_S=$2; FLIP=$3; END=$4
-DESIGNED=66.55                       # sum of the recorder's subtitle beats
+DESIGNED="${DESIGNED:-66.55}"                # override for a shorter cut
 FACTOR=$(python3 -c "print(($END-$TRIM_S)/$DESIGNED)")
 SPLIT=$(python3 -c "print(($FLIP-$TRIM_S)/$FACTOR)")
 W=576; FPS=7; LOSSY=65               # 640/8fps broke the 15 MB LinkedIn cap at this length

@@ -23,15 +23,13 @@
 [![e2e: all pass](https://img.shields.io/badge/e2e-all%20checks%20pass-success.svg)](tests/e2e.sh)
 [![Status: alpha](https://img.shields.io/badge/status-alpha-orange.svg)](#limitations)
 
-[![A narrated tour of the map. Glowing roads, then 12,563 crash sites on satellite. A crash report opened by hand. A street-level dive onto ten-lane EDSA. A road tapped for its limit and safe speed. The network flipped to safe limits](docs/demo.gif)](https://ai4saferroads-ph.vercel.app)
+[![A 15-second cut of the live map. 12,563 crash sites over real satellite imagery tracing the flagged roads, a dive onto ten-lane EDSA from above, then the network flipped to safe limits](docs/demo.gif)](https://ai4saferroads-ph.vercel.app)
 
-<sub>Real recording of the live map (via `build/record_demo.mjs`), subtitled so it reads without
-sound. It opens on the question over the glowing metro, switches to real satellite imagery and
-lights up the 12,563 reported crash sites tracing the flagged roads, hovers one dot to open the
-crash report behind it, dives to street level over ten-lane EDSA to show the road those reports
-sit on, states the night severity finding, taps a road to compare its posted
-limit with the speed a person survives, and ends by flipping every road to that speed. Watch it
-live at [ai4saferroads-ph.vercel.app](https://ai4saferroads-ph.vercel.app).</sub>
+<sub>Real recording of the live map (via `build/record_demo_15s.mjs`), subtitled so it reads without
+sound. It opens on 12,563 reported crash sites over real satellite imagery, where 76% of them land
+on the 8.5% of road the model flags, dives to street level over ten-lane EDSA to show the road those
+reports sit on, then flips every road to the speed a person survives. Watch it live at
+[ai4saferroads-ph.vercel.app](https://ai4saferroads-ph.vercel.app).</sub>
 
 ## What it shows
 
