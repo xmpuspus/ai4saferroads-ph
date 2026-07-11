@@ -5,7 +5,8 @@
 > in rush-hour traffic. Yet the share that injure or kill roughly doubles between midnight and
 > 5am. That is when the road clears and
 > vehicles reach the speed it is built for: 13.5% against 6.7%, about 2x (p < 0.001, Mendeley EDSA
-> 2007-2016: 22,072 crashes, 1,504 of them injury-or-worse). You are exposed to the top speed a road permits
+> 2007-2016: 22,072 crashes, 1,504 of them injury-or-worse). This is one road, and the late-night hours carry less enforcement and
+> more drinking, so it points to speed rather than proving it. You are exposed to the top speed a road permits
 > near you, not the average. This open map scores every street in 51 Philippine cities against the
 > speed a person survives a crash at: 357,423 scored from OpenStreetMap, 9,435 posted above the safe
 > speed, 5,328 in Metro Manila. Satellite imagery shows the flagged roads for what they are,

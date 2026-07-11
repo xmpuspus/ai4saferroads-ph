@@ -31,6 +31,9 @@ VALIDATION = (ROOT / "docs" / "validation.md").read_text()
 # methodology.html is the user-facing "Exact numbers" page (index.html links it); guard it too so
 # a rebake can't leave it contradicting the README (it silently did after the trunk rescore).
 METHODOLOGY = (ROOT / "build" / "web" / "methodology.html").read_text()
+# index.html carries its own audience-facing numbers (the crash-overlay note, EN + FIL) that the
+# oracle never bound; the crashNote kept the pre-trunk-fix 42%/7% after every doc was updated.
+INDEX = (ROOT / "build" / "web" / "index.html").read_text()
 
 
 def check(cond, msg):
@@ -251,6 +254,14 @@ if cv_path.exists():
     claim("flagged length share", f"{cv['flagged_len_pct']}%", "8.5%", README)
     claim("flagged crash share", f"{cv['flagged_crash_pct']}%", "76.2%", README)
     claim("crash grid cells", f"{cv['grid_cells']:,}", "1,222", README)
+    # the map's crash-overlay note (crashNote, EN + FIL) restates the concentration; bind it so it
+    # cannot keep the stale 42%/7% while the docs move.
+    claim("index crashNote crash share", f"{round(cv['flagged_crash_pct'])}%", "76%", INDEX)
+    claim("index crashNote length share", f"{cv['flagged_len_pct']}%", "8.5%", INDEX)
+    check(
+        "42% of them" not in INDEX and "7% of road" not in INDEX,
+        "index.html crashNote carries no pre-trunk-fix 42%/7% (EN or FIL)",
+    )
     check(
         abs(cv["spearman_sss_vs_crashdensity"] - 0.46) <= 0.01
         and num_in(README, "+0.46"),
@@ -261,6 +272,23 @@ else:
     print(
         "[SKIP] crash-validation claims (build/web/data/crash_validation.json absent; "
         "run 'python3 build/overlay/validate_crashes.py --emit' to pin the 8.5%/76%/+0.46 numbers)"
+    )
+
+# ------------------------------------------------------------------ traffic calming (optional artifact)
+# The flagged-road calming coverage (build/overlay/calming_coverage.py --emit). Site copy and the
+# LinkedIn draft silently drifted to the pre-trunk-fix 21/10/4 while the docs held the current
+# 20/16/4; pin it so both sides fail on the next drift.
+cal_path = DATA / "calming.json"
+if cal_path.exists():
+    cal = json.loads(cal_path.read_text())
+    claim("calming Manila", f"{cal['manila']['calming_pct']}%", "20%", FINDINGS)
+    claim("calming Cebu", cal["cebu"]["calming_pct"], 16, FINDINGS, "16% in Cebu")
+    claim("calming Davao", cal["davao"]["calming_pct"], 4, FINDINGS, "4% in Davao")
+    claim("methodology calming Cebu", cal["cebu"]["calming_pct"], 16, METHODOLOGY, "16%")
+else:
+    print(
+        "[SKIP] calming claims (build/web/data/calming.json absent; "
+        "run 'python3 build/overlay/calming_coverage.py --emit')"
     )
 
 # methodology.html restates the crowd + crash + calming numbers; bind each to its source artifact
@@ -294,6 +322,22 @@ if cv_path.exists():
         num_in(METHODOLOGY, "+0.46"),
         "methodology cites crash-density Spearman +0.46 (matches artifact)",
     )
+
+# ------------------------------------------------------------------ LinkedIn draft (ships to the feed)
+# The draft is the highest-visibility surface and was UNGUARDED, so it silently drifted to the
+# pre-trunk-fix 7%/42% while the map said 8.5%/76.2%. Pin its load-bearing numbers to the same
+# artifacts as the docs so the post and the map can never again disagree.
+DRAFT = (ROOT / "docs" / "linkedin-draft.md").read_text()
+claim("draft EDSA total", f"{tot_n:,}", "22,072", DRAFT)
+claim("draft night share", f"{night_share} percent", "13.5 percent", DRAFT)
+claim("draft peak share", f"{peak_share} percent", "6.7 percent", DRAFT)
+if cv_path.exists():
+    claim("draft crashes shown", f"{cv['crashes_total']:,}", "12,563", DRAFT)
+    claim("draft flagged length share", f"{cv['flagged_len_pct']} percent", "8.5 percent", DRAFT)
+    claim("draft flagged crash share", f"{round(cv['flagged_crash_pct'])} percent", "76 percent", DRAFT)
+if cal_path.exists():
+    claim("draft calming Manila", f"{cal['manila']['calming_pct']} percent", "20 percent", DRAFT)
+    claim("draft calming Cebu", f"{cal['cebu']['calming_pct']} percent", "16 percent", DRAFT)
 
 print(
     f"\n{checks} claims checked. "

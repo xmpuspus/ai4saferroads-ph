@@ -357,7 +357,7 @@
       <div id="satstrip"></div>
       <div class="sq-note" data-i18n-html="sqNote2">The map data has no road widths here. The satellite shows what the flagged roads are, wide straight multi-lane strips cutting through dense housing. Daytime traffic comes and goes. The road itself stays.</div>
       <div class="sq-h" data-i18n-html="sqH3">3 &middot; The fix is physical, not a sign</div>
-      <div class="sq-note" data-i18n-html="sqNote3">A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>21%</b> of Manila's flagged roads have any traffic calming within 100 m, 10% in Cebu, 4% in Davao.</div>
+      <div class="sq-note" data-i18n-html="sqNote3">A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>20%</b> of Manila's flagged roads have any traffic calming within 100 m, 16% in Cebu, 4% in Davao.</div>
       <div class="sq-foot" data-i18n="sqFoot">Flagged for review, not an accusation. Statistical indicators from public data. Patterns may have legitimate explanations.</div>
     </div>
   </div>
@@ -546,7 +546,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
     sqH2:'2 &middot; From space, these roads are built for speed',
     sqNote2:'The map data has no road widths here. The satellite shows what the flagged roads are, wide straight multi-lane strips cutting through dense housing. Daytime traffic comes and goes. The road itself stays.',
     sqH3:'3 &middot; The fix is physical, not a sign',
-    sqNote3:'A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>21%</b> of Manila\'s flagged roads have any traffic calming within 100 m, 10% in Cebu, 4% in Davao.',
+    sqNote3:'A lower number no one obeys in traffic and no one enforces changes nothing. Only road design that caps speed when the road is empty works. Yet only <b>20%</b> of Manila\'s flagged roads have any traffic calming within 100 m, 16% in Cebu, 4% in Davao.',
     sqFoot:'Flagged for review, not an accusation. Statistical indicators from public data. Patterns may have legitimate explanations.',
     statOver:'Set over the safe speed',
     statOf:(posted,total)=>`of ${posted} streets that have a speed limit (${total} checked in all).`,
@@ -594,7 +594,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
     cmpBanner:(rtxt)=>`<b>Left.</b> The roads we highlight as over the safe speed. <b>Right.</b> Where crashes really happened.${rtxt} Drag the divider to sweep.`,
     cmpAgree:(times)=>` The two maps agree about <b>${times}</b> across the city (busy roads get more crashes for many reasons, so this is more than just the limit). <a href="methodology.html#numbers" style="color:#9DD0F0">Exact numbers</a>.`,
     rhoTimes:(n)=>`${n===1?'once':n+' times'} in 10`,
-    crashNote:'12,563 reported crashes, 2018 to 2020 (MMDA alerts). Hover a point to read it. 42% of them land on the 7% of road we highlight. This is a check, not part of the score.',
+    crashNote:'12,563 reported crashes, 2018 to 2020 (MMDA alerts). Tap a point to read it. 76% of them land on the 8.5% of road we highlight. This is a check, not part of the score.',
     crashFail:'Could not load crash data.',
   },
   fil:{
@@ -678,7 +678,7 @@ Mga tagapagpahiwatig mula sa bukas na datos. Ang isang flag ay nangangahulugang 
     sqH2:'2 &middot; Mula sa himpapawid, dinisenyo ang mga kalsadang ito para sa bilis',
     sqNote2:'Walang lapad ng kalsada sa datos ng mapa. Ipinapakita ng satellite kung ano talaga ang mga naka-flag na kalsada: malalapad, tuwid, maraming lane, dumadaan sa siksikang kabahayan. Dumarating at umaalis ang traffic. Nananatili ang kalsada.',
     sqH3:'3 &middot; Pisikal ang solusyon, hindi karatula',
-    sqNote3:'Walang binabago ang mas mababang numerong walang sumusunod sa traffic at walang nagpapatupad. Tanging disenyo ng kalsadang naglilimita ng bilis kapag walang tao ang gumagana. Pero <b>21%</b> lang ng mga naka-flag na kalsada sa Manila ang may kahit anong traffic calming sa loob ng 100 m, 10% sa Cebu, 4% sa Davao.',
+    sqNote3:'Walang binabago ang mas mababang numerong walang sumusunod sa traffic at walang nagpapatupad. Tanging disenyo ng kalsadang naglilimita ng bilis kapag walang tao ang gumagana. Pero <b>20%</b> lang ng mga naka-flag na kalsada sa Manila ang may kahit anong traffic calming sa loob ng 100 m, 16% sa Cebu, 4% sa Davao.',
     sqFoot:'Naka-flag para suriin, hindi paratang. Mga estadistikang palatandaan mula sa bukas na datos. Maaaring may lehitimong paliwanag ang mga pattern.',
     statOver:'Nakatakda nang lampas sa ligtas na bilis',
     statOf:(posted,total)=>`sa ${posted} kalsadang may speed limit (${total} ang sinuri lahat).`,
@@ -726,7 +726,7 @@ Mga tagapagpahiwatig mula sa bukas na datos. Ang isang flag ay nangangahulugang 
     cmpBanner:(rtxt)=>`<b>Kaliwa.</b> Ang mga kalsadang hina-highlight naming lampas sa ligtas na bilis. <b>Kanan.</b> Kung saan talaga nangyari ang mga aksidente.${rtxt} I-drag ang divider para magpalipat.`,
     cmpAgree:(times)=>` Nagkakasundo ang dalawang mapa nang humigit-kumulang <b>${times}</b> sa buong lungsod (maraming dahilan kung bakit mas maraming aksidente sa abalang kalsada, kaya higit pa ito sa limitasyon lang). <a href="methodology.html#numbers" style="color:#9DD0F0">Eksaktong numero</a>.`,
     rhoTimes:(n)=>`${n} sa 10 beses`,
-    crashNote:'12,563 naiulat na aksidente, 2018 hanggang 2020 (mga alerto ng MMDA). I-hover ang tuldok para basahin. 42% ng mga ito ay nasa 7% ng kalsadang hina-highlight namin. Pagsusuri ito, hindi bahagi ng marka.',
+    crashNote:'12,563 naiulat na aksidente, 2018 hanggang 2020 (mga alerto ng MMDA). Pindutin ang tuldok para basahin. 76% ng mga ito ay nasa 8.5% ng kalsadang hina-highlight namin. Pagsusuri ito, hindi bahagi ng marka.',
     crashFail:'Hindi ma-load ang datos ng aksidente.',
   }
 };
@@ -1485,7 +1485,10 @@ map.on('load',async()=>{
     handle.addEventListener('pointerup',()=>{drag=false;});})();
 
   // popups from the rendered network
-  const pop=new maplibregl.Popup({closeButton:false,maxWidth:'260px'});
+  // closeOnClick:false so a touch tap can't open-then-self-close the popup (the tap that opens it
+  // also fired the default close-on-click on mobile, so roads looked untappable); closeButton gives
+  // phones a way to dismiss it since there is no hover-leave on touch.
+  const pop=new maplibregl.Popup({closeButton:true,closeOnClick:false,maxWidth:'260px'});
   function whyPlain(p){return whyPlainStr(p.why);}
   function popup(e,isClick){
     if(typeof routeMode!=='undefined'&&routeMode)return;   // route-check mode owns taps on the map (item 21)
@@ -1523,6 +1526,7 @@ map.on('load',async()=>{
       (line3||p.involved?`<div style="color:var(--muted);font-family:var(--font-data);font-size:11px;margin-top:3px">${esc(line3)}${p.involved?' · '+esc(p.involved):''}</div>`:'')+
       `<div style="color:var(--muted);font-size:10px;margin-top:5px">MMDA alert · a check, not part of the score</div>`).addTo(map);}
   map.on('mousemove','crash-dots',crashTip);
+  map.on('click','crash-dots',crashTip);   // touch: tap a crash dot to open its report (no hover on phones)
   map.on('mouseleave','crash-dots',()=>{map.getCanvas().style.cursor='';cpop.remove();});
 
   // ---- item 17: CSV download of the currently loaded city's flagged roads ----

@@ -1,0 +1,20 @@
+{
+  "manila": {
+    "flagged": 5328,
+    "with_calming_100m": 1073,
+    "calming_100m_pct": 20.1,
+    "calming_pct": 20
+  },
+  "cebu": {
+    "flagged": 727,
+    "with_calming_100m": 114,
+    "calming_100m_pct": 15.7,
+    "calming_pct": 16
+  },
+  "davao": {
+    "flagged": 435,
+    "with_calming_100m": 17,
+    "calming_100m_pct": 3.9,
+    "calming_pct": 4
+  }
+}
