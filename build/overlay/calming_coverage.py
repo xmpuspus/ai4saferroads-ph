@@ -78,7 +78,9 @@ def main():
     for key in CITIES:
         cov = coverage(key)
         if cov is None:
-            print(f"[skip] {key}: missing input (need _fullnet + protective_{key}.json)")
+            print(
+                f"[skip] {key}: missing input (need _fullnet + protective_{key}.json)"
+            )
             continue
         out[key] = cov
         print(f"{key}: {cov['calming_100m_pct']}% of {cov['flagged']} flagged roads")

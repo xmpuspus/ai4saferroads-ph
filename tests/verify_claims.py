@@ -256,7 +256,12 @@ if cv_path.exists():
     claim("crash grid cells", f"{cv['grid_cells']:,}", "1,222", README)
     # the map's crash-overlay note (crashNote, EN + FIL) restates the concentration; bind it so it
     # cannot keep the stale 42%/7% while the docs move.
-    claim("index crashNote crash share", f"{round(cv['flagged_crash_pct'])}%", "76%", INDEX)
+    claim(
+        "index crashNote crash share",
+        f"{round(cv['flagged_crash_pct'])}%",
+        "76%",
+        INDEX,
+    )
     claim("index crashNote length share", f"{cv['flagged_len_pct']}%", "8.5%", INDEX)
     check(
         "42% of them" not in INDEX and "7% of road" not in INDEX,
@@ -284,7 +289,9 @@ if cal_path.exists():
     claim("calming Manila", f"{cal['manila']['calming_pct']}%", "20%", FINDINGS)
     claim("calming Cebu", cal["cebu"]["calming_pct"], 16, FINDINGS, "16% in Cebu")
     claim("calming Davao", cal["davao"]["calming_pct"], 4, FINDINGS, "4% in Davao")
-    claim("methodology calming Cebu", cal["cebu"]["calming_pct"], 16, METHODOLOGY, "16%")
+    claim(
+        "methodology calming Cebu", cal["cebu"]["calming_pct"], 16, METHODOLOGY, "16%"
+    )
 else:
     print(
         "[SKIP] calming claims (build/web/data/calming.json absent; "
@@ -333,11 +340,31 @@ claim("draft night share", f"{night_share} percent", "13.5 percent", DRAFT)
 claim("draft peak share", f"{peak_share} percent", "6.7 percent", DRAFT)
 if cv_path.exists():
     claim("draft crashes shown", f"{cv['crashes_total']:,}", "12,563", DRAFT)
-    claim("draft flagged length share", f"{cv['flagged_len_pct']} percent", "8.5 percent", DRAFT)
-    claim("draft flagged crash share", f"{round(cv['flagged_crash_pct'])} percent", "76 percent", DRAFT)
+    claim(
+        "draft flagged length share",
+        f"{cv['flagged_len_pct']} percent",
+        "8.5 percent",
+        DRAFT,
+    )
+    claim(
+        "draft flagged crash share",
+        f"{round(cv['flagged_crash_pct'])} percent",
+        "76 percent",
+        DRAFT,
+    )
 if cal_path.exists():
-    claim("draft calming Manila", f"{cal['manila']['calming_pct']} percent", "20 percent", DRAFT)
-    claim("draft calming Cebu", f"{cal['cebu']['calming_pct']} percent", "16 percent", DRAFT)
+    claim(
+        "draft calming Manila",
+        f"{cal['manila']['calming_pct']} percent",
+        "20 percent",
+        DRAFT,
+    )
+    claim(
+        "draft calming Cebu",
+        f"{cal['cebu']['calming_pct']} percent",
+        "16 percent",
+        DRAFT,
+    )
 
 print(
     f"\n{checks} claims checked. "
