@@ -69,7 +69,7 @@ await page.evaluate(() => window.__map.easeTo({ center: [121.0, 14.585], zoom: 1
 await sub('Bring each road to a speed people survive. The risk of a deadly crash drops about two thirds.', 3600);
 
 // BEAT 4 — where to find it
-await sub('Every street, 51 Philippine cities. ai4saferroads-ph.vercel.app', 2700);
+await sub('Every street, 50 cities and Metro Manila. ai4saferroads-ph.vercel.app', 2700);
 await page.evaluate(() => { document.getElementById('rec-sub').style.opacity = 0; }).catch(() => {});
 await page.waitForTimeout(800);
 

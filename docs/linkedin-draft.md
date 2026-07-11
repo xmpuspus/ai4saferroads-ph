@@ -48,11 +48,11 @@ within 100 meters. In Cebu it is 16 percent. In Davao, 4.
 
 So the answer to the objection is yes, speed is the problem, just not the average speed. What puts you
 in danger is the top speed the road lets cars reach near you, however slow the traffic is right now. I
-put the whole thing on an open map, every drivable street in 51 Philippine cities, the current limit
+put the whole thing on an open map, every drivable street in 50 Philippine cities and Metro Manila, the current limit
 against the speed a person survives, with the real crashes laid over the satellite so you can see it
 for yourself.
 
-The map has every drivable street in 51 cities. Find the one outside your house, or the one your kids
+The map has every drivable street in 50 cities and Metro Manila. Find the one outside your house, or the one your kids
 cross to get to school, and tell me in the comments what its limit says against the speed you would
 actually survive. Link in the first comment.
 

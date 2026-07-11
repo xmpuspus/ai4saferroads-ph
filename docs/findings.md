@@ -52,7 +52,7 @@ Reproduce: `build/overlay/emit_severity_artifact.py` (the hourly split), `build/
 
 ## 1. Most streets have no posted limit at all
 
-Across the 51 cities, 357,423 drivable streets are scored, but only 37,971 carry a posted
+Across 50 cities and Metro Manila, 357,423 drivable streets are scored, but only 37,971 carry a posted
 limit in OpenStreetMap: about 11% overall. Coverage swings wildly by city:
 
 | City | Streets scored | With a real posted limit | Share |
@@ -63,7 +63,7 @@ limit in OpenStreetMap: about 11% overall. Coverage swings wildly by city:
 | Metro Manila | 87,123 | 14,163 | 16% |
 | Cebu City | 22,402 | 2,027 | 9% |
 | Butuan | 3,976 | 0 | 0% |
-| **All 51 cities** | **357,423** | **37,971** | **11%** |
+| **50 cities + Metro Manila** | **357,423** | **37,971** | **11%** |
 
 The map keeps two cases visually separate: bright glow only where a **real** posted limit
 exceeds the safe speed. The imputed majority never glows. The honest headline is the

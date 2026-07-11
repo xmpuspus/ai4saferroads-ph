@@ -1,6 +1,6 @@
 # Per-city numbers
 
-All 51 cities scored from live OpenStreetMap, June 2026. `Flagged` = roads with a real posted limit above the Safe System speed. `ρ` / `p` = Spearman correlation between the raw speed-limit gap (the mismatch, independent of exposure weighting) and Meta Relative Wealth Index on a ~1.6 km grid (blank where the city has too little real-posted road to grid). Reproduce with `make data`, then `python3 build/overlay/compute_overlay.py` and `python3 build/overlay/gen_cities_md.py`. See [findings.md](findings.md).
+All 50 cities and Metro Manila scored from live OpenStreetMap, June 2026. `Flagged` = roads with a real posted limit above the Safe System speed. `ρ` / `p` = Spearman correlation between the raw speed-limit gap (the mismatch, independent of exposure weighting) and Meta Relative Wealth Index on a ~1.6 km grid (blank where the city has too little real-posted road to grid). Reproduce with `make data`, then `python3 build/overlay/compute_overlay.py` and `python3 build/overlay/gen_cities_md.py`. See [findings.md](findings.md).
 
 | City | Streets scored | Real posted limit | Flagged | VRU sites | Wealth ρ | p |
 |------|---------------:|------------------:|--------:|----------:|---------:|---:|
@@ -55,4 +55,4 @@ All 51 cities scored from live OpenStreetMap, June 2026. `Flagged` = roads with 
 | Naga City | 3,212 | 7 | 3 | 164 | - | - |
 | Puerto Princesa | 3,593 | 1 | 0 | 100 | - | - |
 | Butuan | 3,976 | 0 | 0 | 213 | - | - |
-| **All 51 cities** | **357,423** | **37,971** | **9,435** | **16,399** | | |
+| **50 cities + Metro Manila** | **357,423** | **37,971** | **9,435** | **16,399** | | |

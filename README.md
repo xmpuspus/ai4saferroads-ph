@@ -7,7 +7,7 @@
 > vehicles reach the speed it is built for: 13.5% against 6.7%, about 2x (p < 0.001, Mendeley EDSA
 > 2007-2016: 22,072 crashes, 1,504 of them injury-or-worse). This is one road, and the late-night hours carry less enforcement and
 > more drinking, so it points to speed rather than proving it. You are exposed to the top speed a road permits
-> near you, not the average. This open map scores every street in 51 Philippine cities against the
+> near you, not the average. This open map scores every street in 50 Philippine cities and Metro Manila against the
 > speed a person survives a crash at: 357,423 scored from OpenStreetMap, 9,435 posted above the safe
 > speed, 5,328 in Metro Manila. Satellite imagery shows the flagged roads for what they are,
 > wide straight multi-lane roads through dense housing, built for a speed no sign and no traffic
@@ -19,7 +19,7 @@
 [![Data: CC-BY-4.0](https://img.shields.io/badge/data-CC--BY--4.0-blue.svg)](LICENSE)
 [![Method: Safe System + Nilsson](https://img.shields.io/badge/method-Safe%20System%20%2B%20Nilsson-success.svg)](build/web/methodology.html)
 [![Source: OpenStreetMap](https://img.shields.io/badge/source-OpenStreetMap-success.svg)](https://www.openstreetmap.org)
-[![Cities: 51](https://img.shields.io/badge/cities-51%20across%20PH-success.svg)](docs/cities.md)
+[![Cities: 50 plus Metro Manila](https://img.shields.io/badge/cities-50%20%2B%20Metro%20Manila-success.svg)](docs/cities.md)
 [![e2e: all pass](https://img.shields.io/badge/e2e-all%20checks%20pass-success.svg)](tests/e2e.sh)
 [![Status: alpha](https://img.shields.io/badge/status-alpha-orange.svg)](#limitations)
 
@@ -91,7 +91,7 @@ physics, drawn so you can see where each car stops.</sub>
 
 ## Cities (live OpenStreetMap, June 2026)
 
-51 cities are scored, from Metro Manila to regional centres across Luzon, the Visayas, and
+50 cities and Metro Manila are scored, from the capital out to regional centres across Luzon, the Visayas, and
 Mindanao. The top of the list by flagged-road count:
 
 | City | Streets scored | With a real posted limit | Flagged: limit over safe speed | Vulnerable-user sites |
@@ -108,7 +108,7 @@ Mindanao. The top of the list by flagged-road count:
 | Koronadal | 3,274 | 476 | 105 | 86 |
 | Bacolod | 8,167 | 475 | 98 | 258 |
 | Malolos | 7,025 | 212 | 93 | 277 |
-| **All 51 cities** | **357,423** | **37,971** | **9,435** | **16,399** |
+| **50 cities + Metro Manila** | **357,423** | **37,971** | **9,435** | **16,399** |
 
 Full per-city numbers are in [docs/cities.md](docs/cities.md). The whole urban network of each
 city is pulled, scored, and served as vector tiles so the entire street grid draws at once.

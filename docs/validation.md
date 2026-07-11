@@ -64,7 +64,7 @@ causes the crash. Honest limits:
 
 ## Experiment B: the regional death rate does NOT track the map (and that is expected)
 
-To check the other unit of analysis, we mapped all 51 cities to their region and correlated each
+To check the other unit of analysis, we mapped all 50 cities and Metro Manila to their region and correlated each
 region's speed-mismatch metric (flagged roads per 100 scored) against the PSA road-traffic death
 rate per 100,000 (SDG 3.6.1, 2022, from PSA OpenSTAT).
 
