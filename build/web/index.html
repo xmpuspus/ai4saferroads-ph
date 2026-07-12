@@ -169,6 +169,17 @@
   .sq-note{font-size:11.5px;line-height:1.5;color:var(--muted);margin:2px 0}.sq-note b{color:#fff}
   .sq-cap{font-size:10.5px;color:var(--muted);margin:4px 0 2px;line-height:1.4}.sq-cap b{color:var(--ink)}
   .sq-foot{font-size:10px;color:var(--muted);margin-top:12px;line-height:1.4;border-top:1px solid var(--line);padding-top:9px}
+  /* product structure (Vision-Zero-lean): a wordmark, grouped cards, one surfaced road-colour control */
+  .brand{display:flex;align-items:center;gap:8px;margin:0 0 11px}
+  .brand svg{flex:0 0 auto}
+  .brand .bm{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+  .pcard{background:rgba(255,255,255,.022);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:0 0 12px}
+  .pcard>.sec:first-child{margin-top:0;margin-bottom:8px}
+  .pcard .stat{gap:10px}.pcard .stat .big{white-space:nowrap}
+  .modebar{margin:0 0 12px}
+  .modebar .llbl{margin:0 2px 6px}
+  .modebar .roadmode{margin:0}
+  .modebar .seg{width:100%}.modebar .seg button{flex:1}
   #sevchart svg{width:100%;height:auto;display:block}
   #satstrip{display:flex;flex-direction:column;gap:8px;margin:4px 0 2px}
   #satstrip .sat{position:relative;border-radius:9px;overflow:hidden;border:1px solid var(--line);cursor:pointer;background:#0E1116}
@@ -350,6 +361,10 @@
   <span class="tk-ramp score" aria-hidden="true"></span><small>the more the speed limit needs to come down.</small></div>
 <div class="panel glass" role="region" aria-label="Current vs proposed speed limits, controls and findings">
   <button id="panelToggle" class="ptoggle" aria-label="Collapse panel" aria-expanded="true">&#9652;</button>
+  <div class="brand" aria-hidden="true">
+    <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="#E0574A" stroke-width="2.4"/><path d="M6.4 8.8 L10 12.4 L13.6 8.8" fill="none" stroke="#E0574A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="bm">AI for Safer Roads</span>
+  </div>
   <h1 id="h1title" data-i18n-html="h1Title">Will a lower speed limit <span class="em">actually make us safer?</span></h1>
   <p class="sub" data-i18n="h1_lead">Not on its own. A lower number no one obeys changes nothing. But the road itself is built for a speed, and people meet it the moment traffic clears. This maps where that speed is higher than a person can survive, next to schools and markets, across 50 cities and Metro Manila.</p>
   <div class="row2">
@@ -358,6 +373,15 @@
       <button data-lang="en" aria-pressed="true">EN</button>
       <button data-lang="fil" aria-pressed="false">FIL</button>
     </div>
+  </div>
+  <div class="modebar">
+    <div class="llbl" data-i18n="roadColour">Road colour</div>
+    <div class="roadmode" id="roadmode">
+      <div class="seg" role="group" aria-label="Road colour">
+        <button data-m="score" aria-pressed="true" data-i18n="risk">Risk</button>
+        <button data-m="current" aria-pressed="false" data-i18n="now">Now</button>
+        <button data-m="proposed" aria-pressed="false" data-i18n="safe">Safe</button>
+      </div></div>
   </div>
   <div id="panelbody">
   <div id="speedq" class="speedq">
@@ -379,10 +403,15 @@
     </div>
   </div>
   <div class="row2"><input type="search" id="find" placeholder="Find a flagged road…" data-i18n-ph="findPh" aria-label="Find a flagged road" /></div>
-  <div id="stats"></div>
+  <div class="pcard">
+    <div class="sec" data-i18n="secFlagged">The flagged roads</div>
+    <div id="stats"></div>
+  </div>
   <div id="badetail" hidden></div>
-  <div class="sec" data-i18n="worstRoads">Worst roads</div>
-  <div id="roads"></div>
+  <div class="pcard">
+    <div class="sec" data-i18n="worstRoads">Worst roads</div>
+    <div id="roads"></div>
+  </div>
   <button id="buildbtn" class="bigbtn" aria-pressed="false" data-i18n-html="buildBtn">&#9654; Show me how it works, step by step</button>
   <div id="buildstep" hidden></div>
   <div class="actions2">
@@ -396,14 +425,8 @@
     <div class="seg" id="base" role="group" aria-label="Basemap">
       <button data-v="sat" aria-pressed="false" data-i18n="satellite">Satellite</button>
       <button data-v="dark" aria-pressed="true" data-i18n="dark">Dark</button>
+      <button data-v="light" aria-pressed="false" data-i18n="light">Light</button>
     </div>
-    <div class="llbl" data-i18n="roadColour">Road colour</div>
-    <div class="roadmode" id="roadmode">
-      <div class="seg" role="group" aria-label="Road colour">
-        <button data-m="score" aria-pressed="true" data-i18n="risk">Risk</button>
-        <button data-m="current" aria-pressed="false" data-i18n="now">Now</button>
-        <button data-m="proposed" aria-pressed="false" data-i18n="safe">Safe</button>
-      </div></div>
     <div class="llbl" data-i18n="overlays">Overlays</div>
     <button id="vrubtn" class="toggle" aria-pressed="false" data-i18n="vruBtn">What makes them dangerous</button>
     <div class="vrukey" id="vrukey" style="display:none"><i style="background:#E0B354"></i>school <i style="background:#D98C5F"></i>market <i style="background:#CE8296"></i>hospital <i style="background:#8E86C4"></i>worship <i style="background:#5B8DB8"></i>transit</div>
@@ -491,7 +514,8 @@ const I18N={
     simLabel:'Why the limit matters',simSmall:'60 vs 30 km/h',
     layersSub:'base map &middot; road colour &middot; overlays',
     baseMap:'Base map',roadColour:'Road colour',overlays:'Overlays',
-    satellite:'Satellite',dark:'Dark',risk:'Risk',now:'Now',safe:'Safe',
+    satellite:'Satellite',dark:'Dark',light:'Light',risk:'Risk',now:'Now',safe:'Safe',
+    secFlagged:'The flagged roads',
     vruBtn:'What makes them dangerous',
     crashBtn:'Where crashes really happened (Manila)',
     cmpBtn:'Swipe to compare our map with real crashes (Manila)',
@@ -625,7 +649,8 @@ Statistical indicators from public data. A flag means a road warrants review, no
     simLabel:'Bakit mahalaga ang speed limit',simSmall:'60 laban sa 30 km/h',
     layersSub:'base map &middot; kulay ng kalsada &middot; overlay',
     baseMap:'Base map',roadColour:'Kulay ng kalsada',overlays:'Overlay',
-    satellite:'Satellite',dark:'Madilim',risk:'Panganib',now:'Ngayon',safe:'Ligtas',
+    satellite:'Satellite',dark:'Madilim',light:'Maliwanag',risk:'Panganib',now:'Ngayon',safe:'Ligtas',
+    secFlagged:'Mga naka-flag na kalsada',
     vruBtn:'Ano ang dahilan ng panganib',
     crashBtn:'Saan talaga nangyari ang mga aksidente (Manila)',
     cmpBtn:'I-swipe para ikumpara ang mapa namin sa totoong aksidente (Manila)',
@@ -829,15 +854,17 @@ maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
 const ESRI={type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,maxzoom:17,attribution:'Esri, Maxar, Earthstar Geographics'};
 const r2=devicePixelRatio>1.5?'@2x':'';
 const CARTO={type:'raster',tiles:['a','b','c'].map(s=>`https://${s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}${r2}.png`),tileSize:256,attribution:'© OpenStreetMap contributors © CARTO'};
+const CARTO_LIGHT={type:'raster',tiles:['a','b','c'].map(s=>`https://${s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}${r2}.png`),tileSize:256,attribution:'© OpenStreetMap contributors © CARTO'};
 
 // WebGL can be unavailable on old devices and overloaded machines; fail with a message, not a dark page
 let map;
 try{map=new maplibregl.Map({container:'map',
   style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-    sources:{esri:ESRI,carto:CARTO},
+    sources:{esri:ESRI,carto:CARTO,carto_light:CARTO_LIGHT},
     layers:[{id:'bg',type:'background',paint:{'background-color':'#0E1116'}},
       {id:'esri',type:'raster',source:'esri',layout:{visibility:'none'},paint:{'raster-opacity':0.78,'raster-saturation':-0.25,'raster-brightness-max':0.9}},
-      {id:'carto',type:'raster',source:'carto',paint:{'raster-opacity':1}}]},
+      {id:'carto',type:'raster',source:'carto',paint:{'raster-opacity':1}},
+      {id:'carto_light',type:'raster',source:'carto_light',layout:{visibility:'none'},paint:{'raster-opacity':1}}]},
   center:[121.02,14.59],zoom:11.6,attributionControl:{compact:true}});}
 catch(e){console.warn('WebGL init failed',e);
   const el=document.getElementById('toast');
@@ -1280,7 +1307,11 @@ map.on('load',async()=>{
 
   document.querySelectorAll('#base button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#base button').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
-    const sat=b.dataset.v==='sat';map.setLayoutProperty('esri','visibility',sat?'visible':'none');map.setLayoutProperty('carto','visibility',sat?'none':'visible');});
+    const v=b.dataset.v;
+    map.setLayoutProperty('esri','visibility',v==='sat'?'visible':'none');
+    map.setLayoutProperty('carto','visibility',v==='dark'?'visible':'none');
+    map.setLayoutProperty('carto_light','visibility',v==='light'?'visible':'none');
+    document.body.classList.toggle('lightbase',v==='light');});
   // item 1: search the whole loaded flagged network, not just the top-10 headline list
   document.getElementById('find').addEventListener('input',e=>{if(CUR)renderRoads(CUR.headline_priority_roads_real_posted,e.target.value);});
   document.getElementById('find').addEventListener('keydown',e=>{if(e.key==='Enter'){const f=document.querySelector('#roads .road');if(f)f.click();}});
