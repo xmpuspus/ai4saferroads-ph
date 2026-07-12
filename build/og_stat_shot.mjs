@@ -31,7 +31,7 @@ await page.evaluate(() => {
       <span style="font-size:128px;line-height:.86;color:#5FC6AF;font-weight:800">&minus;66%</span>
       <span style="font-size:41px;color:#F2F5F9;font-weight:700;max-width:340px;line-height:1.1">the chance a crash kills</span>
     </div>
-    <div style="margin-top:22px;font-size:28px;color:#CDD6E0;font-weight:500;max-width:850px;line-height:1.36">but only when the road itself is built for a speed people survive. Not the sign. The road.</div>
+    <div style="margin-top:22px;font-size:28px;color:#CDD6E0;font-weight:500;max-width:860px;line-height:1.36">but only when the road is built to keep people clear of the fast traffic, not just a lower sign.</div>
     <div style="margin-top:28px;display:flex;align-items:center;gap:16px">
       <span style="font-family:var(--font-data,monospace);font-size:22px;color:#160a08;font-weight:700;background:#FB6A50;padding:9px 16px;border-radius:10px">ai4saferroads-ph.vercel.app</span>
       <span style="font-family:var(--font-data,monospace);font-size:17px;color:#7E93AB">Modeled drop across Metro Manila's flagged roads</span>
