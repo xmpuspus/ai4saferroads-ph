@@ -44,34 +44,32 @@ await page.evaluate(() => {
     'z-index:99;opacity:0;transition:opacity .4s;box-shadow:0 8px 30px rgba(0,0,0,.5)';
   document.body.appendChild(d);
 }).catch(() => errs.push('setup'));
-// open already zoomed on the Metro core so the satellite + crashes read in the first second
-await page.evaluate(() => window.__map.jumpTo({ center: [121.02, 14.57], zoom: 12.6 })).catch(() => errs.push('jump'));
-await page.waitForTimeout(1200);
+// open on the glowing danger network over the dark base: the red roads pose the question
+await page.evaluate(() => window.__map.jumpTo({ center: [121.02, 14.585], zoom: 11.5 })).catch(() => errs.push('jump'));
+await page.waitForTimeout(800);
 console.log('TRIM_S=' + ((Date.now() - recStart) / 1000).toFixed(1));
 
-// BEAT 1 — real satellite, real crashes tracing the flagged roads, panning up EDSA
-await jsClick('#base button[data-v="sat"]', 1600);
+// BEAT 1 — lead with the question itself, held over the glowing danger network with a slow zoom
+await page.evaluate(() => window.__map.easeTo({ center: [121.03, 14.60], zoom: 11.78, duration: 3400, easing: t => t })).catch(() => errs.push('pan'));
+await sub('Will a lower speed limit actually make us safer?', 2900);
+
+// BEAT 2 — the answer starts with the road, not the sign: dive to EDSA on satellite, where crashes cluster
+await jsClick('#base button[data-v="sat"]', 700);
 await jsClick('#crashbtn', 300);
-await page.evaluate(() => window.__map.easeTo({ center: [121.048, 14.61], zoom: 12.9, duration: 4200, easing: t => t })).catch(() => errs.push('pan'));
-await sub('12,563 real crashes. 76% of them land on the 8.5% of road we flag as built too fast.', 3800);
+await page.evaluate(() => window.__map.flyTo({ center: [121.052, 14.617], zoom: 15.6, duration: 3500 })).catch(() => errs.push('dive'));
+await sub('Not the sign. The road is built for speed, and most crashes cluster on roads like EDSA.', 3800);
 
-// BEAT 2 — dive to EDSA street level: the road those reports sit on, seen from space
-await page.evaluate(() => window.__map.flyTo({ center: [121.052, 14.617], zoom: 16.6, duration: 3400 })).catch(() => errs.push('dive'));
-await sub('This is EDSA. Ten lanes of highway running straight through homes and shops.', 3600);
-
-// BEAT 3 — the fix: drop the crash overlay, dark base, flip to safe limits, pull back.
-// crashes stay coral, so they must come off or they occlude the teal safe roads.
+// BEAT 3 — the fix: build each road for a survivable speed, deadly-crash risk drops two thirds
 await jsClick('#crashbtn', 300);                                                       // crash dots off
-await jsClick('#base button[data-v="dark"]', 800);                                     // let the dark base settle
+await jsClick('#base button[data-v="dark"]', 700);                                     // dark base back
 console.log('MARK_FLIP=' + ((Date.now() - recStart) / 1000).toFixed(2));
-await jsClick('#roadmode .seg button[data-m="proposed"]', 1000);                       // give the teal recolor time to paint
-await page.evaluate(() => window.__map.easeTo({ center: [121.0, 14.585], zoom: 11.4, duration: 2600 })).catch(() => errs.push('rise'));
-await sub('Bring each road to a speed people survive. The risk of a deadly crash drops about two thirds.', 3600);
+await jsClick('#roadmode .seg button[data-m="proposed"]', 900);                        // give the teal recolor time to paint
+await page.evaluate(() => window.__map.easeTo({ center: [121.0, 14.585], zoom: 11.3, duration: 2700 })).catch(() => errs.push('rise'));
+await sub('Build each road for a speed people survive and the risk a crash kills drops about two thirds.', 3800);
 
-// BEAT 4 — where to find it
-await sub('Every street, 50 cities and Metro Manila. ai4saferroads-ph.vercel.app', 2700);
-await page.evaluate(() => { document.getElementById('rec-sub').style.opacity = 0; }).catch(() => {});
-await page.waitForTimeout(800);
+// BEAT 4 — where to find it; hold the URL on the final frame instead of fading it out
+await sub('Every street, 50 cities and Metro Manila. ai4saferroads-ph.vercel.app', 3000);
+await page.waitForTimeout(500);
 
 console.log('MARK_END=' + ((Date.now() - recStart) / 1000).toFixed(2));
 const video = page.video();

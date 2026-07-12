@@ -7,7 +7,10 @@
 <meta name="description" content="Not on its own: a lower number no one obeys changes nothing. But the road itself is built for a speed, and people meet it the moment traffic clears. This open map shows where streets in 50 Philippine cities and Metro Manila are built for a speed people cannot survive. The crash data shows the share of crashes that injure or kill doubles when the road clears." />
 <meta property="og:title" content="Will a lower speed limit actually make us safer?" />
 <meta property="og:description" content="Slow traffic hides what the road permits. Where Philippine streets allow lethal speed near people. The crashes that happen when the road clears are twice as likely to injure or kill. Open data, 50 cities and Metro Manila." />
-<meta property="og:image" content="https://ai4saferroads-ph.vercel.app/og-card.png" />
+<meta property="og:image" content="https://ai4saferroads-ph.vercel.app/og-card.png?v=20260712" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="https://ai4saferroads-ph.vercel.app/og-card.png?v=20260712" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="og:type" content="website" />
 <link href="vendor/maplibre-gl.css" rel="stylesheet"
@@ -155,8 +158,10 @@
   /* the reframe card: the answer to "is speed even the problem?" leads the panel */
   .speedq{margin:0 0 13px;padding:13px 14px;border:1px solid var(--accent);border-radius:12px;background:rgba(224,87,74,.08)}
   .speedq .sq-lead{font-size:13px;line-height:1.5;color:var(--ink)}.speedq .sq-lead b{color:#fff}
-  .sqbtn{width:100%;margin-top:11px;padding:9px;border-radius:9px;border:1px solid var(--accent);background:transparent;color:#E8CFC9;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
-  .sqbtn[aria-expanded=true]{background:var(--accent);color:#160a08}
+  /* quiet expander, not a second coral CTA: the one primary action (Show me how it works) keeps the coral fill */
+  .sqbtn{width:100%;margin-top:11px;padding:8px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--muted);font-weight:600;font-size:12px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
+  .sqbtn:hover{color:var(--ink);border-color:var(--focus)}
+  .sqbtn[aria-expanded=true]{background:rgba(255,255,255,.05);color:var(--ink);border-color:var(--line)}
   .sqbtn .chev{transition:transform .15s ease}.sqbtn[aria-expanded=true] .chev{transform:rotate(180deg)}
   #sqbody{margin-top:12px}
   .sq-h{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#E8CFC9;font-weight:700;margin:14px 0 7px}
@@ -214,14 +219,24 @@
     line-height:1;cursor:pointer;display:block;z-index:5}
   @media (max-width:560px){
     .ptoggle{display:block}
-    .topkey{font-size:11px;padding:6px 10px;text-align:left}
+    /* shrink the legend banner and cap its height so the h1 owns the first glance (it was a
+       wordy strip reading as a second headline). 3 lines keeps the colour ramp visible in the
+       longer Filipino copy too; only trailing prose clips. */
+    .topkey{font-size:10px;line-height:1.32;padding:5px 10px;text-align:left;
+      display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .topkey b{font-weight:600;color:var(--ink)}  /* reads as a caption, not a second headline */
     .panel{width:calc(100% - 18px);top:58px;left:9px;max-height:calc(100% - 68px);padding:14px 15px 16px;
       -webkit-overflow-scrolling:touch}
     h1{font-size:21px;padding-right:34px}
     details.more>summary .lgrp-sub{display:none}
     .panel.collapsed{max-height:none;overflow:visible}
     .panel.collapsed .sub,.panel.collapsed #panelbody{display:none}
-    .stamp{font-size:9.5px;padding:5px 8px;bottom:14px}
+    /* data-date to the bottom-left so it stops stacking under the centered CTA and the
+       attribution (which is now a compact info button in the corner) */
+    .stamp{font-size:9.5px;padding:5px 8px;bottom:12px;right:auto;left:9px}
+    /* during the guided tour the panel drops to a bottom card; clear the map buttons off it */
+    body:has(.panel.building) .mylocbtn,
+    body:has(.panel.building) .maplibregl-ctrl-bottom-right{display:none}
     #seehow.show{display:block;animation:ctapulse 2.4s ease-in-out infinite}
     /* guided-build on a phone: drop the panel to a compact bottom card showing only the
        step, so the map (where the dots and the red->green flip happen) stays visible above. */
@@ -817,12 +832,16 @@ try{map=new maplibregl.Map({container:'map',
     layers:[{id:'bg',type:'background',paint:{'background-color':'#0E1116'}},
       {id:'esri',type:'raster',source:'esri',layout:{visibility:'none'},paint:{'raster-opacity':0.78,'raster-saturation':-0.25,'raster-brightness-max':0.9}},
       {id:'carto',type:'raster',source:'carto',paint:{'raster-opacity':1}}]},
-  center:[121.02,14.59],zoom:11.6,attributionControl:true});}
+  center:[121.02,14.59],zoom:11.6,attributionControl:{compact:true}});}
 catch(e){console.warn('WebGL init failed',e);
   const el=document.getElementById('toast');
   el.textContent=t('errVendor','WebGL');el.style.background='rgba(160,40,40,.92)';el.classList.add('show');
   throw e;}
 map.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');
+// the compact attribution renders <details open>, sprawling a full credit bar across the bottom
+// edge over the CTA; collapse it to its info icon at rest (a tap still opens the full credit)
+map.on('load',()=>{const a=document.querySelector('.maplibregl-ctrl-attrib');
+  if(a){a.removeAttribute('open');a.classList.remove('maplibregl-compact-show');}});
 window.__map=map;
 // item 10: route tile/source failures to the same non-blocking banner language, throttled to once
 // per source per session so a flaky basemap tile doesn't spam the user
