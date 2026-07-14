@@ -32,7 +32,7 @@
   @font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-500.woff2) format("woff2");font-weight:500;font-display:swap}
   @font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
   :root{--bg:#0E1116;--panel:#161B24;--ink:#E6EAF0;--muted:#8B95A5;--line:#2A323D;
-    --glass:rgba(18,22,30,.86);--accent:#E0574A;--safe:#54A89B;--focus:#5B8DB8;
+    --glass:rgba(18,22,30,.86);--accent:#EE3B3B;--safe:#54A89B;--focus:#5B8DB8;
     --font-display:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
     --font-body:"IBM Plex Sans",system-ui,sans-serif;
     --font-data:"IBM Plex Mono",ui-monospace,monospace;}
@@ -52,7 +52,7 @@
     padding:8px 16px;font-size:12.5px;color:var(--ink);text-align:center;line-height:1.45}
   .topkey b{color:#fff}
   .topkey .tk-ramp{display:inline-block;width:60px;height:8px;border-radius:4px;vertical-align:middle;margin:0 5px;
-    background:linear-gradient(90deg,#3B0F70,#8C2981,#B73779,#E65D5E,#FB9F3A)}
+    background:linear-gradient(90deg,#3B0F70,#7E1E82,#B71E68,#DE2A4E,#FF3A46)}
   .topkey small{color:var(--muted);font-size:10.5px}
   details.more{margin:13px 0 2px}
   details.more:not([open]) > :not(summary){display:none}
@@ -67,8 +67,8 @@
   .llbl{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:600;margin:13px 2px 6px}
   #layers .seg{width:100%}
   #layers .seg button{flex:1}
-  .topkey .tk-ramp.score{background:linear-gradient(90deg,#3B0F70,#8C2981,#B73779,#E65D5E,#FB9F3A)}
-  .topkey .tk-ramp.speed{background:linear-gradient(90deg,#54A89B,#9DA871,#C99F52,#E0574A,#FB9F3A)}
+  .topkey .tk-ramp.score{background:linear-gradient(90deg,#3B0F70,#7E1E82,#B71E68,#DE2A4E,#FF3A46)}
+  .topkey .tk-ramp.speed{background:linear-gradient(90deg,#54A89B,#7C9D9E,#B07487,#EE3B3B,#FF3A46)}
   .bigbtn{display:block;width:100%;margin:12px 0 0;padding:12px;border-radius:11px;border:0;
     background:var(--accent);color:#0E1116;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
   #buildstep{margin-top:10px;padding:13px 14px;border:1px solid var(--safe);border-radius:12px;background:rgba(84,168,155,.12)}
@@ -104,7 +104,7 @@
   /* PH regulatory speed-limit sign (white roundel, red ring): the Waze/Google vocabulary the audience already reads */
   .sign{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#F4F3EE;border:4px solid #D11F2D;color:#0c0c0c;font-family:var(--font-display);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;flex:0 0 auto;vertical-align:middle}
   .sign.sm{width:23px;height:23px;border-width:2.5px;font-size:10px}
-  .sign.over{box-shadow:0 0 0 2px rgba(224,87,74,.28),0 0 12px 1px rgba(224,87,74,.5)}
+  .sign.over{box-shadow:0 0 0 2px rgba(238,59,59,.28),0 0 12px 1px rgba(238,59,59,.5)}
   .sign.strike::before{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2.2px;background:var(--accent);transform:rotate(-20deg);border-radius:2px}
   .signrow{display:inline-flex;align-items:center;gap:5px}
   .signrow .ar{color:var(--muted);font-weight:700}
@@ -114,13 +114,13 @@
   .svlink{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:rgba(91,141,184,.12);color:#86AED2;font-size:11.5px;font-weight:600;text-decoration:none;font-family:var(--font-body)}
   .svlink:hover,.svlink:focus-visible{background:rgba(91,141,184,.2);border-color:var(--focus)}
   .svlink .ar2{font-size:13px;line-height:1}
-  .ba{margin:10px 0 2px;padding:12px 13px;border:1px solid var(--accent);border-radius:11px;background:rgba(224,87,74,.08)}
+  .ba{margin:10px 0 2px;padding:12px 13px;border:1px solid var(--accent);border-radius:11px;background:rgba(238,59,59,.08)}
   .ba .t{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
   .ba .v{font-family:var(--font-data);font-size:17px;margin:3px 0;font-variant-numeric:tabular-nums slashed-zero}.ba .v s{color:var(--accent)}.ba .v b{color:var(--safe)}
   .ba .r{font-size:12px;color:#E8CFC9}
   .toggle{width:100%;margin:11px 0 0;padding:11px;border-radius:11px;border:1px solid var(--accent);background:transparent;color:#E8CFC9;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
   .toggle[aria-pressed=true]{background:var(--accent);color:#160a08}
-  #stepper{margin-top:11px;padding:13px 14px;border:1px solid var(--accent);border-radius:12px;background:rgba(224,87,74,.10)}
+  #stepper{margin-top:11px;padding:13px 14px;border:1px solid var(--accent);border-radius:12px;background:rgba(238,59,59,.10)}
   #stepper .ix{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
   #stepper .nm{font-family:var(--font-display);font-weight:700;font-size:18px;margin:2px 0 5px}
   #stepper .ba2{font-size:13px;line-height:1.5;font-family:var(--font-data);font-variant-numeric:tabular-nums slashed-zero}#stepper .ba2 s{color:var(--accent)}#stepper .ba2 b{color:var(--safe)}
@@ -134,8 +134,8 @@
   .biv{display:grid;grid-template-columns:repeat(3,16px);gap:2px;margin:8px 0 4px}
   .biv i{width:16px;height:16px;display:block}
   .bivlbl{font-size:10px;color:var(--muted);display:flex;justify-content:space-between}
-  .ramp{height:11px;border-radius:6px;margin:6px 0 3px;background:linear-gradient(90deg,#3B0F70,#8C2981,#B73779,#E65D5E,#FB9F3A)}
-  .ramp.speed{background:linear-gradient(90deg,#54A89B,#9DA871,#C99F52,#E0574A,#FB9F3A)}
+  .ramp{height:11px;border-radius:6px;margin:6px 0 3px;background:linear-gradient(90deg,#3B0F70,#7E1E82,#B71E68,#DE2A4E,#FF3A46)}
+  .ramp.speed{background:linear-gradient(90deg,#54A89B,#7C9D9E,#B07487,#EE3B3B,#FF3A46)}
   .rl{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
   .legend{margin-top:6px;font-size:11px;color:var(--muted);line-height:1.4}
   .legend i{display:inline-block;width:14px;height:0;border-top:3px solid;vertical-align:middle;margin-right:4px}
@@ -156,7 +156,7 @@
   .toggle:disabled{opacity:.4;cursor:not-allowed}
   .foot{font-size:10px;color:var(--muted);margin-top:12px;line-height:1.45}.foot a{color:var(--focus)}
   /* the reframe card: the answer to "is speed even the problem?" leads the panel */
-  .speedq{margin:0 0 13px;padding:13px 14px;border:1px solid var(--accent);border-radius:12px;background:rgba(224,87,74,.08)}
+  .speedq{margin:0 0 13px;padding:13px 14px;border:1px solid var(--accent);border-radius:12px;background:rgba(238,59,59,.08)}
   .speedq .sq-lead{font-size:13px;line-height:1.5;color:var(--ink)}.speedq .sq-lead b{color:#fff}
   /* quiet expander, not a second coral CTA: the one primary action (Show me how it works) keeps the coral fill */
   .sqbtn{width:100%;margin-top:11px;padding:8px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--muted);font-weight:600;font-size:12px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -192,7 +192,7 @@
   .actions2 .act{flex:1;min-width:0;background:#0E1116;border:1px solid var(--line);border-radius:11px;color:var(--ink);font-weight:600;font-size:12.5px;line-height:1.2;padding:9px 8px;cursor:pointer;text-decoration:none;font-family:inherit;text-align:center}
   .actions2 .act small{display:block;font-weight:500;color:var(--muted);font-size:10px;margin-top:2px}
   .actions2 .act:hover{border-color:var(--focus);background:rgba(255,255,255,.05)}
-  .actions2 .act[aria-pressed=true]{border-color:var(--accent);background:rgba(224,87,74,.14);color:#fff}
+  .actions2 .act[aria-pressed=true]{border-color:var(--accent);background:rgba(238,59,59,.14);color:#fff}
   .actions2 .act:disabled{opacity:.4;cursor:not-allowed}
   .stamp{position:absolute;bottom:16px;right:14px;z-index:3;font-size:10.5px;color:var(--muted);padding:7px 11px}
   .overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;z-index:4;background:rgba(7,10,15,.55);backdrop-filter:blur(2px)}
@@ -218,7 +218,7 @@
     cursor:ew-resize;box-shadow:0 2px 10px rgba(0,0,0,.55);pointer-events:auto;touch-action:none}
   #swipe .sw-lbl{position:absolute;top:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
     white-space:nowrap;padding:4px 8px;border-radius:7px;background:rgba(13,17,24,.82);backdrop-filter:blur(6px)}
-  #swipe .sw-l{right:9px;color:#FB9F3A}
+  #swipe .sw-l{right:9px;color:#FF3A46}
   #swipe .sw-r{left:9px;color:#9DD0F0}
   #cmpexit{display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:6;
     background:var(--panel);color:var(--ink);font-weight:700;border:1px solid var(--line);border-radius:22px;
@@ -258,9 +258,9 @@
   }
   /* motion: small breathing loops on the primary action, live overlays, and the danger glow,
      plus a radar ping when you fly to a road. All off under prefers-reduced-motion. */
-  @keyframes breatheCta{0%,100%{box-shadow:0 0 0 0 rgba(224,87,74,0)}50%{box-shadow:0 0 22px 1px rgba(224,87,74,.5)}}
+  @keyframes breatheCta{0%,100%{box-shadow:0 0 0 0 rgba(238,59,59,0)}50%{box-shadow:0 0 22px 1px rgba(238,59,59,.5)}}
   #buildbtn[aria-pressed="false"]{animation:breatheCta 3s ease-in-out infinite}
-  @keyframes breatheGlow{0%,100%{box-shadow:0 0 0 0 rgba(224,87,74,0)}50%{box-shadow:0 0 13px 0 rgba(224,87,74,.42)}}
+  @keyframes breatheGlow{0%,100%{box-shadow:0 0 0 0 rgba(238,59,59,0)}50%{box-shadow:0 0 13px 0 rgba(238,59,59,.42)}}
   .toggle[aria-pressed="true"]{animation:breatheGlow 3.4s ease-in-out infinite}
   .bigbtn,.toggle,.actions2 .act,.seg button,.road,.svlink,#panelToggle{transition:box-shadow .25s ease,background .2s ease,border-color .2s ease}
   @keyframes panelIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
@@ -362,7 +362,7 @@
 <div class="panel glass" role="region" aria-label="Current vs proposed speed limits, controls and findings">
   <button id="panelToggle" class="ptoggle" aria-label="Collapse panel" aria-expanded="true">&#9652;</button>
   <div class="brand" aria-hidden="true">
-    <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="#E0574A" stroke-width="2.4"/><path d="M6.4 8.8 L10 12.4 L13.6 8.8" fill="none" stroke="#E0574A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="#EE3B3B" stroke-width="2.4"/><path d="M6.4 8.8 L10 12.4 L13.6 8.8" fill="none" stroke="#EE3B3B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span class="bm">AI for Safer Roads</span>
   </div>
   <h1 id="h1title" data-i18n-html="h1Title">Will a lower speed limit <span class="em">actually make us safer?</span></h1>
@@ -578,7 +578,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
     csvHeaders:['Road','Posted (km/h)','Safe (km/h)','Gap (km/h)','Score','Why'],
     h1Title:'Will a lower speed limit <span class="em">actually make us safer?</span>',
     bannerScore:'Each <b>glowing road has a speed limit higher than a person can survive a crash at</b>. The brighter the colour, <span class="tk-ramp score"></span><small>the more the speed limit needs to come down.</small>',
-    bannerCurrent:'<b>Now.</b> Each road shows its <b>current speed limit</b>. <span class="tk-ramp speed"></span><small>teal is 30, coral is 60 or more km/h.</small>',
+    bannerCurrent:'<b>Now.</b> Each road shows its <b>current speed limit</b>. <span class="tk-ramp speed"></span><small>teal is 30, red is 60 or more km/h.</small>',
     bannerProposed:'<b>Safe.</b> The <b>speed limit each road should have</b>. <span class="tk-ramp speed"></span><small>the fast roads turn teal.</small>',
     sqLead:'Total crashes peak in rush-hour traffic, when the road is fullest. But the crashes that happen when the road <b>clears</b> are twice as likely to injure or kill.',
     sqSee:'See the evidence ',sqHide:'Hide the evidence ',
@@ -599,7 +599,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
     exactNumbers:'The exact numbers',
     zeroCounts:(posted,total)=>` (${posted} streets have a recorded limit, ${total} checked in all.)`,
     legLeadScore:'<i style="border-color:#ff3b3b"></i>Bright glow. The <b>speed limit is higher than the safe speed</b>. The deeper the colour, the bigger the gap between the limit now and the safe one.',
-    legLeadCurrent:'Each road shows its <b>current speed limit</b>. Teal is slow, coral is 60 or more km/h.',
+    legLeadCurrent:'Each road shows its <b>current speed limit</b>. Teal is slow, red is 60 or more km/h.',
     legLeadProposed:'Each road shows the <b>safe limit it should have</b>. The fast roads turn teal.',
     legGuess:'<i style="border-top-style:dashed;border-color:#7587a0"></i>Faint dashed. The limit is a <b>guess</b> from the road type, so it is left out of the counts.',
     legGrey:'<i style="border-color:#46566b"></i>Thin grey. Every other street, where the limit already fits.',
@@ -610,7 +610,7 @@ Statistical indicators from public data. A flag means a road warrants review, no
     stepBanner2:'The <b>glowing dots are real reported crashes</b>. They land on the very same roads.',
     stepBannerNoCrash:'<b>Reported crash points are for Metro Manila only.</b> There, the crashes land on the very same highlighted roads.',
     step3t:'3. What the limit is now',step3d:'The current speed limit. Coral roads are set at 60 or more km/h, right where people cross.',
-    step4t:'4. What it should be',step4d:'The safe speed. The fast coral roads should turn into the calm teal ones.',
+    step4t:'4. What it should be',step4d:'The safe speed. The fast red roads should turn into the calm teal ones.',
     stepOf:(i)=>`Step ${i} of 4`,stepBack:'&larr; Back',stepDone:'Done',stepNext:'Next &rarr;',stepFinish:'Finish',
     stepNoCrash:' <i>(crash data is Manila-only)</i>',
     baTitle:(nm)=>`What the speed limit should be on ${esc(nm)}`,
@@ -713,7 +713,7 @@ Mga tagapagpahiwatig mula sa bukas na datos. Ang isang flag ay nangangahulugang 
     csvHeaders:['Kalsada','Naka-post (km/h)','Ligtas (km/h)','Agwat (km/h)','Marka','Dahilan'],
     h1Title:'Magiging mas ligtas ba tayo <span class="em">kung ibababa ang speed limit?</span>',
     bannerScore:'Bawat <b>kumikinang na kalsada ay may speed limit na mas mataas sa kayang tagalan ng tao sa isang banggaan</b>. Habang mas maliwanag ang kulay, <span class="tk-ramp score"></span><small>mas kailangang ibaba ang speed limit.</small>',
-    bannerCurrent:'<b>Ngayon.</b> Ipinapakita ng bawat kalsada ang <b>kasalukuyang speed limit</b> nito. <span class="tk-ramp speed"></span><small>teal ay 30, coral ay 60 pataas na km/h.</small>',
+    bannerCurrent:'<b>Ngayon.</b> Ipinapakita ng bawat kalsada ang <b>kasalukuyang speed limit</b> nito. <span class="tk-ramp speed"></span><small>teal ay 30, pula ay 60 pataas na km/h.</small>',
     bannerProposed:'<b>Ligtas.</b> Ang <b>speed limit na dapat sa bawat kalsada</b>. <span class="tk-ramp speed"></span><small>nagiging teal ang mabibilis na kalsada.</small>',
     sqLead:'Pinakamarami ang aksidente sa rush hour, kapag pinakapuno ang kalsada. Pero ang mga aksidenteng nangyayari kapag <b>luwag</b> ang kalsada ay dobleng mas malamang na makasakit o makamatay.',
     sqSee:'Tingnan ang ebidensya ',sqHide:'Itago ang ebidensya ',
@@ -734,7 +734,7 @@ Mga tagapagpahiwatig mula sa bukas na datos. Ang isang flag ay nangangahulugang 
     exactNumbers:'Ang eksaktong mga numero',
     zeroCounts:(posted,total)=>` (${posted} kalsada ang may naka-rekord na limitasyon, ${total} ang sinuri lahat.)`,
     legLeadScore:'<i style="border-color:#ff3b3b"></i>Maliwanag na kinang. Ang <b>speed limit ay mas mataas sa ligtas na bilis</b>. Habang mas matingkad ang kulay, mas malaki ang agwat ng limitasyon ngayon sa ligtas.',
-    legLeadCurrent:'Ipinapakita ng bawat kalsada ang <b>kasalukuyang speed limit</b> nito. Mabagal ang teal, 60 pataas na km/h ang coral.',
+    legLeadCurrent:'Ipinapakita ng bawat kalsada ang <b>kasalukuyang speed limit</b> nito. Mabagal ang teal, 60 pataas na km/h ang pula.',
     legLeadProposed:'Ipinapakita ng bawat kalsada ang <b>ligtas na limitasyong nararapat dito</b>. Nagiging teal ang mabibilis na kalsada.',
     legGuess:'<i style="border-top-style:dashed;border-color:#7587a0"></i>Malabo at putol-putol. Ang limitasyon ay <b>hula</b> mula sa uri ng kalsada, kaya hindi ito kasama sa bilang.',
     legGrey:'<i style="border-color:#46566b"></i>Manipis na abo. Lahat ng ibang kalsada, kung saan akma na ang limitasyon.',
@@ -744,8 +744,8 @@ Mga tagapagpahiwatig mula sa bukas na datos. Ang isang flag ay nangangahulugang 
     step2t:'2. Saan nangyayari ang mga aksidente',step2d:'Ang mga totoong naiulat na aksidente ay bumabagsak sa parehong mga kalsada.',
     stepBanner2:'Ang <b>kumikinang na mga tuldok ay totoong naiulat na aksidente</b>. Bumabagsak ang mga ito sa parehong mga kalsada.',
     stepBannerNoCrash:'<b>Ang mga tuldok ng aksidente ay para sa Metro Manila lamang.</b> Doon, bumabagsak ang mga aksidente sa parehong mga naka-highlight na kalsada.',
-    step3t:'3. Ano ang limitasyon ngayon',step3d:'Ang kasalukuyang speed limit. Ang mga coral na kalsada ay nakatakda sa 60 pataas na km/h, mismo kung saan tumatawid ang mga tao.',
-    step4t:'4. Ano ang nararapat',step4d:'Ang ligtas na bilis. Ang mabibilis na coral na kalsada ay dapat maging kalmadong teal.',
+    step3t:'3. Ano ang limitasyon ngayon',step3d:'Ang kasalukuyang speed limit. Ang mga pulang kalsada ay nakatakda sa 60 pataas na km/h, mismo kung saan tumatawid ang mga tao.',
+    step4t:'4. Ano ang nararapat',step4d:'Ang ligtas na bilis. Ang mabibilis na pulang kalsada ay dapat maging kalmadong teal.',
     stepOf:(i)=>`Hakbang ${i} ng 4`,stepBack:'&larr; Balik',stepDone:'Tapos',stepNext:'Susunod &rarr;',stepFinish:'Tapusin',
     stepNoCrash:' <i>(Manila lang ang datos ng aksidente)</i>',
     baTitle:(nm)=>`Ano dapat ang speed limit sa ${esc(nm)}`,
@@ -899,10 +899,10 @@ window.onerror=function(msg,src){if(src&&src.indexOf('_vercel/insights')!==-1)re
   if(isM())set(true); else upSeehow();
 })();
 
-const SSS_COLOR=['interpolate',['linear'],['get','sss'],0,'#3B0F70',25,'#8C2981',50,'#B73779',75,'#E65D5E',100,'#FB9F3A'];
+const SSS_COLOR=['interpolate',['linear'],['get','sss'],0,'#3B0F70',25,'#7E1E82',50,'#B71E68',75,'#DE2A4E',100,'#FF3A46'];
 // colour a road by an actual speed (km/h): teal = slow/safe, coral = fast. Used for Now / Safe views.
 // 30 and below stay solid teal so the Safe flip reads as the banner says ("teal is 30").
-const SPEED_COLOR=f=>['interpolate',['linear'],['get',f],30,'#54A89B',45,'#9DA871',55,'#C99F52',65,'#E0574A',100,'#FB9F3A'];
+const SPEED_COLOR=f=>['interpolate',['linear'],['get',f],30,'#54A89B',45,'#7C9D9E',55,'#B07487',65,'#EE3B3B',100,'#FF3A46'];
 const SSS_WIDTH=['interpolate',['linear'],['zoom'],10,['interpolate',['linear'],['get','sss'],0,1.1,75,3.2],
   11,['interpolate',['linear'],['get','sss'],0,0.9,75,2.8],
   14,['interpolate',['linear'],['get','sss'],0,1,75,5],16,['interpolate',['linear'],['get','sss'],0,1.6,75,7]];
@@ -937,7 +937,7 @@ function spearman(xs,ys){const n=xs.length;if(n<3)return null;
   const rx=rank(xs),ry=rank(ys);const mx=rx.reduce((a,b)=>a+b,0)/n,my=ry.reduce((a,b)=>a+b,0)/n;
   let num=0,dx=0,dy=0;for(let i=0;i<n;i++){const a=rx[i]-mx,b=ry[i]-my;num+=a*b;dx+=a*a;dy+=b*b;}
   return dx&&dy?num/Math.sqrt(dx*dy):null;}
-const col=s=>s>=75?'#FB9F3A':s>=55?'#E65D5E':s>=30?'#B73779':'#6B1D6E';
+const col=s=>s>=75?'#FF3A46':s>=55?'#DE2A4E':s>=30?'#B71E68':'#6B1D6E';
 let CITIES=[],OVI=[],CUR=null,SEG=null,reqToken=0,roadsAll=false,CROWD=null,SEV=null,SAT=null;
 const OVERLAY_FAIL=new Set();   // city keys whose overlay geojson failed to fetch (item 15: surface, don't swallow)
 // severity-by-hour chart (EDSA): grey bars = crashes per hour (peak in rush-hour traffic), coral line =
@@ -950,11 +950,11 @@ function renderSevChart(s){const el=document.getElementById('sevchart');if(!el||
   const yN=v=>padT+ih*(1-v/maxN),yS=v=>padT+ih*(1-v/(maxS*1.08));
   const bars=bh.map(d=>`<rect x="${(x(d.hour)-bw/2).toFixed(1)}" y="${yN(d.n).toFixed(1)}" width="${bw.toFixed(1)}" height="${(padT+ih-yN(d.n)).toFixed(1)}" fill="#46566b" rx="1"/>`).join('');
   const line=bh.map((d,i)=>`${i?'L':'M'}${x(d.hour).toFixed(1)},${yS(d.casualty_share_pct).toFixed(1)}`).join(' ');
-  const dots=bh.map(d=>`<circle cx="${x(d.hour).toFixed(1)}" cy="${yS(d.casualty_share_pct).toFixed(1)}" r="1.7" fill="#E0574A"/>`).join('');
+  const dots=bh.map(d=>`<circle cx="${x(d.hour).toFixed(1)}" cy="${yS(d.casualty_share_pct).toFixed(1)}" r="1.7" fill="#EE3B3B"/>`).join('');
   // faint band over the late-night clear-road window (0-5h)
   const night=`<rect x="${x(0)}" y="${padT}" width="${(x(5)-x(0)).toFixed(1)}" height="${ih}" fill="#5B8DB8" opacity="0.10"/>`;
   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="On EDSA, crashes peak in rush hour but the share that injure or kill peaks at night.">
-    ${night}${bars}<path d="${line}" fill="none" stroke="#E0574A" stroke-width="1.8"/>${dots}
+    ${night}${bars}<path d="${line}" fill="none" stroke="#EE3B3B" stroke-width="1.8"/>${dots}
     <text x="${x(2.5).toFixed(0)}" y="${padT+8}" fill="#9DD0F0" font-size="8" text-anchor="middle" font-family="var(--font-data)">road clears</text>
     <text x="${padL}" y="${H-7}" fill="#8B95A5" font-size="8" font-family="var(--font-data)">12a</text>
     <text x="${x(6).toFixed(0)}" y="${H-7}" fill="#8B95A5" font-size="8" text-anchor="middle" font-family="var(--font-data)">6a</text>
@@ -962,7 +962,7 @@ function renderSevChart(s){const el=document.getElementById('sevchart');if(!el||
     <text x="${x(18).toFixed(0)}" y="${H-7}" fill="#8B95A5" font-size="8" text-anchor="middle" font-family="var(--font-data)">6p</text>
     <text x="${W-padR}" y="${H-7}" fill="#8B95A5" font-size="8" text-anchor="end" font-family="var(--font-data)">11p</text>
   </svg>`;
-  document.getElementById('sevcap').innerHTML=`<span style="color:#46566b">&#9646;</span> crashes per hour &nbsp; <span style="color:#E0574A">&#9644;</span> share that injure or kill. `+
+  document.getElementById('sevcap').innerHTML=`<span style="color:#46566b">&#9646;</span> crashes per hour &nbsp; <span style="color:#EE3B3B">&#9644;</span> share that injure or kill. `+
     `Night <b>${s.night.casualty_share_pct}%</b> vs rush-hour <b>${s.peak.casualty_share_pct}%</b>, about <b>${s.relative_risk_night_over_peak}&times;</b> (${(s.n_casualty).toLocaleString()} injury-or-worse crashes in the set, p&lt;0.001). ${esc(s.source)}.`;}
 function renderSatStrip(sat){const el=document.getElementById('satstrip');if(!el||!sat||!sat.featured)return;
   el.innerHTML=sat.featured.map(f=>`<a class="sat" href="${esc(f.full||f.crop)}" target="_blank" rel="noopener" title="Open the full satellite crop">
@@ -1217,11 +1217,11 @@ map.on('load',async()=>{
   map.addSource('crash',{type:'geojson',data:EMPTY});
   map.addLayer({id:'crash-glow',type:'circle',source:'crash',layout:{visibility:'none'},
     paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,6,14,11,16,18],
-      'circle-color':'#E0574A','circle-opacity':['interpolate',['linear'],['zoom'],11,0.13,16,0.10],'circle-blur':1}});
+      'circle-color':'#EE3B3B','circle-opacity':['interpolate',['linear'],['zoom'],11,0.13,16,0.10],'circle-blur':1}});
   map.addLayer({id:'crash-dots',type:'circle',source:'crash',layout:{visibility:'none'},
     paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.5,14,2.4,16,3.6],
       'circle-color':'#FFDCA8','circle-opacity':0.92,'circle-blur':0.2,
-      'circle-stroke-width':0.6,'circle-stroke-color':'rgba(224,87,74,0.6)'}});
+      'circle-stroke-width':0.6,'circle-stroke-color':'rgba(238,59,59,0.6)'}});
   // wealth overlay (bivariate choropleth), hidden by default
   map.addSource('wealth',{type:'geojson',data:EMPTY});
   map.addLayer({id:'wealth-fill',type:'fill',source:'wealth',layout:{visibility:'none'},
@@ -1236,13 +1236,13 @@ map.on('load',async()=>{
   // danger heatmap (overview): strong at city zoom, fades out as you zoom in to the precise glowing lines. Sits under the network so the lines read on top.
   map.addSource('heat',{type:'geojson',data:EMPTY});
   map.addLayer({id:'heat-layer',type:'fill',source:'heat',maxzoom:15,layout:{visibility:'none'},paint:{
-    'fill-color':['interpolate',['linear'],['get','t'],0,'#3B0F70',0.3,'#8C2981',0.55,'#B73779',0.78,'#E65D5E',0.92,'#FB9F3A',1,'#FCE38A'],
+    'fill-color':['interpolate',['linear'],['get','t'],0,'#3B0F70',0.3,'#7E1E82',0.55,'#B71E68',0.78,'#DE2A4E',0.92,'#FF3A46',1,'#FF8A9A'],
     'fill-opacity':['interpolate',['linear'],['zoom'],10,0.72,12.5,0.6,14,0],
     'fill-outline-color':'rgba(8,10,14,0.55)'}},'net-base');
   // crash-density hexbins (Manila), same H3 grid + same colour scale as the danger hexbins, for the swipe comparison. Hidden until compare mode.
   map.addSource('heatcrash',{type:'geojson',data:EMPTY});
   map.addLayer({id:'heatcrash-layer',type:'fill',source:'heatcrash',layout:{visibility:'none'},paint:{
-    'fill-color':['interpolate',['linear'],['get','t'],0,'#3B0F70',0.3,'#8C2981',0.55,'#B73779',0.78,'#E65D5E',0.92,'#FB9F3A',1,'#FCE38A'],
+    'fill-color':['interpolate',['linear'],['get','t'],0,'#3B0F70',0.3,'#7E1E82',0.55,'#B71E68',0.78,'#DE2A4E',0.92,'#FF3A46',1,'#FF8A9A'],
     'fill-opacity':0.78,
     'fill-outline-color':'rgba(8,10,14,0.55)'}},'net-base');
   map.addSource('crit',{type:'geojson',data:EMPTY});
@@ -1405,7 +1405,7 @@ map.on('load',async()=>{
     const speed=(m!=='score');document.getElementById('legramp').className='ramp'+(speed?' speed':'');
     document.getElementById('legrl').innerHTML=speed?'<span>30 km/h</span><span></span><span>60+ km/h</span>':`<span>${t('legAlready')}</span><span>${t('legOver')}</span><span>${t('legMost')}</span>`;
     const dot=c=>`<i style="background:${c};border:0;width:8px;height:8px;border-radius:50%"></i>`;
-    document.getElementById('leglead').innerHTML=m==='current'?dot('#E0574A')+t('legLeadCurrent')
+    document.getElementById('leglead').innerHTML=m==='current'?dot('#EE3B3B')+t('legLeadCurrent')
       :m==='proposed'?dot('#54A89B')+t('legLeadProposed')
       :t('legLeadScore');updateHeat();}
   document.querySelectorAll('#roadmode .seg button').forEach(b=>b.onclick=()=>setRoadMode(b.dataset.m));

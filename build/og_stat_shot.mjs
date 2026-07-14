@@ -26,14 +26,14 @@ await page.evaluate(() => {
     'font-family:var(--font-body,system-ui,sans-serif)';
   o.innerHTML = `
     <div style="font-family:var(--font-data,monospace);font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:#9DB4CC;font-weight:600">AI for safer roads &middot; Metro Manila</div>
-    <div style="margin-top:16px;font-family:var(--font-display,sans-serif);font-size:39px;line-height:1.12;color:#F2F5F9;font-weight:700;max-width:840px">Will a lower speed limit <span style="color:#FB6A50">actually make us safer?</span></div>
+    <div style="margin-top:16px;font-family:var(--font-display,sans-serif);font-size:39px;line-height:1.12;color:#F2F5F9;font-weight:700;max-width:840px">Will a lower speed limit <span style="color:#EE3B3B">actually make us safer?</span></div>
     <div style="margin-top:20px;display:flex;align-items:baseline;gap:20px;font-family:var(--font-display,sans-serif)">
       <span style="font-size:128px;line-height:.86;color:#5FC6AF;font-weight:800">&minus;66%</span>
       <span style="font-size:41px;color:#F2F5F9;font-weight:700;max-width:340px;line-height:1.1">the chance a crash kills</span>
     </div>
     <div style="margin-top:22px;font-size:28px;color:#CDD6E0;font-weight:500;max-width:860px;line-height:1.36">but only when the road is built to keep people clear of the fast traffic, not just a lower sign.</div>
     <div style="margin-top:28px;display:flex;align-items:center;gap:16px">
-      <span style="font-family:var(--font-data,monospace);font-size:22px;color:#160a08;font-weight:700;background:#FB6A50;padding:9px 16px;border-radius:10px">ai4saferroads-ph.vercel.app</span>
+      <span style="font-family:var(--font-data,monospace);font-size:22px;color:#160a08;font-weight:700;background:#EE3B3B;padding:9px 16px;border-radius:10px">ai4saferroads-ph.vercel.app</span>
       <span style="font-family:var(--font-data,monospace);font-size:17px;color:#7E93AB">Modeled drop across Metro Manila's flagged roads</span>
     </div>`;
   document.body.appendChild(o);
