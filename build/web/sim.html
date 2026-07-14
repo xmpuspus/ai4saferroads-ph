@@ -9,7 +9,7 @@
   @font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-400.woff2) format("woff2");font-weight:400;font-display:swap}
   @font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-500.woff2) format("woff2");font-weight:500;font-display:swap}
   :root{--bg:#0E1116;--ink:#E6EAF0;--muted:#8B95A5;--line:#2A323D;
-    --glass:rgba(18,22,30,.84);--danger:#E0574A;--safe:#54A89B;--amber:#FB9F3A;--accent:#E0574A;
+    --glass:rgba(18,22,30,.84);--danger:#EE3B3B;--safe:#54A89B;--amber:#FF3A46;--accent:#EE3B3B;
     --font-display:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
     --font-body:"IBM Plex Sans",system-ui,sans-serif;--font-data:"IBM Plex Mono",ui-monospace,monospace}
   *{box-sizing:border-box}
@@ -117,7 +117,7 @@ function step(s,dt){
 }
 function stageShot(){for(const s of scenes){let g=0;while(s.state!=='done'&&g++<5000)step(s,0.01);}}
 
-const colors={danger:{a:'#E0574A',line:'#E0574A'},safe:{a:'#54A89B',line:'#54A89B'}};
+const colors={danger:{a:'#EE3B3B',line:'#EE3B3B'},safe:{a:'#54A89B',line:'#54A89B'}};
 function mx(m){const l=W*PAD_L,r=W*(1-PAD_R);return l+(m/SPAN)*(r-l);}
 function drawCar(x,y,col,w){ctx.save();ctx.translate(x,y);
   ctx.fillStyle=col;roundRect(-w,-13,w*2,16,4);ctx.fill();
@@ -146,11 +146,11 @@ function drawScene(s,top,h){
   for(let i=0;i<6;i++){ctx.fillStyle=i%2?'#cfd6dd':'#11161d';ctx.fillRect(cx-14+i*5,road-2,4,30);}
   // travelled bar: reaction (amber) + braking (theme), shows what is just reaction time
   const reactM=Math.min(s.x,s.v0*TR), brakeM=Math.max(0,s.x-reactM);
-  ctx.fillStyle='rgba(255,176,46,.45)';ctx.fillRect(mx(0),road-9,mx(reactM)-mx(0),6);
-  ctx.fillStyle=s.theme==='danger'?'rgba(224,87,74,.5)':'rgba(84,168,155,.5)';
+  ctx.fillStyle='rgba(150,160,175,.45)';ctx.fillRect(mx(0),road-9,mx(reactM)-mx(0),6);
+  ctx.fillStyle=s.theme==='danger'?'rgba(238,59,59,.5)':'rgba(84,168,155,.5)';
   ctx.fillRect(mx(reactM),road-9,mx(reactM+brakeM)-mx(reactM),6);
   // bar labels (non-colour cue for what the distance is made of)
-  if(reactM>0.5){ctx.font='9px "IBM Plex Sans",sans-serif';ctx.fillStyle='#caa15a';ctx.textAlign='center';
+  if(reactM>0.5){ctx.font='9px "IBM Plex Sans",sans-serif';ctx.fillStyle='#9aa3b0';ctx.textAlign='center';
     ctx.fillText(TXT.reaction,(mx(0)+mx(reactM))/2,road-12);}
   // pedestrian at crossing
   ped(cx,road,s.state==='done'&&s.impact>0);
@@ -158,15 +158,15 @@ function drawScene(s,top,h){
   drawCar(mx(s.x),road-3,colors[s.theme].a,15);
   // text result badge (carries the outcome without relying on colour)
   if(s.state==='done'){ctx.font='800 12px "IBM Plex Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillStyle=s.impact>0?'#E0574A':'#54A89B';
+    ctx.fillStyle=s.impact>0?'#EE3B3B':'#54A89B';
     ctx.fillText(s.impact>0?TXT.struck:TXT.stopped,mx(s.x),road-34);}
   // outcome
   if(s.state==='done'){
     ctx.textAlign='left';ctx.font='700 14px "IBM Plex Sans",sans-serif';
     if(s.impact>0){const k=s.impact*3.6,risk=fatalRisk(k);
-      ctx.fillStyle='#E0574A';
+      ctx.fillStyle='#EE3B3B';
       ctx.fillText(TXT.hits(k.toFixed(0),risk.toFixed(0)),mx(0)-6,road-22);
-      ctx.font='11px "IBM Plex Sans",sans-serif';ctx.fillStyle='#ECC4BE';
+      ctx.font='11px "IBM Plex Sans",sans-serif';ctx.fillStyle='#C9CDD6';
       ctx.fillText(TXT.hitsub((s.v0*TR).toFixed(0)),mx(0)-6,road+62);
     }else{const short=GAP-s.stopX;
       ctx.fillStyle='#54A89B';
