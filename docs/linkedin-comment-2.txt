@@ -1,0 +1,18 @@
+The methods and papers
+
+Survivable speeds, from Tingvall and Haworth 1999 (Vision Zero), the ITF and OECD Speed and Crash Risk 2018, and the WHO Speed Management Manual
+https://www.monash.edu/muarc/archive/our-publications/papers/visionzero
+https://www.itf-oecd.org/speed-crash-risk
+https://www.who.int/publications/m/item/speed-management--a-road-safety-manual-for-decision-makers-and-practitioners
+
+Fatal risk against speed, from the Nilsson power model (2004) and Tefft 2011 pedestrian survival curves (AAA Foundation)
+https://portal.research.lu.se/en/publications/traffic-safety-dimensions-and-the-power-model-to-describe-the-eff/
+https://aaafoundation.org/impact-speed-pedestrians-risk-severe-injury-death/
+
+Road shape from above, Esri World Imagery (Esri, Maxar, Earthstar Geographics)
+https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9
+
+Who lives around each road, WorldPop 2020 (Philippines, 100m)
+https://hub.worldpop.org/geodata/summary?id=6316
+
+A flag means a road is worth reviewing, not that the limit is definitely wrong. Public-data indicators, patterns can have legitimate explanations. Not affiliated with ADB, WHO, or iRAP.

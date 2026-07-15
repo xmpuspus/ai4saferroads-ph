@@ -1,0 +1,22 @@
+The map, open and no login
+https://ai4saferroads-ph.vercel.app
+
+The ADB challenge that set me off
+https://challenges.adb.org/en/challenges/ai4saferroads
+
+How it is built, every threshold and formula
+https://ai4saferroads-ph.vercel.app/methodology
+
+Code and data, open source
+https://github.com/xmpuspus/ai4saferroads-ph
+
+The crash and road data
+
+Road network and speed limits, OpenStreetMap
+https://www.openstreetmap.org
+
+EDSA crash severity by hour, MMDA records 2007 to 2016 (22,072 crashes), on Mendeley by Luz and Blanco, UP Diliman
+https://data.mendeley.com/datasets/hwbf6n4krw/1
+
+Crash locations for the 76% on 8.5% check, MMDA traffic-alert mirror 2018 to 2020 (12,563 with coordinates)
+https://github.com/PotatoC0der/mmda_traffic_analysis

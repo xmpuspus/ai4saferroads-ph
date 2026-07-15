@@ -43,13 +43,30 @@ Code and data, open source
 https://github.com/xmpuspus/ai4saferroads-ph
 
 What I studied
-- Road network and speed limits, from OpenStreetMap
-- EDSA crash severity by hour, from MMDA records 2007 to 2016, 22,072 crashes, published by UP Diliman researchers on Mendeley
-- Crash locations for the 76% on 8.5% check, from MMDA traffic alerts 2018 to 2020, 12,563 with coordinates
-- Survivable speeds, from Tingvall and Haworth 1999, ITF and OECD Speed and Crash Risk 2018, and the WHO Speed Management Manual
-- Fatal risk against speed, from the Nilsson power model and Tefft 2011 pedestrian survival curves (AAA Foundation)
-- Road shape from above, from Esri World Imagery
-- Who lives around each road, from WorldPop 2020
+
+Road network and speed limits, from OpenStreetMap
+https://www.openstreetmap.org
+
+EDSA crash severity by hour, MMDA records 2007 to 2016 (22,072 crashes), published on Mendeley by Luz and Blanco, UP Diliman
+https://data.mendeley.com/datasets/hwbf6n4krw/1
+
+Crash locations for the 76% on 8.5% check, MMDA traffic-alert mirror 2018 to 2020 (12,563 with coordinates)
+https://github.com/PotatoC0der/mmda_traffic_analysis
+
+Survivable speeds, from Tingvall and Haworth 1999 (Vision Zero), the ITF and OECD Speed and Crash Risk 2018, and the WHO Speed Management Manual
+https://www.monash.edu/muarc/archive/our-publications/papers/visionzero
+https://www.itf-oecd.org/speed-crash-risk
+https://www.who.int/publications/m/item/speed-management--a-road-safety-manual-for-decision-makers-and-practitioners
+
+Fatal risk against speed, from the Nilsson power model (2004) and Tefft 2011 pedestrian survival curves (AAA Foundation)
+https://portal.research.lu.se/en/publications/traffic-safety-dimensions-and-the-power-model-to-describe-the-eff/
+https://aaafoundation.org/impact-speed-pedestrians-risk-severe-injury-death/
+
+Road shape from above, from Esri World Imagery (Esri, Maxar, Earthstar Geographics)
+https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9
+
+Who lives around each road, from WorldPop 2020 (Philippines, 100m)
+https://hub.worldpop.org/geodata/summary?id=6316
 
 A flag means a road is worth reviewing, not that the limit is definitely wrong. These are statistical indicators from public data and patterns can have legitimate explanations. Not affiliated with ADB, WHO, or iRAP.
 
